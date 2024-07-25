@@ -1,2 +1,1 @@
-# rfc
-RSVIM RFC.
+# RSVIM RFC

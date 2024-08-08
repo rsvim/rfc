@@ -13,5 +13,5 @@ But comparing with Javascript/Typescript, one of the most successful programming
 - It doesn't support many modern language features:
   - Async/await.
   - Functional programming features such as lambda.
-- - Static type system.
+  - Static type system.
 - [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.

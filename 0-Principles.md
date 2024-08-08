@@ -1,4 +1,4 @@
-# 0-Principles
+# 0. Principles
 
 The RSVIM is going to still be the VIM editor, not something else. It maintains almost the same product features as the VIM editor:
 

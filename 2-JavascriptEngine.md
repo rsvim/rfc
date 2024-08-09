@@ -1,4 +1,4 @@
-# 2. Js Engine
+# Javascript Engine
 
 This RFC describes the [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and JS engine embedded in the RSVIM.
 

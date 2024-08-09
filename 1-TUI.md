@@ -1,4 +1,4 @@
-# 1. TUI
+# TUI
 
 This RFC describes the basic TUI system architecture.
 

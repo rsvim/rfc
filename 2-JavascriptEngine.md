@@ -15,3 +15,4 @@ But comparing with Javascript/Typescript, one of the most successful programming
   - Functional programming features such as lambda.
   - Static type system.
 - [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
+- Active community developers and rich third-party libraries.

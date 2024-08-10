@@ -1,5 +1,7 @@
 # Principles
 
+> 2024-03-16
+
 The RSVIM is going to still be the VIM editor, not something else. It maintains almost the same product features as the VIM editor:
 
 1. Terminal executable, not GUI application.

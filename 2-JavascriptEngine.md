@@ -1,5 +1,7 @@
 # Javascript Engine
 
+> 2024-08-10
+
 This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS engine embedded in the RSVIM.
 
 ## Motivition
@@ -16,10 +18,50 @@ But when comparing with Javascript, one of the most successful programming langu
 - [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
 - The most active community developers and rich third-party libraries.
 
-However, Javascript's syntax can be really bad and chaotic (the success actually belongs the browsers instead of the language itself). So the final target is scripting with Typescript instead of Javascript. There're even more benefits:
+However, Javascript's syntax can be really bad and chaotic (the success actually belongs the browsers instead of the language itself). So the final target is scripting with Typescript, while Javascript plays the middle layer under the hood. There're even more benefits:
 
 - More elegant and beautiful syntax designing.
 - Static type system.
 - Fully compatible with Javascript's community.
 
 By introducing the JS engine, RSVIM provides the best scripting environment that can interact with the editor.
+
+## Architecture
+
+The architecture of how Javascript interacts with Rust looks like:
+
+```text
+---The RSVIM instance----------------
+|                                   |
+|   ---API-----------------         |
+|   |                     |         |
+|   |                     |         |
+|   |                     |         |
+|   |                     |         |
+|   -----------------------         |
+|                                   |
+|                                   |
+|   ---Js Engine-----------         |              ---Js scripts/plugins-------
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   |                     |         |              |                          |
+|   -----------------------         |              ----------------------------
+|                                   |
+|                                   |
+|                                   |
+|                                   |
+------------------------------------|
+```

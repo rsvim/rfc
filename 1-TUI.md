@@ -15,13 +15,15 @@ Here's a very simple hardware-level event loop for RSVIM:
 |   keyboard/mouse  |
 |       input       |
 ---------------------
-         ↓
+         |
+         v
 ---------------------
 |      editing      |
 |        or         |   ------------
-| type `:q` to quit | → |   exit   |
+| type `:q` to quit |-->|   exit   |
 ---------------------   ------------
-         ↓
+         |
+         v
 ---------------------
 |  terminal output  |
 ---------------------

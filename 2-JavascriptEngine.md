@@ -57,7 +57,7 @@ The architecture of how Javascript interacts with Rust looks like:
 |             |              |                                  |
 |             |              |   ---Garbage collection-------   |
 |             |              |   |                          |   |
-|             |              |-->|  Objects                 |   |
+|             |              |-->|  Heap Objects            |   |
 |             |              |   |                          |   |
 |             |              |   ----------------------------   |
 |             |              |                                  |

@@ -69,7 +69,7 @@ The architecture of how Javascript interacts with Rust looks like:
 |             v                                                 |
 |   ---Js Engine----------       ---(Optional) Ts Compiler---   |    ---Js/Ts Scripts------------
 |   |                    |       |                          |   |    |                          |
-|   |  Evaluate scripts  |<------|  Compile TS to JS        |<-------|  Configs and plugins     |
+|   |  Evaluate scripts  |<------|  Compile Ts to Js        |<-------|  Configs and plugins     |
 |   |                    |       |                          |   |    |                          |
 |   ----------------------       ----------------------------   |    ----------------------------
 |                                                               |

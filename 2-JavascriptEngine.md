@@ -24,9 +24,9 @@ However, Javascript's syntax can be really bad and chaotic (the success actually
 
 - More elegant and beautiful syntax designing.
 - Static type system.
-- Fully compatible with Javascript's community.
+- Fully compatible with js community.
 
-By introducing the JS engine, RSVIM provides the best scripting environment that can interact with the editor.
+By introducing the js engine, RSVIM provides the best scripting environment that can interact with the editor.
 
 ## Architecture
 

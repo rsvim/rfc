@@ -1,6 +1,6 @@
 # TUI
 
-> 2024-04-01
+> Written by @linrongbin16, 2024-04-01
 
 This RFC describes the basic TUI system architecture.
 

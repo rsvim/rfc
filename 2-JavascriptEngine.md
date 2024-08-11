@@ -1,6 +1,6 @@
 # Javascript Engine
 
-> 2024-08-10
+> Written by @linrongbin16, 2024-08-10
 
 This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS engine embedded in the RSVIM.
 

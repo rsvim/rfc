@@ -1,4 +1,6 @@
-# 0-Principles
+# Principles
+
+> 2024-03-16
 
 The RSVIM is going to still be the VIM editor, not something else. It maintains almost the same product features as the VIM editor:
 
@@ -21,6 +23,6 @@ But to re-invent VIM, we introduce new things, and deprecate old things. Here're
    - Remote editing.
    - Multiple clients working together.
 6. Improve the project developing by leveraging existing community works:
-   - Use third-party document frameworks to build better user manual, API references for Rust/Javascript/Typescript based projects.
-   - Use third-party testing/benchmark frameworks to improve code quality.
-   - Use third-party JS/WASM engines to embed Javascript/Typescript language evaluation, and even support NPM package system.
+   - Build better RSVIM user manual, API reference for Rust/Javascript/Typescript projects.
+   - Improve code quality and performance with testing/benchmark frameworks.
+   - Embed JS/WASM engines for Javascript/Typescript evaluation, and (maybe) integrate with NPM package manager.

@@ -1,4 +1,6 @@
-# 1-TUI
+# TUI
+
+> 2024-04-01
 
 This RFC describes the basic TUI system architecture.
 
@@ -9,20 +11,22 @@ RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardwa
 Here's a very simple hardware-level event loop for RSVIM:
 
 ```text
- -------------------
+---------------------
 |   keyboard/mouse  |
 |       input       |
- -------------------
-         ↓
- -------------------
+---------------------
+         |
+         v
+---------------------
 |      editing      |
-|        or         |    ----------
-| type `:q` to quit | → |   exit   |
- -------------------     ----------
-         ↓
- -------------------
+|        or         |   ------------
+| type `:q` to quit |-->|   exit   |
+---------------------   ------------
+         |
+         v
+---------------------
 |  terminal output  |
- -------------------
+---------------------
 ```
 
 ## UI Framework

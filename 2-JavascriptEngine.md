@@ -63,7 +63,7 @@ The architecture of how Javascript interacts with Rust looks like:
 |             |              |                                  |
 |             |              |   ---Misc---------------------   |
 |             |              |   |                          |   |
-|             |              |-->|  Terminal/Child process  |   |
+|             |              --->|  Terminal/Child process  |   |
 |             |                  |                          |   |
 |             |                  ----------------------------   |
 |             v                                                 |

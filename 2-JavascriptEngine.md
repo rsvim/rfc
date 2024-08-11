@@ -16,7 +16,9 @@ But when comparing with Javascript, one of the most successful programming langu
   - Async/await.
   - Functional programming.
 - [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
-- The most active community developers and rich third-party libraries.
+- The community is not that active/popular:
+  - The number of developers is not that large.
+  - The open-sourced/third-party libraries are not that rich or widely used.
 
 However, Javascript's syntax can be really bad and chaotic (the success actually belongs the browsers instead of the language itself). So the final target is scripting with Typescript, while Javascript plays the middle layer under the hood. There're even more benefits:
 
@@ -33,35 +35,32 @@ The architecture of how Javascript interacts with Rust looks like:
 ```text
 ---The RSVIM instance----------------
 |                                   |
-|   ---API-----------------         |
-|   |                     |         |
-|   |                     |         |
-|   |                     |         |
-|   |                     |         |
-|   -----------------------         |
+|   ---API----------------------    |
+|   |                          |    |
+|   |                          |    |
+|   |                          |    |
+|   |                          |    |
+|   ----------------------------    |
 |                                   |
 |                                   |
-|   ---Js Engine-----------         |              ---Js scripts/plugins-------
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   |                     |         |              |                          |
-|   -----------------------         |              ----------------------------
-|                                   |
-|                                   |
-|                                   |
+|   ---Js Engine----------------    |              ---Js scripts/plugins-------
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   |                          |    |              |                          |
+|   ----------------------------    |              ----------------------------
 |                                   |
 ------------------------------------|
 ```

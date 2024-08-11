@@ -22,7 +22,7 @@ The whole reason is simply because: both of vimscript and lua still lack many mo
   - The open-sourced/third-party libraries are not that rich or widely used.
 - [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
 
-However, Javascript's syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with Typescript, while Javascript plays the role of middle layer under the hood. Using ts brings even more benefits:
+However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with Typescript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
 
 - More elegant and beautiful syntax designing.
 - Static type system.

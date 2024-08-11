@@ -15,10 +15,10 @@ But when comparing with Javascript, one of the most successful programming langu
 - It doesn't support many modern language features:
   - Async/await.
   - Functional programming.
-- [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
 - The community is not that active/popular:
   - The number of developers is not that large.
   - The open-sourced/third-party libraries are not that rich or widely used.
+- [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
 
 However, Javascript's syntax can be really bad and chaotic (the success actually belongs the browsers instead of the language itself). So the final target is scripting with Typescript, while Javascript plays the middle layer under the hood. There're even more benefits:
 

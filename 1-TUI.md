@@ -11,20 +11,20 @@ RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardwa
 Here's a very simple hardware-level event loop for RSVIM:
 
 ```text
- -------------------
+---------------------
 |   keyboard/mouse  |
 |       input       |
- -------------------
+---------------------
          ↓
- -------------------
+---------------------
 |      editing      |
-|        or         |    ----------
+|        or         |   ------------
 | type `:q` to quit | → |   exit   |
- -------------------     ----------
+---------------------   ------------
          ↓
- -------------------
+---------------------
 |  terminal output  |
- -------------------
+---------------------
 ```
 
 ## UI Framework

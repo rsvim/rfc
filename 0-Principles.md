@@ -4,7 +4,7 @@
 
 The RSVIM is going to still be the VIM editor, not something else. It maintains almost the same product features as the VIM editor:
 
-1. Terminal executable, not GUI application.
+1. Terminal text editor, not GUI application.
 2. VIM editing mode.
 3. UI components such as window, buffer, commandline, statusline, tabline, etc.
 4. Scripting/plugin system.

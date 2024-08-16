@@ -17,24 +17,24 @@ Here's a very simple hardware-level event loop for RSVIM:
 |                        |
 +-----------+------------+
             |
-            |
-+-----------v------------+
+            v
++------------------------+
 |                        |    +------------------------+
 |        editing         |    |                        |
 |          or            |    |          exit          |
-|   type `:q` to quit    +---->                        |
+|   type `:q` to quit    +--->|                        |
 |                        |    +------------------------+
 +-----------+------------+
             |
-            |
-+-----------v------------+
+            v
++------------------------+
 |                        |
 |    terminal output     |
 |                        |
 +------------------------+
 ```
 
-<!-- https://asciiflow.com/#/share/eJyrVspLzE1VssorzcnRUcpJrEwtUrJSqo5RKkstKs7Mz4tRsjLSiVGqANKWZuZAViVIxNIUyCpJrSgBcmKUHk3peTSlgUpoggJeEBOT92hKEy5ZPFKo2rNTK5PyE4tS9HPzS4tTFTLzCkpLSNBOie1TiAiENcSF1QyC1pHkPKpqJipRTNtDv0RB3VSKamVqSmZJZl46ppX4HIXu6vwirK5GUpFakVmC3YiSyoJUhQSrwgSFknyFwlKIskdTUIN32i4SXIMjDIlJvUSiGaPZYQCzAzHaS1KLcjPzEnMU8ktLwAUkadrJt52aqYyAdUq1SrUAmmaU0A%3D%3D) -->
+<!-- https://asciiflow.com/#/share/eJyrVspLzE1VslJKLE5JA2ElHaWcxMrUIqBQdYxSWWpRcWZ%2BXoySlZFOjFIFkLY0MweyKkEilqZAVklqRQmQE6P0aErPoykNVEITFPCCmJi8R1OacMnikULVnp1amZSfWJSin5tfWpyqkJlXUFpCgnZKbJ9CRCCsIS6sZhC0jiTn4dU8bQ9pmgddoqCug1CtTE3JLMnMS8e0Ep%2Bj0F2dX4TV1UgqUisyS7AbUVJZkKqQYFWYoFCSr1BYClH2aMochJOn7SLNNTjCkJjUSySaMZodBjA7EKO9JLUoNzMvMUchv7QEXECSpp1826mZyghYp1SrVAsAziCWcw%3D%3D) -->
 
 ## UI Framework
 

@@ -35,43 +35,45 @@ By introducing the js engine, RSVIM provides the best scripting environment that
 The architecture of how Javascript interacts with Rust looks like:
 
 ```text
----RSVIM---------------------------------------------------------
++---RSVIM-------------------------------------------------------+
 |                                                               |
-|   ---API----------------       ---Editor function----------   |
-|   |                    |       |                          |   |
-|   |  `vim` global var  |------>|  Option/var/win/buf      |   |
-|   |                    |   |   |                          |   |
-|   ----------------------   |   ----------------------------   |
-|             ^              |                                  |
-|             |              |   ---Task queue---------------   |
-|             |              |   |                          |   |
-|             |              |   |  Callbacks/timers        |   |
-|             |              |   |                          |   |
-|             |              |   ----------------------------   |
-|             |              |                                  |
-|             |              |   ---Micro-task queue---------   |
-|             |              |   |                          |   |
-|             |              |-->|  Async/Promise           |   |
-|             |              |   |                          |   |
-|             |              |   ----------------------------   |
-|             |              |                                  |
-|             |              |   ---Garbage collection-------   |
-|             |              |   |                          |   |
-|             |              |-->|  Heap Objects            |   |
-|             |              |   |                          |   |
-|             |              |   ----------------------------   |
-|             |              |                                  |
-|             |              |   ---Misc---------------------   |
-|             |              |   |                          |   |
-|             |              --->|  Terminal/Child process  |   |
-|             |                  |                          |   |
-|             |                  ----------------------------   |
-|             v                                                 |
-|   ---Js Engine----------       ---(Optional) Ts Compiler---   |    ---Js/Ts Scripts------------
-|   |                    |       |                          |   |    |                          |
-|   |  Evaluate scripts  |<------|  Compile Ts to Js        |<-------|  Configs and plugins     |
-|   |                    |       |                          |   |    |                          |
-|   ----------------------       ----------------------------   |    ----------------------------
 |                                                               |
------------------------------------------------------------------
+|   +--API-----------------+      +--Editor-Function-------+    |
+|   |                      |      |                        |    |
+|   |   `vim` global var   +--+-->|  Option/var/win/buf    |    |
+|   |                      |  |   |                        |    |
+|   +----------------------+  |   +------------------------+    |
+|              ^              |                                 |
+|              |              |                                 |
+|              |              |   +--Task-Queue------------+    |
+|              |              |   |                        |    |
+|              |              +-->|  Callback/timer/async  |    |
+|              |              |   |                        |    |
+|              |              |   +------------------------+    |
+|              |              |                                 |
+|              |              |                                 |
+|              |              |   +--Garbage-Collection-----+   |
+|              |              |   |                         |   |
+|              |              +-->|  Heap Objects           |   |
+|              |              |   |                         |   |
+|              |              |   +-------------------------+   |
+|              |              |                                 |
+|              |              |                                 |
+|              |              |   +--Misc-------------------+   |
+|              |              |   |                         |   |
+|              |              +-->|  Terminal/Child process |   |
+|              |                  |                         |   |
+|              |                  +-------------------------+   |
+|              |                                                |
+|              |                                                |
+|   +--Js-Engin+-----------+      +--Ts-Compiler------------+   |    +--Js/Ts-Scripts----------+
+|   |                      |      |                         |   |    |                         |
+|   |  Option/var/win/buf  |<-----+  Compile Ts to Js       |<--+----+  Configs and plugins    |
+|   |                      |      |                         |   |    |                         |
+|   +----------------------+      +-------------------------+   |    +-------------------------+
+|                                                               |
+|                                                               |
++---------------------------------------------------------------+
 ```
+
+<!-- https://asciiflow.com/#/share/eJzdWE1LwzAY%2FishZ6GgILqbDD82ED82PPVg2mUzmqYlaadDBBGPHjwM9eDRoyeP4q%2FpLzHbuui0a%2BwW62YIa5q8eZ73ffs%2BtNk5ZMjDsMQiShcgRR3MYQme27CNuSA%2Bs2FpccGGZ%2FK6urwiR53ezOqSHIX4LJQ3Noy7N3H3ctD3aweVbXU32%2F0WZDfbZnH3SmOka3qEomnU41rbrUyTN4Wz3iChz%2BVgI2JuKIsma18uR8eYqoUMsGQpN91hm3iHoEV9B1HQRry%2F8DgM4TkZ3L32rXeCXriWNLNOCbOcqDkN9bgoNDaTEXZNKOjhwzkjeAp1Ut3Edy%2BpqclsE1JpJ36bSgmwjsSJvOxFOMI5JGzYGYPlmU03VGMiwjKi1EHuiRUSD3MLiQ5zzZMWHONMierPK71AKiWqTcQd1OrpqexTitNfbLfm6ceD6S1y0X2R0RZGAdhxjmWk4vdIC47RuIwSJc1rdRdIpYS0TYQ7RbrnWWLDwkskVsfcIwxRq3xEaAME3HexEGZJx06OrBklm1l56dssEinhVIX8WWctwn6W46%2Fnsrrov7y8gFDMc4vtkxtWH6nmchKEQgth5vw2Wqgaw1HKtFOZXIjvr785%2ByQ%2FHwcJAnUBQh9UxQfqpw1vKdtYk7QEQEwKmUbyIYlUZ4qO39S5DphDS5O2ceh%2F%2BGeN2QwV3x90QcILePEOUXoO9g%3D%3D) -->

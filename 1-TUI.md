@@ -11,23 +11,30 @@ RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardwa
 Here's a very simple hardware-level event loop for RSVIM:
 
 ```text
----------------------
-|   keyboard/mouse  |
-|       input       |
----------------------
-         |
-         v
----------------------
-|      editing      |
-|        or         |   ------------
-| type `:q` to quit |-->|   exit   |
----------------------   ------------
-         |
-         v
----------------------
-|  terminal output  |
----------------------
++------------------------+
+|                        |
+|  keyboard/mouse input  |
+|                        |
++-----------+------------+
+            |
+            |
++-----------v------------+
+|                        |    +------------------------+
+|        editing         |    |                        |
+|          or            |    |          exit          |
+|   type `:q` to quit    +---->                        |
+|                        |    +------------------------+
++-----------+------------+
+            |
+            |
++-----------v------------+
+|                        |
+|    terminal output     |
+|                        |
++------------------------+
 ```
+
+<!-- https://asciiflow.com/#/share/eJyrVspLzE1VssorzcnRUcpJrEwtUrJSqo5RKkstKs7Mz4tRsjLSiVGqANKWZuZAViVIxNIUyCpJrSgBcmKUHk3peTSlgUpoggJeEBOT92hKEy5ZPFKo2rNTK5PyE4tS9HPzS4tTFTLzCkpLSNBOie1TiAiENcSF1QyC1pHkPKpqJipRTNtDv0RB3VSKamVqSmZJZl46ppX4HIXu6vwirK5GUpFakVmC3YiSyoJUhQSrwgSFknyFwlKIskdTUIN32i4SXIMjDIlJvUSiGaPZYQCzAzHaS1KLcjPzEnMU8ktLwAUkadrJt52aqYyAdUq1SrUAmmaU0A%3D%3D) -->
 
 ## UI Framework
 
@@ -40,24 +47,35 @@ People would ask: (Neo)VIM is just a simple terminal app that editing a file, wh
 In this section, we will introduce a stack-based UI components tree, which is a classic design been widely used by many GUI frameworks/libraries. For example we have a terminal application below:
 
 ```text
-     --------------
-     |            |
---------------------------------
-| A  |    B       |            |
-|    |            |            |
-|    --------------            |
-|                              |
-|  --------------------        |
-|  |                  |        |
-|  | C                |        |
-|  |     ----------------      |
-|  |     |     ------   |      |
-|  |     |  D  | E  |   |      |
-|  |     |     ------   |      |
-|  ------|              |      |
-|        ----------------      |
---------------------------------
+         +------------------+
+         |                  |
++--------|------------------|-------------------+
+|        |                  |                   |
+| A      | B                |                   |
+|        |                  |                   |
+|        |                  |                   |
+|        |                  |                   |
+|        |                  |                   |
+|        +------------------+                   |
+|    +------------------------------+           |
+|    |                              |           |
+|    | C                            |           |
+|    |    +---------------------------------+   |
+|    |    |                                 |   |
+|    |    | D        +----------+   |       |   |
+|    |    |          |          |   |       |   |
+|    |    |          | E        |           |   |
+|    |    |          |          |   |       |   |
+|    |    |          |          |   |       |   |
+|    |    |          +----------+           |   |
+|    |    |                         |       |   |
+|    +----+- --  --  --  --  -- -- -+       |   |
+|         |                                 |   |
+|         +---------------------------------+   |
++-----------------------------------------------+
 ```
+
+<!-- https://asciiflow.com/#/share/eJyrVspLzE1VssorzcnRUcpJrEwtUrJSqo5RKkstKs7Mz4tRsjLSiVGqANKWZpZAViVIxNIQyCpJrSgBcmKUFGDg0ZSeR1MayEITFLCAmJg8JLObMBVgFQTrw%2BuUJnJdSbZGkA%2FBrmrC63Ts%2FgGKQvU6IpQ5kaqXEnuHtN4p5MbYDELmU5DeSc0TaPZiTfa4wgZDrzMFemnvbRT%2FY7efgPfhanDpdkEoI%2BiVCSg24jcXeyDC9ZBuhivOWKGnKyg3g2AeRM5rRJqKBgi4Cs0Fe4CkAoSjQIhGpmbgtgMzuPC6FJtesosqktAMJNvpYyMJbotRqlWqBQDhhp4A) -->
 
 `A` is the root component of the tree, we would treat it as the terminal where the application is running on. It has 3 direct child components `B`, `C` and `D`:
 

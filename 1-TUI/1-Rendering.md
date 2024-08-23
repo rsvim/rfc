@@ -98,7 +98,7 @@ Each time a UI widget draws on canvas, the widget marks that drawing area (recta
 \x1b[1;31m  # Set style to bold, red foreground.
 ```
 
-Terminal protocols specify that extra escaping characters need to be prepend and append to mark these effects around the text contents. This facts add more IO operations and affect the way that how canvas flushing.
+Terminal protocols specify that [escaping characters](https://en.wikipedia.org/wiki/ANSI_escape_code) need to be prepend and append to mark these effects around the text contents. This facts add more IO operations and affect the way that how canvas flushing.
 
 For example now we want to render below javascript sample code:
 

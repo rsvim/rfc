@@ -88,13 +88,11 @@ After widgets drawing (on every loop), canvas compares current frame and previou
 
 ## Curses
 
-[Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>) plays the role of hardware driver between RSVIM and terminal (specifically RSVIM uses [crossterm](https://github.com/crossterm-rs/crossterm)). Besides very common ASCII characters 0-9, A-Z, punctuations, etc, terminal protocols also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example:
+[Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>) plays the role of hardware driver between RSVIM and terminal (specifically RSVIM uses [crossterm](https://github.com/crossterm-rs/crossterm)). Besides very common ASCII characters 0-9, A-Z, punctuations, etc, [escaping codes](https://en.wikipedia.org/wiki/ANSI_escape_code) also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example:
 
 ```bash
 \x1b[1;31m  # Set style to bold, red foreground.
 ```
-
-Terminal protocols specify that [escaping characters](https://en.wikipedia.org/wiki/ANSI_escape_code) need to be prepend and append to mark these effects around the text contents. This facts add more IO operations and affect the way that how canvas flushing.
 
 For example now we want to render below javascript sample code:
 
@@ -104,9 +102,15 @@ function hello() {
 }
 ```
 
-Keyword `function` and literal string `"Hello, Javascript!"` are required to mark as special colors. Maybe function name `hello`, `log`, global variable `console` and even punctuations (semicolon `;`, parentheses `()` `{}`) can be mark as special colors as well.
+Text editor needs to mark different colors for the words:
 
-The minimal way to print effects is: prepending and appending the escaping characters only once for the effected contents. For example print the `function` keyword with red color, and reset color after it:
+- Keyword `function`.
+- Literal string `"Hello, Javascript!"`.
+- Function name `hello`, `log`.
+- Global variable `console`.
+- And even punctuations: semicolon `;`, parentheses `()`, brackets `{}`.
+
+Escaping codes need to prepend and append extra codes to add these effects, this also increase the payload flushing to terminal device. For example now we want to print the `function` keyword with <span style="background-color:red,color:white">red</span> color, and reset color after it:
 
 ```bash
 \x1b[38;5;{31}mfunction\x1b[0m

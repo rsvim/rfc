@@ -110,7 +110,7 @@ Text editor needs to mark different colors for the words:
 - Global variable `console`.
 - And even punctuations: semicolon `;`, parentheses `()`, brackets `{}`.
 
-Escaping codes need to prepend and append extra codes to add these effects, this also increase the payload flushing to terminal device. For example now we want to print the `function` keyword with <span style="background-color:red,color:white">red</span> color, and reset color after it:
+Escaping codes need to prepend and append extra codes to add these effects, this also increase the payload flushing to terminal device. For example now we want to print the `function` keyword with $${\color{red}red}$$ color, and reset color after it:
 
 ```bash
 \x1b[38;5;{31}mfunction\x1b[0m

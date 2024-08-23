@@ -17,7 +17,7 @@ Here's part lists of hardwares and benchmarks for some very popular PC/laptop co
 |            | Memory  | Kingston 8GB DDR4<br/>1666MT/s                                                                      | 8GB DDR3L<br/>1600MHz                                                                                                  |
 |            | Storage | Western Digital 512GB HDD<br/>Sequential Read/Write 150-200 MB/s, Random Read/Write 1-5 MB/s        | 512GB Flash Storage<br/>2.8GHz                                                                                         |
 
-A very basic concept for the hardware speed from highest to lowest is: CPU > Memory > Storage. This is also the basic rule we're following when rendering text contents to terminal:
+A very basic concept for the hardware speed from highest to lowest is: CPU > Memory > Storage. This is also the basic rule when rendering text contents to terminal:
 
 - For same amount of data, CPU calculating/processing is preferred over flushing to IO devices.
 - For same amount of data, sequential flushing to IO devices is preferred over random flushing.

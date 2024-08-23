@@ -8,14 +8,14 @@ This RFC describes the rendering system inside TUI.
 
 Here's part lists of hardwares and benchmarks for some very popular PC/laptop computers:
 
-| Year       |         | DIY Windows PC                                                                                      | MacBook Pro                                                                             |
-| ---------- | ------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Since 2022 | CPU     | Intel I5-12400<br/>6 P-Cores, Base Frequency 2.5GHz                                                 | Apple M2 Chip<br/>4 P-Cores, Base Frequency 3.5GHz<br/>4 E-Cores, Base Frequency 2.8GHz |
-|            | Memory  | Kingston 8GB DDR4<br/>2666MT/s                                                                      | 16GB LPDDR5<br/>6400MHz                                                                 |
-|            | Storage | Samsung 512GB PCIe4.0 SSD<br/>Sequential Read/Write 4000-5000 MB/s, Random Read/Write 500-900K IOPS | 512GB SSD<br/>3200MHz                                                                   |
-| Since 2014 | CPU     | Intel I5-4690K<br/>4 Cores, Base Frequency 3.5GHz                                                   | Intel I5 Chip<br/>Dual Cores, Base Frequency 2.6GHz                                     |
-|            | Memory  | Kingston 8GB DDR4<br/>1666MT/s                                                                      | 8GB DDR3L<br/>1600MHz                                                                   |
-|            | Storage | Western Digital 512GB HDD<br/>Sequential Read/Write 150-200 MB/s, Random Read/Write 1-5 MB/s        | 512GB Flash Storage<br/>Read/Write 700-1000 MB/s                                        |
+| Year       |         | DIY Windows PC                                                                                         | MacBook Pro                                                                             |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Since 2022 | CPU     | Intel I5-12400<br/>6 P-Cores, Base Frequency 2.5GHz                                                    | Apple M2 Chip<br/>4 P-Cores, Base Frequency 3.5GHz<br/>4 E-Cores, Base Frequency 2.8GHz |
+|            | Memory  | Kingston 8GB DDR4<br/>2666MT/s                                                                         | 16GB LPDDR5<br/>6400MHz                                                                 |
+|            | Storage | Samsung 512GB PCIe4.0 SSD<br/>Sequential Read/Write 4000-5000 MB/s<br/>Random Read/Write 500-900K IOPS | 512GB SSD<br/>3200MHz                                                                   |
+| Since 2014 | CPU     | Intel I5-4690K<br/>4 Cores, Base Frequency 3.5GHz                                                      | Intel I5 Chip<br/>Dual Cores, Base Frequency 2.6GHz                                     |
+|            | Memory  | Kingston 8GB DDR4<br/>1666MT/s                                                                         | 8GB DDR3L<br/>1600MHz                                                                   |
+|            | Storage | Western Digital 512GB HDD<br/>Sequential Read/Write 150-200 MB/s<br/>Random Read/Write 1-5 MB/s        | 512GB Flash Storage<br/>Read/Write 700-1000 MB/s                                        |
 
 A very basic concept for the hardware speed from highest to lowest is: CPU > Memory > IO Devices. This is also the basic rules when rendering the terminal, for the same amount of data:
 
@@ -110,7 +110,7 @@ Text editor needs to mark different colors for the words:
 - Global variable `console`.
 - And even punctuations: semicolon `;`, parentheses `()`, brackets `{}`.
 
-Escaping codes need to prepend and append extra codes to add these effects, this also increase the payload flushing to terminal device. For example now we want to print the `function` keyword with <b style='color:red'>red</b> color, and reset color after it:
+Escaping codes need to prepend and append extra codes to add these effects, this also increase the payload flushing to terminal device. For example now we want to print the `function` keyword with $${\color{red}red}$$ color, and reset color after it:
 
 ```bash
 \x1b[38;5;{31}mfunction\x1b[0m

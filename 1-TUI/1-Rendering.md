@@ -79,7 +79,7 @@ The rendering system splits into 3 layers: UI widgets tree, canvas and hardware 
 
 UI widgets tree provides high-level friendly interfaces to interact with other editor logics, draws on the canvas in every loop, thus canvas knows the which parts of the terminal are changed and flushing these parts to hardware device. The hardware is a `M x N` grapheme based double-array (`M` is columns/width, `N` is rows/height), for example 240x70 on my personal laptop with a 4K Dell external monitor, thus the problem scale is `O(M * N)`.
 
-After widgets drawing (on every loop), canvas compares current frame and previous frame to find out the changes, then finally flushing the changes to hardware. After flushing, canvas clones and saves current frame as previous frame, for the next loop. The complexity of IO operations can vary in different scenarios:
+After widgets drawing (on every loop), canvas compares current frame and previous frame to find out the changes, then finally flushes to hardware. After flushing, canvas clones and saves current frame as previous frame for the next loop. The complexity of IO operations can vary in different scenarios, at most `O(M * N)`:
 
 - When user moves cursor, canvas only needs to print `O(1)` characters.
 - When user edits a line, canvas needs to print `O(M)` characters.

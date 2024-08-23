@@ -122,4 +122,4 @@ The above example can split into 3 parts:
 - `function`: The text contents.
 - `\x1b[0m`: Reset all effects.
 
-This rule requires the canvas merge continuous text contents that share same effects in one IO operation.
+This requires the canvas merge continuous text contents that share same effects in one IO operation.

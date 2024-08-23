@@ -110,7 +110,7 @@ function hello() {
 
 Keyword `function` and literal string `"Hello, Javascript!"` are required to mark as special colors. Maybe function name `hello`, `log`, global variable `console` and even punctuations (semicolon `;`, parentheses `()` `{}`) can be mark as special colors as well.
 
-The minimal way to print these text contents is: prepending and appending the escaping characters only once for the effected contents. For example print the `function` keyword with red color, and reset color after it:
+The minimal way to print effects is: prepending and appending the escaping characters only once for the effected contents. For example print the `function` keyword with red color, and reset color after it:
 
 ```bash
 \x1b[38;5;{31}mfunction\x1b[0m

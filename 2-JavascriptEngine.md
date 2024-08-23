@@ -75,5 +75,3 @@ The architecture of how Javascript interacts with Rust looks like:
 |                                                               |
 +---------------------------------------------------------------+
 ```
-
-<!-- https://asciiflow.com/#/share/eJzdWE1LwzAY%2FishZ6GgILqbDD82ED82PPVg2mUzmqYlaadDBBGPHjwM9eDRoyeP4q%2FpLzHbuui0a%2BwW62YIa5q8eZ73ffs%2BtNk5ZMjDsMQiShcgRR3MYQme27CNuSA%2Bs2FpccGGZ%2FK6urwiR53ezOqSHIX4LJQ3Noy7N3H3ctD3aweVbXU32%2F0WZDfbZnH3SmOka3qEomnU41rbrUyTN4Wz3iChz%2BVgI2JuKIsma18uR8eYqoUMsGQpN91hm3iHoEV9B1HQRry%2F8DgM4TkZ3L32rXeCXriWNLNOCbOcqDkN9bgoNDaTEXZNKOjhwzkjeAp1Ut3Edy%2BpqclsE1JpJ36bSgmwjsSJvOxFOMI5JGzYGYPlmU03VGMiwjKi1EHuiRUSD3MLiQ5zzZMWHONMierPK71AKiWqTcQd1OrpqexTitNfbLfm6ceD6S1y0X2R0RZGAdhxjmWk4vdIC47RuIwSJc1rdRdIpYS0TYQ7RbrnWWLDwkskVsfcIwxRq3xEaAME3HexEGZJx06OrBklm1l56dssEinhVIX8WWctwn6W46%2Fnsrrov7y8gFDMc4vtkxtWH6nmchKEQgth5vw2Wqgaw1HKtFOZXIjvr785%2ByQ%2FHwcJAnUBQh9UxQfqpw1vKdtYk7QEQEwKmUbyIYlUZ4qO39S5DphDS5O2ceh%2F%2BGeN2QwV3x90QcILePEOUXoO9g%3D%3D) -->

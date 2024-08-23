@@ -17,7 +17,7 @@ Here's part lists of hardwares and benchmarks for some very popular PC/laptop co
 |            | Memory  | Kingston 8GB DDR4<br/>1666MT/s                                                                      | 8GB DDR3L<br/>1600MHz                                                                   |
 |            | Storage | Western Digital 512GB HDD<br/>Sequential Read/Write 150-200 MB/s, Random Read/Write 1-5 MB/s        | 512GB Flash Storage<br/>Read/Write 700-1000 MB/s                                        |
 
-A very basic concept for the hardware speed from highest to lowest is: CPU > Memory > Storage. This is also the basic rules when rendering the terminal, for the same amount of data:
+A very basic concept for the hardware speed from highest to lowest is: CPU > Memory > IO Devices. This is also the basic rules when rendering the terminal, for the same amount of data:
 
 - CPU calculating/processing is preferred over flushing to IO devices.
 - Sequential flushing to IO devices is preferred over random flushing.
@@ -40,9 +40,9 @@ The rendering system splits into 3 layers: UI widgets tree, canvas and hardware 
 |                                   |                                |
 |           +-----------------+-----+--------+--------------+        |
 |           v                 v              v              v        |
-|  +------------------+ +-----------+ +--------------+ +----------+  |
-|  |  Buffer Content  | |  Tabline  | |  Statusline  | |  Cursor  |  |
-|  +------------------+ +-----------+ +--------------+ +----------+  |
+|  +-----------------+  +-----------+ +--------------+ +----------+  |
+|  |  Text Contents  |  |  Tabline  | |  Statusline  | |  Cursor  |  |
+|  +-----------------+  +-----------+ +--------------+ +----------+  |
 |                                                                    |
 +---------------------------------+----------------------------------+
                                   |
@@ -76,8 +76,6 @@ The rendering system splits into 3 layers: UI widgets tree, canvas and hardware 
 |                                                                    |
 +--------------------------------------------------------------------+
 ```
-
-<!-- https://asciiflow.com/#/share/eJztWDtvwjAQ%2FiuWZ6aqDDCWqmq3ilKxZHEbgyJRR3ISHkJIiLlDhqjKj2DsyK%2Fhl%2FTCoyLg%2BEFCWqFYJ%2Bycz5%2FvZfvEFDPyQXETtymzKXdYH9fwgEwoB97UwkPKPcdlFm7e1Cw8hr5Rv4XRJOE06jDy6diHDwuvo891NL8iCi2LraMFQq9PqOvYfep7qMMpReYNYPZgCjmJD8NCNgCJtuv6u2EBgNGBisu0xnEBG%2FxqrRTRh%2Fta5YfLne7icOpsDHNdh9nuCLVc5hOHUZ7tIx3ASKroUmWJOMwlBPjcGJxa9J3DfGFQheoK8u6EJ2McgOZIv1Bzsa6c2YLwyAz4uQt6PUjhJJkp291Mm4kOeRtAdh9wXnziB94RsxVwz90fgRS4PLElFGsu1pUzWxCbnR5l24Od7Q4jMjoweSgGo7SM13CRHpT64dhCXW8t1CJsSDwNL2Q78RKZvUgzS%2FO%2B8BHPUAo%2BnzkdOm7goQcOZbdwpRng5cxdqc1VqbW9mnlyp5%2FYmxYzA1W1IiErPf9WT%2BGTtdpMJWPtftPFBltn2C43SguwnFd4flyXX%2F7ezQtWlSeZrSpPpBT%2B88zOBnsk3B4RTtE9VAbv0v%2BWqgNcMsUWnuHZD9n8qZs%3D) -->
 
 UI widgets tree provides the friendly interfaces for users, draws on the logical frame in the canvas in every loop, thus canvas knows the which parts of the terminal are changed and flushing these parts to hardware device. The hardware is a MxN grapheme based double-array (M is columns/width, N is rows/height), for example 240x70 on my personal laptop with a 4K Dell external monitor, thus the problem scale is `O(M * N)`.
 

@@ -34,8 +34,6 @@ Here's a very simple hardware-level event loop for RSVIM:
 +------------------------+
 ```
 
-<!-- https://asciiflow.com/#/share/eJyrVspLzE1VslJKLE5JA2ElHaWcxMrUIqBQdYxSWWpRcWZ%2BXoySlZFOjFIFkLY0MweyKkEilqZAVklqRQmQE6P0aErPoykNVEITFPCCmJi8R1OacMnikULVnp1amZSfWJSin5tfWpyqkJlXUFpCgnZKbJ9CRCCsIS6sZhC0jiTn4dU8bQ9pmgddoqCug1CtTE3JLMnMS8e0Ep%2Bj0F2dX4TV1UgqUisyS7AbUVJZkKqQYFWYoFCSr1BYClH2aMochJOn7SLNNTjCkJjUSySaMZodBjA7EKO9JLUoNzMvMUchv7QEXECSpp1826mZyghYp1SrVAsAziCWcw%3D%3D) -->
-
 ## UI Framework
 
 The terminology _**UI**_ here is more close to the concept of most GUI and even Web/CSS frameworks, for example [Qt 6](https://doc.qt.io/qt-6/index.html), [tkinker](https://docs.python.org/3/library/tkinter.html#module-tkinter), and [Material UI](https://mui.com/material-ui/).

@@ -178,8 +178,6 @@ There are several UI widgets:
 
 > Don't forget most of the text contents needs extra colors and display effects.
 
-For such a high-frequency scenarios, canvas will have to do several kind of steps (written in a pseudo-language):
-
 ```text
 1. Save cursor position.
 2. Foreach line in whole canvas:
@@ -188,5 +186,5 @@ For such a high-frequency scenarios, canvas will have to do several kind of step
       5. Move cursor to the start position of the consequent contents.
       6. Print the contents with required display effects.
 7. Restore cursor position.
-8. Do cursor movement.
+8. Do (the real) cursor movement.
 ```

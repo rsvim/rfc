@@ -176,7 +176,7 @@ There are several UI widgets:
 - Sidebar (C), structure outline (D): special window that for showing extra directory structures and source code structures, not file editing.
 - Window 1 (F) and 2 (H), and their winbar (E and G): special window that for file editing, each of them has a special winbar widget for extra navigation info.
 
-> Don't forget most of the text contents needs extra colors and display effects.
+For such a high-frequency scenarios, canvas will have to do several kind of steps (written in a pseudo-language):
 
 ```text
 1. Save cursor position.

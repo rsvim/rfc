@@ -118,6 +118,6 @@ The above sequence can be split into 3 parts:
 - `function`: The text contents.
 - `\x1b[0m`: Reset all effects.
 
-Surrounding these escaping codes one by one for each character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`) also works, but the increased overhead is worst. Minimal overhead requires the canvas merge consequent text contents that sharing the same effects into one IO operation.
+Surrounding these escaping codes one by one for each character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`) also works, but the increased overhead is worst. Minimal overhead requires the canvas merge consequent text contents that sharing the same effects.
 
 ### Control Sequences

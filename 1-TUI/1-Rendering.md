@@ -98,7 +98,7 @@ function hello() {
 }
 ```
 
-We need to add different colors for the words:
+We need to add colors for the words:
 
 - Keyword `function`.
 - Literal string `"Hello, Javascript!"`.
@@ -121,3 +121,16 @@ The above sequence can be split into 3 parts:
 Surrounding these escaping codes one by one for each character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`) also works, but the increased overhead is worst. Minimal overhead requires the canvas merge consequent text contents that sharing the same effects.
 
 ### Control Sequences
+
+There are some other escaping codes to control terminal (it's called [Command](https://docs.rs/crossterm/latest/crossterm/trait.Command.html) in crossterm):
+
+- Cursor: move up, down, left, right, or to specific position. Show and hide, save and restore position.
+- Clear terminal: all, cursor line, column cells up from cursor, column cells down from cursor.
+- Set size: set terminal buffer size.
+
+Consider below example when we're editing a file inside RSVIM:
+
+
+```text
+
+```

@@ -86,7 +86,9 @@ After widgets drawing (on every loop), canvas compares current frame and previou
 - When user inserts/deletes a line in the middle of VIM's window, canvas needs to print `O(M * N / 2)` characters, i.e. half of the terminal.
 - When user first open a file, canvas needs to print `O(M * N)` characters.
 
-## Curses
+## Escaping Codes
+
+### Display Attributes
 
 [Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>) plays the role of hardware driver between RSVIM and terminal (specifically RSVIM uses [crossterm](https://github.com/crossterm-rs/crossterm)). Besides very common ASCII characters 0-9, A-Z, punctuations, etc, [escaping codes](https://en.wikipedia.org/wiki/ANSI_escape_code) also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example we want to render below javascript sample code:
 
@@ -117,3 +119,5 @@ The above sequence can be split into 3 parts:
 - `\x1b[0m`: Reset all effects.
 
 Surrounding these escaping codes one by one for each character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`) also works, but the increased overhead is worst. Minimal overhead requires the canvas merge consequent text contents that sharing the same effects into one IO operation.
+
+### Control Sequences

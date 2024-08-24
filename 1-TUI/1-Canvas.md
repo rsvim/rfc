@@ -1,8 +1,8 @@
-# Rendering
+# Canvas
 
 > Written by @linrongbin16, 2024-08-23
 
-This RFC describes the rendering system inside TUI.
+This RFC describes the canvas system inside TUI.
 
 ## Hardware
 
@@ -128,9 +128,50 @@ There are some other escaping codes to control terminal (it's called [Command](h
 - Clear terminal: all, cursor line, column cells up from cursor, column cells down from cursor.
 - Set size: set terminal buffer size.
 
-Consider below example when we're editing a file inside RSVIM:
+Consider below example when we're editing a file inside VIM editor:
 
+````text
++--------------------------------------------------------------------------------------------------+
+| A:Tabline                                                                                        |
++---------------------+-----------------------------------------------------+----------------------+
+| C:Sidebar(Window-3) | E:Winbar for Window-1                               | D:Outline(Window-4)  |
+| ```                 +-----------------------------------------------------+ ```                  |
+| ~/github/rsvim/rfc  |                                                     | H1-Canvas            |
+|   .git              | F:Window-1                                          |   H2-Hardware        |
+|   1-TUI             | ```                                                 |   H2-Architecture    |
+|   +-1-Canvas.md     | The above sequence can be split into 3 parts:       |   H2-Escaping Codes  |
+|   0-Principles.md   |                                                     |     H3-Display Att.. |
+|   1-TUI.md          | - `\x1b[38;5;{31}m`: Set red foreground color.      |     H3-Control Seq.. |
+|   2-Javascript.md   | - `function`: The text contents.                    | ```                  |
+|   LICENSE           | - `\x1b[0m`: Reset all effects.                     |                      |
+|   README.md         |                                                     |                      |
+|   typos.toml        | Surrounding these escaping codes one by one for each|                      |
+| ```                 | character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`)  |                      |
+|                     | also works, but the increased overhead is worst.    |                      |
+|                     | ```                                                 |                      |
+|                     |                                                     |                      |
+|                     +-----------------------------------------------------+                      |
+|                     | G:Winbar for Window-2                               |                      |
+|                     +-----------------------------------------------------+                      |
+|                     |                                                     |                      |
+|                     | H:Window-2                                          |                      |
+|                     | ```                                                 |                      |
+|                     | There are some other escaping codes to control      |                      |
+|                     | terminal (it's called Command in crossterm):        |                      |
+|                     |                                                     |                      |
+|                     | - Cursor: move up, down, left, right, or to specific|                      |
+|                     |   position. Show and hide, save and restore.        |                      |
+|                     | - Clear terminal: all, cursor line, column cells    |                      |
+|                     |   up from cursor, column cells down from cursor.    |                      |
+|                     | ```                                                 |                      |
+|                     |                                                     |                      |
++---------------------+-----------------------------------------------------+----------------------+
+| B:Statusline (global)                                                                            |
++--------------------------------------------------------------------------------------------------+
+````
 
-```text
+There are several UI widgets:
 
-```
+- Tabline (A), statusline (B): global widgets for an editor instance.
+- Sidebar (C), structure outline (D): special window that for showing extra directory structures and source code structures, not file editing.
+- Window 1 (F) and 2 (H), and their winbar (E and G): special window that for file editing.

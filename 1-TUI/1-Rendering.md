@@ -88,13 +88,7 @@ After widgets drawing (on every loop), canvas compares current frame and previou
 
 ## Curses
 
-[Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>) plays the role of hardware driver between RSVIM and terminal (specifically RSVIM uses [crossterm](https://github.com/crossterm-rs/crossterm)). Besides very common ASCII characters 0-9, A-Z, punctuations, etc, [escaping codes](https://en.wikipedia.org/wiki/ANSI_escape_code) also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example:
-
-```bash
-\x1b[1;31m  # Set style to bold, red foreground.
-```
-
-For example now we want to render below javascript sample code:
+[Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>) plays the role of hardware driver between RSVIM and terminal (specifically RSVIM uses [crossterm](https://github.com/crossterm-rs/crossterm)). Besides very common ASCII characters 0-9, A-Z, punctuations, etc, [escaping codes](https://en.wikipedia.org/wiki/ANSI_escape_code) also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example we want to render below javascript sample code:
 
 ```javascript
 function hello() {
@@ -102,7 +96,7 @@ function hello() {
 }
 ```
 
-Text editor needs to mark different colors for the words:
+We need to add different colors for the words:
 
 - Keyword `function`.
 - Literal string `"Hello, Javascript!"`.
@@ -110,16 +104,16 @@ Text editor needs to mark different colors for the words:
 - Global variable `console`.
 - And even punctuations: semicolon `;`, parentheses `()`, brackets `{}`.
 
-Escaping codes need to prepend and append extra codes to add these effects, and increases the payload. For example now we want to print the `function` keyword with red color, and reset color after it:
+Terminal needs to prepend and append extra escaping codes to add these effects, and increases the flushing payload. For example we want to print the `function` keyword with red color, and reset color after it:
 
 ```bash
 \x1b[38;5;{31}mfunction\x1b[0m
 ```
 
-The above example can split into 3 parts:
+The above sequence can be split into 3 parts:
 
 - `\x1b[38;5;{31}m`: Set red foreground color.
 - `function`: The text contents.
 - `\x1b[0m`: Reset all effects.
 
-This requires the canvas merge consequent text contents that sharing the same effects into one IO operation.
+Surrounding these escaping codes one by one for each character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`) also works, but the increased overhead is worst. The minimal overhead requires the canvas merge consequent text contents that sharing the same effects into one IO operation.

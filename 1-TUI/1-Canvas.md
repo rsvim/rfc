@@ -180,12 +180,10 @@ For such a high-frequency scenarios, canvas will have to do several kind of step
 
 ```text
 1. Save cursor position.
-2. Foreach line in whole canvas:
-3.   If current line is changed:
-4.     Clear the whole (current) line.
-5.     Foreach consequent contents on the line:
-6.       Move cursor to the start position of the consequent contents.
-7.       Print the contents with required display effects.
-8. Restore cursor position.
-9. Do (the real) cursor movement.
+2. Foreach changed line in whole canvas:
+3.     Foreach changed contents on the line:
+4.       Move cursor to the start position of the changed contents.
+5.       Print the contents with required display effects.
+6. Restore cursor position.
+7. Do (the real) cursor movement.
 ```

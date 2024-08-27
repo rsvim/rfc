@@ -176,15 +176,16 @@ There are several UI widgets:
 - Sidebar (C), structure outline (D): special window that for showing extra directory structures and source code structures, not file editing.
 - Window 1 (F) and 2 (H), and their winbar (E and G): special window that for file editing, each of them has a special winbar widget for extra navigation info.
 
-For such a high-frequency scenarios, canvas will have to do several kind of steps (written in a pseudo-language):
+For such a high-frequency scenarios, canvas will have to do several kind of steps:
 
 ```text
 1. Save cursor position.
 2. Foreach line in whole canvas:
-   3. Clear the whole (current) line.
-   4. Foreach consequent contents on the line:
-      5. Move cursor to the start position of the consequent contents.
-      6. Print the contents with required display effects.
-7. Restore cursor position.
-8. Do (the real) cursor movement.
+3.   If current line is changed:
+4.     Clear the whole (current) line.
+5.     Foreach consequent contents on the line:
+6.       Move cursor to the start position of the consequent contents.
+7.       Print the contents with required display effects.
+8. Restore cursor position.
+9. Do (the real) cursor movement.
 ```

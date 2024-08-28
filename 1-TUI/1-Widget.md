@@ -81,6 +81,8 @@ NOTE: The `Root Container` and `Window` nodes are pure logical nodes, i.e. they 
 
 ## Ownership
 
+The ownership guarantees:
+
 - Children will be destroyed when their parent is.
 - Each node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, which is easier for user. The absolute coordinate is based on the terminal device, which is faced to hardware rendering.
 - Children are displayed inside their parent's geomtric shape, clipped by their boundaries. While the logical shape can still be infinite on the imaginary canvas.

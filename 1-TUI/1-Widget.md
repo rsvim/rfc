@@ -91,7 +91,7 @@ The ownership guarantees:
 
 ## Coordinate System
 
-All widgets are rectangles (fortunately we don't need to involve too much complicated graphic calculations), and have their own shapes: size (height and width), position (x/y, row/column). This is the 2-dimensional coordinate system:
+Fortunately in VIM editor, all widgets are rectangles. They have their own shapes: size (height and width), position (x/y, row/column). This is the 2-dimensional coordinate system:
 
 ```text
                 Y
@@ -111,7 +111,7 @@ X------(-1,0)-(0,0)-(1,0)------->
                 v
 ```
 
-When it comes to the terminal device, we set the `(0,0)` coordinate as the top-left corner of the terminal device. Thus it becomes to:
+When it comes to the terminal device, we set the `(0,0)` coordinate as the top-left corner of the terminal device:
 
 ```text
 (0,0)------------------------(width,0)-->X
@@ -131,7 +131,32 @@ When it comes to the terminal device, we set the `(0,0)` coordinate as the top-l
   Y
 ```
 
-- Widgets can be stacking and overlapping, this involves the Z-axis (Z-index), higher Z-index covers lower Z-index.
+Widgets can be stacking and overlapping: higher Z-index has higher priority than lower Z-index to display.
+
+```text
+(0,0)-------------------------------------(width,0)--->X
+  |                                             |
+  |  Terminal                                   |
+  |                                             |
+  |      +------------------------+             |
+  |      | A: Z-index 20          |             |
+  |      |   +-------------------------+        |
+  |      |   | B: Z-index 50      |    |        |
+  |      |   |                         |        |
+  |      |   |                    |    |        |
+  |      |   |                         |        |
+  |      |   |                    |    |        |
+  |      +---|-- -- -- -- -- -- --+    |        |
+  |          |                         |        |
+  |          +-------------------------+        |
+  |                                             |
+(0,height)--------------------------------(width,height)
+  |
+  |
+  |
+  v
+  Y
+```
 
 ## Event Handlers and Dispatching
 

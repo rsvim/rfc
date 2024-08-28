@@ -4,17 +4,17 @@
 
 This RFC describes the widget tree inside TUI.
 
-## Features
+## Design
 
-In the TUI RFC, we introduced a stack-based UI widgets tree structure, it plays the role of middle layer between data logics and terminal rendering, helps us to manage all UI components:
+The widgets design is deeply influenced by [Qt](https://www.qt.io/) GUI framework:
 
-- It manages ownership
-- It manages coordinate system (shapes and layers).
-- It manages keyboard/mouse events dispatching.
+- Ownership between parent and children.
+- Coordinate system (shapes and layers).
+- Keyboard/mouse events dispatching.
 
 ## Ownership
 
-The parent node always owns its children nodes.
+The parent node owns its children nodes.
 
 - Children will be destroyed when their parent is.
 - Each node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, which is easier for user. The absolute coordinate is based on the terminal device, which is faced to hardware rendering.

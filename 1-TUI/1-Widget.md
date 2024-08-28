@@ -157,8 +157,11 @@ Widgets can be stacking and overlapping: higher Z-index has higher priority than
   Y
 ```
 
-## Event Handlers and Dispatching
+## Event Handling and Dispatching
 
-- Once an event happens, the event will be dispatched from leaf nodes to root nodes.
-- All widgets have a default event handler (callback methods) binding on it, the default behavior is simply doing nothing. But users can bind their own handlers to listen to the events and do extra logics.
-- An event is been consumed if a node has an event handler to consume it, or it will continue to be dispatched to its parent node. There's only one exception: when the handler tells the UI engine to continue dispatching this event to its parent node, even the event is been consumed by current handler, it will still continue to be dispatched to its parent node.
+With coordinate system, we can find out where does a keyboard/mouse event happen, and dispatch it from the leaf nodes to root node in the widget tree, which is totally intuitive. Each widget node has a default event handler (callback method) binding on it, the default behavior is simply doing nothing. Users can bind their own handlers to do extra logics.
+
+For a handler/callback, it returns `true` or `false` to the TUI engine:
+
+- When returns `true`, it tells the engine to stop dispatching to its parent node, i.e. the event is consumed by this handler.
+- When returns `false`, it tells the engine to continue dispatching to its parent node, i.e. the event is not consumed by this handler even it's been processed. The default handler returns `false`.

@@ -153,7 +153,6 @@ Widgets can be stacking and overlapping: higher Z-index has higher priority than
 (0,height)--------------------------------(width,height)
   |
   |
-  |
   v
   Y
 ```

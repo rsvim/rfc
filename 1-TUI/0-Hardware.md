@@ -1,5 +1,9 @@
 # Hardware
 
+> Written by @linrongbin16, 2024-08-28
+
+This RFC describes the basic concepts and rules for TUI system.
+
 ## Spec List
 
 Here's a list of hardwares and specifications for some very popular PC/laptop computers:

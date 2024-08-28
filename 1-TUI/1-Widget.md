@@ -6,11 +6,11 @@ This RFC describes the widget tree inside TUI.
 
 ## Design
 
-The widgets design is deeply influenced by [Qt](https://www.qt.io/) GUI framework:
+The design of TUI engine is deeply influenced by [Qt](https://www.qt.io/) GUI framework:
 
 - Ownership between parent and children.
 - Coordinate system (shapes and layers).
-- Keyboard/mouse events dispatching.
+- Keyboard/mouse events dispatching and handling.
 
 ## Ownership
 

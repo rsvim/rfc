@@ -8,13 +8,78 @@ This RFC describes the widget tree inside TUI.
 
 The design of TUI engine is deeply influenced by [Qt](https://www.qt.io/) GUI framework:
 
-- Ownership between parent and children.
+- Each widget is a node on the widgets tree.
+- Parent node owns its children nodes.
 - Coordinate system (shapes and layers).
 - Keyboard/mouse events dispatching and handling.
 
-## Ownership
+Consider below example, when we're editing a file inside VIM editor:
 
-The parent node owns its children nodes.
+```text
++-------------------------------------------------------------------------+
+| A:Tabline                                                               |
++---------------------+---------------------------------------------------|
+| C:Window-1          | D:Window-2                                        |
+|                     |                                                   |
+|                     |                                                   |
+| Some text           | Some text contents here...                        |
+| contents here...    |                                                   |
+|                     | +--------+                                        |
+|                     | |E:Cursor|                                        |
+|                     | +--------+                                        |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
+|                     |                                                   |
++---------------------+---------------------------------------------------|
+| B:Statusline (global)                                                   |
++-------------------------------------------------------------------------+
+```
+
+While the widgets tree looks like:
+
+```text
++----------------+
+| Root Container |
++-------+--------+
+        |
+        +---------------------+-------------------+--------------------+
+        |                     |                   |                    |
+        v                     v                   v                    v
++----------------+   +----------------+   +----------------+   +----------------+
+| A: Tabline     |   | B: Statusline  |   | C: Window-1    |   | D: Window-2    |
++----------------+   +----------------+   +-------+--------+   +-------+--------+
+                                                  |                    |
+                                                  |                    +-------------------+
+                                                  |                    |                   |
+                                                  v                    v                   v
+                                          +----------------+   +----------------+   +----------------+
+                                          | Window-1 Texts |   | Window-2 Texts |   | E: Cursor      |
+                                          +----------------+   +----------------+   +----------------+
+```
+
+NOTE: The `Root Container` and `Window` nodes are pure logical nodes, i.e. they only have shapes and can arrange their children nodes layout, but no text contents.
+
+## Ownership
 
 - Children will be destroyed when their parent is.
 - Each node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, which is easier for user. The absolute coordinate is based on the terminal device, which is faced to hardware rendering.

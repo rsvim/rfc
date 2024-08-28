@@ -84,9 +84,9 @@ NOTE: The `Root Container` and `Window` nodes are pure logical nodes, i.e. they 
 The ownership guarantees:
 
 - Children will be destroyed when their parent is.
-- Each node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, the absolute coordinate is based on the terminal device.
+- A node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, the absolute coordinate is based on the terminal device.
 - Children are displayed inside their parent's geomtric shape, clipped by their boundaries. While the logical shape can still be infinite on the imaginary canvas.
-- Children always covers their parent. The Z-index arranges the display priority of the content stack when multiple children overlap on each other, for widgets under the same parent, higher Z-index has higher priority to display.
+- Children always have higher priority over their parent to display. While Z-index arranges the display priority when multiple children overlap on each other, for children under the same parent, higher Z-index has higher priority to display.
 - Common attributes of children are implicitly inherited from their parent, for example `visible` and `enabled`, unless they are been explicitly been changed.
 
 ## Coordinate System

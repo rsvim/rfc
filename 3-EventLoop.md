@@ -46,7 +46,7 @@ Let's consider some very extreme and unlikely situations:
 
 ### Cancel a Submitted Task
 
-Simply clear all the tasks in the queue, this should not be a big deal.
+Simply clear the queue, this should not be a big deal.
 
 ### Interrupt/Abort a Running Task
 

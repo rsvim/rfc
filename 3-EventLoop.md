@@ -36,7 +36,7 @@ After all, RSVIM's event loop is similar to a javascript runtime like [node.js](
 Main use cases of a VIM editor for async runtime are:
 
 - Resolve filesystem (directories and file reading) for external scripts and plugins, and run them.
-- Event subscription (in Vim editor it's called [auto commands](https://vimhelp.org/autocmd.txt.html#autocmd.txt)) and trigger callbacks.
+- Topic subscription and event consuming (in Vim editor it's called [auto commands](https://vimhelp.org/autocmd.txt.html#autocmd.txt), but can be treat as a more generally [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)).
 - Timeout tasks.
 - The `async` annotated javascript functions.
 

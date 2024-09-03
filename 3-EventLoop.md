@@ -52,4 +52,8 @@ Simply clear all the tasks in the queue, this should not be a big issue.
 
 For example, reading/writing a big file that takes minutes or even hours (it can be dangerous because interrupting the read/write operation without correctly open/close a file can damage filesystem on storage device).
 
-For such cases, we will have to carefully insert [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) to tell the task to stop in safety. And for external javascript scripts, there seems no way to do it.
+For such case, we have below choices:
+
+1. Carefully insert manual checks on a global [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) inside every async task, it notifies these running tasks to stop in safety.
+2. Build up a pool to reserve these running tasks, and abort them when needed, while potential danger is at user's own risk.
+3. Do nothing and simply wait for these running tasks complete.

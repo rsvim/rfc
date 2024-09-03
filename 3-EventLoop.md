@@ -29,4 +29,4 @@ Tokio provides multiple infrastructures:
   - Trigger auto-commands (event callbacks).
   - Schedule timeout or delayed tasks.
 
-After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/) focusing on text editing and TUI rendering.
+After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.

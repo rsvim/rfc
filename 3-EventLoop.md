@@ -40,4 +40,4 @@ Main use cases of a VIM editor for async runtime are:
 - Timeout tasks.
 - The `async` annotated javascript functions.
 
-These use cases usually require we submit an async task to a queue, schedule and run them later. Thus we would like a very general task queue inside the event loop, which can be selected along with crossterm's hardware events.
+These use cases usually require we submit an async task (just like a function pointer with a context in c/c++ that literally allows us doing any logic) to a queue, schedule and run them later. Thus we would like a very general task queue inside the event loop, which can be selected along with crossterm's hardware events.

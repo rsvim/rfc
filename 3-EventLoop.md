@@ -57,3 +57,5 @@ For such case, we have below choices:
 1. Carefully insert manual checks on a global [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) inside every async task, it notifies these running tasks to stop in safety.
 2. Build up a pool to reserve these running tasks, and abort them when needed, while potential danger is at user's own risk.
 3. Do nothing and simply wait for these running tasks complete.
+
+The current behavior of Neovim and Vim is the option 3. We would also keep the compatible behavior, leave option 1 and 2 for future discussion if needed.

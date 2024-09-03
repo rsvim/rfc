@@ -22,9 +22,11 @@ Tokio provides multiple infrastructures:
 - Non-blocking event loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
   - TUI: Receive user keyboard/mouse events by crossterm's [event-stream feature](https://github.com/crossterm-rs/crossterm?tab=readme-ov-file#feature-flags).
   - IO: Read/write file system, network, tcp/http/ssh, etc.
-  - Async: Schedule the `await` functions inside javascript scripts.
+  - Async: Schedule `async` annotated javascript functions inside scripts.
 - Concurrent tasks schedule on multiple threadings:
   - Loading user scripts/plugins.
   - Syntax and colorscheme rendering.
   - Trigger auto-commands (event callbacks).
   - Schedule timeout or delayed tasks.
+
+After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/) focusing on text editing and TUI rendering.

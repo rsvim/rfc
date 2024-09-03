@@ -35,6 +35,9 @@ After all, RSVIM's event loop is similar to a javascript runtime like [node.js](
 
 Main use cases of a VIM editor for async runtime are:
 
-- Resolve filesystem (directories and file reading) for external scripts and plugins.
-- Load and execute external scripts.
+- Resolve filesystem (directories and file reading) for external scripts and plugins, and run them.
 - Event subscription (in Vim editor it's called [auto commands](https://vimhelp.org/autocmd.txt.html#autocmd.txt)) and trigger callbacks.
+- Timeout tasks.
+- The `async` annotated javascript functions.
+
+These use cases usually require we submit an async task to a queue, schedule and run them later. Thus we would like a very general task queue inside the event loop, which can be selected along with crossterm's hardware events.

@@ -106,9 +106,9 @@ Surrounding these escaping codes one by one for each character (`f`, `u`, `n`, `
 
 There are some other escaping codes to control terminal (it's called [Command](https://docs.rs/crossterm/latest/crossterm/trait.Command.html) in crossterm):
 
-- Cursor: move up, down, left, right, or to specific position. Show and hide, save and restore position.
-- Clear terminal: all, cursor line, column cells up from cursor, column cells down from cursor.
-- Set size: set terminal buffer size.
+- Cursor: Move up, down, left, right, or to specific position. Show and hide, save and restore position.
+- Clear terminal: All, cursor line, column cells up from cursor, column cells down from cursor.
+- Set size: Set terminal buffer size.
 
 Consider below example when we're editing a file inside VIM editor:
 
@@ -154,9 +154,9 @@ Consider below example when we're editing a file inside VIM editor:
 
 There are several UI widgets:
 
-- Tabline (A), statusline (B): global widgets for an editor instance.
-- Sidebar (C), structure outline (D): special window that for showing extra directory structures and source code structures, not file editing.
-- Window 1 (F) and 2 (H), and their winbar (E and G): special window that for file editing, each of them has a special winbar widget for extra navigation info.
+- Tabline (A), statusline (B): Global widgets for an editor instance.
+- Sidebar (C), structure outline (D): Special window that for showing extra directory structures and source code structures, not file editing.
+- Window 1 (F) and 2 (H), and their winbar (E and G): Special window that for file editing, each of them has a special winbar widget for extra navigation info.
 
 For such a high-frequency scenarios, canvas will have to do several kind of steps:
 

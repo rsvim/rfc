@@ -50,7 +50,7 @@ Simply clear the queue, this should not be a big deal.
 
 ### Interrupt/Abort a Running Task
 
-For example, reading/writing a big file that takes minutes or even hours (it can be dangerous because interrupting the read/write operation without correctly open/close a file can damage filesystem on storage device).
+For example, when reading/writing a super big file, it can take minutes or even hours. It's dangerous if the read/write operation is interrupted without correctly open/close the filedescriptor, which damage the filesystem on storage device.
 
 For such case, we have below choices:
 

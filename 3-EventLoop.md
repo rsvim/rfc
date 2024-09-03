@@ -22,4 +22,4 @@ Tokio builds multiple infrastructures:
 - Non-blocking event loop that loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
   - TUI: Receive user keyboard/mouse events by crossterm's [event-stream feature](https://github.com/crossterm-rs/crossterm?tab=readme-ov-file#feature-flags).
   - IO: Read/write file system, network, tcp/http/ssh, etc.
-- Multiple green threading that can concurrent schedule (include delayed) tasks.
+- Multiple threads that concurrently schedule (include delayed) tasks.

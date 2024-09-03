@@ -19,10 +19,11 @@ When such a classic running loop (for all GUI/TUI application) comes to terminal
 
 Tokio provides multiple infrastructures:
 
-- Non-blocking event loop that loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
+- Non-blocking event loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
   - TUI: Receive user keyboard/mouse events by crossterm's [event-stream feature](https://github.com/crossterm-rs/crossterm?tab=readme-ov-file#feature-flags).
   - IO: Read/write file system, network, tcp/http/ssh, etc.
-- Multiple threads that concurrently schedule tasks:
+  - Async: Schedule the `await` functions inside javascript scripts.
+- Concurrent tasks schedule on multiple threadings:
   - Loading user scripts/plugins.
   - Syntax and colorscheme rendering.
   - Trigger auto-commands (event callbacks).

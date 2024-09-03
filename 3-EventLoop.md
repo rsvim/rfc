@@ -4,8 +4,6 @@
 
 This RFC describes the RSVIM's running loop.
 
-## Top-Down View
-
 As mentioned in [TUI](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
 
 1. Receive user keyboard/mouse events.

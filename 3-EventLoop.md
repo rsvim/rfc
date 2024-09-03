@@ -42,7 +42,7 @@ Main use cases of a VIM editor for async runtime are:
 
 These use cases usually require we submit an async task (just like a function pointer with a context in c/c++ that literally allows us doing any logic) to a queue, schedule and run them later. Thus we would like a very general task queue inside the event loop, which can be selected along with crossterm's hardware events.
 
-Rust doesn't support [dynamic dispatch akin to `virtual class` in c++](https://doc.rust-lang.org/book/ch17-01-what-is-oo.html#polymorphism), or at least it's not safe, which is not recommended and should be avoid in large-scale usage. In tokio, we may have below solutions:
+Rust doesn't support [dynamic dispatch akin to `virtual class` in c++](https://doc.rust-lang.org/book/ch17-01-what-is-oo.html#polymorphism), or at least it's not safe, which is not recommended and should be avoid in large-scale use. In tokio, we may have below solutions:
 
 1. [`futures::stream::FuturesUnordered`](https://docs.rs/futures/latest/futures/stream/struct.FuturesUnordered.html)
 2. [`tokio_stream::wrappers::ReceiverStream`](https://docs.rs/tokio-stream/latest/tokio_stream/wrappers/struct.ReceiverStream.html)

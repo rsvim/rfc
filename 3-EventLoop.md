@@ -55,7 +55,7 @@ The event loop is simply a global instance of data structure that contains every
         v
 +----------------+               +------------------------+
 |                |          i    |                        |
-|  Normal Mode   +------+------->|      Insert Mode       |
+|  Normal Mode   +------+------->|  Insert Mode           |
 |                |      |        |                        |
 +----------------+      |        +-----------+------------+
         ^    ESC        |                    |
@@ -87,7 +87,7 @@ The event loop is simply a global instance of data structure that contains every
         |               |
         |               |        +------------------------+
         |               |  ...   |                        |
-        |               +------->| Other states/modes...  |
+        |               +------->|  Other states/modes... |
         |               |        |                        |
         |               |        +-----------+------------+
         |    ESC        |                    |

@@ -31,6 +31,85 @@ Tokio provides multiple infrastructures:
 
 After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 
+## Context
+
+The event loop is simply a global instance of data structure that contains everything inside the editor:
+
+- UI widget tree (that contains the Vim windows, cursor, statusline, etc) and canvas.
+- The Vim buffers.
+- Editing mode.
+- And more: javascript runtime, loaded scripts/plugins, etc.
+
+## Editing Mode
+
+[Editing mode](https://vimhelp.org/intro.txt.html#vim-modes) is managed by a finite-state machine, i.e. each mode is a state inside the editor:
+
+```text
++----------------+
+|                |
+|     Start      |
+|                |
++-------+--------+
+        |
+        |
+        v
++----------------+               +------------------------+
+|                |          i    |                        |
+|  Normal Mode   +------+------->|  Insert Mode           |
+|                |      |        |                        |
++----------------+      |        +-----------+------------+
+        ^    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |   v    |                        |
+        |               +------->|  CharWise-Visual Mode  |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |   V    |                        |
+        |               +------->|  LineWise-Visual Mode  |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               | CTRL-V |                        |
+        |               +------->|  BlockWise-Visual Mode |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |  ...   |                        |
+        |               +------->|  Other states/modes... |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |   :    |                        |
+        |               +------->|  Command-Line Mode     |
+        |                        |                        |
+        |                        +-----------+-------+----+
+        |    ESC                             |       |
+        +------------------------------------+       |
+                                                     |
++----------------+                                   |
+|                |           qa!                     |
+|      Exit      |<----------------------------------+
+|                |
++----------------+
+```
+
+Each state can consumes the keyboard/mouse events and implements the corresponding behavior in editor.
+
 ## Task Queue
 
 Main use cases of a VIM editor for async runtime are:

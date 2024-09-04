@@ -80,7 +80,10 @@ The architecture of how Javascript interacts with Rust looks like:
 
 Interaction between rust and javascript requires two sides: rust side and javascript side.
 
-For rust side, it can load javascripts, resolve the dependency graphs (via `import` and `require`), execute source code (via the engine).
+For rust side, it can:
+
+1. Load external javascripts
+2. Execute javascript code (via the engine).
 
 For javascript side, it can:
 

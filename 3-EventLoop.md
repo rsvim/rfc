@@ -128,7 +128,7 @@ Two more topics need to discuss:
 
 ### General Async Task Type
 
-Based on current design
+For a general async task, we execute it with the global [context](#context) mentioned above. Thus it can easily acquire the editor's global state and complete it task. This way we don't need it returns a value with too much information, maybe simply a [`Result<(), String>`](https://doc.rust-lang.org/std/result/enum.Result.html) to indicate it's successful, or failed with an error message.
 
 ### Extreme and Unlikely Situations
 

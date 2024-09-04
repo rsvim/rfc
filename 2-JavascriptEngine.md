@@ -75,3 +75,20 @@ The architecture of how Javascript interacts with Rust looks like:
 |                                                               |
 +---------------------------------------------------------------+
 ```
+
+## Interaction
+
+Interactions between rust and javascript requires on two sides: rust side and javascript side.
+
+For rust side, it can load javascripts, resolve the dependency graphs (via `import` and `require`), execute source code (via the engine).
+
+For javascript side, it can:
+
+1. Use [ECMA scripts](https://ecma-international.org/publications-and-standards/standards/ecma-262/) to literally implement anything.
+2. Use editor APIs provided by RSVIM to drive the editor instance.
+3. (Optional) use very limited part of standard library ported from other runtimes to improve developing efficiency. For example:
+
+   - [Node.js Official APIs](https://nodejs.org/docs/latest/api/documentation.html)
+   - [Deno Standard Library](https://deno.land/std)
+
+   > Web and browser related APIs are not supported in text editors.

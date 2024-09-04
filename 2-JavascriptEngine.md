@@ -103,4 +103,4 @@ Both (Neo)Vim ship a lot of builtin scripts/plugins with their releases, which p
 
 All of them point to the core problem: (Neo)Vim doesn't have its own package management system.
 
-Image we had already embedded both js runtime and package manager (just like `node` and `npm`) inside RSVIM editor, all we need is sharing an example of config file (say `~/.rsvim.js`) that contains a list of recommended plugins in the "Get Started" section in the first page of user documents. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor itself can remain to be a single executable file.
+Image we had already embedded both js runtime and package manager (just like `node` and `npm`) inside RSVIM editor, all we need is sharing an example of config file (for example `~/.rsvim.js`) that contains recommended plugins in the "Get Started" document. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor itself can remain to be a single executable file.

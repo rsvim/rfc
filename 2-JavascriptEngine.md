@@ -82,8 +82,8 @@ Interaction between rust and javascript requires two sides: rust side and javasc
 
 For rust side:
 
-1. It loads external javascripts
-2. It executes javascript code (via the engine).
+1. It loads external javascripts and executes via js engine.
+2. It provides editor APIs for javascript to allow user interact with editor.
 
 For javascript side:
 
@@ -95,3 +95,10 @@ For javascript side:
    - [Deno Standard Library](https://deno.land/std)
 
 ## Package Management
+
+Both (Neo)Vim ship a lot of builtin scripts/plugins with their releases, which provide a lot of editor APIs and functionalities. But this method has two shortcomings:
+
+1. Some scripts are rapidly developed and changed, which are not suitable for release in a fixed time manner.
+2. Users cannot choose whether they want them or not, there usually exist better alternative works in community.
+
+All of them point to the core problem: (Neo)Vim doesn't have its own package management system.

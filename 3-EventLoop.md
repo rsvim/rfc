@@ -121,22 +121,13 @@ Main use cases of a VIM editor for async runtime are:
 
 These use cases usually require we submit a very general async task to a queue, schedule and run later, just like a function pointer with a context in c/c++ that literally allows us doing any logic. We also need the task queue be to a [`Stream`](https://docs.rs/futures/latest/futures/stream/trait.Stream.html), which can be selected along with crossterm's event stream. The [`FuturesUnordered`](https://docs.rs/futures/latest/futures/stream/struct.FuturesUnordered.html) can be the queue for all async tasks, i.e. the [`Future`](https://docs.rs/futures/latest/futures/future/trait.Future.html) trait.
 
-Two more topics need to discuss:
+Let's consider some very extreme and unlikely situations:
 
-1. The type of general async task.
-2. Extreme and unlikely situations.
-
-### General Async Task Type
-
-For a general async task, we execute it with the global [context](#context) mentioned above. Thus it can easily acquire the editor's global state and complete it task. This way we don't need it returns a value with too much information, maybe simply a [`Result<(), String>`](https://doc.rust-lang.org/std/result/enum.Result.html) to indicate it's successful, or failed with an error message.
-
-### Extreme and Unlikely Situations
-
-#### Cancel a Submitted Task
+### Cancel a Submitted Task
 
 Simply clear the queue, this should not be a big deal.
 
-#### Interrupt/Abort a Running Task
+### Interrupt/Abort a Running Task
 
 For example, when reading/writing a super big file, it can take minutes or even hours. It's dangerous if the read/write operation is interrupted without correctly open/close the file descriptor, which damages filesystem on storage device.
 

@@ -40,6 +40,74 @@ The event loop is simply a global instance of data structure that contains every
 - Editing mode.
 - And more: javascript runtime, loaded scripts/plugins, etc.
 
+## Editing Mode
+
+[Editing mode](https://vimhelp.org/intro.txt.html#vim-modes) is managed by a finite-state machine, i.e. each mode is a state inside the editor:
+
+```text
++----------------+
+|                |
+|     Start      |
+|                |
++-------+--------+
+        |
+        |
+        v
++----------------+               +------------------------+
+|                |          i    |                        |
+|  Normal Mode   +------+------->|      Insert Mode       |
+|                |      |        |                        |
++----------------+      |        +-----------+------------+
+        ^    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |   v    |                        |
+        |               +------->|  CharWise-Visual Mode  |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |   V    |                        |
+        |               +------->|  LineWise-Visual Mode  |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               | CTRL-V |                        |
+        |               +------->|  BlockWise-Visual Mode |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |  ...   |                        |
+        |               +------->| Other states/modes...  |
+        |               |        |                        |
+        |               |        +-----------+------------+
+        |    ESC        |                    |
+        +---------------+--------------------+
+        |               |
+        |               |        +------------------------+
+        |               |   :    |                        |
+        |               +------->|  Command-Line Mode     |
+        |                        |                        |
+        |                        +-----------+-------+----+
+        |    ESC                             |       |
+        +------------------------------------+       |
+                                                     |
++----------------+                                   |
+|                |           qa!                     |
+|      Exit      |<----------------------------------+
+|                |
++----------------+
+```
+
 ## Task Queue
 
 Main use cases of a VIM editor for async runtime are:

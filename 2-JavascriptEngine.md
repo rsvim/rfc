@@ -94,6 +94,6 @@ For javascript side, it can:
    - [Node.js Official APIs](https://nodejs.org/docs/latest/api/documentation.html)
    - [Deno Standard Library](https://deno.land/std)
 
-   > Web and browser related APIs are not supported in text editors.
+   > Web and browser related APIs are not supported.
 
 ## Package Management

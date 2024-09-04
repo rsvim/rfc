@@ -89,7 +89,7 @@ For javascript side:
 
 1. It uses [ECMA scripts](https://ecma-international.org/publications-and-standards/standards/ecma-262/) to literally implement anything.
 2. It uses editor APIs provided by RSVIM to drive the editor instance.
-3. (Optionally) it uses very limited part of standard library ported from other runtimes to improve developing efficiency, while web and browser related APIs are not supported. For example:
+3. (Optionally) it uses very limited subset of standard library ported from other runtimes to improve developing efficiency, while web and browser related APIs are not supported. For example:
 
    - [Node.js Official APIs](https://nodejs.org/docs/latest/api/documentation.html)
    - [Deno Standard Library](https://deno.land/std)

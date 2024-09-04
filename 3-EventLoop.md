@@ -108,6 +108,8 @@ The event loop is simply a global instance of data structure that contains every
 +----------------+
 ```
 
+Each state can consumes the keyboard/mouse events and implements the corresponding behavior in editor.
+
 ## Task Queue
 
 Main use cases of a VIM editor for async runtime are:

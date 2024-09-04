@@ -78,7 +78,7 @@ The architecture of how Javascript interacts with Rust looks like:
 
 ## Interaction
 
-Interactions between rust and javascript requires on two sides: rust side and javascript side.
+Interaction between rust and javascript requires two sides: rust side and javascript side.
 
 For rust side, it can load javascripts, resolve the dependency graphs (via `import` and `require`), execute source code (via the engine).
 
@@ -92,3 +92,5 @@ For javascript side, it can:
    - [Deno Standard Library](https://deno.land/std)
 
    > Web and browser related APIs are not supported in text editors.
+
+## Package Management

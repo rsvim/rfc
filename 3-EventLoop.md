@@ -31,6 +31,15 @@ Tokio provides multiple infrastructures:
 
 After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 
+## Context
+
+The event loop is simply a global instance of data structure that contains everything inside the editor:
+
+- UI widget tree and canvas. Note: the Vim windows and cursor belongs to the UI tree.
+- Buffers.
+- Editing mode.
+- And more: javascript runtime, loaded scripts/plugins, etc.
+
 ## Task Queue
 
 Main use cases of a VIM editor for async runtime are:
@@ -44,10 +53,12 @@ These use cases usually require we submit a very general async task to a queue, 
 
 Two more topics need to discuss:
 
-1. Type of the general async task.
+1. The type of general async task.
 2. Extreme and unlikely situations.
 
 ### General Async Task Type
+
+Based on current design
 
 ### Extreme and Unlikely Situations
 

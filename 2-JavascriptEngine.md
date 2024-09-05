@@ -1,6 +1,6 @@
 # Javascript Engine
 
-> Written by @linrongbin16, 2024-08-10
+> Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-05.
 
 This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS engine embedded in the RSVIM.
 
@@ -78,7 +78,7 @@ The architecture of how Javascript interacts with Rust looks like:
 
 ## Interaction
 
-Interaction between rust and javascript requires two sides: rust side and javascript side.
+Interaction between rust and javascript requires cooperations from both sides.
 
 For rust side:
 

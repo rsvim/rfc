@@ -1,6 +1,6 @@
 # Javascript Engine
 
-> Written by @linrongbin16, 2024-08-10
+> Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-05.
 
 This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS engine embedded in the RSVIM.
 
@@ -75,3 +75,32 @@ The architecture of how Javascript interacts with Rust looks like:
 |                                                               |
 +---------------------------------------------------------------+
 ```
+
+## Interaction
+
+Interaction between rust and javascript requires cooperations from both sides.
+
+For rust side:
+
+1. It loads external javascripts and executes via js engine.
+2. It provides editor APIs for javascript to allow user interact with editor.
+
+For javascript side:
+
+1. It uses [ECMA scripts](https://ecma-international.org/publications-and-standards/standards/ecma-262/) to literally implement anything.
+2. It uses editor APIs provided by RSVIM to drive the editor instance.
+3. (Optionally) it uses a limited subset of standard library ported from other runtimes to improve developing efficiency, while web and browser related APIs are not supported. For example:
+
+   - [Node.js Official APIs](https://nodejs.org/docs/latest/api/documentation.html)
+   - [Deno Standard Library](https://deno.land/std)
+
+## Package Management
+
+Both (Neo)Vim ship a lot of builtin scripts/plugins with their releases, which provide a lot of editor APIs and functionalities. But this method has two shortcomings:
+
+1. Some scripts are rapidly developed and changed, which are not suitable for release in a fixed time manner.
+2. Users cannot choose whether they want them or not, there usually exist better alternative works in community.
+
+All of them point to the core problem: (Neo)Vim doesn't have its own package management system.
+
+Image we had already embedded both js runtime and package manager (just like `node` and `npm`) inside RSVIM editor, all we need is sharing an example of config file (for example `~/.rsvim.js`) that contains recommended plugins in the "Get Started" document. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor itself can remain to be a single executable file, only responsible for providing an interface for script runtime and package management.

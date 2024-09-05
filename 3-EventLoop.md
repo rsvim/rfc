@@ -1,6 +1,6 @@
 # Event Loop
 
-> Written by @linrongbin16, 2024-09-03
+> Written by @linrongbin16, first created at 2024-09-03, last updated at 2024-09-05.
 
 This RFC describes the RSVIM's running loop.
 
@@ -35,8 +35,8 @@ After all, RSVIM's event loop is similar to a javascript runtime like [node.js](
 
 The event loop is simply a global instance of data structure that contains everything inside the editor:
 
-- UI widget tree (that contains the Vim windows, cursor, statusline, etc) and canvas.
-- The Vim buffers.
+- UI widget tree (contains windows, cursor, statusline, etc) and canvas.
+- Buffers.
 - Editing mode.
 - And more: javascript runtime, loaded scripts/plugins, etc.
 
@@ -125,11 +125,13 @@ Let's consider some very extreme and unlikely situations:
 
 ### Cancel a Submitted Task
 
-Simply clear the queue, this should not be a big deal.
+To clear all the submitted tasks, simply clear the task queue, this should not be a big deal.
+
+To cancel a specific task, we could add an `ID` field for each task, and create a cancelled task IDs set. Thus everytime we get a task out from the queue, we could check if the task is already been marked as cancelled.
 
 ### Interrupt/Abort a Running Task
 
-For example, when reading/writing a super big file, it can take minutes or even hours. It's dangerous if the read/write operation is interrupted without correctly open/close the file descriptor, which damages filesystem on storage device.
+For example, when reading/writing a super big file that takes minutes or even hours, it's dangerous if the read/write operation is interrupted without correctly open/close the file descriptor, which damages filesystem on storage device.
 
 For such case, we have below choices:
 

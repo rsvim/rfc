@@ -125,11 +125,13 @@ Let's consider some very extreme and unlikely situations:
 
 ### Cancel a Submitted Task
 
-Simply clear the queue, this should not be a big deal.
+To clear all the submitted tasks, simply clear the task queue, this should not be a big deal.
+
+To cancel a specific task, we could add an `ID` field for each task, and create a cancelled task IDs set. Thus everytime we get a task out from the queue, we could check if the task is already been marked as cancelled.
 
 ### Interrupt/Abort a Running Task
 
-For example, when reading/writing a super big file, it can take minutes or even hours. It's dangerous if the read/write operation is interrupted without correctly open/close the file descriptor, which damages filesystem on storage device.
+For example, when reading/writing a super big file that takes minutes or even hours, it's dangerous if the read/write operation is interrupted without correctly open/close the file descriptor, which damages filesystem on storage device.
 
 For such case, we have below choices:
 

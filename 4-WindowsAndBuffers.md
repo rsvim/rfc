@@ -1,4 +1,4 @@
-# Window, Buffer and Tabpage
+# Windows and Buffers
 
 > Written by @linrongbin16, 2024-09-04
 
@@ -6,7 +6,6 @@ This RFC describes below functinalities:
 
 - [windows](https://vimhelp.org/windows.txt.html)
 - [buffers](https://vimhelp.org/windows.txt.html#buffers)
-- [tabpage](https://vimhelp.org/tabpage.txt.html)
 - [popup](https://vimhelp.org/popup.txt.html#popup) (or [floating window](https://neovim.io/doc/user/api.html#_floating-windows))
 
 The main functionality still follows (Neo)Vim (see [References](#references)), while may involve some upgrades and break changes.
@@ -28,10 +27,6 @@ The main functionality still follows (Neo)Vim (see [References](#references)), w
 - [Directory buffer](https://vimhelp.org/windows.txt.html#special-buffers), Directory/folder (filesystem).
 - [Scratch buffer](https://vimhelp.org/windows.txt.html#special-buffers), Discardable text.
 - [Unlisted buffer](https://vimhelp.org/windows.txt.html#special-buffers), Unlisted buffers.
-
-### Tabpage
-
-[Tabpage](https://vimhelp.org/tabpage.txt.html) manages a group of windows, similar to the concepts of [workspaces](https://help.gnome.org/users/gnome-help/stable/shell-workspaces.html) in Gnome Desktop, [spaces](https://support.apple.com/guide/mac-help/work-in-multiple-spaces-mh14112/14.0/mac/14.0) in macOS, [desktops](https://support.microsoft.com/en-us/windows/multiple-desktops-in-windows-36f52e38-5b4a-557b-2ff9-e1a60c976434) in Windows.
 
 ## References
 

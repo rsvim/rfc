@@ -35,8 +35,8 @@ After all, RSVIM's event loop is similar to a javascript runtime like [node.js](
 
 The event loop is simply a global instance of data structure that contains everything inside the editor:
 
-- UI widget tree (that contains the Vim windows, cursor, statusline, etc) and canvas.
-- The Vim buffers.
+- UI widget tree (contains windows, cursor, statusline, etc) and canvas.
+- Buffers.
 - Editing mode.
 - And more: javascript runtime, loaded scripts/plugins, etc.
 

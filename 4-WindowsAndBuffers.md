@@ -1,6 +1,6 @@
 # Windows and Buffers
 
-> Written by @linrongbin16, 2024-09-04
+> Written by @linrongbin16, first created at 2024-09-04.
 
 This RFC describes below functinalities:
 

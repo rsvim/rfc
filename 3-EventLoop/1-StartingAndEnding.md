@@ -18,7 +18,7 @@ Consider two special cases with above topics: starting and ending.
 
 As mentioned in [RFC-4](https://github.com/rsvim/rfc/blob/main/4-WindowsAndBuffers.md), the editor has several behaviors:
 
-1. Creates a window and an empty buffer if no input files specified (by default).
-2. Creates a window, and N buffers for N input files, only the 1st input file is binded on the current window.
+1. When there's no input files, creates a window and an empty buffer.
+2. When there's N input files, creates a window, and N buffers for the N input files, only the 1st file is binded on the created window.
 
 ## Ending

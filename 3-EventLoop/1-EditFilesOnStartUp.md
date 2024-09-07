@@ -4,8 +4,9 @@ The editor accepts file names from command line [arguments](https://vimhelp.org/
 
 But we need to consider more edge cases about the data race between file IO and user operations in a multi-threaded concurrent environment.
 
-## Feature Description
+## Description
 
 As mentioned in [RFC-4](https://github.com/rsvim/rfc/blob/main/4-WindowsAndBuffers.md), the editor has several behaviors:
 
-1. By default creates a window and an empty buffer if no input files specified.
+1. Creates a window and an empty buffer if no input files specified (by default).
+2. Creates a window, and N buffers for N input files, only the 1st input file is binded on the current window.

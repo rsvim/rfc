@@ -24,8 +24,6 @@ As mentioned in [RFC-4](https://github.com/rsvim/rfc/blob/main/4-WindowsAndBuffe
 
 The input files are loaded into corresponding buffers by an async task, with async file reading. During the file reading, user is still able to do normal operations inside the editor, for example: move the cursor, change to other editing modes, execute Vim commands, open new files, etc.
 
-Here are some edge cases worth to discuss:
-
 ### Buffer Synchronization between User Editing and File Loading
 
 ## Ending

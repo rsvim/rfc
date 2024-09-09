@@ -2,9 +2,6 @@
 
 This RFC describes the starting and ending logic of the editor.
 
-
-Consider two special cases with above topics: starting and ending.
-
 ## Starting
 
 The editor runs steps on start up:
@@ -24,5 +21,5 @@ There are some edge cases worth to discuss:
 
 ## References
 
-- [Neovim user documentation - Starting](https://neovim.io/doc/user/starting.html)
+- [Neovim user documentation - Initialization](https://neovim.io/doc/user/starting.html#_initialization)
 - [Vim help - Initialization](https://vimhelp.org/starting.txt.html#initialization)

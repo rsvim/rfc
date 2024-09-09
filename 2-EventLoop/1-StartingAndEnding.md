@@ -19,7 +19,7 @@ Consider two special cases with above topics: starting and ending.
 The editor has several behaviors on start up:
 
 1. TUI mode, allows user to interact with TUI and edit file contents.
-2. Headless mode, uses as a js/ts runtime, without TUI and non-interactively with users.
+2. Headless mode, starts everything but without TUI, for running as a backend for GUI connected via RPC.
 3. Script mode, this mode uses the editor as a js/ts runtime, without TUI and non-interactively with users.
 
 4. When there's no input files, creates a window and an empty buffer.

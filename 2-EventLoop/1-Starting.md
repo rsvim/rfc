@@ -7,7 +7,8 @@ The editor runs steps on start up:
 1. Set `shell` options.
 2. Process command line arguments.
    1. Load input files into buffers.
-   2. Execute the `--cmd` arguments (before loading any configs).
+   2. Execute the `-c` arguments after the first file is loaded, before loading any configs.
+   3. Execute the `--cmd` arguments after all input files are loaded, before loading any configs.
 3. Load configs, i.e. the `vimrc` file (for Vim) or `init.lua` file (for Neovim).
    1. Load the config entry file (say `.rsvim.js` or `.rsvim.ts`).
    2. For all the js/ts modules specified with `require` and `import` keywords, continue to load them recursively.

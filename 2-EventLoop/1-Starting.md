@@ -19,6 +19,16 @@ Here are some edge cases worth to discuss:
 
 ### Data Racing in Buffers between User Editing and File Loading
 
+If the 1st input file is quite large and need some minutes to read into buffers completely. There will be a data racing issue:
+
+1. The default window and buffer is created immediately after editor start, and allow user editing the empty buffer.
+2. The 1st file is still been reading into buffer, and not ready for editing.
+
+Here use a chunks reading method:
+
+1. When editor start, it creates the default window and an empty buffer binding with it.
+2. Input files will be loaded in blocks per 4096 bytes, and sync back to the buffer after reading a block done.
+
 ## References
 
 - [Neovim user documentation - Initialization](https://neovim.io/doc/user/starting.html#_initialization)

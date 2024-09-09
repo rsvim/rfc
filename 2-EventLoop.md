@@ -17,7 +17,7 @@ When such a (classic) running loop comes to terminal+rust, we specifically intro
 - [Tokio](https://tokio.rs/) as asynchronize runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio runtime turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other blocking jobs are spawned with async tasks running in multi-threaded environment and sync back to editor data and update UI after finished. Here are some examples for async tasks:
+Tokio runtime turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other laggy jobs are spawned with async tasks running in multi-threaded environment and sync data back to editor and update UI after finished. Here are some examples for async tasks:
 
 - IO:
   - File IO.

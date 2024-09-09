@@ -27,7 +27,7 @@ If the 1st input file is quite large and need some minutes to read into buffers 
 Here use a chunks reading method:
 
 1. When editor start, it creates the default window and an empty buffer binding with it.
-2. Input files will be loaded in blocks per 4096 bytes, and sync back to the buffer after reading a block done.
+2. Input files will be loaded in blocks per 4096 bytes, and sync back to the buffer after reading a block done. During the reading period, the buffer allows both user editing and data appending from input files, no strict time sequence restriction.
 
 ## References
 

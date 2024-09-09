@@ -35,7 +35,7 @@ Tokio runtime turns the running loop from sync to async, i.e. the main thread on
   - Text object.
   - Token parsing.
 
-In this way, RSVIM's running loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
+In this way, RSVIM's running loop is actually similar to javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 
 ## Context
 

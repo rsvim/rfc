@@ -4,41 +4,49 @@
 
 This RFC describes the RSVIM's running loop.
 
-## Top-down View
+## Running Loop
 
-As mentioned in [TUI](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
+As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
 
 1. Receive user keyboard/mouse events.
 2. Handle user logic.
 3. Render terminal or exit.
 
-When such a classic running loop (for all GUI/TUI application) comes to terminal+rust, we specifically introduce:
+When such a (classic) running loop comes to terminal+rust, we specifically introduce:
 
 - [Tokio](https://tokio.rs/) as asynchronize runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio provides multiple infrastructures:
+Tokio runtime turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other laggy jobs are spawned with async tasks running in multi-threaded environment and sync data back to editor and update UI after finished. Here are some examples:
 
-- Non-blocking event loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
-  - TUI: Receive user keyboard/mouse events by crossterm's [event-stream feature](https://github.com/crossterm-rs/crossterm?tab=readme-ov-file#feature-flags).
-  - IO: Read/write file system, network, tcp/http/ssh, etc.
-  - Async: Schedule `async` annotated javascript functions inside scripts.
-- Concurrent tasks schedule on multiple threadings:
-  - Loading user scripts/plugins.
+- IO:
+  - File IO.
+  - IPC/RPC: Pipe, named pipe, unix domain socket, tcp/udp, http(s), ssh, etc.
+  - Terminal: Keyboard/mouse events. Note: the sync _**stdout/stderr**_ operation is still used for rendering terminal.
+- Callbacks:
+  - Delayed/timeout jobs.
+  - Auto commands on Vim events.
+  - File watcher.
+- (User) js/ts scripts:
+  - The `async` annotated functions and `Promise` functions.
+  - The `require` and `import` keywords (js modules).
+- Heavy CPU or big memory block workload:
   - Syntax and colorscheme rendering.
-  - Trigger auto-commands (event callbacks).
-  - Schedule timeout or delayed tasks.
+  - Text object.
+  - Token parsing.
 
-After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
+In this way, RSVIM's running loop is actually similar to [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 
 ## Context
 
-The event loop is simply a global instance of data structure that contains everything inside the editor:
+The context is a global data structure instance that contains all the data for the editor:
 
 - UI widget tree (contains windows, cursor, statusline, etc) and canvas.
 - Buffers.
 - Editing mode.
 - And more: javascript runtime, loaded scripts/plugins, etc.
+
+It uses read/write locks for data synchronization across different threads.
 
 ## Editing Mode
 

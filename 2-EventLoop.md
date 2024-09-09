@@ -17,17 +17,23 @@ When such a (classic) running loop comes to terminal+rust, we specifically intro
 - [Tokio](https://tokio.rs/) as asynchronize runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio runtime turns the running loop from sync to async, i.e.
+Tokio runtime turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other blocking jobs are spawned with async tasks running in multi-threaded environment and sync back to editor data and update UI after finished. Here are some examples for async tasks:
 
-- Non-blocking event loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
-  - TUI: Receive user keyboard/mouse events by crossterm's [event-stream feature](https://github.com/crossterm-rs/crossterm?tab=readme-ov-file#feature-flags).
-  - IO: Read/write file system, network, tcp/http/ssh, etc.
-  - Async: Schedule `async` annotated javascript functions inside scripts.
-- Concurrent tasks schedule on multiple threadings:
-  - Loading user scripts/plugins.
-  - Heavy CPU and big memory block tasks such as: syntax and colorscheme rendering, text object, token parsing, etc.
-  - Trigger auto-commands (event callbacks).
-  - Schedule timeout or delayed tasks.
+- IO:
+  - File IO.
+  - IPC/RPC: pipe, named pipe, unix domain socket, tcp/udp, http(s), ssh, etc.
+  - Terminal: receive user keyboard/mouse events. Note: the sync _**stdout/stderr**_ operation is still used for rendering terminal.
+- Callbacks:
+  - Delayed/timeout jobs.
+  - Auto commands on Vim events.
+  - File watcher.
+- (User) js/ts scripts:
+  - The `async` annotated functions and `Promise` functions.
+  - The `require` and `import` keywords (js modules).
+- Heavy CPU or big memory block workload:
+  - Syntax and colorscheme rendering.
+  - Text object.
+  - Token parsing.
 
 After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 

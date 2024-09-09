@@ -17,7 +17,7 @@ When such a classic running loop (for all GUI/TUI application) comes to terminal
 - [Tokio](https://tokio.rs/) as asynchronize runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio provides multiple infrastructures:
+Tokio runtime turns the running loop from sync to async, i.e.
 
 - Non-blocking event loop ([select](https://docs.rs/tokio/latest/tokio/macro.select.html)) on future streams:
   - TUI: Receive user keyboard/mouse events by crossterm's [event-stream feature](https://github.com/crossterm-rs/crossterm?tab=readme-ov-file#feature-flags).
@@ -25,7 +25,7 @@ Tokio provides multiple infrastructures:
   - Async: Schedule `async` annotated javascript functions inside scripts.
 - Concurrent tasks schedule on multiple threadings:
   - Loading user scripts/plugins.
-  - Syntax and colorscheme rendering.
+  - Heavy CPU and big memory block tasks such as: syntax and colorscheme rendering, text object, token parsing, etc.
   - Trigger auto-commands (event callbacks).
   - Schedule timeout or delayed tasks.
 

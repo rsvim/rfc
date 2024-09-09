@@ -34,4 +34,4 @@ There are some edge cases worth to discuss:
 ## References
 
 - [Neovim user documentation - Starting](https://neovim.io/doc/user/starting.html)
-- [Vim help - starting.txt](https://vimhelp.org/starting.txt.html)
+- [Vim help - Initialization](https://vimhelp.org/starting.txt.html#initialization)

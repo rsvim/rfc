@@ -4,7 +4,7 @@
 
 This RFC describes the RSVIM's running loop.
 
-## Asynchronize Running Loop
+## Running Loop
 
 As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
 
@@ -35,7 +35,7 @@ Tokio runtime turns the running loop from sync to async, i.e. the main thread on
   - Text object.
   - Token parsing.
 
-After all, RSVIM's event loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
+In this way, RSVIM's running loop is similar to a javascript runtime like [node.js](https://nodejs.org/) or [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 
 ## Context
 

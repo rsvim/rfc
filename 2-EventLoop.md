@@ -39,7 +39,7 @@ In this way, RSVIM's running loop is actually similar to [deno](https://deno.com
 
 ## Context
 
-The event loop is simply a global instance of data structure that contains everything inside the editor:
+The context is a global data structure instance that contains all the data for the editor:
 
 - UI widget tree (contains windows, cursor, statusline, etc) and canvas.
 - Buffers.

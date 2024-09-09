@@ -22,7 +22,7 @@ Tokio runtime turns the running loop from sync to async, i.e. the main thread on
 - IO:
   - File IO.
   - IPC/RPC: pipe, named pipe, unix domain socket, tcp/udp, http(s), ssh, etc.
-  - Terminal: receive user keyboard/mouse events. Note: the sync _**stdout/stderr**_ operation is still used for rendering terminal.
+  - Terminal: user keyboard/mouse events. Note: the sync _**stdout/stderr**_ operation is still used for rendering terminal.
 - Callbacks:
   - Delayed/timeout jobs.
   - Auto commands on Vim events.

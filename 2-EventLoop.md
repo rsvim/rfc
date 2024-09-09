@@ -46,6 +46,8 @@ The context is a global data structure instance that contains all the data for t
 - Editing mode.
 - And more: javascript runtime, loaded scripts/plugins, etc.
 
+It uses read/write locks for data synchronization across different threads.
+
 ## Editing Mode
 
 [Editing mode](https://vimhelp.org/intro.txt.html#vim-modes) is managed by a finite-state machine, i.e. each mode is a state inside the editor:

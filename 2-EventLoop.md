@@ -4,15 +4,15 @@
 
 This RFC describes the RSVIM's running loop.
 
-## Top-down View
+## Asynchronize Running Loop
 
-As mentioned in [TUI](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
+As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
 
 1. Receive user keyboard/mouse events.
 2. Handle user logic.
 3. Render terminal or exit.
 
-When such a classic running loop (for all GUI/TUI application) comes to terminal+rust, we specifically introduce:
+When such a (classic) running loop comes to terminal+rust, we specifically introduce:
 
 - [Tokio](https://tokio.rs/) as asynchronize runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.

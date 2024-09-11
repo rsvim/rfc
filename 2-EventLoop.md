@@ -127,8 +127,6 @@ Main use cases of a VIM editor for async runtime are:
 - Timeout tasks.
 - The `async` annotated javascript functions and standard APIs provided by RSVIM editor.
 
-These use cases usually require we submit a very general async task to a queue, schedule and run later, just like a function pointer with a context in c/c++ that literally allows us doing any logic. We also need the task queue be to a [`Stream`](https://docs.rs/futures/latest/futures/stream/trait.Stream.html), which can be selected along with crossterm's event stream. The [`FuturesUnordered`](https://docs.rs/futures/latest/futures/stream/struct.FuturesUnordered.html) can be the queue for all async tasks, i.e. the [`Future`](https://docs.rs/futures/latest/futures/future/trait.Future.html) trait.
-
 Let's consider some very extreme and unlikely situations:
 
 ### Cancel a Submitted Task

@@ -4,20 +4,9 @@
 
 This RFC describes the config file, i.e. the `.rsvimrc.js` or `.rsvimrc.ts` config for the editor.
 
-## JavaScript Engine
+## Entry
 
-The [V8](https://v8.dev/) engine is the best javascript engine widely used in many popular projects, RSVIM choose the same way to embed to execute js scripts. But there are still many components needed to fill the gap between the final goal:
-
-- Operations (OPs): Extend config's capabilities beyond the [ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/) specification, since V8 engine strictly follows the ECMAScript guidelines, unable to perform real-world tasks like reading files, managing sockets, handling timers, etc.
-- TSC/SWC: V8 engine is exclusively designed to run js code and does not support TypeScript. To address this, ts code must be translated into js through a transformation process, enabling V8 engine to execute it.
-- Load module: Resolve modules marked by `require` and `import` keywords, which are used to load other scripts and third-party installed plugins.
-- Package management: Manage third-party plugins and leverage existing js package registry [npm](https://www.npmjs.com/) and [jsr](https://jsr.io/).
-
-After all, it's very similar to js runtimes like [deno](https://deno.com/) in some ways.
-
-## File Structure
-
-The `.rsvimrc.js` or `.rsvimrc.ts` file is the config file where user put all their configs for configuring RSVIM editor.
+The `.rsvimrc.js` or `.rsvimrc.ts` file is the config file where user put all their configs, and the editor trying to load on start up.
 
 ## References
 

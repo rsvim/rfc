@@ -23,6 +23,7 @@ They are built with below principles:
 - All operations are pure JavaScript functions, no variables or objects are exposed under the `vim` namespace.
 - The design of editor APIs follow both [Neovim API](https://neovim.io/doc/user/api.html) and [Vim help](https://vimhelp.org/).
 - The design of operating system APIs follow [MDN Web APIs](https://developer.mozilla.org/en-US/docs/Web/API).
+- Primitive values are preferred when APIs return a value to js script, unless it's not suitable.
 - Slow operations provide both sync and async mode.
 
 ## Not Supported

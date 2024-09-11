@@ -12,8 +12,13 @@ The `.rsvim.js` or `.rsvim.ts` file is the config file where user put all their 
 
 All the operations provided by editor are placed under the `vim` namespace, divided into several groups:
 
+- `vim.var`: Global/local/buffer-level/window-level variables.
 - `vim.ops`: Global/local/buffer-level/window-level options.
 - `vim.buf`: Buffer related APIs.
 - `vim.win`: Window (UI) related APIs. Note: All TUI APIs are placed under this group, by the naming style still follows the Vim's tradition, i.e. still called "window".
 
 ## Not Supported
+
+Compare with other js runtimes such as [node.js](https://nodejs.org/), [deno](https://deno.com/), RSVIM editor doesn't provide:
+
+- `document`

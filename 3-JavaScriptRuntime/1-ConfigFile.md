@@ -22,7 +22,7 @@ They are built with below principles:
 
 - All operations are pure JavaScript functions, no variables or objects are exposed under the `vim` namespace.
 - Most resources inside the editor such as buffers and windows are referred as positive integers, unless they are not suitable.
-- Operating system APIs follow [MDN browsers standard APIs](https://developer.mozilla.org/en-US/docs/Web/API).
+- Operating system APIs follow [MDN Web APIs](https://developer.mozilla.org/en-US/docs/Web/API).
 - Slow operations provide both sync and async mode.
 
 ## Not Supported

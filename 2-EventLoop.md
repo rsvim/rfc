@@ -1,6 +1,6 @@
 # Event Loop
 
-> Written by @linrongbin16, first created at 2024-09-03, last updated at 2024-09-05.
+> Written by @linrongbin16, first created at 2024-09-03, last updated at 2024-09-11.
 
 This RFC describes the RSVIM's running loop.
 
@@ -118,7 +118,7 @@ It uses read/write locks for data synchronization across different threads.
 
 Each state can consumes the keyboard/mouse events and implements the corresponding behavior in editor.
 
-## Task Queue
+## Async Task
 
 Main use cases of a VIM editor for async runtime are:
 
@@ -127,24 +127,14 @@ Main use cases of a VIM editor for async runtime are:
 - Timeout tasks.
 - The `async` annotated javascript functions and standard APIs provided by RSVIM editor.
 
-These use cases usually require we submit a very general async task to a queue, schedule and run later, just like a function pointer with a context in c/c++ that literally allows us doing any logic. We also need the task queue be to a [`Stream`](https://docs.rs/futures/latest/futures/stream/trait.Stream.html), which can be selected along with crossterm's event stream. The [`FuturesUnordered`](https://docs.rs/futures/latest/futures/stream/struct.FuturesUnordered.html) can be the queue for all async tasks, i.e. the [`Future`](https://docs.rs/futures/latest/futures/future/trait.Future.html) trait.
-
 Let's consider some very extreme and unlikely situations:
 
 ### Cancel a Submitted Task
 
-To clear all the submitted tasks, simply clear the task queue, this should not be a big deal.
-
-To cancel a specific task, we could add an `ID` field for each task, and create a cancelled task IDs set. Thus everytime we get a task out from the queue, we could check if the task is already been marked as cancelled.
+To clear all the submitted tasks, simply place a [CancellationToken](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) at the beginning of each task, check if it's cancelled before running. This should not be a big deal.
 
 ### Interrupt/Abort a Running Task
 
-For example, when reading/writing a super big file that takes minutes or even hours, it's dangerous if the read/write operation is interrupted without correctly open/close the file descriptor, which damages filesystem on storage device.
+For example, when writing a super big file that takes minutes or even hours, it's dangerous if the write operation is interrupted without correctly close the file descriptor, which damages filesystem on storage device.
 
-For such case, we have below choices:
-
-1. Carefully insert manual checks on a global [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) inside every async task, it notifies these running tasks to stop in safety.
-2. Build up a pool to reserve these running tasks, and abort them when needed, while potential danger is at user's own risk.
-3. Do nothing and simply wait for these running tasks complete.
-
-The current behavior of Neovim and Vim is the option 3. We would also keep the compatible behavior, leave option 1 and 2 for future discussion if needed.
+For such case, we have to wait for them complete to keep safe.

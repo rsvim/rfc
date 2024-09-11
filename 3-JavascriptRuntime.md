@@ -1,8 +1,8 @@
-# Javascript Engine
+# Javascript Runtime
 
-> Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-05.
+> Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-11.
 
-This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS engine embedded in the RSVIM.
+This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS runtime embedded in the RSVIM.
 
 ## Motivition
 

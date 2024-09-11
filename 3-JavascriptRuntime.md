@@ -1,8 +1,8 @@
-# Javascript Runtime
+# JavaScript Runtime
 
 > Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-11.
 
-This RFC describes [Javascript](https://en.wikipedia.org/wiki/JavaScript)/[Typescript](https://www.typescriptlang.org/) and the JS runtime embedded in the RSVIM.
+This RFC describes [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://www.typescriptlang.org/) and the JS runtime embedded in the RSVIM.
 
 ## Motivition
 
@@ -12,7 +12,7 @@ Scripting plays the most important role in (Neo)VIM editor, it drives the editor
 
 Introducing third-party scripting languages is always a trend in (Neo)VIM's history. In the old days before Neovim appeared, people use [python](https://www.python.org/) and javascript on [node.js](https://nodejs.org/) to achieve more complex features in their plugins: code-complete, async code lint running in background, etc. After Neovim brings lua, people still keep integrating third-party lua libraries for more features, such as async support via [luv](https://github.com/luvit/luv) (which brings a strong sense of separation when developing async scripts).
 
-The whole reason is simply because: both of vimscript and lua still lack many modern language features to achieve the real power. That's why RSVIM choose Javascript, one of the most successful scripting languages. When comparing with js, lua still lacks in below aspects:
+The whole reason is simply because: both of vimscript and lua still lack many modern language features to achieve the real power. That's why RSVIM choose JavaScript, one of the most successful scripting languages. When comparing with js, lua still lacks in below aspects:
 
 - It doesn't support many modern language features:
   - Async/await.
@@ -22,7 +22,7 @@ The whole reason is simply because: both of vimscript and lua still lack many mo
   - The open-sourced/third-party libraries are not that rich or widely used.
 - [luarocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
 
-However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with Typescript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
+However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with TypeScript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
 
 - More elegant and beautiful syntax designing.
 - Static type system.
@@ -30,51 +30,16 @@ However, js syntax can be really bad and chaotic (the success actually belongs t
 
 By introducing the js engine, RSVIM provides the best scripting environment that can interact with the editor, while also turns itself into a js/ts interpreter/runtime focused on editing.
 
-## Architecture
+## Runtime
 
-The architecture of how Javascript interacts with Rust looks like:
+The [V8](https://v8.dev/) engine is the best javascript engine widely used in many popular projects, RSVIM choose the same way to execute js scripts. But there are still many components needed to fill the gap between the final goal:
 
-```text
-+---RSVIM-------------------------------------------------------+
-|                                                               |
-|                                                               |
-|   +--API-----------------+      +--Editor-Function-------+    |
-|   |                      |      |                        |    |
-|   |   `vim` global var   +--+-->|  Option/var/win/buf    |    |
-|   |                      |  |   |                        |    |
-|   +----------------------+  |   +------------------------+    |
-|              ^              |                                 |
-|              |              |                                 |
-|              |              |   +--Task-Queue------------+    |
-|              |              |   |                        |    |
-|              |              +-->|  Callback/timer/async  |    |
-|              |              |   |                        |    |
-|              |              |   +------------------------+    |
-|              |              |                                 |
-|              |              |                                 |
-|              |              |   +--Garbage-Collection-----+   |
-|              |              |   |                         |   |
-|              |              +-->|  Heap Objects           |   |
-|              |              |   |                         |   |
-|              |              |   +-------------------------+   |
-|              |              |                                 |
-|              |              |                                 |
-|              |              |   +--Misc-------------------+   |
-|              |              |   |                         |   |
-|              |              +-->|  Terminal/Child process |   |
-|              |                  |                         |   |
-|              |                  +-------------------------+   |
-|              |                                                |
-|              |                                                |
-|   +--Js-Engin+-----------+      +--Ts-Compiler------------+   |    +--Js/Ts-Scripts----------+
-|   |                      |      |                         |   |    |                         |
-|   |  Option/var/win/buf  |<-----+  Compile Ts to Js       |<--+----+  Configs and plugins    |
-|   |                      |      |                         |   |    |                         |
-|   +----------------------+      +-------------------------+   |    +-------------------------+
-|                                                               |
-|                                                               |
-+---------------------------------------------------------------+
-```
+- Operations (OPs): Extend config's capabilities beyond the [ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/) specification, since V8 engine strictly follows the ECMAScript guidelines, unable to perform real-world tasks like reading files, managing sockets, handling timers, etc.
+- TSC/SWC: V8 engine is exclusively designed to run js code and does not support TypeScript. To address this, ts code must be translated into js through a transformation process, enabling V8 engine to execute it.
+- Load module: Resolve modules marked by `require` and `import` keywords, which are used to load other scripts and third-party installed plugins.
+- Package management: Manage third-party plugins and leverage existing js package registry [npm](https://www.npmjs.com/) and [jsr](https://jsr.io/).
+
+After all, RSVIM becomes a js runtime similar to [deno](https://deno.com/) in some ways, but only focus on editing and text processing, not for browsers or web development.
 
 ## Interaction
 
@@ -104,3 +69,7 @@ Both (Neo)Vim ship a lot of builtin scripts/plugins with their releases, which p
 All of them point to the core problem: (Neo)Vim doesn't have its own package management system.
 
 Image we had already embedded both js runtime and package manager (just like `node` and `npm`) inside RSVIM editor, all we need is sharing an example of config file (for example `~/.rsvimrc.js`) that contains recommended plugins in the "Get Started" document. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor itself can remain to be a single executable file, only responsible for providing an interface for script runtime and package management.
+
+## References
+
+- [The Internals of Deno](https://choubey.gitbook.io/internals-of-deno)

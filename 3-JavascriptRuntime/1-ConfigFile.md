@@ -9,5 +9,3 @@ This RFC describes the config file, i.e. the `.rsvimrc.js` or `.rsvimrc.ts` conf
 The `.rsvimrc.js` or `.rsvimrc.ts` file is the config file where user put all their configs, and the editor trying to load on start up.
 
 ## References
-
-- [The Internals of Deno](https://choubey.gitbook.io/internals-of-deno)

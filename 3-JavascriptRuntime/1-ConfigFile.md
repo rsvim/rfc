@@ -1,7 +1,15 @@
 # Config File
 
-This RFC describes the config file, i.e. the `.rsvim.js` or `.rsvim.ts` config for the editor.
+This RFC describes the config file, i.e. the `.rsvimrc.js` or `.rsvimrc.ts` config for the editor.
 
-## V8 Engine
+## JavaScript Engine
 
-The [V8](https://v8.dev/) engine is the best javascript engine nowadays, which RSVIM editor embeds to execute js scripts just like many other projects.
+The [V8](https://v8.dev/) engine is the best javascript engine nowadays, which RSVIM editor embeds to execute js scripts just like many other projects. But there are still many components needed to fill the gap between the final goal:
+
+- Operations (OPs): Extend config's capabilities beyond the [ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/) specification, since V8 engine strictly follows the ECMAScript guidelines, unable to perform real-world tasks like reading files, managing sockets, handling timers, etc.
+- TSC/SWC: V8 engine is exclusively designed to run js code and does not support TypeScript. To address this, ts code must be translated into js through a transformation process, enabling V8 engine to execute it.
+- Plugins (packages, modules) manager: Embed into the editor to enable `require` and `import` keywords, which are used to load external js modules in user config.
+
+## References
+
+- [The Internals of Deno](https://choubey.gitbook.io/internals-of-deno)

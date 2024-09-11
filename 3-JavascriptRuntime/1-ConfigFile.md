@@ -16,6 +16,7 @@ All the operations provided by editor are placed under the `vim` namespace, divi
 - `vim.ops`: Global/local/buffer-level/window-level options.
 - `vim.buf`: Buffer related APIs.
 - `vim.win`: Window (UI) related APIs. Note: All TUI APIs are placed under this group, by the naming style still follows the Vim's tradition, i.e. still called "window".
+- And a lot more.
 
 ## Not Supported
 

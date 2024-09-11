@@ -1,6 +1,6 @@
 # Event Loop
 
-> Written by @linrongbin16, first created at 2024-09-03, last updated at 2024-09-05.
+> Written by @linrongbin16, first created at 2024-09-03, last updated at 2024-09-11.
 
 This RFC describes the RSVIM's running loop.
 

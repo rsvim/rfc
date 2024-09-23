@@ -23,7 +23,7 @@ The javascript language itself is also designed to be running in a single thread
 
 ## Starting
 
-The RSVIM itself becomes yet another js runtime actually, it will initialize the V8 engine first on starting. Then locate user config files, say `$XDG_CONFIG_HOME/rsvim/rsvim.{ts,js}`, and execute it, which is also running in a pure single thread. This design also makes the editor's behavior consistent, for example, if we let js runtime run in another thread, and start TUI application at the same time, user may find their editor config such as _indent size_, _tab space_ is first 8 bytes width (by default), then turns into 2 bytes (user config).
+The RSVIM itself becomes yet another js runtime actually, it will initialize the V8 engine first on starting. Then locate user config files, say `$XDG_CONFIG_HOME/rsvim/rsvim.{ts,js}`, execute it, which is also running in a pure single thread. This design also makes the editor's behavior consistent. For example, if we let js runtime run in another thread, and start TUI application at the same time, user may find their configs such as _indent size_, _tab space_ is first 8 bytes width (default settings when editor start), then turns into 2 bytes (modified by executing the user config js running in another thread).
 
 As a user config, the js file anyway need to be loaded first before user can operate on the TUI application.
 

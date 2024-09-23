@@ -38,10 +38,9 @@ We could choose to directly use implement such as [`deno_core`](https://github.c
 1. Maybe the best js runtime framework written in rust.
 2. Many built-in types implementations (i.e. the `JSON`, `decodeURI`, `Proxy`, `queueMicrotask` etc).
 
-But we have more reasons to not use it:
+But we also have reasons to not use it:
 
-1. `deno_core` is designed for a general purpose js runtime running web frameworks and applications on server side, there is the `Deno` global object and many other web APIs to be built inside.
+1. `deno_core` is designed for a general purpose js runtime running web frameworks and applications on server side, there is the `Deno` global object and many other web APIs to be built inside, but we may don't want them. For example the `console.log` API, when we implement it for RSVIM, it should never just print messages to `stdout`, instead, it should print messages in the command line inside the editor.
+2. We are not 100% sure about the `deno_core` behavior, unless we have detailed understanding for every line of code in its entire codebase.
 
-Unless we have detailed understanding of every line of code in the entire codebase, it's still kind of out of control to embed it. For example the `console.log` API, when we implement it for RSVIM, it should never just print messages to `stdout`, instead, it should print messages in the command line inside the editor.
-
-As a TUI editor, most APIs we want to provide is about the file system, IO, network, and IPC on local operating system. Manually implementing every API is more fit into the editor, and more controllable.
+As a TUI editor, most APIs we want to provide is about the file system, IO, network, and IPC on local operating system, not for web applications. Manually implementing every API is more fit into the editor, and more controllable.

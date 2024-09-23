@@ -29,7 +29,7 @@ As a user config, the js file anyway need to be loaded first before user can ope
 
 Sequential configuration loading brings the start time, i.e. as users install more configs/plugins, the editor's startup time increases. The famous [lazy.nvim](https://github.com/folke/lazy.nvim) (Neovim's plugin manager) uses `VeryLazy` event to lazy load configs, and compile lua files into byte code to boost the start up time. For RSVIM, we may take a look at some solutions such as V8's snapshot, and js file bundle.
 
-## Built-in Types
+## Dependency
 
 Most famous js runtimes such as _Node.js_, _Deno_ and [_LLRT_](https://github.com/awslabs/llrt) are for general purpose, running web frameworks or applications on server side. The long history of javascript brings a lot of web APIs and specifications, which is quite a burden if we want to keep compatible with.
 
@@ -37,10 +37,12 @@ We could choose to directly use implement such as [`deno_core`](https://github.c
 
 1. Maybe the best js runtime framework written in rust.
 2. Many built-in types implementations (i.e. the `JSON`, `decodeURI`, `Proxy`, `queueMicrotask` etc).
+3. It can resolves modules that marked in CDN, http(s), [deno.land](https://deno.land/std@0.224.0) and registries: [jsr](https://jsr.io/)/[npm](https://www.npmjs.com/) by detecting if exist, downloading and transpiling them on the fly.
 
 But we also have reasons to not use it:
 
 1. `deno_core` is designed for a general purpose js runtime running web frameworks and applications on server side, there is the `Deno` global object and many other web APIs to be built inside, but we may don't want them. For example the `console.log` API, when we implement it for RSVIM, it should never just print messages to `stdout`, instead, it should print messages in the command line inside the editor.
-2. We are not 100% sure about the `deno_core` behavior, unless we have detailed understanding for every line of code in its entire codebase.
+2. We don't want to implicitly download the plugins when starting the editor, simply resolve the plugins path on local file system should be good for RSVIM.
+3. We are not 100% sure about the `deno_core` behavior, unless we have detailed understanding for every line of code in its entire codebase.
 
 As a TUI editor, most APIs we want to provide is about the file system, IO, network, and IPC on local operating system, not for web applications. Manually implementing every API is more fit into the editor, and more controllable.

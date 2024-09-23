@@ -45,4 +45,4 @@ But we also have reasons to not use it:
 2. We don't want to implicitly download the plugins when starting the editor, simply resolve the plugins path on local file system should be good for RSVIM.
 3. We are not 100% sure about the `deno_core` behavior, unless we have detailed understanding for every line of code in its entire codebase.
 
-As a TUI editor, most APIs we want to provide is about the file system, IO, network, and IPC on local operating system, not for web applications. Manually implementing every API is more fit into the editor, and more controllable.
+As a TUI editor, most APIs we want to provide is focused on file system, IO, network, and IPC on local operating system, not for web applications. Manually implementing every API is more fit into the editor, and more controllable.

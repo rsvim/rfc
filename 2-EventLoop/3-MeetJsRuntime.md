@@ -27,6 +27,8 @@ The RSVIM itself becomes yet another js runtime actually, it will initialize the
 
 As a user config, the js file anyway need to be loaded first before user can operate on the TUI application.
 
+Sequential configuration loading brings the start time, i.e. as users install more configs/plugins, the editor's startup time increases. The famous [lazy.nvim](https://github.com/folke/lazy.nvim) (Neovim's plugin manager) uses `VeryLazy` event to lazy load configs, and compile lua files into byte code to boost the start up time. For RSVIM, we may take a look at some solutions such as V8's snapshot, and js file bundle.
+
 ## Built-in Types
 
 Most famous js runtimes such as _Node.js_, _Deno_ and [_LLRT_](https://github.com/awslabs/llrt) are for general purpose, running web frameworks or applications on server side. The long history of javascript brings a lot of built-in APIs and specifications, which is quite a burden if we want to keep compatible with.

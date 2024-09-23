@@ -1,5 +1,7 @@
 # Starting
 
+> Written by @linrongbin16, first created at 2024-09-09, last updated at 2024-09-23.
+
 This RFC describes the starting (initialization) logic of the editor, only for normal TUI mode, other modes are not covered.
 
 The editor runs steps on start up:

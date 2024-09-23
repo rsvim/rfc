@@ -31,7 +31,7 @@ Sequential configuration loading brings the start time, i.e. as users install mo
 
 ## Built-in Types
 
-Most famous js runtimes such as _Node.js_, _Deno_ and [_LLRT_](https://github.com/awslabs/llrt) are for general purpose, running web frameworks or applications on server side. The long history of javascript brings a lot of built-in APIs and specifications, which is quite a burden if we want to keep compatible with.
+Most famous js runtimes such as _Node.js_, _Deno_ and [_LLRT_](https://github.com/awslabs/llrt) are for general purpose, running web frameworks or applications on server side. The long history of javascript brings a lot of web APIs and specifications, which is quite a burden if we want to keep compatible with.
 
 We could choose to directly use implement such as [`deno_core`](https://github.com/denoland/deno_core), which is actually great, it has:
 

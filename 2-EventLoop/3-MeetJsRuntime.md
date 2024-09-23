@@ -4,11 +4,11 @@
 
 This RFC describe how the event loop should work along with javascript runtime.
 
-## Limitation
+## Challenges
 
 When we introduce javascript engine, i.e. the V8 to RSVIM, a command line TUI application, everything changed because of it. There're several challenges:
 
-- The `Isolate` of rust binding [rusty_v8](https://github.com/denoland/rusty_v8) is purely `!Send` and `Sync`, thus it doesn't work in a multi-thread environment.
+- The `Isolate` of rust binding [rusty_v8](https://github.com/denoland/rusty_v8) is purely `!Send` and `Sync`, thus it cannot work along with tokio runtime in a multi-thread environment.
 - The conflicts between the start time minimization and user config file execution, and the data racing in a multi-thread environment.
 - The plugin support, i.e. the multiple javascript files support.
 - The development difficulty and learning curve on V8, which is the price of the most powerful and performant js engine.
@@ -17,9 +17,9 @@ When we introduce javascript engine, i.e. the V8 to RSVIM, a command line TUI ap
 
 After some investigation and hesitation, the final event loop is designed to be: let the js runtime runs in the main thread, along with terminal keyboard/mouse events, and terminal rendering. Worker threads are only involved when they are suitable.
 
-This is mostly because, the javascript language itself is designed to be running in single process, single thread, it doesn't support concepts such as thread and mutex (which is also a benefit for users when they're writing scripts because it's simple) at the very beginning. For the async, timeout and callbacks, they are handled by the tokio runtime's local tasks, i.e. the `spawn_local`, which should be actually a coroutine running on current thread.
+This is mostly because single thread natively brings the determined and consistent behavior for the editor, and reduces the data syncing effort between multiple threads. For example, users will never want to press `i` key and see the terminal still allowing you to press other keys but not go into the **INSERT** mode. Instead, users would rather blocked by the terminal and wait for it goes into **INSERT** mode.
 
-Single thread brings determined and consistent behavior, and reduces the data syncing effort between multiple threads. For example users will never want to press `i` key and see the terminal still allow you press other keys but not go into the **INSERT** mode. Instead, users would rather block by the terminal and wait for it.
+The javascript language itself is also designed to be running in a single thread at the very beginning. It doesn't support concepts such as thread and mutex, while it is a benefit for users when writing scripts because the simplicity. For the async, timeout and callbacks inside js, they are handled by the tokio runtime's local tasks, i.e. the `spawn_local`, which should be actually a coroutine running on current thread.
 
 ## Starting
 
@@ -36,6 +36,10 @@ We could choose to directly use implement such as [`deno_core`](https://github.c
 1. Maybe the best js runtime framework written in rust.
 2. Many built-in types implementations (i.e. the `JSON`, `decodeURI`, `Proxy`, `queueMicrotask` etc).
 
-But the `deno_core` is designed for a general purpose js runtime running on server side, we don't want the `Deno` global object and many other web APIs to be built inside the RSVIM. Unless we have detailed understanding of every line of code in the entire codebase, it's still kind of out of control to embed it. For example the `console.log` API, when we implement it for RSVIM, it should never just print messages to `stdout`, instead, it should print messages in the command line inside the editor.
+But we have more reasons to not use it:
+
+1. `deno_core` is designed for a general purpose js runtime running web frameworks and applications on server side, there is the `Deno` global object and many other web APIs to be built inside.
+
+Unless we have detailed understanding of every line of code in the entire codebase, it's still kind of out of control to embed it. For example the `console.log` API, when we implement it for RSVIM, it should never just print messages to `stdout`, instead, it should print messages in the command line inside the editor.
 
 As a TUI editor, most APIs we want to provide is about the file system, IO, network, and IPC on local operating system. Manually implementing every API is more fit into the editor, and more controllable.

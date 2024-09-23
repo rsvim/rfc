@@ -37,10 +37,12 @@ We could choose to directly use implement such as [`deno_core`](https://github.c
 
 1. Maybe the best js runtime framework written in rust.
 2. Many built-in types implementations (i.e. the `JSON`, `decodeURI`, `Proxy`, `queueMicrotask` etc).
+3. It can resolves modules that marked in CDN, http(s), [deno.land](https://deno.land/std@0.224.0) and registries: [jsr](https://jsr.io/)/[npm](https://www.npmjs.com/) by detecting if exist, downloading and transpiling them on the fly.
 
 But we also have reasons to not use it:
 
 1. `deno_core` is designed for a general purpose js runtime running web frameworks and applications on server side, there is the `Deno` global object and many other web APIs to be built inside, but we may don't want them. For example the `console.log` API, when we implement it for RSVIM, it should never just print messages to `stdout`, instead, it should print messages in the command line inside the editor.
 2. We are not 100% sure about the `deno_core` behavior, unless we have detailed understanding for every line of code in its entire codebase.
+3. We don't want to implicitly download the plugins when starting the editor, simply resolve the plugins path on local file system should be good for RSVIM.
 
 As a TUI editor, most APIs we want to provide is about the file system, IO, network, and IPC on local operating system, not for web applications. Manually implementing every API is more fit into the editor, and more controllable.

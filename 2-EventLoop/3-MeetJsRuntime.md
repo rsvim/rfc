@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2024-09-23.
 
-This RFC describe how event loop works along with javascript runtime.
+This RFC describe how the event loop should work along with javascript runtime.
 
 ## Limitation
 

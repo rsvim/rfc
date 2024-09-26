@@ -35,4 +35,4 @@ import("/my-module.js").then((mod2) => {
 });
 ```
 
-In this way, it's actually a `Promise` and must be async.
+In this way, it's actually a `Promise` and must be async, i.e. the `then` code block will have to run in next tick until the module is been resolved.

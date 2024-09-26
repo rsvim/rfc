@@ -26,4 +26,4 @@ This behavior is quite different with the VIM editor, because VIM editor always 
 1. Security: Is it safe if we allow the editor directly download external plugins and execute it?
 2. Behavior: Is the behavior still remains consistent if the editor first start and work for users, then change its behavior after the module completes its downloading and loading?
 
-For now, we follows the tradition behavior of the editor, i.e. we don't support the URL import in js module, all external modules need to be downloaded before editor loading them.
+For now, we follows the tradition behavior of the editor, i.e. we don't support the URL import in js module, all external modules need to be downloaded before editor loading them. For more discussion, we may leave for the future.

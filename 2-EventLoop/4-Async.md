@@ -21,10 +21,13 @@ A confliction we have is: ECMAScript standards support [directly import modules 
 import { name } from "https://example.com/shapes/circle.js";
 ```
 
-This behavior is quite different with the VIM editor, because VIM editor always first download all plugins onto local file system, and load them on editor's startup. Here we have two things to take consideration in this scenario:
+This behavior is quite different with the VIM editor, because VIM editor always first download all plugins onto local file system, and load them on editor's startup, which runs in a completely sequential order. Once we implement the `import` keyword in async way, it means every time we use `import`, the TUI application will resolve the module in next tick.
+
+Here we have several things to take consideration in this scenario:
 
 1. Security: Is it safe if we allow the editor directly download external plugins and execute it?
 2. Behavior: Is the behavior still remains consistent if the editor first start and work for users, then change its behavior after the module completes its downloading and loading?
-3. Design: Is it really worth doing it? Does user really need this feature? Or we should stick to ECMAScript standard (to be more compatible with js language)?
+3. Design: Does user really need this feature?
+4. Compatible: Do we need to stick to ECMAScript standard to be more compatible with js language?
 
 For now, we follows the tradition behavior of the editor, i.e. we don't support the URL import in js module, all external modules need to be downloaded before editor loading them. For more discussion, we may leave for the future.

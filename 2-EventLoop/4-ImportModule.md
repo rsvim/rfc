@@ -24,3 +24,15 @@ Here we have several things to take consideration in this scenario:
 4. Compatible: Do we need to stick to ECMAScript standard to be more compatible with js language?
 
 For now, we follows the tradition behavior of the editor, i.e. we don't support the URL import in js module, all external modules need to be downloaded before editor loading them. For more discussion, we may leave for the future.
+
+## Dynamically Import
+
+ECMAScript standard also support the [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import):
+
+```javascript
+import("/my-module.js").then((mod2) => {
+  console.log(mod === mod2); // true
+});
+```
+
+In this way, it's actually a `Promise` and must be async.

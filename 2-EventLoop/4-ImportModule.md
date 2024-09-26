@@ -13,7 +13,7 @@ And a module will be evaluated only once.
 
 > Note: When this comes to the RSVIM editor, all modules are simply external config files that extracted from the main `.rsvim.{js,ts}` user config file. And they can be plugins too.
 
-A confliction we have is: ECMAScript standards support [directly import modules from a URL](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), i.e. a js module can be directly downloaded from the internet during it's been executed. For example:
+A confliction we have is: ECMAScript standards support [import modules from a URL](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), i.e. a js module can be directly downloaded from the internet during it's been executed. For example:
 
 ```javascript
 import { name } from "https://example.com/shapes/circle.js";

@@ -1,10 +1,8 @@
-# Async
+# Import Module
 
 > Written by @linrongbin16, first created at 2024-09-26.
 
 This RFC describe how the event loop support the async functions and callbacks inside javascript code.
-
-## Import (Module)
 
 Keyword `require`, `import` and dynamically import are 3 ways to import modules in javascript language. For js (actually for most generic purpose scripting languages), a module can do:
 

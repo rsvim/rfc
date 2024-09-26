@@ -4,14 +4,9 @@
 
 This RFC describe how the event loop support the async functions and callbacks inside javascript code.
 
-Keyword `require`, `import` and dynamically import are 3 ways to import modules in javascript language. For js (actually for most generic purpose scripting languages), a module can do:
+## Static Import
 
-1. Export functions, classes, global variables, etc as common utilities for others.
-2. Directly execute some logics.
-
-And a module will be evaluated only once.
-
-> Note: When this comes to the RSVIM editor, all modules are simply external config files that extracted from the main `.rsvim.{js,ts}` user config file. And they can be plugins too.
+Keyword `require` and `import` (we will discuss _**dynamically import**_ later) are static ways to import modules in javascript language. When this comes to the RSVIM editor, all modules are simply external config files that extracted from the main `.rsvim.{js,ts}` user config file, they can be plugins as well. For each module, it will be evaluated only once.
 
 A confliction we have is: ECMAScript standards support [import modules from URL](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), i.e. a js module can be directly downloaded from the internet during it's been executed. For example:
 
@@ -23,9 +18,9 @@ This behavior is quite different with the VIM editor, because VIM editor always 
 
 Here we have several things to take consideration in this scenario:
 
-1. Security: Is it safe if we allow the editor directly download external plugins and execute it?
-2. Behavior: Is the behavior still remains consistent if the editor first start and work for users, then change its behavior after the module completes its downloading and loading?
-3. Design: Does user really need this feature?
+1. Design: Does user really need this feature?
+2. Security: Is it safe if we allow the editor directly downloading and loading plugins from network/http?
+3. Behavior: Is the behavior still remains consistent if the editor first start TUI and let user use it, then change its behavior after the module completes the plugin downloading and loading?
 4. Compatible: Do we need to stick to ECMAScript standard to be more compatible with js language?
 
 For now, we follows the tradition behavior of the editor, i.e. we don't support the URL import in js module, all external modules need to be downloaded before editor loading them. For more discussion, we may leave for the future.

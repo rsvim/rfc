@@ -19,15 +19,15 @@ After some investigation and hesitation, the final event loop is designed to be 
 
 This is mostly because single thread natively brings a consistent editor behavior, and avoids data racing issue between multiple threads. For example, user will never want to press `i` key and see the terminal still allowing you to press any other keys but not go into the **INSERT** mode. Instead, users would rather be blocked by the terminal and wait for it goes into **INSERT** mode.
 
-The javascript language itself is also designed to be running in a single thread at the very beginning. It doesn't support concepts such as thread and mutex, while it is a benefit for users when writing scripts because the simplicity. For the async, timeout and callbacks inside js, they are handled by the tokio runtime's local tasks, i.e. the `spawn_local`, which should be actually a coroutine running on current thread.
+The javascript language itself is also designed to be running in a single thread at the very beginning. It doesn't support concepts such as thread and mutex (while on the other hand, it is a benefit for users when writing scripts because the simplicity). For the async, timeout and callbacks features, they are handled by the tokio runtime's local tasks, i.e. the `spawn_local`, which should be actually a coroutine running on current thread.
 
 ## Starting
 
-The RSVIM itself becomes yet another js runtime actually, it will initialize the V8 engine first on starting. Then locate user config files, say `$XDG_CONFIG_HOME/rsvim/rsvim.{ts,js}`, execute it, which is also running in a pure single thread. This design also makes the editor's behavior consistent. For example, if we let js runtime run in another thread, and start TUI application at the same time, user may find their configs such as _indent size_, _tab space_ is first 8 bytes width (default settings when editor start), then turns into 2 bytes (modified by executing the user config js running in another thread).
+The RSVIM itself becomes yet another js runtime, it will initialize the V8 engine first on starting. Then locate user config files (say `$XDG_CONFIG_HOME/rsvim/rsvim.{ts,js}` or `$HOME/.rsvim.{ts,js}`), execute it, which is also running in a pure single thread. This design also makes the editor's behavior consistent. For example, if we let js runtime run in another thread, and start TUI application at the same time, user may find their configs such as _indent size_, _tab space_ is first 8 bytes width (default settings when editor start), then turns into 2 bytes (modified by executing the user config js running in another thread).
 
 As a user config, the js file anyway need to be loaded first before user can operate on the TUI application.
 
-Sequential configuration loading brings the start time, i.e. as users install more configs/plugins, the editor's startup time increases. The famous [lazy.nvim](https://github.com/folke/lazy.nvim) (Neovim's plugin manager) uses `VeryLazy` event to lazy load configs, and compile lua files into byte code to boost the start up time. For RSVIM, we may take a look at some solutions such as V8's snapshot, and js file bundle.
+Since the config file is loading in sequential order, it increases the startup time as user installs more and more configs/plugins. The famous [lazy.nvim](https://github.com/folke/lazy.nvim) (Neovim's plugin manager) uses `VeryLazy` event to lazy load configs, and compile lua files into byte code to boost the start up time. For RSVIM, we may take a look at some solutions such as V8's snapshot, and js bundles.
 
 ## Dependency
 

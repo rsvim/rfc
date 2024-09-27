@@ -26,13 +26,15 @@ Editor related APIs will be following the design of Vim and Neovim:
 
 ## General Purposes
 
-General purposes APIs (similar to standard libraries for some general programming languages) will be following the POSIX-like, Unix-like, Linux. We have several options:
+General purposes APIs (similar to standard libraries for some general programming languages) will be compatible with [WinterCG](https://wintercg.org/), also to be POSIX-like, Unix-like, Linux. We have several options:
 
-| Option                                                                 | Pros         | Cons               |
-| ---------------------------------------------------------------------- | ------------ | ------------------ |
-| [Deno standard library](https://jsr.io/@std)                           | High quality | Codebase too large |
-| [Node.js APIs](https://nodejs.org/api/index.html)                      |              |                    |
-| [LLRT modules](https://github.com/awslabs/llrt/tree/main/llrt_modules) |              |                    |
-| [rustix](https://github.com/bytecodealliance/rustix)                   |              |                    |
+| Option                                               | Pros                  | Cons                        |
+| ---------------------------------------------------- | --------------------- | --------------------------- |
+| [Deno extensions](https://github.com/denoland/deno)  | High quality          | Codebase too large          |
+| [Node.js APIs](https://nodejs.org/api/index.html)    | Widely used           | Chaotic, codebase too large |
+| [rustix](https://github.com/bytecodealliance/rustix) | POSIX/Unix/Linux like | Not js runtimes             |
 
-Note: We are not going to provide a full set of APIs, because they're for general purposes developing. Only a small subset will be implemented, such as file system, child process, operating system, strings, bytes, data structures, IO, network, etc. And also we may want to remain a small group instead of being super big because it may not be worth it.
+We are not going to provide a full set of APIs, because big standard libraries are mostly for general purposes developing. Only a small subset will be implemented, such as file system, child process, operating system, data structures, IO, network, etc. And also we may want to remain a small group instead of being super big because it may not worth it:
+
+1. Part of deno extensions: for compatibility with the web world: ECMAScript standards, WinterCG and popular js runtimes.
+2. Port part of rustix APIs into javascript: for file system, IO, network, child process, operating systems, etc.

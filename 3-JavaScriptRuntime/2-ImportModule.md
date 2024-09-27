@@ -1,20 +1,20 @@
 # Import Module
 
-> Written by @linrongbin16, first created at 2024-09-26.
+> Written by @linrongbin16, first created at 2024-09-26, last updated at 2024-09-27.
 
-This RFC describe how the event loop support the async functions and callbacks inside javascript code.
+This RFC describe how the modules resolved and imported in the js runtime.
 
 ## Static Import
 
 Keyword `require` and `import` (we will discuss _**dynamically import**_ later) are static ways to import modules in javascript language. When this comes to the RSVIM editor, all modules are simply external config files that extracted from the main `.rsvim.{js,ts}` user config file, they can be plugins as well. For each module, it will be evaluated only once.
 
-A confliction we have is: ECMAScript standards support [import modules from URL](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), i.e. a js module can be directly downloaded from the internet during it's been executed. For example:
+A confliction we have is: ECMAScript standards support [import modules from URL](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), i.e. a js module can be directly downloaded from network during it's been executed. For example:
 
 ```javascript
 import { name } from "https://example.com/shapes/circle.js";
 ```
 
-This behavior is quite different with the VIM editor, because VIM editor always first download all plugins onto local file system, and load them on editor's startup, which runs in a completely sequential order. Once we implement the `import` keyword in async way, it means every time we use `import`, the TUI application will resolve the module in next tick.
+This behavior is quite different with the VIM editor, because VIM editor always first download all plugins onto local file system, then load them on editor's startup, which runs in a completely sequential order. Once we implement the `import` keyword in async way, it means every time we use `import`, the event loop has to resolve the module in next tick.
 
 Here we have several things to take consideration in this scenario:
 

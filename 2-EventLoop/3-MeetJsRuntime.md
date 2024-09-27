@@ -1,23 +1,23 @@
 # Meet Js Runtime
 
-> Written by @linrongbin16, first created at 2024-09-23.
+> Written by @linrongbin16, first created at 2024-09-23, last updated at 2024-09-27.
 
-This RFC describe how the event loop should work along with javascript runtime.
+This RFC describe how the event loop should work when it meets the javascript engine.
 
 ## Challenges
 
-When we introduce javascript engine, i.e. the V8 to RSVIM, a command line TUI application, everything changed because of it. There're several challenges:
+When we introduce javascript engine, i.e. the V8 to RSVIM, a command line TUI application, everything changes because of it:
 
-- The `Isolate` of rust binding [rusty_v8](https://github.com/denoland/rusty_v8) is purely `!Send` and `Sync`, thus it cannot work along with tokio runtime in a multi-thread environment.
-- The conflicts between the start time minimization and user config file execution, and the data racing in a multi-thread environment.
-- The plugin support, i.e. the multiple javascript files support.
+- The V8 [`Isolate`](https://docs.rs/v8/latest/v8/struct.Isolate.html) is `!Send` and `Sync`, it cannot work along with tokio runtime in a multi-thread environment.
+- The conflicts between the requirement that minimizing the start time and user config file's execution, and the data racing in a multi-thread environment.
+- The plugin support, i.e. how to support the structure of multiple javascript files.
 - The development difficulty and learning curve on V8, which is the price of the most powerful and performant js engine.
 
 ## Single Thread
 
-After some investigation and hesitation, the final event loop is designed to be: let the js runtime runs in the main thread, along with terminal keyboard/mouse events, and terminal rendering. Worker threads are only involved when they are suitable.
+After some investigation and hesitation, the final event loop is designed to be still single thread, i.e. let the js runtime runs in the main thread along with terminal's receiving keyboard/mouse events and rendering. Worker threads are only involved when they are suitable.
 
-This is mostly because single thread natively brings the determined and consistent behavior for the editor, and reduces the data syncing effort between multiple threads. For example, users will never want to press `i` key and see the terminal still allowing you to press other keys but not go into the **INSERT** mode. Instead, users would rather blocked by the terminal and wait for it goes into **INSERT** mode.
+This is mostly because single thread natively brings a consistent editor behavior, and avoids data racing issue between multiple threads. For example, user will never want to press `i` key and see the terminal still allowing you to press any other keys but not go into the **INSERT** mode. Instead, users would rather be blocked by the terminal and wait for it goes into **INSERT** mode.
 
 The javascript language itself is also designed to be running in a single thread at the very beginning. It doesn't support concepts such as thread and mutex, while it is a benefit for users when writing scripts because the simplicity. For the async, timeout and callbacks inside js, they are handled by the tokio runtime's local tasks, i.e. the `spawn_local`, which should be actually a coroutine running on current thread.
 

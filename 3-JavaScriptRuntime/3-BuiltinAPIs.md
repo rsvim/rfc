@@ -33,9 +33,9 @@ WinterCG's [Minimum Common Web Platform API](https://common-min-api.proposal.win
 Deno's builtin extensions are a great set of implements, we would follow their API design and implementations. We may not provide the full standard library like deno, but deno's standard library will be the _**GUIDE**_ when we are looking for solutions.
 
 - `deno_core` extensions:
-  1.  [00_infra.js](https://github.com/denoland/deno_core/blob/main/core/00_infra.js)
-  2.  [00_primordials.js](https://github.com/denoland/deno_core/blob/main/core/00_primordials.js)
-  3.  [01_core.js](https://github.com/denoland/deno_core/blob/main/core/01_core.js)
+  1. [00_infra.js](https://github.com/denoland/deno_core/blob/main/core/00_infra.js)
+  2. [00_primordials.js](https://github.com/denoland/deno_core/blob/main/core/00_primordials.js)
+  3. [01_core.js](https://github.com/denoland/deno_core/blob/main/core/01_core.js)
 - [`deno` extensions](https://github.com/denoland/deno/tree/main/ext)
   1. [fs](https://github.com/denoland/deno/tree/main/ext/fs): File system and IO.
   2. [net](https://github.com/denoland/deno/tree/main/ext/net): Network, tls and dns.

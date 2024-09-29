@@ -31,7 +31,4 @@ For general purposed APIs/library, we would follow:
      3. [01_core.js](https://github.com/denoland/deno_core/blob/main/core/01_core.js)
    - [`deno` extensions](https://github.com/denoland/deno/tree/main/ext)
 
-We are not going to provide a full set of library like node or deno. Because they are mostly for general purposes development. Only a small subset will be implemented, such as file system, child process, operating system, data structures, IO, network, etc. And also we may want to remain a small group to avoid too much maintain effort:
-
-- [deno_core extensions](https://github.com/denoland/deno_core/tree/main/core)
-- [deno extensions](https://github.com/denoland/deno/tree/main/ext)
+We may not provide the full standard library like deno for development effort reason, but deno's standard library will be the _**GUIDE**_ when we are looking for solutions.

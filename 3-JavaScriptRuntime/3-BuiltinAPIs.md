@@ -41,4 +41,4 @@ Deno's builtin extensions are a great set of implements, we would follow their A
   2. [net](https://github.com/denoland/deno/tree/main/ext/net): Network, tls and dns.
   3. [tls](https://github.com/denoland/deno/tree/main/ext/tls): TLS handling.
   4. [url](https://github.com/denoland/deno/tree/main/ext/url): `URL`.
-  5. [url](https://github.com/denoland/deno/tree/main/ext/url): `URL`.
+  5. [web](https://github.com/denoland/deno/tree/main/ext/web): Web APIs in WinterCG standard, the biggest subset of APIs.

@@ -10,7 +10,7 @@ RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardwa
 
 Here's a very simple hardware-level event loop for RSVIM:
 
-![1](drawio-images/1-TUI.1.drawio.svg)
+![1](images/1-TUI.1.drawio.svg)
 
 Each time the keyboard inputs some letters/symbols, or mouse inputs some moves/clicks, the event goes into the Rsvim editor, and editor handles the logic, renders the corresponding output to the terminal. Until the event indicates user wants to quit (i.e. type `:q` command), then editor exits and give terminal back to user.
 
@@ -24,7 +24,7 @@ People would ask: (Neo)VIM is just a simple terminal app that editing a file, wh
 
 In this section, we will introduce a stack-based UI components tree, which is a classic design been widely used by many GUI frameworks/libraries. For example we have a terminal application below:
 
-![2](drawio-images/1-TUI.2.drawio.svg)
+![2](images/1-TUI.2.drawio.svg)
 
 `A` is the root component of the tree, we would treat it as the terminal where the application is running on. It has 3 direct child components `B`, `C` and `D`. Once there's user keyboard/mouse events, the TUI framework calculates the event position, tells us where does it happen, for example:
 

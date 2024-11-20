@@ -1,6 +1,6 @@
 # TUI
 
-> Written by @linrongbin16, 2024-04-01
+> Written by @linrongbin16, first created at 2024-04-01, last updated at 2024-11-20.
 
 This RFC describes the basic TUI system architecture.
 
@@ -10,29 +10,9 @@ RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardwa
 
 Here's a very simple hardware-level event loop for RSVIM:
 
-```text
-+------------------------+
-|                        |
-|  keyboard/mouse input  |
-|                        |
-+-----------+------------+
-            |
-            v
-+------------------------+
-|                        |    +------------------------+
-|        editing         |    |                        |
-|          or            |    |          exit          |
-|   type `:q` to quit    +--->|                        |
-|                        |    +------------------------+
-+-----------+------------+
-            |
-            v
-+------------------------+
-|                        |
-|    terminal output     |
-|                        |
-+------------------------+
-```
+![1](drawio-images/1-TUI.1.drawio.svg)
+
+Each time the keyboard inputs some letters/symbols, or mouse inputs some moves/clicks, the event goes into the Rsvim editor, and editor handles the logic, renders the corresponding output to the terminal. Until the event indicates user wants to quit (i.e. type `:q` command), then editor exits and give terminal back to user.
 
 ## UI Framework
 

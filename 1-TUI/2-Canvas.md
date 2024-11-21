@@ -1,6 +1,6 @@
 # Canvas
 
-> Written by @linrongbin16, 2024-08-23
+> Written by @linrongbin16, first created at 2024-08-23, last updated at 2024-11-21.
 
 This RFC describes the canvas system inside TUI.
 
@@ -8,56 +8,7 @@ This RFC describes the canvas system inside TUI.
 
 The rendering system splits into 3 layers: UI widgets tree, canvas and hardware device. It looks like:
 
-```text
-+--------------------------------------------------------------------+
-|  UI Widgets Tree                                                   |
-|                               +--------+                           |
-|                               |  Root  |                           |
-|                               +---+----+                           |
-|                                   |                                |
-|                                   v                                |
-|                         +--------------------+                     |
-|                         |  Window Container  |                     |
-|                         +---------+----------+                     |
-|                                   |                                |
-|           +-----------------+-----+--------+--------------+        |
-|           v                 v              v              v        |
-|  +-----------------+  +-----------+ +--------------+ +----------+  |
-|  |  Text Contents  |  |  Tabline  | |  Statusline  | |  Cursor  |  |
-|  +-----------------+  +-----------+ +--------------+ +----------+  |
-|                                                                    |
-+---------------------------------+----------------------------------+
-                                  |
-                                  v
-+--------------------------------------------------------------------+
-|  Canvas                                                            |
-|                                                                    |
-|            +----------------------------------+                    |
-|            |  Previous Frame                  |                    |
-|            |      +---------------------------+------+             |
-|            |      |  Current Frame            |      |             |
-|            |      |                                  |             |
-|            |      |                           |      |             |
-|            |      |                                  |             |
-|            |      |                           |      |             |
-|            |      |                                  |             |
-|            |      |                           |      |             |
-|            +------+   --  --  --  --  --  -- -+      |             |
-|                   |                                  |             |
-|                   +----------------------------------+             |
-|                                                                    |
-|                                                                    |
-+---------------------------------+----------------------------------+
-                                  |
-                                  v
-+--------------------------------------------------------------------+
-|                                                                    |
-|                                                                    |
-|                         Hardware Device                            |
-|                                                                    |
-|                                                                    |
-+--------------------------------------------------------------------+
-```
+![1](images/1-TUI-2-Canvas.1.drawio.svg)
 
 UI widgets tree provides high-level friendly interfaces to interact with other editor logics, draws on the canvas in every loop, thus canvas knows the which parts of the terminal are changed and flushing these parts to hardware device. The hardware is a `M x N` grapheme based double-array (`M` is columns/width, `N` is rows/height), for example 240x70 on my personal laptop with a 4K Dell external monitor, thus the problem scale is `O(M * N)`.
 

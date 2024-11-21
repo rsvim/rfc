@@ -1,6 +1,6 @@
 # Hardware
 
-> Written by @linrongbin16, 2024-08-28
+> Written by @linrongbin16, first created at 2024-08-28, last updated at 2024-11-21.
 
 This RFC describes the basic concepts and rules for TUI system.
 

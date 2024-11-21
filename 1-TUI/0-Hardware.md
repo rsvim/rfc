@@ -28,7 +28,13 @@ Here's a list of hardwares and specifications for some very popular PC/laptop co
 
 ## Conclusion
 
-A very basic concept for the hardware speed from highest to lowest is: CPU > Memory > Max Freuency GPU > IO Devices > Base Frequency GPU. For a PC/laptop, the terminal printing is related to kernel, desktop GUI and GPU, so roughly speaking the speed is even or slower than IO devices.
+A very basic concept of hardware speed from highest to lowest is:
+
+```text
+CPU > Memory > Max Freuency GPU > IO Devices > Base Frequency GPU
+```
+
+For a PC/laptop, the terminal printing is related to kernel, desktop GUI and GPU, so roughly speaking the speed is even or slower than IO devices.
 
 This is also the basic rules when rendering the terminal, for the same amount of data:
 

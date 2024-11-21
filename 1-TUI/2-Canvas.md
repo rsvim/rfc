@@ -8,7 +8,7 @@ This RFC describes the canvas system inside TUI.
 
 The rendering system splits into 3 layers: UI widgets tree, canvas and hardware device. It looks like:
 
-![1](images/1-TUI-2-Canvas.1.drawio.svg)
+![1](../images/1-TUI-2-Canvas.1.drawio.svg)
 
 UI widgets tree provides high-level friendly interfaces to interact with other editor logics, draws on the canvas in every loop, thus canvas knows the which parts of the terminal are changed and flushing these parts to hardware device. The hardware is a `M x N` grapheme based double-array (`M` is columns/width, `N` is rows/height), for example 240x70 on my personal laptop with a 4K Dell external monitor, thus the problem scale is `O(M * N)`.
 
@@ -63,7 +63,7 @@ There are some other escaping codes to control terminal (it's called [Command](h
 
 Consider below example when we're editing a file inside VIM editor:
 
-![2](images/1-TUI-2-Canvas.2.drawio.svg)
+![2](../images/1-TUI-2-Canvas.2.drawio.svg)
 
 There are several UI widgets:
 

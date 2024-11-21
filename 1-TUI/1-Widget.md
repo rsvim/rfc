@@ -15,67 +15,11 @@ The design of TUI engine is deeply influenced by [Qt](https://www.qt.io/) GUI fr
 
 Consider below example, when we're editing a file inside VIM editor:
 
-```text
-+-------------------------------------------------------------------------+
-| A:Tabline                                                               |
-+---------------------+---------------------------------------------------|
-| C:Window-1          | D:Window-2                                        |
-|                     |                                                   |
-|                     |                                                   |
-| Some text           | Some text contents here...                        |
-| contents here...    |                                                   |
-|                     | +--------+                                        |
-|                     | |E:Cursor|                                        |
-|                     | +--------+                                        |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-|                     |                                                   |
-+---------------------+---------------------------------------------------|
-| B:Statusline (global)                                                   |
-+-------------------------------------------------------------------------+
-```
+![1](images/1-TUI-1-Widget.1.drawio.svg)
 
 While the widgets tree looks like:
 
-```text
-+----------------+
-| Root Container |
-+-------+--------+
-        |
-        +---------------------+-------------------+--------------------+
-        |                     |                   |                    |
-        v                     v                   v                    v
-+----------------+   +----------------+   +----------------+   +----------------+
-| A: Tabline     |   | B: Statusline  |   | C: Window-1    |   | D: Window-2    |
-+----------------+   +----------------+   +-------+--------+   +-------+--------+
-                                                  |                    |
-                                                  |                    +-------------------+
-                                                  |                    |                   |
-                                                  v                    v                   v
-                                          +----------------+   +----------------+   +----------------+
-                                          | Window-1 Texts |   | Window-2 Texts |   | E: Cursor      |
-                                          +----------------+   +----------------+   +----------------+
-```
+![2](images/1-TUI-1-Widget.2.drawio.svg)
 
 NOTE: The `Root Container` and `Window` nodes are pure logical nodes, i.e. they only have shapes and can arrange their children nodes layout, but no text contents.
 
@@ -93,43 +37,11 @@ The ownership guarantees:
 
 Fortunately in VIM editor, all widgets are rectangles. They have their own shapes: size (height and width), position (x/y, row/column). This is the 2-dimensional coordinate system:
 
-```text
-                Y
-                |
-                |
-                |
-                |
-              (0,1)
-                |
-X------(-1,0)-(0,0)-(1,0)------->
-                |
-              (0,-1)
-                |
-                |
-                |
-                |
-                v
-```
+![3](images/1-TUI-1-Widget.3.drawio.svg)
 
 When it comes to the terminal device, we set the `(0,0)` coordinate as the top-left corner of the terminal device:
 
-```text
-(0,0)------------------------(width,0)-->X
-  |                                |
-  |  Terminal                      |
-  |                                |
-  |                                |
-  |                                |
-  |                                |
-  |                                |
-  |                                |
-  |                                |
-  |                                |
-(0,height)-------------------(width,height)
-  |
-  v
-  Y
-```
+![4](images/1-TUI-1-Widget.4.drawio.svg)
 
 Widgets can be stacking and overlapping: higher Z-index has higher priority than lower Z-index to display.
 

@@ -15,11 +15,11 @@ The design of TUI engine is deeply influenced by [Qt](https://www.qt.io/) GUI fr
 
 Consider below example, when we're editing a file inside VIM editor:
 
-![1](images/1-TUI-1-Widget.1.drawio.svg)
+![1](../images/1-TUI-1-Widget.1.drawio.svg)
 
 While the widgets tree looks like:
 
-![2](images/1-TUI-1-Widget.2.drawio.svg)
+![2](../images/1-TUI-1-Widget.2.drawio.svg)
 
 NOTE: The `Root Container` and `Window` nodes are pure logical nodes, i.e. they only have shapes and can arrange their children nodes layout, but no text contents.
 
@@ -37,15 +37,15 @@ The ownership guarantees:
 
 Fortunately in VIM editor, all widgets are rectangles. They have their own shapes: size (height and width), position (x/y, row/column). This is the 2-dimensional coordinate system:
 
-![3](images/1-TUI-1-Widget.3.drawio.svg)
+![3](../images/1-TUI-1-Widget.3.drawio.svg)
 
 When it comes to the terminal device, we set the `(0,0)` coordinate as the top-left corner of the terminal device:
 
-![4](images/1-TUI-1-Widget.4.drawio.svg)
+![4](../images/1-TUI-1-Widget.4.drawio.svg)
 
 Widgets can be stacking and overlapping: higher Z-index has higher priority than lower Z-index to display.
 
-![5](images/1-TUI-1-Widget.5.drawio.svg)
+![5](../images/1-TUI-1-Widget.5.drawio.svg)
 
 ## Event Handling and Dispatching
 

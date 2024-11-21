@@ -1,6 +1,6 @@
 # TUI
 
-> Written by @linrongbin16, 2024-04-01
+> Written by @linrongbin16, first created at 2024-04-01, last updated at 2024-11-20.
 
 This RFC describes the basic TUI system architecture.
 
@@ -10,29 +10,9 @@ RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardwa
 
 Here's a very simple hardware-level event loop for RSVIM:
 
-```text
-+------------------------+
-|                        |
-|  keyboard/mouse input  |
-|                        |
-+-----------+------------+
-            |
-            v
-+------------------------+
-|                        |    +------------------------+
-|        editing         |    |                        |
-|          or            |    |          exit          |
-|   type `:q` to quit    +--->|                        |
-|                        |    +------------------------+
-+-----------+------------+
-            |
-            v
-+------------------------+
-|                        |
-|    terminal output     |
-|                        |
-+------------------------+
-```
+![1](images/1-TUI.1.drawio.svg)
+
+Each time the keyboard inputs some letters/symbols, or mouse inputs some moves/clicks, the event goes into the Rsvim editor, and editor handles the logic, renders the corresponding output to the terminal. Until the event indicates user wants to quit (i.e. type `:q` command), then editor exits and give terminal back to user.
 
 ## UI Framework
 
@@ -44,44 +24,9 @@ People would ask: (Neo)VIM is just a simple terminal app that editing a file, wh
 
 In this section, we will introduce a stack-based UI components tree, which is a classic design been widely used by many GUI frameworks/libraries. For example we have a terminal application below:
 
-```text
-         +------------------+
-         |                  |
-+--------|------------------|-------------------+
-|        |                  |                   |
-| A      | B                |                   |
-|        |                  |                   |
-|        |                  |                   |
-|        |                  |                   |
-|        |                  |                   |
-|        +------------------+                   |
-|    +------------------------------+           |
-|    |                              |           |
-|    | C                            |           |
-|    |    +---------------------------------+   |
-|    |    |                                 |   |
-|    |    | D        +----------+   |       |   |
-|    |    |          |          |   |       |   |
-|    |    |          | E        |           |   |
-|    |    |          |          |   |       |   |
-|    |    |          |          |   |       |   |
-|    |    |          +----------+           |   |
-|    |    |                         |       |   |
-|    +----+- --  --  --  --  -- -- -+       |   |
-|         |                                 |   |
-|         +---------------------------------+   |
-+-----------------------------------------------+
-```
+![2](images/1-TUI.2.drawio.svg)
 
-<!-- https://asciiflow.com/#/share/eJyrVspLzE1VssorzcnRUcpJrEwtUrJSqo5RKkstKs7Mz4tRsjLSiVGqANKWZpZAViVIxNIQyCpJrSgBcmKUFGDg0ZSeR1MayEITFLCAmJg8JLObMBVgFQTrw%2BuUJnJdSbZGkA%2FBrmrC63Ts%2FgGKQvU6IpQ5kaqXEnuHtN4p5MbYDELmU5DeSc0TaPZiTfa4wgZDrzMFemnvbRT%2FY7efgPfhanDpdkEoI%2BiVCSg24jcXeyDC9ZBuhivOWKGnKyg3g2AeRM5rRJqKBgi4Cs0Fe4CkAoSjQIhGpmbgtgMzuPC6FJtesosqktAMJNvpYyMJbotRqlWqBQDhhp4A) -->
-
-`A` is the root component of the tree, we would treat it as the terminal where the application is running on. It has 3 direct child components `B`, `C` and `D`:
-
-- The upper part of `B` is outside of `A`, we can only see the lower part of it.
-- The lower-right part of `C` is covered by `D`.
-- `D` also has a child component `E` inside of it. Note: `E` is actually also inside of `C` and `A`.
-
-Once there's user keyboard/mouse events, the TUI framework calculates the event position, tells us where does it happen:
+`A` is the root component of the tree, we would treat it as the terminal where the application is running on. It has 3 direct child components `B`, `C` and `D`. Once there's user keyboard/mouse events, the TUI framework calculates the event position, tells us where does it happen, for example:
 
 - Is mouse clicking on `A` or `E`?
 - Is keyboard editing something in `C` or `D`?

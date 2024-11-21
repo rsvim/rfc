@@ -45,29 +45,7 @@ When it comes to the terminal device, we set the `(0,0)` coordinate as the top-l
 
 Widgets can be stacking and overlapping: higher Z-index has higher priority than lower Z-index to display.
 
-```text
-(0,0)-------------------------------------(width,0)--->X
-  |                                             |
-  |  Terminal                                   |
-  |                                             |
-  |      +------------------------+             |
-  |      | A: Z-index 20          |             |
-  |      |   +-------------------------+        |
-  |      |   | B: Z-index 50      |    |        |
-  |      |   |                         |        |
-  |      |   |                    |    |        |
-  |      |   |                         |        |
-  |      |   |                    |    |        |
-  |      +---|-- -- -- -- -- -- --+    |        |
-  |          |                         |        |
-  |          +-------------------------+        |
-  |                                             |
-(0,height)--------------------------------(width,height)
-  |
-  |
-  v
-  Y
-```
+![5](images/1-TUI-1-Widget.5.drawio.svg)
 
 ## Event Handling and Dispatching
 

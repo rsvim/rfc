@@ -63,45 +63,7 @@ There are some other escaping codes to control terminal (it's called [Command](h
 
 Consider below example when we're editing a file inside VIM editor:
 
-````text
-+--------------------------------------------------------------------------------------------------+
-| A:Tabline                                                                                        |
-+---------------------+-----------------------------------------------------+----------------------+
-| C:Sidebar(Window-3) | E:Winbar for Window-1                               | D:Outline(Window-4)  |
-| ```                 +-----------------------------------------------------+ ```                  |
-| ~/github/rsvim/rfc  |                                                     | H1-Canvas            |
-|   .git              | F:Window-1                                          |   H2-Hardware        |
-|   1-TUI             | ```                                                 |   H2-Architecture    |
-|   +-1-Canvas.md     | The above sequence can be split into 3 parts:       |   H2-Escaping Codes  |
-|   0-Principles.md   |                                                     |     H3-Display Att.. |
-|   1-TUI.md          | - `\x1b[38;5;{31}m`: Set red foreground color.      |     H3-Control Seq.. |
-|   2-Javascript.md   | - `function`: The text contents.                    | ```                  |
-|   LICENSE           | - `\x1b[0m`: Reset all effects.                     |                      |
-|   README.md         |                                                     |                      |
-|   typos.toml        | Surrounding these escaping codes one by one for each|                      |
-| ```                 | character (`f`, `u`, `n`, `c`, `t`, `i`, `o`, `n`)  |                      |
-|                     | also works, but the increased overhead is worst.    |                      |
-|                     | ```                                                 |                      |
-|                     |                                                     |                      |
-|                     +-----------------------------------------------------+                      |
-|                     | G:Winbar for Window-2                               |                      |
-|                     +-----------------------------------------------------+                      |
-|                     |                                                     |                      |
-|                     | H:Window-2                                          |                      |
-|                     | ```                                                 |                      |
-|                     | There are some other escaping codes to control      |                      |
-|                     | terminal (it's called Command in crossterm):        |                      |
-|                     |                                                     |                      |
-|                     | - Cursor: move up, down, left, right, or to specific|                      |
-|                     |   position. Show and hide, save and restore.        |                      |
-|                     | - Clear terminal: all, cursor line, column cells    |                      |
-|                     |   up from cursor, column cells down from cursor.    |                      |
-|                     | ```                                                 |                      |
-|                     |                                                     |                      |
-+---------------------+-----------------------------------------------------+----------------------+
-| B:Statusline (global)                                                                            |
-+--------------------------------------------------------------------------------------------------+
-````
+![2](images/1-TUI-2-Canvas.2.drawio.svg)
 
 There are several UI widgets:
 

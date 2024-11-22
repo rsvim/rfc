@@ -25,4 +25,4 @@ The two states (associated and detached) and several running status can be switc
 Note:
 
 1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, file operations are handled with async manner and won't block TUI. But during these states, buffer modifications are still not allowed, i.e. user cannot edit/delete buffers when they are reading/writing contents from/to the file on the file system, unless the editor process is been force killed.
-2. The `bind to` is a general word to describe how the buffer is associated with a file, when we implement it in Rsvim editor, it will be some APIs that can let users running the `:edit` or `:file` vim ex command.
+2. The `bind to` is a general word to describe how the buffer becomes associated with a file, when we implement it in Rsvim editor, it will be some APIs that can let users running the `:edit` or `:file` vim ex command.

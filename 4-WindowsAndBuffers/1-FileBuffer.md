@@ -8,7 +8,7 @@ The file buffer has several functionalities:
 
 1. It can be either associated with a file on the file system, or detached with no file.
 
-   > NOTE: The _**file system**_ can be not only a local disk storage, but also a remote file system via network, as long as the operating system manages it well. But we would not explicitly handles the network (TCP, UDP, etc) connecting or data transferring.
+   > NOTE: The _**file system**_ can be not only a local disk storage, but also a remote file system via network or protocols.
 
 2. It has several status, a certain time point has a certain status:
 

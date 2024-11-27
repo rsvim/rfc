@@ -8,7 +8,7 @@ This RFC describes the normal buffer that maps the file content in filesystem to
 
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
-- `:e[dit] {filename}`\[[2](#references)\]: Edit file, open a new buffer and bind it with a `{filename}`.
+- `:e[dit] {filename}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{filename}` for the buffer.
 - `:e[new]`\[[3](#references)\]: Create a new detached buffer, associated with no file.
 - `:file {filename}`\[[4](#references)\]: Bind a buffer to another `{filename}`, i.e. rename a buffer's associated file name.
 - `:sav[eas] {filename}`\[[5](#references)\]: Save current buffer contents into another `{filename}`, instead of saving to current associated file.

@@ -34,6 +34,8 @@ Note:
 2. If a buffer is detached and modified, it is always _**changed**_ and will never go back to _**initialized**_.
 3. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
 
+The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
+
 ## References
 
 - \[1\]: <https://vimhelp.org/editing.txt.html>

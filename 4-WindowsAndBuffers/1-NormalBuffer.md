@@ -10,7 +10,7 @@ There are several read/write operations about normal buffer\[[1](#references)\]:
 
 - `:e[dit] {filename}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{filename}` for the buffer.
 - `:e[new]`\[[3](#references)\]: Create a new detached buffer, associated with no file.
-- `:file {filename}`\[[4](#references)\]: Bind a buffer to another `{filename}`, i.e. rename a buffer's associated file name.
+- `:file {filename}`\[[4](#references)\]: Set another `{filename}` for the buffer, i.e. rename a buffer's associated file name.
 - `:sav[eas] {filename}`\[[5](#references)\]: Save current buffer contents into another `{filename}`, instead of saving to current associated file.
 - `:{,range} {filename}`\[[6](#references)\], `:w[rite] {filename}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents into another `{filename}`, instead of saving to current associated file.
 

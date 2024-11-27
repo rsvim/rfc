@@ -2,7 +2,9 @@
 
 > Written by @linrongbin16, first created at 2024-11-21, last modified at 2024-11-27.
 
-This RFC describes the normal buffer that maps the file content in filesystem to the memory inside editor.
+This RFC describes the normal buffer that maps the file content in filesystem to the memory inside editor. Here we propose two manners for data syncing between buffers and filesystems: async and sync.
+
+## States
 
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
@@ -30,11 +32,69 @@ The associated-detached state and running status can be switched to each other:
 
 Note:
 
-1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, file operations are handled with async manner and won't block TUI. During these states, user can still do a lot of operations such as moving cursor, switching to other buffers, etc. But buffer modification is not allowed, i.e. user cannot edit/delete the buffer when it is reading/writing contents from/to the file on the file system. This is mostly to ensure user data security.
+1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, we would want all IO operations are handled with async manner and won't block TUI. During these states, user can still do a lot of operations such as moving cursor, switching to other buffers, etc. But buffer modification is not allowed, i.e. user cannot edit/delete the buffer when it is reading/writing contents from/to the file on the file system. This is mostly to ensure user data security.
 2. If a buffer is detached and modified, it is always _**changed**_ and will never go back to _**initialized**_.
 3. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
 
 The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
+
+## Multiple-Threading and Async IO
+
+When implementing the buffer's operation primitives in a multiple-threading and async environment, we would want each primitives are thread-safe and atomic to higher-level. For example, now we have such a primitive, or say, a buffer API:
+
+- `OpenFile`: This API opens file (by argument `{filename}`) with a new buffer, there are two cases it needs to handle:
+  - If the file exists, it reads both the file's metadata (create time, last modified time, is symbolink, etc) and file contents into the newly created buffer, and also saved the last sync time to _**current time**_.
+  - If the file doesn't exist, it simply saves the `{filename}`, the set the last sync time to `None`.
+
+Below is the pseudocode to describe the logic:
+
+```text
+Create new buffer.
+Set buffer status to `Loading`.
+Set buffer file name to `{filename}`.
+Set buffer metadata to `None`.
+Set buffer last sync time to `None`.
+
+Open the file.
+  if successful:
+    Read the file metadata.
+    if read metadata is successful:
+      Set buffer metadata.
+    else:
+      Delete the buffer.
+      Returns the IO error.
+
+    Read the file content.
+    if read content is successful:
+      Set buffer content.
+    else:
+      Delete the buffer.
+      Returns the IO error.
+
+    Set buffer status to `Synced`.
+    Set buffer last sync time to `Now`.
+    Returns success
+  else:
+    if error is "File not found":
+      Set buffer status to `changed`.
+      Set buffer file name to `{filename}`.
+      Returns success
+    else:
+      Delete the buffer.
+      Returns the IO error.
+```
+
+As we could see, there are actually several OS-level file IO operations happened and multiple buffer internal data changed inside this API.
+
+When in a multiple-threading and async runtime, this API runs in an async manner. Thus other threads (especially the logics running in javascripts) could still try to fetch this buffer's data (I didn't mean it must happens with `OpenFile` API we used as an example here, but with the developing of Rsvim, there will be more and more primitives, so one day this will happen). It will eventually lead to issues like the data synchronization in database transactions, or like the data racing issue in multiple-threading runtime.
+
+With async IO, we would have to support a full featured transactional mechanism with the ACID (atomicity, consistency, isolation, durability) properties, or buffer-level mutex/condition/notify mechanism. Both solutions are not going to be easy.
+
+## Single-Threading and Sync IO
+
+But if we simply use single-threading and sync IO to synchronize data between buffer and filesystem, there will be no `Loading` and `Saving` status, and javascripts layer will have a much more easy running environment. The internal dataflow becomes:
+
+![2](../images/4-WindowsAndBuffers-1-FileBuffer.2.drawio.svg)
 
 ## References
 

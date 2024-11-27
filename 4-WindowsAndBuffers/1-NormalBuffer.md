@@ -16,7 +16,7 @@ There are several read/write operations about normal buffer\[[1](#references)\]:
 
 To support these features, normal buffer (it can also be called file buffer because it is mostly presented as a file in filesystem) contains two types of states:
 
-1. Associated (with a file on the file system) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
+1. Associated (with a file on the filesystem) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
 
 2. Several running status, a certain time point has a certain status:
 

@@ -4,6 +4,8 @@
 
 This RFC describes the normal buffer that maps the file content in filesystem to the memory inside editor.
 
+## States
+
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
 - `:e[dit] {filename}`\[[2](#references)\]: Edit file, open a new buffer and bind it with a `{filename}`.
@@ -35,6 +37,56 @@ Note:
 3. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
 
 The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
+
+## Data Sync
+
+When implementing the buffer's operation primitives in a multiple-threading and async environment, we would want each primitives are thread-safe and atomic to higher-level. For example, now we have such a primitive, or say, a buffer API:
+
+- `OpenFile`: This API opens file (by argument `{filename}`) with a new buffer, there are two cases it needs to handle:
+  - If the file exists, it reads both the file's metadata (create time, last modified time, is symbolink, etc) and file contents into the newly created buffer, and also saved the last sync time to _**current time**_.
+  - If the file doesn't exist, it simply saves the `{filename}`, the set the last sync time to `None`.
+
+Below is the pseudocode to describe the logic:
+
+```text
+Create new buffer.
+Set buffer status to `Loading`.
+Set buffer file name to `{filename}`.
+Set buffer metadata to `None`.
+Set buffer last sync time to `None`.
+
+Open the file.
+  if successful:
+    Read the file metadata.
+    if read metadata is successful:
+      Set buffer metadata.
+    else:
+      Delete the buffer.
+      Returns the IO error.
+
+    Read the file content.
+    if read content is successful:
+      Set buffer content.
+    else:
+      Delete the buffer.
+      Returns the IO error.
+
+    Set buffer status to `Synced`.
+    Set buffer last sync time to `Now`.
+    Returns success
+  else:
+    if error is "File not found":
+      Set buffer status to `changed`.
+      Set buffer file name to `{filename}`.
+      Returns success
+    else:
+      Delete the buffer.
+      Returns the IO error.
+```
+
+As we could see, there are actually several OS-level file IO operations happened and multiple buffer internal data changed inside this API.
+
+When in a multiple-threading and async runtime, this API runs in an async task, while other threads could still try to query the buffer's info and data (I didn't mean it must happens in this `OpenFile` API, but with the growing of Rsvim editor, there will be more and more primitives, so one day this will happen). Thus it can lead to issue similar to the data synchronization inside relational database, i.e. we would like to ensure the ACID (atomicity, consistency, isolation, durability) properties for the buffer primitives/APIs.
 
 ## References
 

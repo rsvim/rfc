@@ -32,13 +32,13 @@ The associated-detached state and running status can be switched to each other:
 
 Note:
 
-1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, file operations are handled with async manner and won't block TUI. During these states, user can still do a lot of operations such as moving cursor, switching to other buffers, etc. But buffer modification is not allowed, i.e. user cannot edit/delete the buffer when it is reading/writing contents from/to the file on the file system. This is mostly to ensure user data security.
+1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, we would want all IO operations are handled with async manner and won't block TUI. During these states, user can still do a lot of operations such as moving cursor, switching to other buffers, etc. But buffer modification is not allowed, i.e. user cannot edit/delete the buffer when it is reading/writing contents from/to the file on the file system. This is mostly to ensure user data security.
 2. If a buffer is detached and modified, it is always _**changed**_ and will never go back to _**initialized**_.
 3. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
 
 The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
 
-## Data Sync
+## Multiple-Threading and Async IO
 
 When implementing the buffer's operation primitives in a multiple-threading and async environment, we would want each primitives are thread-safe and atomic to higher-level. For example, now we have such a primitive, or say, a buffer API:
 
@@ -86,7 +86,15 @@ Open the file.
 
 As we could see, there are actually several OS-level file IO operations happened and multiple buffer internal data changed inside this API.
 
-When in a multiple-threading and async runtime, this API runs in an async task, while other threads could still try to query the buffer's info and data (I didn't mean it must happens in this `OpenFile` API, but with the growing of Rsvim editor, there will be more and more primitives, so one day this will happen). Thus it can lead to issue similar to the data synchronization inside relational database, i.e. we would like to ensure the ACID (atomicity, consistency, isolation, durability) properties for the buffer primitives/APIs.
+When in a multiple-threading and async runtime, this API runs in an async manner. Thus other threads (especially the logics running in javascripts) could still try to fetch this buffer's data (I didn't mean it must happens with `OpenFile` API we used as an example here, but with the developing of Rsvim, there will be more and more primitives, so one day this will happen). It will eventually lead to issues like the data synchronization in database transactions, or like the data racing issue in multiple-threading runtime.
+
+With async IO, we would have to support a full featured transactional mechanism with the ACID (atomicity, consistency, isolation, durability) properties, or buffer-level mutex/condition/notify mechanism. Both solutions are not going to be easy.
+
+## Single-Threading and Sync IO
+
+But if we simply use single-threading and sync IO to synchronize data between buffer and filesystem, there will be no `Loading` and `Saving` status, and javascripts layer will have a much more easy running environment. The internal dataflow becomes:
+
+![2](../images/4-WindowsAndBuffers-1-FileBuffer.2.drawio.svg)
 
 ## References
 

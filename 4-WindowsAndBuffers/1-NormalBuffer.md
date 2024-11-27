@@ -21,7 +21,7 @@ To support these features, normal buffer (it can also be called file buffer beca
 2. Several running status, a certain time point has a certain status:
 
    - Initialized: When a detached buffer is created, the status is always _**initialized**_.
-   - Changed: When buffer contents are different from file system (if associated) or once been modified (if detached). Note: once a detached buffer is been modified, it will always stay in _**changed**_ status, and cannot go back to _**initialized**_ status.
+   - Changed: When buffer contents are different from filesystem (if associated) or once been modified (if detached). Note: once a detached buffer is been modified, it will always stay in _**changed**_ status, and cannot go back to _**initialized**_ status.
    - Loading: When the buffer reads the content (or meta info) from associated file into the buffer, the status is _**loading**_. Note: a detached buffer cannot change its status to _**loading**_.
    - Saving: When the buffer writes the buffer's contents into the associated file, the status is _**saving**_. Note: a detached buffer cannot change its status to _**saving**_.
    - Synced: When the buffer's loading/saving operation is completed, the status changes to _**synced**_.

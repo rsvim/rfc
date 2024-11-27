@@ -4,11 +4,12 @@
 
 This RFC describes the normal buffer that maps the file content in filesystem to the memory inside editor.
 
-There are several read/write operations about normal buffer (\[[1][1]\]):
+There are several read/write operations about normal buffer\[[1][1]\]:
 
-- `:e[dit] {name}` (\[[2][2]\]): Edit file, open a new buffer and bind it with a file `{name}`.
-- `:e[new]` (\[[3][3]\]): Create a new detached buffer, associated with no file.
-- `:file {name}` (\[[4][4]\]): Set file `{name}` for an existing buffer.
+- `:e[dit] {name}`\[[2][2]\]: Edit file, open a new buffer and bind it with a file `{name}`.
+- `:e[new]`\[[3][3]\]: Create a new detached buffer, associated with no file.
+- `:file {name}`\[[4][4]\]: Set file `{name}` for an existing buffer.
+- `:sav[eas] {name}`\[[5][5]\]: Set file `{name}` for an existing buffer.
 
 To support this, the normal buffer (it can also be called file buffer because it is mostly presented as a file in filesystem) has several functionalities:
 
@@ -33,9 +34,8 @@ Note:
 3. If a buffer is detached and modified, it is always _**changed**_ and will never go back to _**initialized**_.
 4. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
 
-## References
-
-- [1]: https://vimhelp.org/editing.txt.html
-- [2]: https://vimhelp.org/editing.txt.html#%3Aedit
-- [3]: https://vimhelp.org/editing.txt.html#%3Aenew
-- [4]: https://vimhelp.org/editing.txt.html#%3Afile_f
+[1]: https://vimhelp.org/editing.txt.html
+[2]: https://vimhelp.org/editing.txt.html#%3Aedit
+[3]: https://vimhelp.org/editing.txt.html#%3Aenew
+[4]: https://vimhelp.org/editing.txt.html#%3Afile_f
+[5]: https://vimhelp.org/editing.txt.html#%3Asav

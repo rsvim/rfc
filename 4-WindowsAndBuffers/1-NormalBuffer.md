@@ -1,6 +1,6 @@
 # Normal Buffer
 
-> Written by @linrongbin16, first created at 2024-11-21, last modified at 2024-11-26.
+> Written by @linrongbin16, first created at 2024-11-21, last modified at 2024-11-27.
 
 This RFC describes the normal buffer that maps the file content in filesystem to the memory inside editor.
 
@@ -33,6 +33,8 @@ Note:
 1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, file operations are handled with async manner and won't block TUI. During these states, user can still do a lot of operations such as moving cursor, switching to other buffers, etc. But buffer modification is not allowed, i.e. user cannot edit/delete the buffer when it is reading/writing contents from/to the file on the file system. This is mostly to ensure user data security.
 2. If a buffer is detached and modified, it is always _**changed**_ and will never go back to _**initialized**_.
 3. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
+
+The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
 
 ## References
 

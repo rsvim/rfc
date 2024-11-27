@@ -9,7 +9,7 @@ There are several read/write operations about normal buffer\[[1][1]\]:
 - `:e[dit] {name}`\[[2][2]\]: Edit file, open a new buffer and bind it with a file `{name}`.
 - `:e[new]`\[[3][3]\]: Create a new detached buffer, associated with no file.
 - `:file {name}`\[[4][4]\]: Set file `{name}` for an existing buffer.
-- `:sav[eas] {name}`\[[5][5]\]: Set file `{name}` for an existing buffer.
+- `:sav[eas] {name}`\[[5][5]\]: Save current buffer contents into another file `{name}`, instead of saving to current associated file.
 
 To support this, the normal buffer (it can also be called file buffer because it is mostly presented as a file in filesystem) has several functionalities:
 

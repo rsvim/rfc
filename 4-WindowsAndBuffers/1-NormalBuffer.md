@@ -2,9 +2,13 @@
 
 > Written by @linrongbin16, first created at 2024-11-21, last modified at 2024-11-27.
 
-This RFC describes the normal buffer that maps the file content in filesystem to the memory inside editor. Here we propose two manners for data syncing between buffers and filesystems: async and sync.
+This RFC describes the normal buffer that maps the file content from filesystem to the memory managed by editor.
 
-## States
+Here we propose two ways of data syncing between the in-memory buffers and files on filesystems: async and sync. Finally we choose the sync way to implement this to avoid data racing issue, but I think it still worth to give both of the design works.
+
+## Background
+
+Note: the normal buffer can also be called file buffer because it is mostly presented as a file in filesystem.
 
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
@@ -14,7 +18,13 @@ There are several read/write operations about normal buffer\[[1](#references)\]:
 - `:sav[eas] {filename}`\[[5](#references)\]: Save current buffer contents into another `{filename}`, instead of saving to current associated file.
 - `:{,range} {filename}`\[[6](#references)\], `:w[rite] {filename}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents into another `{filename}`, instead of saving to current associated file.
 
-To support these features, normal buffer (it can also be called file buffer because it is mostly presented as a file in filesystem) contains two types of states:
+## Async Way
+
+The biggest benefit of async way is: it can fully utilize the multiple-threading environment provided by tokio runtime, and keep all IO operations running in async mode, thus never block the TUI. Everything sounds great until we met the data racing issue.
+
+### States
+
+To support these features, normal buffer contains two types of states:
 
 1. Associated (with a file on the file system) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
 
@@ -38,7 +48,7 @@ Note:
 
 The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
 
-## Multiple-Threading and Async IO
+### Multiple-Threading and Async IO
 
 When implementing the buffer's operation primitives in a multiple-threading and async environment, we would want each primitives are thread-safe and atomic to higher-level. For example, now we have such a primitive, or say, a buffer API:
 
@@ -90,7 +100,7 @@ When in a multiple-threading and async runtime, this API runs in an async manner
 
 With async IO, we would have to support a full featured transactional mechanism with the ACID (atomicity, consistency, isolation, durability) properties, or buffer-level mutex/condition/notify mechanism. Both solutions are not going to be easy.
 
-## Single-Threading and Sync IO
+## Sync Way
 
 But if we simply use single-threading and sync IO to synchronize data between buffer and filesystem, there will be no `Loading` and `Saving` status, and javascripts layer will have a much more easy running environment. The internal dataflow becomes:
 

@@ -12,11 +12,11 @@ Note: the normal buffer can also be called file buffer because it is mostly pres
 
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
-- `:e[dit] {filename}`\[[2](#references)\]: Edit file, open a new buffer and bind it with a `{filename}`.
+- `:e[dit] {filename}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{filename}` for the buffer.
 - `:e[new]`\[[3](#references)\]: Create a new detached buffer, associated with no file.
-- `:file {filename}`\[[4](#references)\]: Bind a buffer to another `{filename}`, i.e. rename a buffer's associated file name.
+- `:file {filename}`\[[4](#references)\]: Set another `{filename}` for the buffer, i.e. rename a buffer's associated file name.
 - `:sav[eas] {filename}`\[[5](#references)\]: Save current buffer contents into another `{filename}`, instead of saving to current associated file.
-- `:{,range} {filename}`\[[6](#references)\], `:w[rite] {filename}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents into another `{filename}`, instead of saving to current associated file.
+- `:{,range} {filename}`\[[6](#references)\], `:w[rite] {filename}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{filename}`, instead of saving to current associated file.
 
 ## Async Way
 
@@ -26,12 +26,12 @@ The biggest benefit of async way is: it can fully utilize the multiple-threading
 
 To support these features, normal buffer contains two types of states:
 
-1. Associated (with a file on the file system) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
+1. Associated (with a file on the filesystem) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
 
 2. Several running status, a certain time point has a certain status:
 
-   - Initialized: When a file buffer is created, it is always detached, and the status is always _**initialized**_.
-   - Changed: When buffer contents are different from file system (if associated) or once been modified (if detached). Note: once a detached buffer is been modified, it will always stay in _**changed**_ status, and cannot go back to _**initialized**_ status.
+   - Initialized: When a detached buffer is created, the status is always _**initialized**_.
+   - Changed: When buffer contents are different from filesystem (if associated) or once been modified (if detached). Note: once a detached buffer is been modified, it will always stay in _**changed**_ status, and cannot go back to _**initialized**_ status.
    - Loading: When the buffer reads the content (or meta info) from associated file into the buffer, the status is _**loading**_. Note: a detached buffer cannot change its status to _**loading**_.
    - Saving: When the buffer writes the buffer's contents into the associated file, the status is _**saving**_. Note: a detached buffer cannot change its status to _**saving**_.
    - Synced: When the buffer's loading/saving operation is completed, the status changes to _**synced**_.

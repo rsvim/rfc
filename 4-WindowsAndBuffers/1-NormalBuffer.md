@@ -89,7 +89,7 @@ enum BufferStatus {
 }
 
 // Buffer metadata.
-type BufferMetadata {
+type BufferMetadata = {
     // Buffer status.
     status: BufferStatus;
 
@@ -111,7 +111,7 @@ type BufferMetadata {
     // Last synced time between buffer and filesystem.
     // For detached buffer, this field is `undefined` since it's never synced with filesystem.
     lastSyncedTime?: string;
-}
+};
 
 // Fetch buffer metadata.
 // It returns the metadata of a buffer.

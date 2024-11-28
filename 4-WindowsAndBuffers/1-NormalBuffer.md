@@ -181,7 +181,7 @@ Actually we no longer need these status, the buffer's metadata itself already in
 
 - For associated or detached, a buffer can indicate by whether it has the `fileName`, `lastModifiedTime`, `createTime` and `lastModifiedTime` fields. A detached buffer don't have these fields.
 - For buffer status `Initialized`, a buffer can indicate by whether it has no `fileName` and not been modified.
-- For buffer status `Synced` and `Changed`, a buffer can indicate by whether it the `fileName`, and also it needs to maintain all the modifications history since the buffer is created.
+- For buffer status `Synced` and `Changed`, a buffer can indicate by whether it the `fileName`, and also it needs to maintain all the modifications history since the buffer is created. Note: The the modifications history is also useful for implementing editing history related features such as _**undo**_, _**redo**_, etc.
 
 This is the final easy and stable solution for buffer and filesystem.
 

@@ -173,9 +173,11 @@ The conclusion is: we will fall into the data racing trap and never solve it cor
 
 ## Sync Way
 
-But if we simply use single-threading and sync IO to synchronize data between buffer and filesystem, there will be no `Loading` and `Saving` status, and javascripts layer will have a much more easy running environment. The internal dataflow becomes:
+Once we simply use sync IO to synchronize file contents between buffer and filesystem, there will be no `loading` or `saving` status, and APIs exposed to javascript side will be all sync and blocking. The internal dataflow becomes:
 
 ![2](../images/4-WindowsAndBuffers-1-FileBuffer.2.drawio.svg)
+
+This is the final easy and stable solution for buffer and filesystem.
 
 ## References
 

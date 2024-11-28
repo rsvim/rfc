@@ -49,81 +49,127 @@ The biggest benefit of the async way is: it can fully utilize the async and mult
 
 ### States
 
-To support the requirements, normal buffer has two types of states:
+To support the requirements, normal buffer has two kind of internal states:
 
-1. Associated (with a file on the filesystem) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
+1. Associated (or say, named, maps to a file on the filesystem) or detached (or say, unnamed, maps to no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
 
-2. Several running status, a certain time point has a certain status:
+2. Several running status, a buffer in a certain time point has a certain status:
 
    - Initialized: When a detached buffer is created, the status is always _**initialized**_.
-   - Changed: When buffer contents are different from filesystem (if associated) or once been modified (if detached). Note: once a detached buffer is been modified, it will always stay in _**changed**_ status, and cannot go back to _**initialized**_ status.
-   - Loading: When the buffer reads the content (or meta info) from associated file into the buffer, the status is _**loading**_. Note: a detached buffer cannot change its status to _**loading**_.
-   - Saving: When the buffer writes the buffer's contents into the associated file, the status is _**saving**_. Note: a detached buffer cannot change its status to _**saving**_.
-   - Synced: When the buffer's loading/saving operation is completed, the status changes to _**synced**_.
+   - Loading: When the buffer reads the contents from the associated file, the status is _**loading**_. Note: a detached buffer cannot change its status to _**loading**_.
+   - Saving: When the buffer writes its contents into the associated file, the status is _**saving**_. Note: a detached buffer cannot change its status to _**saving**_.
+   - Synced: When the buffer's loading/saving operation is completed, the status changes to _**synced**_, i.e. the buffer's contents are same with the filesystem. Note: since a detached buffer cannot change its status to _**loading**_ or _**saving**_, thus it cannot change to _**synced**_ neither.
+   - Changed: When buffer's contents are different from the filesystem:
+     - If the buffer is associated with a file name, and its contents are modified since last synced with filesystem, the status is _**changed**_.
+     - If the buffer is detached, once it is modified, the status will always stays in _**changed**_ and cannot go back to _**initialized**_.
 
-The associated-detached state and running status can be switched to each other:
+Here's a flow chart to show how it works on a certain buffer:
 
 ![1](../images/4-WindowsAndBuffers-1-FileBuffer.1.drawio.svg)
 
 Note:
 
-1. `Loading` and `Saving` are momentary states, since Rsvim is designed with the concept of never freezing, we would want all IO operations are handled with async manner and won't block TUI. During these states, user can still do a lot of operations such as moving cursor, switching to other buffers, etc. But buffer modification is not allowed, i.e. user cannot edit/delete the buffer when it is reading/writing contents from/to the file on the file system. This is mostly to ensure user data security.
-2. If a buffer is detached and modified, it is always _**changed**_ and will never go back to _**initialized**_.
-3. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved.
+1. `Loading` and `Saving` are momentary status. During these status, user can still do a lot of operations such as moving cursor, visual selection, switching to other buffers and windows, etc. But modifying the buffer is not allowed, i.e. user cannot edit/delete the buffer when it is loading/saving the file on the file system. This is mostly to ensure user data security.
+2. If a buffer is associated with a non-existing file and modified, it is always _**changed**_ and will never go to _**synced**_ unless it is been saved on filesystem.
+3. All the status are for one certain buffer, there is no other buffer instances in the flow chart.
+4. There are still big gaps between the buffer operations and the (user facing) Vim ex commands, i.e. `:edit`, `:file`, etc. This is an internal middle-level design.
 
-The above flow chart shows the status for only one certain buffer, there is no other buffers in the flow chart. And there still are big gaps between the internal states and the final user facing ex commands (i.e. `:edit`, `:file`, etc), this is only a middle-level design.
+### Data Racing
 
-### Multiple-Threading and Async IO
+Before showing the data racing examples, let's introduce one more buffer API to fetch the buffer's info and data:
 
-When implementing the buffer's operation primitives in a multiple-threading and async environment, we would want each primitives are thread-safe and atomic to higher-level. For example, now we have such a primitive, or say, a buffer API:
+```typescript
+// Buffer status enums.
+enum BufferStatus {
+    Initialized = 1,
+    Loading,
+    Saving,
+    Synced,
+    Changed,
+}
 
-- `OpenFile`: This API opens file (by argument `{filename}`) with a new buffer, there are two cases it needs to handle:
-  - If the file exists, it reads both the file's metadata (create time, last modified time, is symbolink, etc) and file contents into the newly created buffer, and also saved the last sync time to _**current time**_.
-  - If the file doesn't exist, it simply saves the `{filename}`, the set the last sync time to `None`.
+// Buffer metadata.
+type BufferMetadata {
+    // Buffer status.
+    status: BufferStatus;
 
-Below is the pseudocode to describe the logic:
+    // Associated file name of the buffer.
+    // For detached buffer, this field is `undefined`.
+    fileName?: string;
 
-```text
-Create new buffer.
-Set buffer status to `Loading`.
-Set buffer file name to `{filename}`.
-Set buffer metadata to `None`.
-Set buffer last sync time to `None`.
+    // Buffer contents.
+    contents?: string;
 
-Open the file.
-  if successful:
-    Read the file metadata.
-    if read metadata is successful:
-      Set buffer metadata.
-    else:
-      Delete the buffer.
-      Returns the IO error.
+    // Last modified time of the file (on the filesystem).
+    // For detached buffer, this field is `undefined` since it's never synced with filesystem.
+    lastModifiedTime?: Date;
 
-    Read the file content.
-    if read content is successful:
-      Set buffer content.
-    else:
-      Delete the buffer.
-      Returns the IO error.
+    // Create time of the file (on the filesystem).
+    // For detached buffer, this field is `undefined` since it's never synced with filesystem.
+    createTime?: Date;
 
-    Set buffer status to `Synced`.
-    Set buffer last sync time to `Now`.
-    Returns success
-  else:
-    if error is "File not found":
-      Set buffer status to `changed`.
-      Set buffer file name to `{filename}`.
-      Returns success
-    else:
-      Delete the buffer.
-      Returns the IO error.
+    // Last synced time between buffer and filesystem.
+    // For detached buffer, this field is `undefined` since it's never synced with filesystem.
+    lastSyncedTime?: string;
+}
+
+// Fetch buffer metadata.
+// It returns the metadata of a buffer.
+Rsvim.buf.getMetadata(bufferId: number): BufferMetadata?;
 ```
 
-As we could see, there are actually several OS-level file IO operations happened and multiple buffer internal data changed inside this API.
+When in an async and multiple-threading tokio runtime, we would want to keep the buffer's data thread-safe and the API behaves like atomic primitives, just like locked by mutex or follows the ACID (atomicity, consistency, isolation, durability) principles in database transactions.
 
-When in a multiple-threading and async runtime, this API runs in an async manner. Thus other threads (especially the logics running in javascripts) could still try to fetch this buffer's data (I didn't mean it must happens with `OpenFile` API we used as an example here, but with the developing of Rsvim, there will be more and more primitives, so one day this will happen). It will eventually lead to issues like the data synchronization in database transactions, or like the data racing issue in multiple-threading runtime.
+But the `loading` and `saving` status are not easy to handle, image we have below typescripts:
 
-With async IO, we would have to support a full featured transactional mechanism with the ACID (atomicity, consistency, isolation, durability) properties, or buffer-level mutex/condition/notify mechanism. Both solutions are not going to be easy.
+```typescript
+// User just type `:edit file1` command to open a file with a new buffer.
+let bufferIds = Rsvim.buf.listBuffers();
+bufferIds.forEach((bufferId) => {
+  console.log(
+    `For buffer ${bufferId}, the status is: ${Rsvim.buf.getMetadata(bufferId)?.status}`,
+  );
+  console.log(`The contents is: ${Rsvim.buf.getMetadata(bufferId)?.contents}`);
+});
+```
+
+If the above example code runs right after user opens a buffer with `:edit {file1}` ex command, i.e. the editor just runs the `Rsvim.buf.editFile` API in an async task spawned by tokio runtime. In this time, the result of the `Rsvim.buf.getMetadata` API in the example code is highly possible to be `Loading` status, and incomplete/partial contents different from the filesystem.
+
+What should the javascripts do now?
+
+Solution-1: It would use a blocking while-loop to wait for the buffer syncing (loading/saving) complete:
+
+```typescript
+// Use while-loop to wait for buffer syncing complete.
+while (
+  buffersId
+    .map((bufferId) => Rsvim.buf.getMetadata(bufferId)?.status)
+    .some(
+      (status) =>
+        status === BufferStatus.Loading || status === BufferStatus.Saving,
+    )
+) {
+  /* Do nothing. */
+}
+
+// Syncing complete, continue user logic.
+```
+
+Solution-2: The editor have to change all the buffer related APIs to `async`, so let user wait for them syncing complete:
+
+```typescript
+// Change the `Rsvim.buf.listBuffers` API to async mode.
+// It returns a promise of buffer IDs.
+Rsvim.buf.listBuffers(opts?:{includeUnlist:boolean?}): Promise<Array<number>>;
+
+// Then we can list all buffer IDs like this:
+let bufferIds = await Rsvim.buf.listBuffers();
+// ...
+```
+
+The solution-1 of course leads to low performance and bad practice, while solution-2 looks it will need a full-featured buffer-level lock/notify/condition mechanism (similar to mutex, conditional variable and notify in C/C++ pthread or rust sync library), or transactions that support ACID principles in relational database.
+
+The conclusion is: we will fall into the data racing trap and never solve it correctly.
 
 ## Sync Way
 

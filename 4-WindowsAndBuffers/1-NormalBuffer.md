@@ -1,6 +1,6 @@
 # Normal Buffer
 
-> Written by @linrongbin16, first created at 2024-11-21, last modified at 2024-11-27.
+> Written by @linrongbin16, first created at 2024-11-21, last modified at 2024-11-28.
 
 This RFC describes the normal buffer that maps the file content from filesystem to the memory managed by editor.
 

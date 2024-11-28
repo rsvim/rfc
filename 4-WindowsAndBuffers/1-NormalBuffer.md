@@ -18,14 +18,16 @@ There are several read/write operations about normal buffer\[[1](#references)\]:
 - `:sav[eas] {name}`\[[5](#references)\]: Save current buffer contents into another `{name}`, instead of saving to current associated file.
 - `:{,range} {name}`\[[6](#references)\], `:w[rite] {name}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{name}`, instead of saving to current associated file.
 
-And since javascript is the first-class citizen in Rsvim editor, these Vim ex commands will be implemented with javascripts, core APIs will be exposed to javascript world from rust side. For example we would like to have below javascript APIs (written in typescript for better type support):
+And since javascript is the first-class citizen in Rsvim editor, these Vim ex commands will be implemented with javascripts, core APIs will be exposed to javascript world from rust side. Image we have below javascript APIs (written in typescript with better types):
 
 ```typescript
-// List all buffers (by ID), returns all buffer IDs.
+// List all buffers (by ID).
+// It returns all buffer IDs.
 // Equivalent to Vim's `:buffers` and Neovim's `vim.api.nvim_list_bufs`.
 Rsvim.buf.listBuffers(opts?:{includeUnlist:boolean?}): Array<number>;
 
-// Edit file with a new buffer, returns the newly created buffer ID.
+// Edit file with a new buffer.
+// It returns the newly created buffer ID.
 // Equivalent to Vim's `:edit`, similar to Neovim's `vim.api.nvim_create_buf` (it only creates a new buffer, but not opens a file).
 Rsvim.buf.editFile(opts:{fileName:string}): number;
 
@@ -33,13 +35,13 @@ Rsvim.buf.editFile(opts:{fileName:string}): number;
 // Equivalent to Vim's `:file {name}` and Neovim's `vim.api.nvim_buf_set_name`.
 Rsvim.buf.setName(bufferId: number, fileName:string): void;
 
-// Save buffer's contents into its associated file, returns `true` if successful, `false` if there's any error occurred.
+// Save buffer's contents into its associated file.
+// It returns `true` if successful, `false` if there's any error occurred.
 // Equivalent to Vim's `:w[rite]` (Neovim doesn't have any equivalent lua APIs).
 Rsvim.buf.saveFile(bufferId: number, force?: boolean): boolean;
-
 ```
 
-Also please keep in mind: javascript code runs in single-threading with async/await support, but without any concepts of mutex/lock.
+Also please keep in mind: javascript code runs in single-threading with Promise/async/await support, but without any concepts of mutex/lock.
 
 ## Async Way
 
@@ -47,7 +49,7 @@ The biggest benefit of the async way is: it can fully utilize the async and mult
 
 ### States
 
-To support the requirements, normal buffer contains two types of states:
+To support the requirements, normal buffer has two types of states:
 
 1. Associated (with a file on the filesystem) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
 

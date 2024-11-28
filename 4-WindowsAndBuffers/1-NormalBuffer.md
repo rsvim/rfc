@@ -4,27 +4,50 @@
 
 This RFC describes the normal buffer that maps the file content from filesystem to the memory managed by editor.
 
-Here we propose two ways of data syncing between the in-memory buffers and files on filesystems: async and sync. Finally we choose the sync way to implement this to avoid data racing issue, but I think it still worth to give both of the design works.
+Note: the normal buffer can also be called file buffer because it is mostly presented as a file in filesystem.
+
+Here we propose two ways of data syncing between the in-memory buffers and files on filesystems: async and sync. Finally we choose the sync way to implement this to avoid data racing issue, but it is still worth to document both of the design works.
 
 ## Background
 
-Note: the normal buffer can also be called file buffer because it is mostly presented as a file in filesystem.
-
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
-- `:e[dit] {filename}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{filename}` for the buffer.
+- `:e[dit] {name}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{name}` for the buffer.
 - `:e[new]`\[[3](#references)\]: Create a new detached buffer, associated with no file.
-- `:file {filename}`\[[4](#references)\]: Set another `{filename}` for the buffer, i.e. rename a buffer's associated file name.
-- `:sav[eas] {filename}`\[[5](#references)\]: Save current buffer contents into another `{filename}`, instead of saving to current associated file.
-- `:{,range} {filename}`\[[6](#references)\], `:w[rite] {filename}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{filename}`, instead of saving to current associated file.
+- `:file {name}`\[[4](#references)\]: Set another `{name}` for the buffer, i.e. rename a buffer's associated file name.
+- `:sav[eas] {name}`\[[5](#references)\]: Save current buffer contents into another `{name}`, instead of saving to current associated file.
+- `:{,range} {name}`\[[6](#references)\], `:w[rite] {name}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{name}`, instead of saving to current associated file.
+
+And since javascript is the first-class citizen in Rsvim editor, these Vim ex commands will be implemented with javascripts, core APIs will be exposed to javascript world from rust side. For example we would like to have below javascript APIs (written in typescript for better type support):
+
+```typescript
+// List all buffers (by ID), returns all buffer IDs.
+// Equivalent to Vim's `:buffers` and Neovim's `vim.api.nvim_list_bufs`.
+Rsvim.buf.listBuffers(opts?:{includeUnlist:boolean?}): Array<number>;
+
+// Edit file with a new buffer, returns the newly created buffer ID.
+// Equivalent to Vim's `:edit`, similar to Neovim's `vim.api.nvim_create_buf` (it only creates a new buffer, but not opens a file).
+Rsvim.buf.editFile(opts:{fileName:string}): number;
+
+// Set file name to a buffer.
+// Equivalent to Vim's `:file {name}` and Neovim's `vim.api.nvim_buf_set_name`.
+Rsvim.buf.setName(bufferId: number, fileName:string): void;
+
+// Save buffer's contents into its associated file, returns `true` if successful, `false` if there's any error occurred.
+// Equivalent to Vim's `:w[rite]` (Neovim doesn't have any equivalent lua APIs).
+Rsvim.buf.saveFile(bufferId: number, force?: boolean): boolean;
+
+```
+
+Also please keep in mind: javascript code runs in single-threading with async/await support, but without any concepts of mutex/lock.
 
 ## Async Way
 
-The biggest benefit of async way is: it can fully utilize the multiple-threading environment provided by tokio runtime, and keep all IO operations running in async mode, thus never block the TUI. Everything sounds great until we met the data racing issue.
+The biggest benefit of the async way is: it can fully utilize the async and multiple-threading environment provided by tokio runtime, and run all IO operations in async mode, thus it can never block the TUI. Everything sounds great until we met the data racing issue.
 
 ### States
 
-To support these features, normal buffer contains two types of states:
+To support the requirements, normal buffer contains two types of states:
 
 1. Associated (with a file on the filesystem) or detached (with no file). Note: The _**filesystem**_ can be not only local storage, but also remote via network protocols.
 

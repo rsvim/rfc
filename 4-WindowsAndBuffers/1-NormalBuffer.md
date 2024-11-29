@@ -22,6 +22,7 @@ And there are some limitations for buffers:
 
 1. A buffer has its own unique file name, mapped to the filesystem in absolute path.
 2. There is at most 1 unnamed buffer.
+3. The file name cannot be empty string, i.e. the file name length must be greater than 0.
 
 And since javascript is the first-class citizen in Rsvim editor, these Vim ex commands will be implemented with javascripts, core APIs will be exposed to javascript world from rust side. Image we have below javascript APIs (written in typescript with better types):
 

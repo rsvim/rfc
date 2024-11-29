@@ -14,9 +14,14 @@ There are several read/write operations about normal buffer\[[1](#references)\]:
 
 - `:e[dit] {name}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{name}` for the buffer.
 - `:e[new]`\[[3](#references)\]: Create a new detached buffer, associated with no file.
-- `:file {name}`\[[4](#references)\]: Set another `{name}` for the buffer, i.e. rename a buffer's associated file name.
-- `:sav[eas] {name}`\[[5](#references)\]: Save current buffer contents into another `{name}`, instead of saving to current associated file.
-- `:{,range} {name}`\[[6](#references)\], `:w[rite] {name}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{name}`, instead of saving to current associated file.
+- `:file {name}`\[[4](#references)\]: Set another `{name}` for the buffer, i.e. rename a buffer's file name.
+- `:sav[eas] {name}`\[[5](#references)\]: Save current buffer contents into another `{name}`, instead of saving to current file.
+- `:{,range} {name}`\[[6](#references)\], `:w[rite] {name}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{name}`, instead of saving to current file.
+
+And there are some limitations for buffers:
+
+1. A buffer has its own unique file name, mapped to the filesystem in absolute path.
+2. There is at most 1 unnamed buffer.
 
 And since javascript is the first-class citizen in Rsvim editor, these Vim ex commands will be implemented with javascripts, core APIs will be exposed to javascript world from rust side. Image we have below javascript APIs (written in typescript with better types):
 

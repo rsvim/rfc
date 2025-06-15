@@ -37,7 +37,15 @@ The syntax engine is directly built inside the editor, while it has a separate s
 
 A syntax config helps the editor detect the source code text file by the file type/extension, i.e. it maps the file type to its syntax definition.
 
-Note:
+Regex-based engines (vim, textmate) syntax files are mostly config files like json/yaml/xml. While treesitter parser is a `parser.c` that implements the tokenizer parser for the language, and it needs to compile (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) and load into the editor to work with treesitter.
 
-1. regex-based engines (vim, textmate) syntax files are mostly config files like json/yaml/xml. While treesitter parser is a `parser.c` that implements the tokenizer parser for the language, and it needs to compile (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) and load into the editor to work with treesitter.
-2. Once source code text file are parsed into tokens, they are also been used by other functions/features of the editor. For example [textobjects](https://vimhelp.org/motion.txt.html#text-objects) in vim, [textobjects](https://docs.helix-editor.com/textobjects.html) in helix.
+Once source code text file are parsed into tokens, they are also been used by other functions/features of the editor. For example [textobjects](https://vimhelp.org/motion.txt.html#text-objects) in vim, [textobjects](https://docs.helix-editor.com/textobjects.html) in helix.
+
+### Theme
+
+Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.
+
+- For vim, it embeds some default colorschemes in its [runtime/colors](https://github.com/vim/vim/tree/master/runtime/colors) folder.
+- For vscode, it embeds some default themes in its [extensions](https://github.com/microsoft/vscode/tree/main/extensions) folder, sub-folders with `theme-` prefix.
+- For helix, it embeds treesitter queries in its [runtime/queries](https://github.com/helix-editor/helix/tree/master/runtime/queries) folder (each language also needs a `query` file to define how editors can query the tokens from treesitter), themes in its [runtime/themes](https://github.com/helix-editor/helix/tree/master/runtime/themes).
+

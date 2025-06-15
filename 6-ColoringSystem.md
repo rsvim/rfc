@@ -40,4 +40,4 @@ A syntax config helps the editor detect the source code text file by the file ty
 Note:
 
 1. regex-based engines (vim, textmate) syntax files are mostly config files like json/yaml/xml. While treesitter parser is a `parser.c` that implements the tokenizer parser for the language, and it needs to compile (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) and load into the editor to work with treesitter.
-2. Once source code text file are parsed into tokens, they are also been used by other functions/features of the editor. For example [textobjects](https://vimhelp.org/motion.txt.html#text-objects) in vim, [textobjects](https://docs.helix-editor.com/textobjects.html).
+2. Once source code text file are parsed into tokens, they are also been used by other functions/features of the editor. For example [textobjects](https://vimhelp.org/motion.txt.html#text-objects) in vim, [textobjects](https://docs.helix-editor.com/textobjects.html) in helix.

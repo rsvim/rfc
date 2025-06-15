@@ -49,3 +49,4 @@ Once editors parsed the tokens from a source code text file, it needs another co
 - For vscode, it embeds some default themes in its [extensions](https://github.com/microsoft/vscode/tree/main/extensions) folder, sub-folders with `theme-` prefix.
 - For helix, it embeds treesitter queries in its [runtime/queries](https://github.com/helix-editor/helix/tree/master/runtime/queries) folder (each language also needs a `query` file to define how editors can query the tokens from treesitter), themes in its [runtime/themes](https://github.com/helix-editor/helix/tree/master/runtime/themes).
 
+A theme config file actually maps each token to its color (RGB, css name, terminal ansi code) and visual effects (underline, bold, italic).

@@ -13,3 +13,14 @@ The editing mode of Vim/Neovim/Rsvim editor is one of its core features differen
 
 - Vim modes: <https://vimhelp.org/intro.txt.html#vim-modes>.
 - Neovim modes: <https://neovim.io/doc/user/vimindex.html>.
+
+To make it simple, let's ignore some unimportant modes and only keeps the most important modes. The modes can be split into 2 types:
+
+1. Basic modes.
+   - Normal mode.
+   - Insert mode.
+   - Visual/select mode (Note: We don't distinguish between these two modes in this design).
+   - Command-line (Cmdline) mode.
+   - Terminal mode.
+2. Additional modes.
+   - Operator-pending mode.

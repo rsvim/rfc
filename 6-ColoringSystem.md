@@ -100,21 +100,21 @@ Cons:
 2. If rsvim directly uses `syntect` library, it means rsvim will have to use the `.sublime-syntax` config files, or the `.tmLanguage` config files. The biggest `.sublime-syntax` configs are maintained by sublime-text's open source packages: [sublimehq/Packages](https://github.com/sublimehq/Packages), and the biggest `.tmLanguage` configs are maintained by github linguist grammars [github-linguist/linguist/vendor/grammars](https://github.com/github-linguist/linguist/tree/main/vendor/grammars) (most these grammars are not updated for many years).
 3. If rsvim directly uses `vscode-textmate` library, it means rsvim will have to implement a javascript-runtime to run the library. Which performance can be a big issue (syntax engine should be directly embedded inside editor and be very performant).
 
-### Treesitter
+### TreeSitter
 
 Pros:
 
 1. Most accurate parsing results/tokens. Note: We don't consider LSP servers as a syntax engine here, even it also provide semantic tokens.
-2. Treesitter has an official library and rust binding. The library is actively maintained, and it has an actively maintained community for most programming languages, see the [list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers).
+2. TreeSitter has an official library and rust binding. The library is actively maintained, and it has an actively maintained community for most programming languages, see the [list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers).
 
 Cons:
 
-1. Treesitter is slower than regex-based engine (to be fare, treesitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions). TODO: Can treesitter support partial parsing, and generate a error-tolerant result? If not, it means treesitter
-2. Treesitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with treesitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
+1. TreeSitter is slower than regex-based engine (to be fare, treesitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions). TODO: Can treesitter support partial parsing, and generate a error-tolerant result? If not, it means treesitter
+2. TreeSitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with treesitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
 
 ## Solution
 
-The final solution choice is: TextMate vs Treesitter.
+The final solution choice is: TextMate vs TreeSitter.
 
 I believe treesitter is a better choice because both itself and its community are actively maintained, a clear documentation about how to use it. The issues are:
 

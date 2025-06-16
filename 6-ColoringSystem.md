@@ -134,3 +134,5 @@ We can use GitHub Actions to automatically upgrade/build all the language parser
 ### Avoid Blocking On First Open
 
 When user first opens a file and TreeSitter parses the whole file, it can be slow and block user.
+
+We can use the `async` operation provided by **Tokio** runtime, the async operation is scheduled in a separate thread, and avoid blocking. But in the meanwhile, there will be no syntaxes available.

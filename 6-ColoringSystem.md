@@ -116,7 +116,7 @@ Cons:
 
 The final solution choice is: TextMate vs TreeSitter.
 
-I believe treesitter is a better choice because both itself and its community are actively maintained, it also has a clear documentation. The issues are:
+I believe treesitter is a better choice because both itself and its community are actively maintained, it also has a clear documentation. The issues for rsvim are:
 
 1. How to alleviate the needs for C/C++ compilers to help users avoid compiling the parsers.
 2. How to avoid the slow speed of parsing the whole file when user first opens a source code text file, and on every user insertion/deletion, thus never blocks user editing.

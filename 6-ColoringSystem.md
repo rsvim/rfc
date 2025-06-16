@@ -66,7 +66,7 @@ All the popular editors have their community to continuously contribute to the s
 
 Compared the syntax configs and parsers, only creating a syntax engine and specifications is easy, but building a whole community for all the popular programming languages is hard. It may takes many years.
 
-## Solution
+## Engine
 
 I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to archive a quick win. Apparently we only have below choices:
 
@@ -111,3 +111,7 @@ Cons:
 
 1. Treesitter is slower than regex-based engine (to be fare, treesitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions). TODO: Can treesitter support partial parsing, and generate a error-tolerant result? If not, it means treesitter
 2. Treesitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with treesitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
+
+## Solution
+
+The final solution choice is: TextMate vs Treesitter.

@@ -125,7 +125,9 @@ I believe TreeSitter is a better choice because both itself and its community ar
 
 ### Avoid Local Compilation
 
-Since a parser for a language in TreeSitter is a `parser.c` file, and it needs to be compiled into a dynamical library with C/C++ compiler on user's local machine. We can provide a plugin for rsvim to collect/build/download all the syntax parsers for user.
+Since a parser for a language in TreeSitter is a `parser.c` file, and it needs to be compiled into a dynamical library with C/C++ compiler on user's local machine. We can provide a plugin for rsvim to collect/prebuild/download all the syntax parsers for user.
+
+TreeSitter team also plans to support `wasm` library, to let parsers work with javascript engines such as `v8`, to avoid C dynamical library.
 
 ### Avoid Blocking On First Open
 

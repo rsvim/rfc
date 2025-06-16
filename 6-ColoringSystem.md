@@ -106,3 +106,8 @@ Pros:
 
 1. Most accurate parsing results/tokens. Note: We don't consider LSP servers as a syntax engine here, even it also provide semantic tokens.
 2. Treesitter has an official library and rust binding. The library is actively maintained, and it has an actively maintained community for most programming languages, see the [list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers).
+
+Cons:
+
+1. Treesitter is slower than regex-based engine. But to be fare, treesitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions.
+2. Treesitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with treesitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).

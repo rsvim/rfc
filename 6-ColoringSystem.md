@@ -132,3 +132,5 @@ Image we create a `syntaxes-rsvim` project (written in javascript/typescript) as
 We can use GitHub Actions to automatically upgrade/build all the language parsers by running a daily job to upgrade them, and release the prebuilt dynamical libraries in GitHub Releases for some most popular OS: Windows/Linux x86_64, MacOS arm64. For other OS, user will have to install a C/C++ compiler to build the parsers by themself.
 
 ### Avoid Blocking On First Open
+
+When user first opens a file and TreeSitter parses the whole file, it can be slow and block user.

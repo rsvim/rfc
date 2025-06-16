@@ -121,3 +121,9 @@ I believe treesitter is a better choice because both itself and its community ar
 1. How to alleviate the needs for C/C++ compilers to help users avoid compiling the parsers.
 2. How to avoid the slow speed of parsing the whole file when user first opens a source code text file, and on every user insertion/deletion, thus never blocks user editing.
 3. How to make the syntaxes/themes pluggable with rsvim editor. As rsvim is designed with a strong concept of being as a javascript-runtime, all plugins are actually packages that can be installed/removed/upgraded by a package management tool (just like `node` and `npm`), thus the `rsvim` binary will not embed any plugins inside itself. While we will provide some **official** plugins for rsvim and users can choose not to install them, if community has create better plugins, which is a common case for Vim editors.
+
+### Avoid Local Parser Compilation
+
+Since a parser for a language in TreeSitter is a `parser.c` file, and it needs to be compiled into a dynamical library with C/C++ compiler on user's local machine. We can provide a plugin for rsvim to collect/build/download all the syntax parsers for user.
+
+Image we create a `syntaxes-rsvim` plugin (a separate git project, written in javascript/typescript) as an official plugin for rsvim, it is highly similar to the [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) plugin (for Neovim). Once user install it, it will try to automatically download the prebuilt dynamical library (or download the parser and build/compile it with C/C++ compiler) for user when user first opens a source code text file. And it also provide several commands to let user install/upgrade/remove parsers by themself.

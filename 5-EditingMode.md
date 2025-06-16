@@ -7,7 +7,7 @@ This RFC describes below functinalities:
 1. An overview on the features of Vim/Neovim/Rsvim editor, taking scripts/commands/plugins into consideration.
 2. Some high-level potential solutions and comparison among them, and finally Rsvim's choice.
 
-## Features Overview
+## Overview
 
 The editing mode of Vim/Neovim/Rsvim editor is one of its core features differentiates itself from other editors ([emacs](https://www.gnu.org/software/emacs/), [vscode](https://code.visualstudio.com/), [sublime-text](https://www.sublimetext.com/)). Here are some references about Vim and Neovim:
 

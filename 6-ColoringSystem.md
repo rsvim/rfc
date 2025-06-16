@@ -26,18 +26,18 @@ In today's indrustry, there are actually only a few _popular_ syntax engines:
 
 - [Vim's syntax engine](https://github.com/vim/vim/blob/master/src/syntax.c): Vim implements a regex-based syntax engine by itself. It is only used by Vim/Neovim.
 - [TextMate](https://macromates.com/manual/en/language_grammars): The TextMate engine is also a regex-based engine, created by the [textmate](https://github.com/textmate/textmate) editor. It is widely used by many editors: sublime-text (see [sublime-text syntax definition](https://www.sublimetext.com/docs/syntax.html#include-syntax)), vscode (see [vscode-textmate](https://github.com/microsoft/vscode-textmate)), atom (see [first-mate](https://github.com/atom/first-mate)), etc.
-- [TreeSitter](https://github.com/tree-sitter/tree-sitter): The treesitter engine is a parser-framework engine. Different from the regex-based engine, it actually implements each parser for each programming language. It is actively maintained and also popular in many editors: helix (see [helix runtime files](https://github.com/helix-editor/helix/tree/master/runtime)), zed (see [zed extensions](https://github.com/zed-industries/zed/tree/main/extensions) and [zed languages crate](https://github.com/zed-industries/zed/tree/main/crates/languages/src)).
+- [TreeSitter](https://github.com/tree-sitter/tree-sitter): The TreeSitter engine is a parser-framework engine. Different from the regex-based engine, it actually implements each parser for each programming language. It is actively maintained and also popular in many editors: helix (see [helix runtime files](https://github.com/helix-editor/helix/tree/master/runtime)), zed (see [zed extensions](https://github.com/zed-industries/zed/tree/main/extensions) and [zed languages crate](https://github.com/zed-industries/zed/tree/main/crates/languages/src)).
 
 The syntax engine is directly built inside the editor, while it has a separate syntax config file that defines how to parse the language source code.
 
 - For vim, it embeds all the syntax configs in its [runtime/syntax](https://github.com/vim/vim/tree/master/runtime/syntax) folder. Every language has its `.vim` syntax file, for example [c.vim](https://github.com/vim/vim/blob/master/runtime/syntax/c.vim), [cpp.vim](https://github.com/vim/vim/blob/master/runtime/syntax/cpp.vim), [python.vim](https://github.com/vim/vim/blob/master/runtime/syntax/python.vim).
 - For sublime-text, it has the [sublimehq/Packages](https://github.com/sublimehq/Packages). Each language has its `.sublime-syntax` config file, for example [C.sublime-syntax](https://github.com/sublimehq/Packages/blob/master/C%2B%2B/C.sublime-syntax), [C++.sublime-syntax](https://github.com/sublimehq/Packages/blob/master/C%2B%2B/C%2B%2B.sublime-syntax), [Python.sublime-syntax](https://github.com/sublimehq/Packages/blob/master/Python/Python.sublime-syntax).
 - For vscode, it embeds the [extensions](https://github.com/microsoft/vscode/tree/main/extensions) folder. Each language has its `.tmLanguage.json` config file, for example [c.tmLanguage.json](https://github.com/microsoft/vscode/blob/main/extensions/cpp/syntaxes/c.tmLanguage.json), [cpp.tmLanguage.json](https://github.com/microsoft/vscode/blob/main/extensions/cpp/syntaxes/cpp.tmLanguage.json), [python.tmLanguage.json](https://github.com/microsoft/vscode/blob/main/extensions/python/syntaxes/MagicPython.tmLanguage.json).
-- For treesitter (zed/helix), it has a community to maintain [a list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers) for each programming languages. Each language has its parser.
+- For TreeSitter (zed/helix), it has a community to maintain [a list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers) for each programming languages. Each language has its parser.
 
 A syntax config helps the editor detect the source code text file by the file type/extension, i.e. it maps the file type to its syntax definition.
 
-Regex-based engines (vim, textmate) syntax files are mostly config files like json/yaml/xml. While treesitter parser is a `parser.c` that implements the tokenizer parser for the language, and it needs to compile (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) and load into the editor to work with treesitter.
+Regex-based engines (vim, textmate) syntax files are mostly config files like json/yaml/xml. While TreeSitter parser is a `parser.c` that implements the tokenizer parser for the language, and it needs to compile (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) and load into the editor to work with TreeSitter.
 
 Once source code text file are parsed into tokens, these syntax information are also been used by other functions/features of the editor. For example textobjects (vim's [textobjects](https://vimhelp.org/motion.txt.html#text-objects), helix's [textobjects](https://docs.helix-editor.com/textobjects.html)), indents, and other syntax related features.
 
@@ -47,7 +47,7 @@ Once editors parsed the tokens from a source code text file, it needs another co
 
 - For vim, it embeds some default colorschemes in its [runtime/colors](https://github.com/vim/vim/tree/master/runtime/colors) folder.
 - For vscode, it embeds some default themes in its [extensions](https://github.com/microsoft/vscode/tree/main/extensions) folder, sub-folders with `theme-` prefix.
-- For helix, it embeds treesitter queries in its [runtime/queries](https://github.com/helix-editor/helix/tree/master/runtime/queries) folder (each language also needs a `query` file to define how editors can query the tokens from treesitter), themes in its [runtime/themes](https://github.com/helix-editor/helix/tree/master/runtime/themes).
+- For helix, it embeds TreeSitter queries in its [runtime/queries](https://github.com/helix-editor/helix/tree/master/runtime/queries) folder (each language also needs a `query` file to define how editors can query the tokens from TreeSitter), themes in its [runtime/themes](https://github.com/helix-editor/helix/tree/master/runtime/themes).
 
 A theme config file actually maps each token to its color (RGB, css name, terminal ansi code) and visual effects (underline, bold, italic).
 
@@ -62,7 +62,7 @@ All the popular editors have their community to continuously contribute to the s
 - Vim: Programming languages will maintain a `.vim` syntax file, to help developers to use their language with Vim/Neovim editors.
 - Sublime-text: Programming languages will maintain a `.sublime-syntax` syntax file, to help developers to use their language with sublime-text editor (and all the editors/viewers compatible with it).
 - VsCode: Programming languages will maintain a `.tmLanguage.json` syntax file, to help developers to use their language with vscode editor (and all the editors/viewers compatible with it).
-- TreeSitter: Many programming languages will maintain its `parser.c` parser, to help developers to use their language with treesitter embedded editors.
+- TreeSitter: Many programming languages will maintain its `parser.c` parser, to help developers to use their language with TreeSitter embedded editors.
 
 Compared the syntax configs and parsers, only creating a syntax engine and specifications is easy, but building a whole community for all the popular programming languages is hard. It may takes many years.
 
@@ -110,14 +110,14 @@ Pros:
 
 Cons:
 
-1. TreeSitter is slower than regex-based engine (to be fare, treesitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions).
-2. TreeSitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with treesitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
+1. TreeSitter is slower than regex-based engine (to be fare, TreeSitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions).
+2. TreeSitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with TreeSitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
 
 ## Solution
 
 The final solution choice is: TextMate vs TreeSitter.
 
-I believe treesitter is a better choice because both itself and its community are actively maintained, it also has a clear documentation. The issues for rsvim are:
+I believe TreeSitter is a better choice because both itself and its community are actively maintained, it also has a clear documentation. The issues for rsvim are:
 
 1. How to alleviate the needs for C/C++ compilers to help users avoid compiling the parsers.
 2. How to avoid the slow speed of parsing the whole file when user first opens a source code text file.

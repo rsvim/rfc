@@ -66,11 +66,9 @@ All the popular editors have their community to continuously contribute to the s
 
 Compared the syntax configs and parsers, only creating a syntax engine and specifications is easy, but building a whole community for all the popular programming languages is hard. It may takes many years.
 
-I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to archive a quick win.
+## Solution
 
-## Engine Solutions
-
-Apparently we only have below choices:
+I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to archive a quick win. Apparently we only have below choices:
 
 1. Vim regex-based syntax engine.
 2. Sublime-text/vscode TextMate syntax engine.
@@ -80,7 +78,11 @@ Apparently we only have below choices:
 
 Pros:
 
-1. Can directly use all existing vim's syntax files.
+1. Can directly use all existing vim's syntax files. It can help rsvim inherits the syntaxes/colorshemes from Vim community.
+
+Cons:
+
+1. Vim's syntax/colorscheme is written in `vim` script, which is completely not compatible with rsvim. Unless we create a vimscript interpreter, or a tool to convert vim scripts into js scripts.
 
 ### TextMate
 

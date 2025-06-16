@@ -96,7 +96,7 @@ Pros:
 
 Cons:
 
-1. The TextMate community seems slowly dying. Because TextMate itself is first created by the [textmate](https://github.com/textmate/textmate) editor (a open source project from Apple). Today textmate is used by sublime-text and vscode. Sublime-text is close source software so we don't know how it implements the textmate engine. Vscode implements the textmate engine in [vscode-textmate](https://github.com/microsoft/vscode-textmate), which is written in javascript. It seems for each editor, when they want to use the textmate engine, they will have to maintain their own textmate implementations and their own specifications.
+1. The TextMate community seems slowly dying. Because TextMate itself is first created by the [textmate](https://github.com/textmate/textmate) editor (a open source project from Apple). Today textmate is used by sublime-text and vscode. Sublime-text is close source software so we don't know how it implements the textmate engine. Vscode implements the textmate engine in [vscode-textmate](https://github.com/microsoft/vscode-textmate), which is written in javascript. It seems when an editor wants to use textmate engine, it will have to maintain its own textmate implementations and syntax specifications.
 2. If rsvim directly uses `syntect` library, it means rsvim will have to use the `.sublime-syntax` config files, or the `.tmLanguage` config files. The biggest `.sublime-syntax` configs are maintained by sublime-text's open source packages: [sublimehq/Packages](https://github.com/sublimehq/Packages), and the biggest `.tmLanguage` configs are maintained by github linguist grammars [github-linguist/linguist/vendor/grammars](https://github.com/github-linguist/linguist/tree/main/vendor/grammars) (most these grammars are not updated for many years).
 3. If rsvim directly uses `vscode-textmate` library, it means rsvim will have to implement a javascript-runtime to run the library. Which performance can be a big issue (syntax engine should be directly embedded inside editor and be very performant).
 
@@ -110,7 +110,7 @@ Pros:
 
 Cons:
 
-1. TreeSitter is slower than regex-based engine (to be fare, TreeSitter provides most accurate results and more flexible framework, while regex-based engines provide more buggy results and simple tech solutions).
+1. TreeSitter is slower than regex-based engine, especially on super big files.
 2. TreeSitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with TreeSitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
 
 ## Solution

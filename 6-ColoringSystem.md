@@ -101,3 +101,8 @@ Cons:
 3. If rsvim directly uses `vscode-textmate` library, it means rsvim will have to implement a javascript-runtime to run the library. Which performance can be a big issue (syntax engine should be directly embedded inside editor and be very performant).
 
 ### Treesitter
+
+Pros:
+
+1. Most accurate parsing results/tokens. Note: We don't consider LSP servers as a syntax engine here, even it also provide semantic tokens.
+2. Treesitter has an official library and rust binding. The library is actively maintained, and it has an actively maintained community for most programming languages, see the [list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers).

@@ -26,7 +26,7 @@ In today's indrustry, there are actually only a few _popular_ syntax engines:
 
 - [Vim's syntax engine](https://github.com/vim/vim/blob/master/src/syntax.c): Vim implements a regex-based syntax engine by itself. It is only used by Vim/Neovim.
 - [TextMate](https://macromates.com/manual/en/language_grammars): The TextMate engine is also a regex-based engine, created by the [textmate](https://github.com/textmate/textmate) editor. It is widely used by many editors: sublime-text (see [sublime-text syntax definition](https://www.sublimetext.com/docs/syntax.html#include-syntax)), vscode (see [vscode-textmate](https://github.com/microsoft/vscode-textmate)), atom (see [first-mate](https://github.com/atom/first-mate)), etc.
-- [Treesitter](https://github.com/tree-sitter/tree-sitter): The treesitter engine is a parser-framework engine. Different from the regex-based engine, it actually implements each parser for each programming language. It is actively maintained and also popular in many editors: helix (see [helix runtime files](https://github.com/helix-editor/helix/tree/master/runtime)), zed (see [zed extensions](https://github.com/zed-industries/zed/tree/main/extensions) and [zed languages crate](https://github.com/zed-industries/zed/tree/main/crates/languages/src)).
+- [TreeSitter](https://github.com/tree-sitter/tree-sitter): The treesitter engine is a parser-framework engine. Different from the regex-based engine, it actually implements each parser for each programming language. It is actively maintained and also popular in many editors: helix (see [helix runtime files](https://github.com/helix-editor/helix/tree/master/runtime)), zed (see [zed extensions](https://github.com/zed-industries/zed/tree/main/extensions) and [zed languages crate](https://github.com/zed-industries/zed/tree/main/crates/languages/src)).
 
 The syntax engine is directly built inside the editor, while it has a separate syntax config file that defines how to parse the language source code.
 
@@ -62,7 +62,7 @@ All the popular editors have their community to continuously contribute to the s
 - Vim: Programming languages will maintain a `.vim` syntax file, to help developers to use their language with Vim/Neovim editors.
 - Sublime-text: Programming languages will maintain a `.sublime-syntax` syntax file, to help developers to use their language with sublime-text editor (and all the editors/viewers compatible with it).
 - VsCode: Programming languages will maintain a `.tmLanguage.json` syntax file, to help developers to use their language with vscode editor (and all the editors/viewers compatible with it).
-- Treesitter: Many programming languages will maintain its `parser.c` parser, to help developers to use their language with treesitter embedded editors.
+- TreeSitter: Many programming languages will maintain its `parser.c` parser, to help developers to use their language with treesitter embedded editors.
 
 Compared the syntax configs and parsers, only creating a syntax engine and specifications is easy, but building a whole community for all the popular programming languages is hard. It may takes many years.
 
@@ -72,7 +72,7 @@ I believe rsvim should choose a ready-to-work syntax engine, leverage the existi
 
 1. Vim regex-based syntax engine.
 2. Sublime-text/vscode TextMate syntax engine.
-3. Treesitter syntax engine.
+3. TreeSitter syntax engine.
 
 ### Vim Regex-Based Engine
 

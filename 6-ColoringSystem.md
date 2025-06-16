@@ -51,7 +51,11 @@ Once editors parsed the tokens from a source code text file, it needs another co
 
 A theme config file actually maps each token to its color (RGB, css name, terminal ansi code) and visual effects (underline, bold, italic).
 
-## Ecosystem
+Vim/Neovim editors also have other colors, not only syntax colors for source code text files. For example Neovim has multiple highlighting groups for **floating-window**: [NormalFloat](https://neovim.io/doc/user/syntax.html#hl-NormalFloat), [FloatBorder](https://neovim.io/doc/user/syntax.html#hl-FloatBorder), [FloatTitle](https://neovim.io/doc/user/syntax.html#hl-FloatTitle), etc.
+
+Such kind of colors are not related to programming language syntaxes, but more related for UI widgets.
+
+### Ecosystem
 
 All the popular editors have their community to continuously contribute to the syntaxes and themes. This requrie a lot of time and efforts.
 
@@ -62,4 +66,22 @@ All the popular editors have their community to continuously contribute to the s
 
 Compared the syntax configs and parsers, only creating a syntax engine and specifications is easy, but building a whole community for all the popular programming languages is hard. It may takes many years.
 
-Thus I believe we should choose a ready-to-work syntax engine, and leverage the existing community.
+I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to archive a quick win.
+
+## Engine Solutions
+
+Apparently we only have below choices:
+
+1. Vim regex-based syntax engine.
+2. Sublime-text/vscode TextMate syntax engine.
+3. Treesitter syntax engine.
+
+### Vim Regex-Based Engine
+
+Pros:
+
+1. Can directly use all existing vim's syntax files.
+
+### TextMate
+
+### Treesitter

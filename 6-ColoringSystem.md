@@ -53,7 +53,7 @@ A theme config file actually maps each token to its color (RGB, css name, termin
 
 ## Ecosystem
 
-All the popular editors have their community to continuously contributions to the syntaxes and themes. This requrie a lot of time and efforts.
+All the popular editors have their community to continuously contribute to the syntaxes and themes. This requrie a lot of time and efforts.
 
 - Vim: Programming languages will maintain a `.vim` syntax file, to help developers to use their language with Vim/Neovim editors.
 - Sublime-text: Programming languages will maintain a `.sublime-syntax` syntax file, to help developers to use their language with sublime-text editor (and all the editors/viewers compatible with it).

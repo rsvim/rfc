@@ -64,7 +64,7 @@ We could directly apply/copy the **Five-Modes** for the integrated terminal, wit
 
 ### Temporary Insert Variant Modes
 
-The 5 temporary insert variant modes is started from insert mode, are also copied from the **Five-Modes**, the difference is they are temporary modes and only exist for one operation:
+The 5 temporary insert variant modes is started from insert mode, they are also copied from the **Five-Modes**, the difference is they are temporary modes and only exist for one operation:
 
 - Insert mode.
 - Insert-Normal mode.

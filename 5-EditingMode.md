@@ -32,9 +32,9 @@ The editing mode is a global state in Vim editor, the editor has and only has ex
 
 ![1](images/5-EditingMode.1.drawio.svg)
 
-## The 5-Modes
+## Five Modes
 
-The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **5-Modes** product design for text editing.
+The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **Five-Modes** product design for text editing.
 
 ## Mode Variants
 
@@ -52,19 +52,19 @@ For rsvim, we can have a better re-design about these two specific scenarios by 
 
 ### Integrated Terminal
 
-We could directly apply/copy the **5-Modes** for the integrated terminal, with some optimizations and adaptions for terminal input scenario:
+We could directly apply/copy the **Five-Modes** for the integrated terminal, with some optimizations and adaptions for terminal input scenario:
 
-- Terminal-Insert mode: The Terminal mode.
-- Terminal-Normal mode: The Normal mode in integrated terminal.
-- Terminal-Visual/Select mode: The Visual/Select mode in integrated terminal.
-- Terminal-Replace mode: The Replace mode in integrated terminal.
-- Terminal-Operator-pending mode: The Operator-pending mode in integrated terminal.
+- Terminal mode: The insert mode in terminal buffer.
+- Terminal-Normal mode: The normal mode in terminal buffer.
+- Terminal-Visual/Select mode: The visual/select mode in terminal buffer.
+- Terminal-Replace mode: The replace mode in terminal buffer.
+- Terminal-Operator-pending mode: The operator-pending mode in terminal buffer.
 
 ![2](images/5-EditingMode.2.drawio.svg)
 
-### Temporary Variant Modes From Insert Mode
+### Temporary Insert Variant Modes
 
-The 5 temporary variant modes from insert mode, are also copied from the **5-Modes**, the difference is they are temporary modes and only exist for one operation:
+The 5 temporary insert variant modes is started from insert mode, they are also copied from the **Five-Modes**, the difference is they are temporary modes and only exist for one operation:
 
 - Insert mode.
 - Insert-Normal mode.
@@ -73,3 +73,5 @@ The 5 temporary variant modes from insert mode, are also copied from the **5-Mod
 - Insert-Operator-pending mode.
 
 ![3](images/5-EditingMode.3.drawio.svg)
+
+> Do we really need this **Temporary Insert Variant Modes** as a product feature for rsvim?

@@ -62,7 +62,7 @@ We could directly apply/copy the **Five-Modes** for the integrated terminal, wit
 
 ![2](images/5-EditingMode.2.drawio.svg)
 
-### Temporary Variant Modes From Insert Mode
+### Temporary Insert Variant Modes
 
 The 5 temporary variant modes from insert mode, are also copied from the **Five-Modes**, the difference is they are temporary modes and only exist for one operation:
 

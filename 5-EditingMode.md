@@ -32,7 +32,7 @@ The editing mode is a global state in Vim editor, the editor has and only has ex
 
 ![1](images/5-EditingMode.1.drawio.svg)
 
-## The Five Modes
+## Five Modes
 
 The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **Five-Modes** product design for text editing.
 

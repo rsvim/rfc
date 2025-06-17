@@ -32,9 +32,9 @@ The editing mode is a global state in Vim editor, the editor has and only has ex
 
 ![1](images/5-EditingMode.1.drawio.svg)
 
-## The 5-Modes
+## The Five Modes
 
-The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **5-Modes** product design for text editing.
+The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **Five-Modes** product design for text editing.
 
 ## Mode Variants
 
@@ -52,7 +52,7 @@ For rsvim, we can have a better re-design about these two specific scenarios by 
 
 ### Integrated Terminal
 
-We could directly apply/copy the **5-Modes** for the integrated terminal, with some optimizations and adaptions for terminal input scenario:
+We could directly apply/copy the **Five-Modes** for the integrated terminal, with some optimizations and adaptions for terminal input scenario:
 
 - Terminal-Insert mode: The Terminal mode.
 - Terminal-Normal mode: The Normal mode in integrated terminal.
@@ -64,7 +64,7 @@ We could directly apply/copy the **5-Modes** for the integrated terminal, with s
 
 ### Temporary Variant Modes From Insert Mode
 
-The 5 temporary variant modes from insert mode, are also copied from the **5-Modes**, the difference is they are temporary modes and only exist for one operation:
+The 5 temporary variant modes from insert mode, are also copied from the **Five-Modes**, the difference is they are temporary modes and only exist for one operation:
 
 - Insert mode.
 - Insert-Normal mode.

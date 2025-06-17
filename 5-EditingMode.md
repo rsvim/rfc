@@ -58,3 +58,15 @@ We could directly apply/copy the **5-Modes** for the integrated terminal, with s
 - Terminal-Operator-pending mode: The Operator-pending mode in integrated terminal.
 
 ![2](images/5-EditingMode.2.drawio.svg)
+
+### Temporary Variant Modes From Insert Mode
+
+The 5 temporary variant modes from insert mode, are also copied from the **5-Modes**, the difference is they are temporary modes and only exist for short operators:
+
+- Insert mode.
+- Insert-Normal mode.
+- Insert-Visual/Select mode.
+- Insert-Replace mode.
+- Insert-Operator-pending mode.
+
+![3](images/5-EditingMode.3.drawio.svg)

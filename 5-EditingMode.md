@@ -54,11 +54,11 @@ For rsvim, we can have a better re-design about these two specific scenarios by 
 
 We could directly apply/copy the **Five-Modes** for the integrated terminal, with some optimizations and adaptions for terminal input scenario:
 
-- Terminal-Insert mode: The Terminal mode.
-- Terminal-Normal mode: The Normal mode in integrated terminal.
-- Terminal-Visual/Select mode: The Visual/Select mode in integrated terminal.
-- Terminal-Replace mode: The Replace mode in integrated terminal.
-- Terminal-Operator-pending mode: The Operator-pending mode in integrated terminal.
+- Terminal mode: The Insert mode in terminal buffer.
+- Terminal-Normal mode: The Normal mode in terminal buffer.
+- Terminal-Visual/Select mode: The Visual/Select mode in terminal buffer.
+- Terminal-Replace mode: The Replace mode in terminal buffer.
+- Terminal-Operator-pending mode: The Operator-pending mode in terminal buffer.
 
 ![2](images/5-EditingMode.2.drawio.svg)
 

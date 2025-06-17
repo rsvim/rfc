@@ -32,7 +32,11 @@ The editing mode is a global state in Vim editor, the editor has and only has ex
 
 ![1](images/5-EditingMode.1.drawio.svg)
 
-The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the key function that improve the text editing efficiency. There are also two groups of special states for two specific scenarios:
+## Improvement
+
+The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **5-Modes** product design for text editing.
+
+There are also two groups of special states for two specific scenarios:
 
 1. Integrated Terminal: User can launch a temporary terminal inside the text editor, and let user run some shell commands without navigating outside of the editor. This feature is widely implemented by other editors such as [VsCode's integrated terminal](https://code.visualstudio.com/docs/terminal/basics), [Zed's integrated terminal](https://zed.dev/features#terminal). For Vim editor, it implements a special [Terminal Buffer](https://vimhelp.org/windows.txt.html#special-buffers) for this feature, and multiple terminal related editing modes:
    - Terminal mode: It is actually the _insert_ mode for the terminal buffer, which simulates the user input behavior in a real terminal app.
@@ -40,4 +44,17 @@ The very basic state transition is between: Normal, Insert, Visual, Operator-pen
 2. Temporary modes from insert mode: Insert mode can temporarily go back to normal/visual/select/replace mode and run some operations, then automatically go back to insert mode. This feature helps further improves the editing efficiency:
    - Insert-Normal mode: It is actually the same with _normal_ mode, but it will automatically go back to insert mode after run an operator.
    - Insert-Visual/Select mode: It is actually the same with _visual/select_ mode, but it will automatically go back to insert mode after run an operator.
-   - Insert-Replace mode: It is actually the same with _replace_ mode, but it will automatically go back to insert mode after run an operator.
+
+For rsvim, we can have a better re-design about these two specific scenarios by extending the states transition.
+
+### Integrated Terminal
+
+We could directly apply/copy the **5-Modes** for the integrated terminal, with some optimizations and adaptions for terminal input scenario:
+
+- Terminal-Insert mode: The Terminal mode.
+- Terminal-Normal mode: The Normal mode in integrated terminal.
+- Terminal-Visual/Select mode: The Visual/Select mode in integrated terminal.
+- Terminal-Replace mode: The Replace mode in integrated terminal.
+- Terminal-Operator-pending mode: The Operator-pending mode in integrated terminal.
+
+![2](images/5-EditingMode.2.drawio.svg)

@@ -32,18 +32,21 @@ The editing mode is a global state in Vim editor, the editor has and only has ex
 
 ![1](images/5-EditingMode.1.drawio.svg)
 
-## Improvement
+## The 5-Modes
 
 The very basic state transition is between: Normal, Insert, Visual, Operator-pending, Replace. This is the core function of Vim editor to improve the text editing efficiency. In the following of this section, let's call it the **5-Modes** product design for text editing.
 
-There are also two groups of special states for two specific scenarios:
+## Mode Variants
 
-1. Integrated Terminal: User can launch a temporary terminal inside the text editor, and let user run some shell commands without navigating outside of the editor. This feature is widely implemented by other editors such as [VsCode's integrated terminal](https://code.visualstudio.com/docs/terminal/basics), [Zed's integrated terminal](https://zed.dev/features#terminal). For Vim editor, it implements a special [Terminal Buffer](https://vimhelp.org/windows.txt.html#special-buffers) for this feature, and multiple terminal related editing modes:
-   - Terminal mode: It is actually the _insert_ mode for the terminal buffer, which simulates the user input behavior in a real terminal app.
-   - Terminal-Normal mode: It is actually the _normal_ mode for the terminal buffer, which allows user uses normal operators in terminal buffer.
-2. Temporary modes from insert mode: Insert mode can temporarily go back to normal/visual/select/replace mode and run some operations, then automatically go back to insert mode. This feature helps further improves the editing efficiency:
-   - Insert-Normal mode: It is actually the same with _normal_ mode, but it will automatically go back to insert mode after run an operator.
-   - Insert-Visual/Select mode: It is actually the same with _visual/select_ mode, but it will automatically go back to insert mode after run an operator.
+There are 2 groups of mode variants for 2 specific scenarios:
+
+1. Integrated terminal: User can launch a temporary terminal inside the text editor, and let user run shell commands without leaving the editor. This feature is widely implemented by other editors such as [VsCode's integrated terminal](https://code.visualstudio.com/docs/terminal/basics), [Zed's integrated terminal](https://zed.dev/features#terminal). For Vim editor, it implements a special [Terminal Buffer](https://vimhelp.org/windows.txt.html#special-buffers) for this feature, and multiple mode variants related to terminal mode:
+   - Terminal mode: Same with the _insert_ mode, but for terminal buffer, which simulates the user input behavior in a real terminal app.
+   - Terminal-Normal mode: Same with the _normal_ mode, but for the terminal buffer, which allows user uses normal operators in terminal buffer.
+2. Temporary mode variants in insert mode: Insert mode can go to temporary normal/visual/select/replace mode variants and run some operations, then automatically go back to insert mode. This feature helps further improves the insertion efficiency:
+   - Insert-Normal mode: Same with _normal_ mode, but it will automatically go back to insert mode after run an operation.
+   - Insert-Visual/Select mode: Same with _visual/select_ mode, but it will automatically go back to insert mode after run an operation.
+   - Insert-Replace mode: Same with _replace_ mode, but it will automatically go back to insert mode after run an operation.
 
 For rsvim, we can have a better re-design about these two specific scenarios by extending the states transition.
 
@@ -61,7 +64,7 @@ We could directly apply/copy the **5-Modes** for the integrated terminal, with s
 
 ### Temporary Variant Modes From Insert Mode
 
-The 5 temporary variant modes from insert mode, are also copied from the **5-Modes**, the difference is they are temporary modes and only exist for once operator:
+The 5 temporary variant modes from insert mode, are also copied from the **5-Modes**, the difference is they are temporary modes and only exist for one operation:
 
 - Insert mode.
 - Insert-Normal mode.

@@ -62,8 +62,6 @@ We could directly apply/copy the **Five-Modes** for the integrated terminal, wit
 
 ![2](images/5-EditingMode.2.drawio.svg)
 
-We need to add 3 new modes: Terminal-Visual/Select mode, Terminal-Replace mode and Terminal-Operator-pending mode.
-
 ### Temporary Insert Variant Modes
 
 The 5 temporary insert variant modes is started from insert mode, they are also copied from the **Five-Modes**, the difference is they are temporary modes and only exist for one operation:
@@ -75,7 +73,5 @@ The 5 temporary insert variant modes is started from insert mode, they are also 
 - Insert-Operator-pending mode.
 
 ![3](images/5-EditingMode.3.drawio.svg)
-
-We need to add 1 new mode: Insert-Operator-pending mode.
 
 > Do we really need this **Temporary Insert Variant Modes** as a product feature for rsvim?

@@ -38,17 +38,31 @@ The very basic state transition is between: Normal, Insert, Visual, Operator-pen
 
 ## Mode Variants
 
-There are 2 groups of mode variants for 2 specific scenarios:
+There are 3 groups of mode variants for 3 specific scenarios:
 
-1. Integrated terminal: User can launch a temporary terminal inside the text editor, and let user run shell commands without leaving the editor. This feature is widely implemented by other editors such as [VsCode's integrated terminal](https://code.visualstudio.com/docs/terminal/basics), [Zed's integrated terminal](https://zed.dev/features#terminal). For Vim editor, it implements a special [Terminal Buffer](https://vimhelp.org/windows.txt.html#special-buffers) for this feature, and multiple mode variants related to terminal mode:
+1. Command-line: The command-line mode actually consists of 3 variants:
+   - Ex-command variant: Press ':' to input ex-command (include user-commands).
+   - Search pattern forward variant: Press '/' to search pattern forward.
+   - Search pattern backward variant: Press '?' to search pattern backward.
+2. Integrated terminal: User can launch a temporary terminal inside the text editor, and let user run shell commands without leaving the editor. This feature is widely implemented by other editors such as [VsCode's integrated terminal](https://code.visualstudio.com/docs/terminal/basics), [Zed's integrated terminal](https://zed.dev/features#terminal). For Vim editor, it implements a special [Terminal Buffer](https://vimhelp.org/windows.txt.html#special-buffers) for this feature, and multiple mode variants related to terminal mode:
    - Terminal mode: Same with the _insert_ mode, but for terminal buffer, which simulates the user input behavior in a real terminal app.
    - Terminal-Normal mode: Same with the _normal_ mode, but for the terminal buffer, which allows user uses normal operators in terminal buffer.
-2. Temporary mode variants in insert mode: Insert mode can go to temporary normal/visual/select/replace mode variants and run some operations, then automatically go back to insert mode. This feature helps further improves the insertion efficiency:
+3. Temporary mode variants in insert mode: Insert mode can go to temporary normal/visual/select/replace mode variants and run some operations, then automatically go back to insert mode. This feature helps further improves the insertion efficiency:
    - Insert-Normal mode: Same with _normal_ mode, but it will automatically go back to insert mode after run an operation.
    - Insert-Visual/Select mode: Same with _visual/select_ mode, but it will automatically go back to insert mode after run an operation.
    - Insert-Replace mode: Same with _replace_ mode, but it will automatically go back to insert mode after run an operation.
 
 For rsvim, we can have a better re-design about these two specific scenarios by extending the states transition.
+
+### Command-line Variants
+
+We actually have 3 command-line modes, or say, we have 3 variants in command-mode:
+
+- Ex-command variant.
+- Search pattern forward variant.
+- Search pattern backward variant.
+
+![4](images/5-EditingMode.4.drawio.svg)
 
 ### Integrated Terminal
 

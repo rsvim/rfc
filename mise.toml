@@ -1,0 +1,3 @@
+[tools]
+"cargo:typos-cli" = "latest"
+"npm:markdownlint" = "latest"

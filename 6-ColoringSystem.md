@@ -64,7 +64,7 @@ All the popular editors have their community to continuously contribute to the s
 - VsCode: Programming languages will maintain a `.tmLanguage.json` syntax file, to help developers to use their language with vscode editor (and all the editors/viewers compatible with it).
 - TreeSitter: Many programming languages will maintain its `parser.c` parser, to help developers to use their language with TreeSitter embedded editors.
 
-Compared the syntax configs and parsers, only creating a syntax engine and specifications is easy, but building a whole community for all the popular programming languages is hard. It may takes many years.
+Only creating a syntax engine and specifications is easy, but building/maintaining the whole community for all programming languages is hard, which may takes many years.
 
 ## Engine
 

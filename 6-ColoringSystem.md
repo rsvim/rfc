@@ -68,7 +68,7 @@ Only creating a syntax engine and specifications is easy, but building/maintaini
 
 ## Engine
 
-I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to archive a quick win. Apparently we only have below choices:
+I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to achieve a quick win. Apparently we only have below choices:
 
 1. Vim regex-based syntax engine.
 2. Sublime-text/vscode TextMate syntax engine.

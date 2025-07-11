@@ -92,7 +92,7 @@ Pros:
 1. Has great performance, slower than Vim's regex-based engine, but provide more accurate tokens (it support syntax scope).
 2. Popular and widely used by many editors.
 3. TextMate has the rust implementation [syntect](https://github.com/trishume/syntect).
-4. Both vim's syntax engine and TextMate are regex-based, and they have a error-tolerant result when parsing partial of the source code text file, which helps a lot for performance. For example, when user opens a very big source code file (500 MB), and let's say the syntax engine needs 3 seconds to parse the while source code text, it can block the user editing. And on every user insertion/deletion operation, it also make the editor laggy/slow. But we can improve the speed by parsing only part of the source code text, the part that shows in the window instead of the whole file. Even the parsing result is not 100% correct, the results can still match some keywords/string literals/variables, and give some colors. This is a trade-off between correctness and performance. As a visual dessert for the eyes, this features/services can be downgraded in exchange for better performance.
+4. Both vim's syntax engine and TextMate are regex-based, and they have a error-tolerant result when parsing partial of the source code text file, which helps a lot for real world typing. When users are typing, in most of the time, the text content is actually error-compiled, because users still not finish their typing yet. So in real world editing, most of the time, the text content is wrong from the language parser's perspective. In such cases, regex-based engines can still recognize some keywords/constants, and provide a downgraded visual effect.
 
 Cons:
 

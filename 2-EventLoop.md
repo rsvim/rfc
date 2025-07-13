@@ -21,7 +21,7 @@ Tokio helps split the editor logic into more fine-grained tasks: blocking tasks 
 
 ## Tasks and Non-Important Tasks
 
-Notice we should not rashly say Tokio helps us turning the editor into async. Because in this scenario, editing is always interacting with users.
+Notice we should not rashly say tokio helps us turning the editor into async. Because in this scenario, editing is always interacting with users.
 
 ### Blocking Tasks
 
@@ -38,6 +38,8 @@ There are also a lot of tasks that provide better user experiences, while users 
 - Multiple IPC/RPC connections.
 - Child processes management.
 - Source code token parsing.
+
+We could leverage rust and tokio's async to dispatch these tasks, thus fully utilize all the CPU cores and never freeze the editor.
 
 ## Context
 

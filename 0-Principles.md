@@ -10,7 +10,7 @@ The RSVIM is still going to be the VIM editor, not anything else. It maintains a
 4. Scripts and plugins.
 5. And more to name.
 
-But to re-invent VIM instead of simply covnerting the project to another language, new designs/solutions will be introduced, old and out-dated things will be deprecated. Here're some topics come to me:
+But to re-invent VIM, instead of simply covnerting the project to another language, new designs/solutions will be introduced, old and out-dated things will be deprecated. Here're some topics come to me:
 
 1. Use Rust as the developing language, as it has so much benefits on language features, performance and the great ecosystem.
 2. Provide a consistent scripting runtime environment (or a virtual machine), with builtin support for:

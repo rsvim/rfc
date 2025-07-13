@@ -12,12 +12,14 @@ The rendering system splits into 3 layers: UI widgets tree, canvas, and hardware
 
 UI widgets tree provides high-level friendly interfaces to cooperate with other editor components, draws on the canvas in every frame after some data's change.
 
-Thus, canvas, the middle layer, knows which cell inside the terminal should change, then only flushes the changed cells to hardware device. Terminal, the hardware, is a `M * N` grapheme based double-array (`M` is columns, `N` is rows). For example, my personal laptop with a 4K Dell external monitor has a `240 * 70` sized terminal, thus the problem scale is `O(M * N)`.
+On each frame, after widgets finished their own drawing, canvas compares current frame and previous frame to find out the differences, knows which cell inside the terminal should change. Then it only flushes the changed cells to hardware device. After flushing, canvas saves current frame as previous frame for the next loop.
 
-After widgets drawing (on every loop), canvas compares current frame and previous frame to find out the changes, then finally flushes to hardware. After flushing, canvas clones and saves current frame as previous frame for the next loop. The worst complexity of IO operations is `O(M * N)`, it can vary in different scenarios:
+Terminal is a `M * N` grapheme based double-array (`M` is columns, `N` is rows). For example, my personal laptop with a 4K Dell external monitor has a `240 * 70` sized terminal, thus the problem scale is `O(M * N)`.
+
+This algorithm complexity can vary in different scenarios, but the worst is `O(M * N)`:
 
 - When user moves cursor, canvas only needs to print `O(1)` characters.
-- When user edits a line, canvas needs to print `O(M)` characters.
+- When user edits a line, canvas needs to print at most `O(M)` characters.
 - When user inserts/deletes a line in the middle of VIM's window, canvas needs to print `O(M * N / 2)` characters, i.e. half of the terminal.
 - When user first open a file, canvas needs to print `O(M * N)` characters.
 

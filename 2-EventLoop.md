@@ -14,10 +14,24 @@ As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675adde
 
 When such a (classic) running loop comes to terminal+rust, we specifically introduce:
 
-- [Tokio](https://tokio.rs/) as asynchronize runtime.
+- [Tokio](https://tokio.rs/) as async runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio runtime turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other laggy jobs are spawned with async tasks running in multi-threaded environment and sync data back to editor and update UI after finished. Here are some examples:
+Tokio helps split the editor logic into more fine-grained tasks: blocking tasks and non-blocking tasks.
+
+## Tasks and Non-Important Tasks
+
+Notice we should not rashly say Tokio helps us turning the editor into async. Because in this scenario, editing is always interacting with users.
+
+### Blocking Tasks
+
+For example, in rsvim edtior, when a user presses the key `i`, the editor goes to **Insert Mode**, then the user types some letters `a-z, A-Z` and numbers `0-9`, the editor appends these letters and numbers in the buffer, then the user presses the key `ESC`, the editor goes back to **Normal Mode**.
+
+In this case, an editor waits for a user's action, finishes internal logic, renders the terminal, then waits for user's next action. This is the most important tasks for the editor, and the timeline should be always sync and blocking. Because user would rather wait for them done to get a deterministic and correct editor behavior.
+
+### Non-Important Tasks
+
+      turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other laggy jobs are spawned with async tasks running in multi-threaded environment and sync data back to editor and update UI after finished. Here are some examples:
 
 - IO:
   - File IO.

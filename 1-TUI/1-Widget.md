@@ -29,9 +29,9 @@ The ownership guarantees:
 
 - Children will be destroyed when their parent is.
 - A node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, the absolute coordinate is based on the terminal device.
-- Children are displayed inside their parent's geomtric shape, clipped by their boundaries. While the logical shape can still be infinite on the imaginary canvas.
+- Children are displayed inside their parent's geometric shape, clipped by parent boundaries. While the logical shape can be infinite on the imaginary canvas.
 - Children always have higher priority over their parent to display. While Z-index arranges the display priority when multiple children overlap on each other, for children under the same parent, higher Z-index has higher priority to display.
-- Common attributes of children are implicitly inherited from their parent, for example `visible` and `enabled`, unless they are been explicitly been changed.
+- Common attributes of children are implicitly inherited from their parent, for example `visible` and `enabled`, unless they are been explicitly changed.
 
 ## Coordinate System
 
@@ -49,7 +49,7 @@ Widgets can be stacking and overlapping: higher Z-index has higher priority than
 
 ## Event Handling and Dispatching
 
-With coordinate system, we can find out where does a keyboard/mouse event happen, and dispatch it from the leaf nodes to root node in the widget tree, which is totally intuitive. Each widget node has a default event handler (callback method) binding on it, the default behavior is simply doing nothing. Users can bind their own handlers to do extra logics.
+With coordinate system, we can find out where does a keyboard/mouse event happen, and dispatch it from the leaf nodes to root node in the widget tree, which is totally intuitive. Each widget node has a default event handler (callback method) binding on it, the default behavior is simply doing nothing. Users can bind their own handlers to do extra logic.
 
 For a handler/callback, it returns `true` or `false` to the TUI engine:
 

@@ -22,7 +22,7 @@ People would ask: (Neo)VIM is just a simple terminal app that editing a file, wh
 
 (Neo)VIM today is definitely not just some simple window/buffer layout, it's extending to more complicated UI components. By introducing some GUI framework's designs and concepts, it helps to build better TUI application. While on the other hand, (Neo)VIM TUI is indeed much simpler than **Qt** and **Material UI**, we don't have to copy all of them but just part of.
 
-In this section, we will introduce a stack-based UI components tree, which is a classic design been widely used by many GUI frameworks/libraries. For example we have a terminal application below:
+In this section, we will introduce a stack-based UI components tree, which is a classic design been widely used by many GUI frameworks/libraries. For example, we have a terminal application below:
 
 ![2](images/1-TUI.2.drawio.svg)
 

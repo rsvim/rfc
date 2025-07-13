@@ -31,7 +31,7 @@ The ownership guarantees:
 - A node has two coordinate systems: relative and absolute. The relative coordinate is based on its parent, the absolute coordinate is based on the terminal device.
 - Children are displayed inside their parent's geometric shape, clipped by parent boundaries. While the logical shape can be infinite on the imaginary canvas.
 - Children always have higher priority over their parent to display. While Z-index arranges the display priority when multiple children overlap on each other, for children under the same parent, higher Z-index has higher priority to display.
-- Common attributes of children are implicitly inherited from their parent, for example `visible` and `enabled`, unless they are been explicitly been changed.
+- Common attributes of children are implicitly inherited from their parent, for example `visible` and `enabled`, unless they are been explicitly changed.
 
 ## Coordinate System
 

@@ -6,7 +6,7 @@ This RFC describes the canvas system inside TUI.
 
 ## Architecture
 
-The rendering system splits into 3 layers: UI widgets tree, canvas and hardware device. It looks like:
+The rendering system splits into 3 layers: UI widgets tree, canvas, and hardware device. It looks like:
 
 ![1](../images/1-TUI-2-Canvas.1.drawio.svg)
 

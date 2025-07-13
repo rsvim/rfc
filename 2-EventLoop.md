@@ -39,8 +39,6 @@ There are also a lot of tasks that provide better user experiences, while users 
 
 We could leverage rust and tokio's async to dispatch these tasks, thus fully utilize all the CPU cores and never freeze the editor.
 
-### JavaScript's `Promise` and `async`/`await`
-
 Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine will stops running and gives the CPU back to the editor, hold scripts logic until next event loop.
 
 This is exactly what all JavaScript-based runtimes ([node.js](https://nodejs.org/), [deno](https://deno.com/)) do.

@@ -49,7 +49,7 @@ Widgets can be stacking and overlapping: higher Z-index has higher priority than
 
 ## Event Handling and Dispatching
 
-With coordinate system, we can find out where does a keyboard/mouse event happen, and dispatch it from the leaf nodes to root node in the widget tree, which is totally intuitive. Each widget node has a default event handler (callback method) binding on it, the default behavior is simply doing nothing. Users can bind their own handlers to do extra logics.
+With coordinate system, we can find out where does a keyboard/mouse event happen, and dispatch it from the leaf nodes to root node in the widget tree, which is totally intuitive. Each widget node has a default event handler (callback method) binding on it, the default behavior is simply doing nothing. Users can bind their own handlers to do extra logic.
 
 For a handler/callback, it returns `true` or `false` to the TUI engine:
 

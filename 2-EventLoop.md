@@ -29,25 +29,15 @@ For example, in rsvim edtior, when a user presses the key `i`, the editor goes t
 
 In this case, an editor waits for a user's action, finishes internal logic, renders the terminal, then waits for user's next action. This is the most important tasks for the editor, and the timeline should be always sync and blocking. Because user would rather wait for tasks done to get a deterministic and correct editor behavior.
 
-### Non-Important Tasks
+### Non-Blocking Tasks
 
-      turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other laggy jobs are spawned with async tasks running in multi-threaded environment and sync data back to editor and update UI after finished. Here are some examples:
+There are also a lot of tasks that provide better user experiences, while users don't want these tasks blocking the core editing functions, such as:
 
-- IO:
-  - File IO.
-  - IPC/RPC: Pipe, named pipe, unix domain socket, tcp/udp, http(s), ssh, etc.
-  - Terminal: Keyboard/mouse events. Note: the sync _**stdout/stderr**_ operation is still used for rendering terminal.
-- Callbacks:
-  - Delayed/timeout jobs.
-  - Auto commands on Vim events.
-  - File watcher.
-- (User) js/ts scripts:
-  - The `async` annotated functions and `Promise` functions.
-  - The `require` and `import` keywords (js modules).
-- Heavy CPU or big memory block workload:
-  - Syntax and colorscheme rendering.
-  - Text object.
-  - Token parsing.
+- Colorschemes.
+- Background jobs.
+- Multiple IPC/RPC connections.
+- Child processes management.
+- Source code token parsing.
 
 In this way, RSVIM's running loop is actually similar to [deno](https://deno.com/), but focusing on text editing and TUI rendering.
 

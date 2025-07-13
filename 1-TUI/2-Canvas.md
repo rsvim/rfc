@@ -10,7 +10,9 @@ The rendering system splits into 3 layers: UI widgets tree, canvas, and hardware
 
 ![1](../images/1-TUI-2-Canvas.1.drawio.svg)
 
-UI widgets tree provides high-level friendly interfaces to cooperate with other editor components, draws on the canvas in every frame after some data change, thus canvas knows the which parts of the terminal are changed and flushing these parts to hardware device. The hardware is a `M x N` grapheme based double-array (`M` is columns/width, `N` is rows/height), for example 240x70 on my personal laptop with a 4K Dell external monitor, thus the problem scale is `O(M * N)`.
+UI widgets tree provides high-level friendly interfaces to cooperate with other editor components, draws on the canvas in every frame after some data's change.
+
+Thus, canvas, the middle layer, knows which cell inside the terminal should change, then only flushes the changed cells to hardware device. Terminal, the hardware, is a `M * N` grapheme based double-array (`M` is columns, `N` is rows). For example, my personal laptop with a 4K Dell external monitor has a `240 * 70` sized terminal, thus the problem scale is `O(M * N)`.
 
 After widgets drawing (on every loop), canvas compares current frame and previous frame to find out the changes, then finally flushes to hardware. After flushing, canvas clones and saves current frame as previous frame for the next loop. The worst complexity of IO operations is `O(M * N)`, it can vary in different scenarios:
 

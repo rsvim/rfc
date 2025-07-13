@@ -39,8 +39,6 @@ There are also a lot of tasks that provide better user experiences, while users 
 - Child processes management.
 - Source code token parsing.
 
-In this way, RSVIM's running loop is actually similar to [deno](https://deno.com/), but focusing on text editing and TUI rendering.
-
 ## Context
 
 The context is a global data structure instance that contains all the data for the editor:

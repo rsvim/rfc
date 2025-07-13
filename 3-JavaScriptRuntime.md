@@ -12,7 +12,7 @@ Scripting plays the most important role in (Neo)VIM editor, it drives the editor
 
 Introducing third-party scripting languages is always a trend in (Neo)VIM's history. In the old days before Neovim appeared, people use [python](https://www.python.org/) and javascript on [node.js](https://nodejs.org/) to achieve more complex features in their plugins: code-complete, async code lint running in background, etc. After Neovim brings lua, people still keep integrating third-party lua libraries for more features, such as async support via [luv](https://github.com/luvit/luv) (which brings a strong sense of separation when developing async scripts).
 
-The whole reason is simply because: both of vimscript and lua still lack many modern language features to achieve the real power. That's why RSVIM choose JavaScript, one of the most successful scripting languages. When comparing with js, lua still lacks in below aspects:
+The whole reason is simply because: both of vimscript and lua lack of modern language features, and they don't have a modern package management tool like python's pip, node's npm. That's why RSVIM choose JavaScript, one of the most successful scripting languages. When comparing with js, lua has below shortcomings:
 
 - It doesn't support many modern language features:
   - Async/await.

@@ -1,6 +1,6 @@
 # Canvas
 
-> Written by @linrongbin16, first created at 2024-08-23, last updated at 2024-11-21.
+> Written by @linrongbin16, first created at 2024-08-23, last updated at 2025-07-13.
 
 This RFC describes the canvas system inside TUI.
 

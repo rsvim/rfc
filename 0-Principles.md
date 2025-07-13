@@ -1,16 +1,16 @@
 # Principles
 
-> Written by @linrongbin16, 2024-03-16
+> Written by @linrongbin16, created at 2024-03-16, last updated at 2025-07-13.
 
-The RSVIM is going to still be the VIM editor, not something else. It maintains almost the same product features as the VIM editor:
+The RSVIM is still going to be the VIM editor, not anything else. It maintains almost the same product features as the VIM editor:
 
 1. Terminal text editor, not GUI application.
-2. VIM editing mode.
-3. UI components such as window, buffer, commandline, statusline, tabline, etc.
-4. Scripting/plugin system.
-5. More to name.
+2. Editing mode: normal, insert, visual/select, commandline, etc.
+3. Core concepts such as window, buffer, commandline, statusline, tabline, etc.
+4. Scripts and plugins.
+5. And more to name.
 
-But to re-invent VIM, we introduce new things, and deprecate old things. Here're some topics to discuss:
+But to re-invent VIM instead of simply covnerting the project to another language, new designs/solutions will be introduced, old and out-dated things will be deprecated. Here're some topics come to me:
 
 1. Use Rust as the developing language, as it has so much benefits on language features, performance and the great ecosystem.
 2. Provide a consistent scripting runtime environment (or a virtual machine), with builtin support for:

@@ -6,7 +6,7 @@ This RFC describe how the modules resolved and imported in the js runtime.
 
 ## Static Import
 
-Keyword `require` and `import` (we will discuss _**dynamically import**_ later) are static ways to import modules in javascript language. When this comes to the RSVIM editor, all modules are simply external config files that extracted from the main `.rsvim.{js,ts}` user config file, they can be plugins as well. For each module, it will be evaluated only once.
+Keyword `require` and `import` (we will discuss _**dynamically import**_ later) are static ways to import modules in javascript language. When this comes to the Rsvim editor, all modules are simply external config files that extracted from the main `.rsvim.{js,ts}` user config file, they can be plugins as well. For each module, it will be evaluated only once.
 
 A confliction we have is: ECMAScript standards support [import modules from URL](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), i.e. a js module can be directly downloaded from network during it's been executed. For example:
 

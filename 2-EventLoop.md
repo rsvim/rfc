@@ -2,11 +2,11 @@
 
 > Written by @linrongbin16, first created at 2024-09-03, last updated at 2025-07-13.
 
-This RFC describes the RSVIM's running loop.
+This RFC describes the Rsvim's running loop.
 
 ## Running Loop
 
-As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
+As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of Rsvim editor is just 3 steps:
 
 1. Receive user keyboard/mouse events.
 2. Handle user logic.

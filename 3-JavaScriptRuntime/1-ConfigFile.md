@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2024-09-11.
 
-This RFC describes the config file for RSVIM editor.
+This RFC describes the config file for Rsvim editor.
 
 ## Entry
 
@@ -28,6 +28,6 @@ They are built with below principles:
 
 ## Not Supported
 
-Compare with other js runtimes such as [node.js](https://nodejs.org/), [deno](https://deno.com/), RSVIM editor doesn't provide:
+Compare with other js runtimes such as [node.js](https://nodejs.org/), [deno](https://deno.com/), Rsvim editor doesn't provide:
 
 - `document`

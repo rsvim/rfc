@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-11.
 
-This RFC describes [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://www.typescriptlang.org/) and the JS runtime embedded in the RSVIM.
+This RFC describes [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://www.typescriptlang.org/) and the JS runtime embedded in the Rsvim.
 
 ## Motivation
 
@@ -23,24 +23,24 @@ If we think of Vim/Neovim editor as a scripting language interpreter, the reason
 - Both vimscript/lua are not modern script languages, and not popular compared with python/javascript.
 - Both Vim/Neovim doesn't have a package manager, they only detect scripts and evaluate them. Not like python's pip, node's npm, etc.
 
-That's why RSVIM choose JavaScript, one of the most successful scripting languages. However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with TypeScript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
+That's why Rsvim choose JavaScript, one of the most successful scripting languages. However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with TypeScript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
 
 - More elegant and beautiful syntax designing.
 - Static type system.
 - Fully compatible with js community.
 
-By introducing the js engine, RSVIM provides the best scripting environment that can interact with the editor, while also turns itself into a js/ts interpreter/runtime focused on editing.
+By introducing the js engine, Rsvim provides the best scripting environment that can interact with the editor, while also turns itself into a js/ts interpreter/runtime focused on editing.
 
 ## Runtime
 
-The [V8](https://v8.dev/) engine is the best javascript engine widely used in many popular projects, RSVIM choose the same way to execute js scripts. But there are still many components needed to fill the gap between the final goal:
+The [V8](https://v8.dev/) engine is the best javascript engine widely used in many popular projects, Rsvim choose the same way to execute js scripts. But there are still many components needed to fill the gap between the final goal:
 
 ### Operations (OPs)
 
 Operations extend js script's capabilities beyond the [ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/) specification, since V8 engine strictly follows the ECMAScript guidelines, unable to:
 
 1. Use system calls such as reading files, managing sockets, handling timers, etc.
-2. Interact with RSVIM editor such as editing buffers, opening windows, changing colorschemes, etc.
+2. Interact with Rsvim editor such as editing buffers, opening windows, changing colorschemes, etc.
 3. Provide a standard library (similar to [Node.js Official APIs](https://nodejs.org/docs/latest/api/documentation.html) and [Deno Standard Library](https://deno.land/std)) to improving developing efficiency such as string manipulation, filesystem, path, streams, etc.
 
 ### TypeScript Support
@@ -60,13 +60,13 @@ Both (Neo)Vim ship a lot of builtin scripts/plugins with their releases, which p
 
 All of them point to the core problem: (Neo)Vim doesn't have its own package management system.
 
-Once we embed the package manager inside RSVIM editor just like [deno](https://deno.com/), all we need is sharing an example of config file with recommended plugins. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor just needs to be a single executable file, responsible for providing an interface for js runtime and package management.
+Once we embed the package manager inside Rsvim editor just like [deno](https://deno.com/), all we need is sharing an example of config file with recommended plugins. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor just needs to be a single executable file, responsible for providing an interface for js runtime and package management.
 
 One step future, we could even directly integrate with javascript package registries such as [npm](https://www.npmjs.com/) and [jsr](https://jsr.io/).
 
 ### Conclusion
 
-After all, RSVIM becomes a js runtime similar to [deno](https://deno.com/) in some ways, but only focus on editing and text processing, not for browsers or web development.
+After all, Rsvim becomes a js runtime similar to [deno](https://deno.com/) in some ways, but only focus on editing and text processing, not for browsers or web development.
 
 ## References
 

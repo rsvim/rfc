@@ -6,9 +6,9 @@ This RFC describes the basic TUI system architecture.
 
 ## Hardware Device
 
-RSVIM uses [crossterm](https://crates.io/crates/crossterm) library as the hardware driver to handle user keyboard/mouse inputs, and render the text-based contents on the terminal such as [Gnome Terminal](https://en.wikipedia.org/wiki/GNOME_Terminal), [macOS iTerm2](https://iterm2.com/), [Windows Terminal](https://aka.ms/terminal), [kitty](https://sw.kovidgoyal.net/kitty/), [WezTerm](https://wezfurlong.org/wezterm/index.html), [Alacritty](https://alacritty.org/), etc.
+Rsvim uses [crossterm](https://crates.io/crates/crossterm) library as the hardware driver to handle user keyboard/mouse inputs, and render the text-based contents on the terminal such as [Gnome Terminal](https://en.wikipedia.org/wiki/GNOME_Terminal), [macOS iTerm2](https://iterm2.com/), [Windows Terminal](https://aka.ms/terminal), [kitty](https://sw.kovidgoyal.net/kitty/), [WezTerm](https://wezfurlong.org/wezterm/index.html), [Alacritty](https://alacritty.org/), etc.
 
-Here's a very simple hardware-level event loop for RSVIM:
+Here's a very simple hardware-level event loop for Rsvim:
 
 ![1](images/1-TUI.1.drawio.svg)
 

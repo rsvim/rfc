@@ -6,7 +6,7 @@ This RFC describe what builtin APIs that editor's js runtime support.
 
 ## Global object and functions
 
-Js runtime provides the `Rsvim` global object just like what node/deno do, also similar to the `vim` namespace used in lua of neovim. It is almost the only way for RSVIM editor to interact with user besides TUI. This "standard library" can be divided into 2 groups:
+Js runtime provides the `Rsvim` global object just like what node/deno do, also similar to the `vim` namespace used in lua of neovim. It is almost the only way for Rsvim editor to interact with user besides TUI. This "standard library" can be divided into 2 groups:
 
 1. Editor related APIs: Options, buffers, windows, cursor, etc.
 2. General purposed APIs: IO, network, file system, IPC/RPC, child process, etc. Which is similar to most popular programming languages' standard library.

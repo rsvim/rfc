@@ -1,6 +1,6 @@
 # JavaScript Runtime
 
-> Written by @linrongbin16, first created at 2024-08-10, last updated at 2024-09-11.
+> Written by @linrongbin16, first created at 2024-08-10, last updated at 2025-07-14.
 
 This RFC describes [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://www.typescriptlang.org/) and the JS runtime embedded in the Rsvim.
 
@@ -35,18 +35,12 @@ By introducing the js engine, Rsvim provides the best scripting environment that
 
 The [V8](https://v8.dev/) js engine is the best javascript engine widely used in many popular projects, Rsvim choose the same way to execute js scripts. But there are still many components needed to fill the gap between the final goal:
 
-### JavaScript APIs (Operations)
+### JavaScript APIs
 
 For most general script programming languages such as python, they provide builtin [types](https://docs.python.org/3/library/stdtypes.html)/[functions](https://docs.python.org/3/library/functions.html) and [standard library](https://docs.python.org/3/library/index.html). Javascript runtime is similar, the difference is: js engine is provided by a third-party library (i.e. V8 js engine). A js engine covers the [ECMA-262](https://ecma-international.org/publications-and-standards/standards/ecma-262/) standard, while js runtimes provide the whole standard library and fill in many other gaps, which includes:
 
 - [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API): Most popular javascript-based runtimes share a compatible implementations today.
 - Specific APIs: Different runtimes provide have their own specific APIs, i.e. browsers such Chrome/Firefox provide the `document` DOM tree APIs, server-side runtimes such as node/deno provide their own APIs to manage the operating systems.
-
-Operations extend js script's capabilities beyond the [ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/) specification, since V8 engine strictly follows the ECMAScript guidelines, unable to:
-
-1. Use system calls such as reading files, managing sockets, handling timers, etc.
-2. Interact with Rsvim editor such as editing buffers, opening windows, changing colorschemes, etc.
-3. Provide a standard library (similar to [Node.js Official APIs](https://nodejs.org/docs/latest/api/documentation.html) and [Deno Standard Library](https://deno.land/std)) to improving developing efficiency such as string manipulation, filesystem, path, streams, etc.
 
 ### TypeScript Support
 

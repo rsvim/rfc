@@ -25,7 +25,7 @@ There will be 3 groups of JavaScript APIs in Rsvim:
 
 - Builtin APIs: The builtin APIs provided by V8 engine, defines by ECMA standard, please see [Standard built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects).
 - Web APIs: Most javascript-based runtimes implements a set of Web APIs.
-- Specific runtime APIs: Different javascript-based runtimes provide their own APIs, different from web browsers and server-side runtimes, Rsvim provides APIs related to Vim windows/buffers, just like Neovim's [`vim.api`](https://neovim.io/doc/user/api.html).
+- Specific runtime APIs: Different javascript-based runtimes provide their own APIs, different from web browsers and server-side runtimes, Rsvim provides APIs related to Vim windows/buffers, similar to Neovim's [`vim.api`](https://neovim.io/doc/user/api.html).
 
 > NOTE: In JavaScript world, a lot of standard APIs are provided by **global objects**, they can be access without using any `import` or `require`.
 

@@ -51,11 +51,12 @@ V8 engine is exclusively designed to run JavaScript code and does not support Ty
 
 ### Package Management
 
-(If) Rsvim directly supports [npm](https://www.npmjs.com/) packages, users can simply install plugins with below steps:
+Rsvim will use a local directory as its config home, and all JavaScript/TypeScript files can be loaded into the editor as scripts or plugins. Specifically, if Rsvim can directly support [npm](https://www.npmjs.com/) packages, users can simply install plugins with below steps:
 
 1. Specify either `package.json` file in Rsvim config directory `~/.rsvim` or `$XDG_CONFIG_HOME/rsvim`.
 2. Run `npm i` to install all packages and their dependencies via npm registry. Run `npm up` to upgrade, `npm rm` to remove as well.
-3. Open Rsvim editor, it just correctly detects all the npm packages as Rsvim plugins.
+3. User can still write their
+4. Open Rsvim editor, it just correctly detects all the npm packages as Rsvim plugins.
 
 In this way, Rsvim can handle plugins in a new way:
 

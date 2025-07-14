@@ -55,21 +55,18 @@ Modules are resolved by `require` and `import` keywords, thus allow user to crea
 
 ### Package Management
 
-Both (Neo)Vim ship a lot of builtin scripts/plugins with their releases, which provide a lot of builtin APIs and functionalities. But this method has two shortcomings:
+Image Rsvim directly supports [npm](https://www.npmjs.com/) packages, users can simply install plugins with below steps:
 
-1. Some scripts are rapidly developed and changed, which are not suitable for release in a fixed time manner.
-2. Users are forced to install them, even there exists better alternative plugins in community.
+1. Specify either `package.json` file in Rsvim config directory `~/.rsvim` or `$XDG_CONFIG_HOME/rsvim`.
+2. Run `npm i` to install all packages and their dependencies via npm registry.
+3. Open Rsvim editor, it just correctly detects all the npm packages as Rsvim plugins.
 
-All of them point to the core problem: (Neo)Vim doesn't have its own package management system.
+In this way, Rsvim can handle plugins with a new way:
 
-Once we embed the package manager inside Rsvim editor just like [deno](https://deno.com/), all we need is sharing an example of config file with recommended plugins. In this way, both official and third-party plugins can be continuously rolled out and updated, the editor just needs to be a single executable file, responsible for providing an interface for js runtime and package management.
-
-One step future, we could even directly integrate with javascript package registries such as [npm](https://www.npmjs.com/) and [jsr](https://jsr.io/).
+- There is no builtin plugins, they are separated from the `rsvim` executable. Users can choose whether to install/uninstall/upgrade a plugin.
+- Some _must have_ plugins will be supported by Rsvim team as the _official_ plugins.
+- Plugins can be uploaded to npm registry, and users can get timely updates from the registry, user don't have to wait for next release for an _official_ plugin updates.
 
 ### Conclusion
 
-After all, Rsvim becomes a js runtime similar to [deno](https://deno.com/) in some ways, but only focus on editing and text processing, not for browsers or web development.
-
-## References
-
-- [The Internals of Deno](https://choubey.gitbook.io/internals-of-deno)
+After all, Rsvim becomes a specialized javascript-based runtime similar to node/deno, but it focus on editing and text processing, not browsers or web.

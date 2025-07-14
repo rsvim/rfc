@@ -1,6 +1,6 @@
 # Modules
 
-> Written by @linrongbin16, first created at 2024-09-26, last updated at 2024-09-27.
+> Written by @linrongbin16, first created at 2024-09-26, last updated at 2025-07-14.
 
 This RFC describe how the modules resolved and imported in the js runtime.
 

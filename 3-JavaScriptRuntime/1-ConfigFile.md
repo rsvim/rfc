@@ -1,10 +1,10 @@
 # Config File
 
-> Written by @linrongbin16, first created at 2024-09-11.
+> Written by @linrongbin16, first created at 2024-09-11, last updated at 2025-07-14.
 
 This RFC describes the config file for Rsvim editor.
 
-## Entry
+## Config Entry
 
 The `.rsvim.js` or `.rsvim.ts` file is the config file where user put all their configs, and the editor trying to load on start up.
 

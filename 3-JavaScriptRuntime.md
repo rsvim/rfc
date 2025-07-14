@@ -55,7 +55,7 @@ Modules are resolved by `require` and `import` keywords, thus allow user to crea
 
 ### Package Management
 
-Image Rsvim directly supports [npm](https://www.npmjs.com/) packages, users can simply install plugins with below steps:
+Rsvim directly supports [npm](https://www.npmjs.com/) packages, users can simply install plugins with below steps:
 
 1. Specify either `package.json` file in Rsvim config directory `~/.rsvim` or `$XDG_CONFIG_HOME/rsvim`.
 2. Run `npm i` to install all packages and their dependencies via npm registry. Run `npm up` to upgrade, `npm rm` to remove as well.

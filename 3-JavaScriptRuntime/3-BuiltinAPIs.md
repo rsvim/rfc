@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2024-09-27, last updated at 2024-09-29.
 
-This RFC describe what built-in APIs that editor's js runtime support.
+This RFC describe what builtin APIs that editor's js runtime support.
 
 ## Global object and functions
 

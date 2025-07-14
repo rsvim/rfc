@@ -19,7 +19,7 @@ But to re-invent VIM, instead of simply converting it into another programming l
    - Package management.
 3. Use JavaScript/TypeScript as the script language, as it's one of the most successful script languages, with powerful V8 js engine and the great ecosystem.
 4. Provide a powerful TUI engine that helps creating more friendly user interfaces and pretty rendering effects.
-5. Provide an editing service, with built-in support for:
+5. Provide an editing service, with builtin support for:
    - Remote editing.
    - Multiple clients working together.
 6. Improve project quality and overall experience:

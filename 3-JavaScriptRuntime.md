@@ -6,7 +6,7 @@ This RFC describes [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeS
 
 ## Motivation
 
-Scripting plays a most important role in (Neo)VIM editor, it drives the editor's looking and behavior, schedule background job, communicate with remote process, etc. It turns the editor into a script interpreter/runtime/virtual machine.
+Scripting plays a most important role in (Neo)VIM editor: it drives the editor's looking and behavior, schedule background job, communicate with remote process, etc. It turns the editor into a script interpreter/runtime/virtual machine.
 
 [Vim](https://www.vim.org/) uses [vimscript](https://www.vim.org/scripts/), which has very limited language features and performance, and documentation is quite rough. While [Neovim](https://neovim.io/) uses [lua](https://www.lua.org/) (running on [LuaJIT](https://luajit.org/)) for much richer language features and great performance. It's so obvious and no need to prove, with a more powerful script language, the community can develop much more feature-rich plugins and provide more functions close to the modern text editors such as [Visual Studio Code](https://code.visualstudio.com/), even IDE editing experiences.
 

@@ -51,16 +51,22 @@ But anyway Rsvim is not a general server-side runtime, the existence of all the 
 
 ### Specific APIs
 
-For all the other specific APIs, they are placed under the `Rsvim` namespace, divided into several groups:
+For all the other specific APIs, they are placed under the `Rsvim` namespace, divided into two kinds, several groups. Each group is either **Editor APIs** or **General APIs**.
+
+For editor APIs:
 
 - `Rsvim.opts`: Global and global-local options.
 - `Rsvim.buf`: Buffer related APIs.
-- `Rsvim.win`: Window (UI) related APIs. Note: All TUI APIs are placed under this group, by the naming style still follows the Vim's tradition, i.e. still called "window".
+- `Rsvim.win`: Window related APIs.
 - And a lot more.
 
-They are built with below principles:
+For general APIs:
 
-- All operations are pure JavaScript functions, no variables or objects are exposed under the `vim` namespace.
+- `Rsvim.process`: The editor process related APIs.
+- And a lot more.
+
+The editor APIs will follow design of [Neovim Lua API](https://neovim.io/doc/user/api.html) and [Vim functions](https://vimhelp.org/), the general APIs will follow [Node API](https://nodejs.org/api/n-api.html) and [Deno API](https://docs.deno.com/api/deno/~/Deno).
+
 - The design of editor APIs follow both [Neovim API](https://neovim.io/doc/user/api.html) and [Vim help](https://vimhelp.org/).
 - The design of operating system APIs follow [MDN Web APIs](https://developer.mozilla.org/en-US/docs/Web/API).
 - Primitive values are preferred when APIs return a value to js script, unless it's necessary.

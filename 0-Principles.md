@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, created at 2024-03-16, last updated at 2025-07-13.
 
-The RSVIM is still going to be the VIM editor, not anything else. It maintains almost the same product features as the VIM editor:
+The Rsvim is still going to be the VIM editor, not anything else. It maintains almost the same product features as the VIM editor:
 
 1. Terminal text editor, not GUI application.
 2. Editing mode: normal, insert, visual/select, commandline, etc.
@@ -19,7 +19,7 @@ But to re-invent VIM, instead of simply converting it into another programming l
    - Package management.
 3. Use JavaScript/TypeScript as the script language, as it's one of the most successful script languages, with powerful V8 js engine and the great ecosystem.
 4. Provide a powerful TUI engine that helps creating more friendly user interfaces and pretty rendering effects.
-5. Provide an editing service, with built-in support for:
+5. Provide an editing service, with builtin support for:
    - Remote editing.
    - Multiple clients working together.
 6. Improve project quality and overall experience:

@@ -20,7 +20,7 @@ Terminal is a `M * N` grapheme based double-array (`M` is columns, `N` is rows).
 
 ### Display Attributes
 
-[Crossterm](https://github.com/crossterm-rs/crossterm) (also see [Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>)) plays the role of hardware driver between RSVIM and terminal. Besides very common ASCII characters 0-9, A-Z, punctuations, etc, [escaping codes](https://en.wikipedia.org/wiki/ANSI_escape_code) also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example, we want to render below JavaScript sample code:
+[Crossterm](https://github.com/crossterm-rs/crossterm) (also see [Curses](<https://en.wikipedia.org/wiki/Curses_(programming_library)>)) plays the role of hardware driver between Rsvim and terminal. Besides very common ASCII characters 0-9, A-Z, punctuations, etc, [escaping codes](https://en.wikipedia.org/wiki/ANSI_escape_code) also provide extra text effects such as color, underline, bold, italic, even overlay and blur. For example, we want to render below JavaScript sample code:
 
 ```javascript
 function hello() {

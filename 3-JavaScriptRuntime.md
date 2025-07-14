@@ -18,17 +18,12 @@ There are many issues:
 - `vim.uv` (luv/libuv) has a big gap with Vim's original event loop that cannot be bridged, plugin developers have to call [`vim.schedule()`](<https://neovim.io/doc/user/lua.html#vim.schedule()>) to manually switch between the event loop. Because Vim's internal event loop was not designed for lua, new libuv event loop is been wrapped around Vim's event loop, instead of replace it (usually one app should only has one event loop).
 - Vim/Neovim embed many builtin plugins, users don't have a choice to uninstall them, and cannot get timely updates until next release. For Vim it is not a big issue because Vim actually uses a rolling release policy, but for Neovim it is not good since Neovim releases by year or quarter.
 
-The whole reason is simply because: both of vimscript and lua lack of modern language features, and they don't have a modern package management tool like python's pip, node's npm. That's why RSVIM choose JavaScript, one of the most successful scripting languages. When comparing with js, lua has below shortcomings:
+If we think of Vim/Neovim editor as a scripting language interpreter, the reason of all these issues is simple:
 
-- It doesn't support many modern language features:
-  - Async/await.
-  - Functional programming.
-- The community is not that active/popular:
-  - The number of developers is not that large.
-  - The open-sourced/third-party libraries are not that rich or widely used.
-- [LuaRocks](https://luarocks.org/) (as lua's package manager) still has too many cross-platform compatibility issues on Windows. While [npm](https://www.npmjs.com/) (as js/ts package manager) is much more successful and popular.
+- Both vimscript/lua are not modern script languages, and not popular compared with python/javascript.
+- Both Vim/Neovim doesn't have a package manager, they only detect scripts and evaluate them. Not like python's pip, node's npm, etc.
 
-However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with TypeScript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
+That's why RSVIM choose JavaScript, one of the most successful scripting languages. However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with TypeScript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:
 
 - More elegant and beautiful syntax designing.
 - Static type system.

@@ -66,14 +66,3 @@ For general APIs:
 - And a lot more.
 
 The editor APIs will follow design of [Neovim Lua API](https://neovim.io/doc/user/api.html) and [Vim functions](https://vimhelp.org/), the general APIs will follow [Node API](https://nodejs.org/api/n-api.html) and [Deno API](https://docs.deno.com/api/deno/~/Deno).
-
-- The design of editor APIs follow both [Neovim API](https://neovim.io/doc/user/api.html) and [Vim help](https://vimhelp.org/).
-- The design of operating system APIs follow [MDN Web APIs](https://developer.mozilla.org/en-US/docs/Web/API).
-- Primitive values are preferred when APIs return a value to js script, unless it's necessary.
-- Slow operations provide both sync and async mode.
-
-## Not Supported
-
-Compare with other js runtimes such as [node.js](https://nodejs.org/), [deno](https://deno.com/), Rsvim editor doesn't provide:
-
-- `document`

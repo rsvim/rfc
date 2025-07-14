@@ -49,10 +49,6 @@ For most general script programming languages such as python, they provide built
 
 V8 engine is exclusively designed to run JavaScript code and does not support TypeScript. To address this, ts code must be transformed into js, thus enables V8 engine to evaluate it.
 
-### Load Module
-
-Modules are resolved by `require` and `import` keywords, thus allow user to create multiple file structured configs, and load third-party plugins.
-
 ### Package Management
 
 (If) Rsvim directly supports [npm](https://www.npmjs.com/) packages, users can simply install plugins with below steps:

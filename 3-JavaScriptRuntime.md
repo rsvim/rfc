@@ -16,7 +16,7 @@ There are many issues:
 
 - Vimscript is indeed the best DSL designed for Vim editor, most syntax are designed for Vim, for example `:(n/i/v)map`, `:set`. But when community try to develop more heavy plugins, it doesn't handle the use cases, compared with other general programming languages.
 - `vim.uv` (luv/libuv) has a big gap with Vim's original event loop that cannot be bridged, plugin developers have to call [`vim.schedule()`](<https://neovim.io/doc/user/lua.html#vim.schedule()>) to manually switch between the event loop. Because Vim's internal event loop was not designed for lua, new libuv event loop is been wrapped around Vim's event loop, instead of replace it (usually one app should only has one event loop).
-- Vim/Neovim force ship their builtin plugins on their releases, users don't have a choice to uninstall them, and cannot get timely updates until next release. For Vim it is not a big issue because Vim actually uses a rolling release policy, but for Neovim it is not good since Neovim releases by year or quarter.
+- Vim/Neovim embed many builtin plugins, users don't have a choice to uninstall them, and cannot get timely updates until next release. For Vim it is not a big issue because Vim actually uses a rolling release policy, but for Neovim it is not good since Neovim releases by year or quarter.
 
 The whole reason is simply because: both of vimscript and lua lack of modern language features, and they don't have a modern package management tool like python's pip, node's npm. That's why RSVIM choose JavaScript, one of the most successful scripting languages. When comparing with js, lua has below shortcomings:
 

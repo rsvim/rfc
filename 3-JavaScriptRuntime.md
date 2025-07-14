@@ -4,7 +4,7 @@
 
 This RFC describes [JavaScript](https://en.wikipedia.org/wiki/JavaScript)/[TypeScript](https://www.typescriptlang.org/) and the JS runtime embedded in the RSVIM.
 
-## Motivition
+## Motivation
 
 Scripting plays the most important role in (Neo)VIM editor, it drives the editor's looking and behavior, schedule background job, communicate with remote process, etc. It turns the editor into a script interpreter/runtime/virtual machine.
 

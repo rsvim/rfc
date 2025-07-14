@@ -61,7 +61,7 @@ Modules are resolved by `require` and `import` keywords, thus allow user to crea
 2. Run `npm i` to install all packages and their dependencies via npm registry. Run `npm up` to upgrade, `npm rm` to remove as well.
 3. Open Rsvim editor, it just correctly detects all the npm packages as Rsvim plugins.
 
-In this way, Rsvim can handle plugins with a new way:
+In this way, Rsvim can handle plugins in a new way:
 
 - There is no builtin plugins, they are separated from the `rsvim` executable. Users can choose whether to install/uninstall/upgrade a plugin.
 - Some _must have_ plugins will be supported by Rsvim team as the _official_ plugins.

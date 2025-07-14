@@ -27,7 +27,7 @@ There will be 3 groups of JavaScript APIs in Rsvim:
 - Web APIs: Most javascript-based runtimes implements a set of Web APIs, please see [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API). But most web APIs are for web browsers and web applications, which are not suitable for Rsvim editor. Rsvim editor will only implement a small set of them.
 - Specific runtime APIs: Different javascript-based runtimes provide their own APIs, different from web browsers and server-side runtimes, Rsvim provides APIs related to Vim windows/buffers, similar to Neovim's [`vim.api`](https://neovim.io/doc/user/api.html).
 
-> NOTE: In JavaScript world, a lot of standard APIs are provided by **global objects**, they can be access without using any `import` or `require`.
+> NOTE: In JavaScript world, builtin and web APIs are provided by **global objects**, they can be access without using any `import` or `require`.
 
 Inside scripts, JavaScript APIs are literally the only way to interact with Rsvim editor. There is no key mappings or user commands, they are actually only editor UI backed with registered js functions.
 

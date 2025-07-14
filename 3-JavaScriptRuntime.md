@@ -20,7 +20,7 @@ There are many issues:
 
 If we think of Vim/Neovim editor as a scripting language interpreter, the reason of all these issues is simple:
 
-- Both vimscript/lua are not modern script languages, and not popular compared with python/javascript.
+- Both vimscript/lua are not modern script languages, and not that popular compared with python/javascript.
 - Both Vim/Neovim doesn't have a package manager, they only detect scripts and evaluate them. Not like python's pip, node's npm, etc.
 
 That's why Rsvim choose JavaScript, one of the most successful scripting languages. However, js syntax can be really bad and chaotic (the success actually belongs to browsers, not the language itself). So the final target is scripting with TypeScript, while js plays the role of middle layer under the hood. Using ts brings even more benefits:

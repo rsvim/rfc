@@ -49,12 +49,13 @@ Web APIs are also **global objects**, they are a de-facto standard that are been
 
 But anyway Rsvim is not a general server-side runtime, the existence of all the APIs is for serving the editing and text processing. Thus, Rsvim will only implement part of the [WinterTC](https://min-common-api.proposal.wintertc.org/) standard.
 
-All js APIs provided by Rsvim are placed under the `Rsvim` namespace, divided into several groups:
+### Specific APIs
 
-- `vim.var`: Global/local/buffer-level/window-level variables.
-- `vim.ops`: Global/local/buffer-level/window-level options.
-- `vim.buf`: Buffer related APIs.
-- `vim.win`: Window (UI) related APIs. Note: All TUI APIs are placed under this group, by the naming style still follows the Vim's tradition, i.e. still called "window".
+For all the other specific APIs, they are placed under the `Rsvim` namespace, divided into several groups:
+
+- `Rsvim.opts`: Global and global-local options.
+- `Rsvim.buf`: Buffer related APIs.
+- `Rsvim.win`: Window (UI) related APIs. Note: All TUI APIs are placed under this group, by the naming style still follows the Vim's tradition, i.e. still called "window".
 - And a lot more.
 
 They are built with below principles:

@@ -37,7 +37,7 @@ The [V8](https://v8.dev/) js engine is the best javascript engine widely used in
 
 ### JavaScript APIs
 
-For most general script programming languages such as python, they provide builtin [types](https://docs.python.org/3/library/stdtypes.html)/[functions](https://docs.python.org/3/library/functions.html) and [standard library](https://docs.python.org/3/library/index.html). Javascript runtime is similar, the difference is: js engine is provided by a third-party library (i.e. V8 js engine). A js engine covers the [ECMA-262](https://ecma-international.org/publications-and-standards/standards/ecma-262/) standard, while js runtimes provide the whole standard library and fill in many other gaps, which includes:
+For most general script programming languages such as python, they provide builtin [types](https://docs.python.org/3/library/stdtypes.html)/[functions](https://docs.python.org/3/library/functions.html) and [standard library](https://docs.python.org/3/library/index.html). JavaScript runtime is similar, the difference is: js engine is provided by a third-party library (i.e. V8 js engine). A js engine covers the [ECMA-262](https://ecma-international.org/publications-and-standards/standards/ecma-262/) standard, while js runtimes provide the whole standard library and fill in many other gaps, which includes:
 
 - [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API): Most popular javascript-based runtimes share a compatible implementations today.
 - Specific APIs: Different runtimes provide have their own specific APIs.
@@ -47,7 +47,7 @@ For most general script programming languages such as python, they provide built
 
 ### TypeScript Support
 
-V8 engine is exclusively designed to run javascript code and does not support TypeScript. To address this, typescript code must be translated into js through a transformation process, enabling V8 engine to execute it.
+V8 engine is exclusively designed to run JavaScript code and does not support TypeScript. To address this, ts code must be transformed into js, thus enables V8 engine to evaluate it.
 
 ### Load Module
 

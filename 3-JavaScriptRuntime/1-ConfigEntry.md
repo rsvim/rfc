@@ -19,9 +19,11 @@ In the config home, Rsvim will use `rsvim.js` or `rsvim.ts` script as its config
 2. `$HOME/.rsvim/rsvim.{js, ts}` (with `$HOME/.rsvim` as config home).
 3. `$HOME/.rsvim.{js, ts}` (with `$HOME/.rsvim` as config home). NOTE: This is an old Vim-style config entry for a compatible user experience.
 
-## Operations (OPs)
+## API Style
 
-All the operations provided by editor are placed under the `vim` namespace, divided into several groups:
+Inside scripts, JavaScript APIs are literally the only way to interact with Rsvim editor. There is no key mappings or user commands, they are actually only editor UI backed with registered js functions.
+
+All the js APIs provided by editor are placed under the `vim` namespace, divided into several groups:
 
 - `vim.var`: Global/local/buffer-level/window-level variables.
 - `vim.ops`: Global/local/buffer-level/window-level options.

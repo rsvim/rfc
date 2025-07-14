@@ -2,8 +2,6 @@
 
 > Written by @linrongbin16, first created at 2025-07-14.
 
-# API Style
-
 There will be 3 groups of JavaScript APIs in Rsvim:
 
 - Builtin APIs: The builtin APIs provided by V8 engine, defines by ECMA standard, please see [Standard built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects).

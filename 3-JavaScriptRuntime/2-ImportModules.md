@@ -24,7 +24,7 @@ A javascript-based project is similar to other programming language project, mos
 
 ## Module
 
-a compiled javascript script file is a "module".
+A compiled javascript script file is a "module".
 
 > For more details about modules, please checkout [Node Modules/Packages document](https://nodejs.org/api/packages.html). In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better words/descriptions.
 

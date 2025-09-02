@@ -140,6 +140,12 @@ syntax/
 |  |  |  |- composeClasses/
 |  |  |  ...
 |  |- react/
+|  |  |  |- cjs/
+|  |  |  |- LICENSE
+|  |  |  |- README.md
+|  |  |  |- compiler-runtime.js
+|  |  |  |- index.js
+|  |  |  ...
 |  |- react-dom/
 |  |- react-is/
 |  |  ...
@@ -189,4 +195,10 @@ Let's go through these "require" statements:
 - In line 14, `require("prop-types")` imports the [`prop-types`](https://www.npmjs.com/package/prop-types) package.
 - In line 15, `require("clsx")` imports the [`clsx`](https://www.npmjs.com/package/clsx) package.
 - In line 16-21, `require("@mui/utils/...")` imports the [`@mui/utils`](https://www.npmjs.com/package/@mui/utils) package.
-- In line 22-26, `require("../...")` imports the local modules in upper directory.
+- In line 22-26, `require("../zero-styled")` and others imports the local modules in upper directory.
+
+As you can see, npm package solves several issues for node/npm:
+
+- Split a npm package into multi-file structure, thus the code logic is more fine-grained controlled.
+- The module can be specified with relative file path started with `./` or `../`, or full file path started with `/` or `C:\\` (on Windows).
+- The module can be specified with a package name. Node will look for the entry module by the [`"exports" entry points`](https://nodejs.org/api/packages.html#package-entry-points) specified inside `package.json`, usually it is the `index.js` file.

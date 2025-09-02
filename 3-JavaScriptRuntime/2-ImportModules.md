@@ -28,9 +28,9 @@ A compiled javascript script file is a "module".
 
 > For more details about modules, please checkout [Node Modules/Packages document](https://nodejs.org/api/packages.html). In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better words/descriptions.
 
-The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". In node modules, there're two types of module standards: [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules) and [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules).
+The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". In node modules, there're two types of module standards: [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules) (CJS) and [ECMA modules](https://nodejs.org/api/esm.html) (ESM) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules).
 
-A common js module is imported by the `require` keyword:
+A CommonJS module is imported by the `require` keyword:
 
 ```javascript
 const syntax = require("syntax");
@@ -203,3 +203,7 @@ As you can see, npm package solves several issues for node/npm:
 - The module can be specified with relative file path started with `./` or `../`, or full file path started with `/` or `C:\\` (on Windows).
 - The module can be specified with a package name. Node will look for the entry module by the [`"exports" entry points`](https://nodejs.org/api/packages.html#package-entry-points) specified inside `package.json`, usually it is the `index.js` file.
 - The `package.json` file specifies all the dependencies used by "this" package, thus npm can install all of them for user.
+
+## Async Import
+
+Recall the "CommonJS modules" and "ECMA modules"

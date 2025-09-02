@@ -17,4 +17,7 @@ As for other projects, they are either too small, just a "Hello World" tutorial,
 
 ## JavaScript-based Project
 
-A javascript-based project
+A javascript-based project is similar to other programming language project, mostly it has two types:
+
+- As an executable file.
+- As a library/package.

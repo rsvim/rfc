@@ -120,7 +120,7 @@ syntax/
 |- util.js
 ```
 
-Let's expand a file inside `@mui`:
+Let's check the `Accordion.js` file inside `@mui`:
 
 ```text
 syntax/
@@ -152,7 +152,7 @@ syntax/
 
 In the `Accordion.js` file, it is:
 
-```javascript
+```javascript {.line-numbers}
 "use strict";
 "use client";
 
@@ -181,4 +181,4 @@ var _Collapse = _interopRequireDefault(require("../Collapse"));
 var _Paper = _interopRequireDefault(require("../Paper"));
 ```
 
-Let's go through these "require"
+Let's go through these "require" statements:

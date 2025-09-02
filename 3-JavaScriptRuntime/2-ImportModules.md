@@ -183,6 +183,6 @@ var _Paper = _interopRequireDefault(require("../Paper"));
 
 Let's go through these "require" statements:
 
-- In line 4-7, `require("@babel/runtime/helpers/...")` imports the [`@babel/runtime`](https://www.npmjs.com/package/@babel/runtime) package. NOTE: `@babel/runtime` is a [scoped npm package](https://docs.npmjs.com/cli/v11/using-npm/scope).
+- In line 4-7, `require("@babel/runtime/helpers/...")` imports the [`@babel/runtime`](https://www.npmjs.com/package/@babel/runtime) package. NOTE: `@babel/runtime` is a [scoped package](https://docs.npmjs.com/cli/v11/using-npm/scope), i.e. `@babel` is the organization/namespace for all its packages.
 - In line 12, `require("react")` imports the [`react`](https://www.npmjs.com/package/react) package.
 - In line 13, `require("react-is")` imports the [`react-is`](https://www.npmjs.com/package/react-is) package.

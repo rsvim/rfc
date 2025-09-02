@@ -6,7 +6,7 @@ This RFC investigates javascript modules and `import` keyword implementations in
 
 ## Dune
 
-Dune:
+The dune project:
 
 - Is an open source javascript runtime.
 - Has a very small code base, but still covers almost covers all the most important components as a javascript runtime.

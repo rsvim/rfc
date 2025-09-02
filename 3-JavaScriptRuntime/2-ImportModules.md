@@ -51,3 +51,8 @@ export function hello() {
   console.log("Hello");
 }
 ```
+
+Here we have 2 modules:
+
+- `index.js` as a main module, it can be executed by `dune` and print a message to `stdout`.
+- `util.js` as a library module, it implements many fundamental utilities and doesn't have any side-effects.

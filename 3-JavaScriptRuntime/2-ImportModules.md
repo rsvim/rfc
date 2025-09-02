@@ -19,5 +19,11 @@ As for other projects, they are either too small, just a "Hello World" tutorial,
 
 A javascript-based project is similar to other programming language project, mostly it has two types:
 
-- As an executable file: for example we can run `dune file.js` (similar to `node file.js`, `deno file.js`) to execute the `file.js` script.
-- As a library/package: for example we can use `import syntax from "syntax";` to import a javascript module to avoid duplication and manual copy-pasting.
+- As an executable file: for example, running `dune file.js` (similar to `node file.js`, `deno file.js`) to execute the `file.js` script.
+- As a library/package: for example, using `import syntax from "syntax";` (inside "current" js script) to import a javascript module to avoid duplication and manual copy-pasting.
+
+## Module
+
+Here we encounter the `import` keyword for the first time. Based on [Node Modules/Packages](https://nodejs.org/api/packages.html) document, a compiled javascript script file is a "module".
+
+> NOTE: In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better words/descriptions.

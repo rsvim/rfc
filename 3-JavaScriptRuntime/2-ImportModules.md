@@ -104,7 +104,7 @@ The `package.json` is:
 }
 ```
 
-The `npm` fetches latest version of these three packages (including all their dependencies), and download them in `node_modules` directory:
+The `npm` fetches latest version of packages (including all the dependencies), and download them in `node_modules` directory:
 
 ```text
 syntax/

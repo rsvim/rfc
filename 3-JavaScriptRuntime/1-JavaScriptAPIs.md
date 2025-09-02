@@ -43,7 +43,7 @@ For editor APIs:
 
 For general APIs:
 
-- `Rsvim.process`: The editor process related APIs.
+- `Rsvim.rt`: The editor process (i.e. runtime) related APIs.
 - And a lot more.
 
 The editor APIs will follow design of [Neovim Lua API](https://neovim.io/doc/user/api.html) and [Vim functions](https://vimhelp.org/), the general APIs will follow [Node API](https://nodejs.org/api/n-api.html) and [Deno API](https://docs.deno.com/api/deno/~/Deno).

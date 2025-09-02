@@ -24,6 +24,30 @@ A javascript-based project is similar to other programming language project, mos
 
 ## Module
 
-Here we encounter the `import` keyword for the first time. Based on [Node Modules/Packages](https://nodejs.org/api/packages.html) document, a compiled javascript script file is a "module".
+Based on [Node Modules/Packages](https://nodejs.org/api/packages.html) document, a compiled javascript script file is a "module".
 
 > NOTE: In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better words/descriptions.
+
+The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". Now let's extend the `file.js` single file module to a multi-file project named "syntax", the file structure is:
+
+```text
+syntax/
+|- index.js
+|- util.js
+```
+
+`index.js` is:
+
+```javascript
+import * as util from "./util.js";
+
+util.hello();
+```
+
+`util.js` is:
+
+```javascript
+export function hello() {
+  console.log("Hello");
+}
+```

@@ -206,4 +206,22 @@ As you can see, npm package solves several issues for node/npm:
 
 ## Async Import
 
-Recall the "CommonJS modules" and "ECMA modules"
+Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from CommonJS is always synchronous, the `import` keyword from ECMA has 3 use cases:
+
+- Static import (no side-effects): It only imports package as a library and doesn't execute it. For example:
+
+  ```javascript
+  import syntax from "syntax";
+  ```
+
+- Static import (has side-effects): It imports the library and also execute it, i.e. if there's a `console.log("hello");` inside the library, it will be print. For example:
+
+  ```javascript
+  import "syntax";
+  ```
+
+- Dynamic import (no side-effects): It imports the library and doesn't execute it, the loading runs asynchronously. For example:
+
+  ```javascript
+  const syntax = await import("syntax");
+  ```

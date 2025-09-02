@@ -42,7 +42,9 @@ A ES module is imported by the `import` keyword:
 import syntax from "syntax";
 ```
 
-Now let's extend the `file.js` single file module to a multi-file project named "syntax", the file structure is:
+## A Real-World Node Project with NPM Packages
+
+Now let's extend a single file module into a multi-file project named "syntax", the file structure is:
 
 ```text
 syntax/

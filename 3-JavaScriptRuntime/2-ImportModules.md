@@ -226,4 +226,6 @@ Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from Com
   const syntax = await import("syntax");
   ```
 
-## V8 JavaScript Engine
+## V8 Js Engine
+
+From a javascript source code is read, until it is executed by V8 engine, a basic process is:

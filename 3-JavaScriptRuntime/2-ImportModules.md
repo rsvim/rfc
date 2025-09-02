@@ -189,3 +189,4 @@ Let's go through these "require" statements:
 - In line 14, `require("prop-types")` imports the [`prop-types`](https://www.npmjs.com/package/prop-types) package.
 - In line 15, `require("clsx")` imports the [`clsx`](https://www.npmjs.com/package/clsx) package.
 - In line 16-21, `require("@mui/utils/...")` imports the [`@mui/utils`](https://www.npmjs.com/package/@mui/utils) package.
+- In line 22-26, `require("../...")` imports the local modules in upper directory.

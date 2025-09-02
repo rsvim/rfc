@@ -28,7 +28,21 @@ A compiled javascript script file is a "module".
 
 > For more details about modules, please checkout [Node Modules/Packages document](https://nodejs.org/api/packages.html). In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better words/descriptions.
 
-The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". Now let's extend the `file.js` single file module to a multi-file project named "syntax", the file structure is:
+The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". In node modules, there're two types of module standards: [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules) and [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules).
+
+A common js module is imported by the `require` keyword:
+
+```javascript
+const syntax = require("syntax");
+```
+
+A ES module is imported by the `import` keyword:
+
+```javascript
+import syntax from "syntax";
+```
+
+Now let's extend the `file.js` single file module to a multi-file project named "syntax", the file structure is:
 
 ```text
 syntax/
@@ -62,10 +76,10 @@ The example is quit simple and easy, but when comes to real-world project, the c
 Let's run below command in the "syntax" project:
 
 ```bash
-npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/material
 ```
 
-> NOTE: The `@mui/material`, `@emotion/react`, `@emotion/styled` packages have nothing to do with Rsvim, here I just want to demo how real-world NPM packages are structured.
+> NOTE: The `@mui/material` packages have nothing to do with Rsvim, here I just want to demo how real-world NPM packages are structured.
 
 We will have two new files `package.json`, `package-lock.json` and a new directory `node_modules/`. The file structure becomes:
 
@@ -83,9 +97,7 @@ The `package.json` is:
 ```json
 {
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/material": "^7.3.1"
+    "@mui/material": "^7.3.2"
   }
 }
 ```
@@ -98,6 +110,7 @@ syntax/
 |  |- .bin/
 |  |- @babel/
 |  |- @emotion/
+|  |- @mui/
 |  ...
 |- index.js
 |- package-lock.json
@@ -105,37 +118,65 @@ syntax/
 |- util.js
 ```
 
-Let's expand the first package `@babel`, the file structure is:
+Let's expand a file inside `@mui`:
 
 ```text
 syntax/
 |- node_modules/
 |  |- .bin/
 |  |- @babel/
-|  |  |- code-frame/
-|  |  |  |- lib/
-|  |  |  |  |- index.js
-|  |  |  |  |- index.js.map
-|  |  |  |- LICENSE
-|  |  |  |- README.md
-|  |  |  |- package.json
-|  |  |- generator/
-|  |  |  |- lib/
-|  |  |  |  |- generators/
-|  |  |  |  |- node/
-|  |  |  |  |- buffer.js
-|  |  |  |  |- buffer.js.map
-|  |  |  |  |- index.js
-|  |  |  |  |- index.js.map
-|  |  |  |  ...
-|  |  |  |- LICENSE
-|  |  |  |- README.md
-|  |  |  |- package.json
-|  |  ...
 |  |- @emotion/
-|  ...
+|  |- @mui/
+|  |  |- core-downloads-tracker/
+|  |  |- material/
+|  |  |  |- Accordion/
+|  |  |  |  |- Accordion.d.ts
+|  |  |  |  |- Accordion.js
+|  |  |  |  ...
+|  |  |- utils/
+|  |  |  |- chainPropTypes/
+|  |  |  |- composeClasses/
+|  |  |  ...
+|  |- react/
+|  |- react-dom/
+|  |- react-is/
+|  |  ...
+|  |- .package-lock.json
 |- index.js
 |- package-lock.json
 |- package.json
 |- util.js
 ```
+
+In the `Accordion.js` file, it is:
+
+```javascript
+"use strict";
+"use client";
+
+var _interopRequireDefault =
+  require("@babel/runtime/helpers/interopRequireDefault").default;
+var _interopRequireWildcard =
+  require("@babel/runtime/helpers/interopRequireWildcard").default;
+Object.defineProperty(exports, "__esModule", {
+  value: true,
+});
+exports.default = void 0;
+var React = _interopRequireWildcard(require("react"));
+var _reactIs = require("react-is");
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _clsx = _interopRequireDefault(require("clsx"));
+var _chainPropTypes = _interopRequireDefault(
+  require("@mui/utils/chainPropTypes"),
+);
+var _composeClasses = _interopRequireDefault(
+  require("@mui/utils/composeClasses"),
+);
+var _zeroStyled = require("../zero-styled");
+var _memoTheme = _interopRequireDefault(require("../utils/memoTheme"));
+var _DefaultPropsProvider = require("../DefaultPropsProvider");
+var _Collapse = _interopRequireDefault(require("../Collapse"));
+var _Paper = _interopRequireDefault(require("../Paper"));
+```
+
+Let's go through these "require"

@@ -56,3 +56,5 @@ Here we have 2 modules:
 
 - `index.js` as a main module, it can be executed by `dune` and print a message to `stdout`.
 - `util.js` as a library module, it implements many fundamental utilities and doesn't have any side-effects.
+
+The example is quit simple and easy, but when comes to real-world project, the complexity grows fast and multi-file structure is urgently needed. And here comes the [NPM packages](https://docs.npmjs.com/about-packages-and-modules), which is the most popular and widely used standard for server side javascript-based runtime.

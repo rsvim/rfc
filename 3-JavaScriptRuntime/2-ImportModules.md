@@ -152,7 +152,7 @@ syntax/
 
 In the `Accordion.js` file, it is:
 
-```javascript {.line-numbers}
+```javascript
 "use strict";
 "use client";
 

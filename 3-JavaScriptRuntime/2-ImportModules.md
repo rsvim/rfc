@@ -275,4 +275,4 @@ The event loop (v1) of dune runs in below pseudo-code process:
 
 ## Module Graph
 
-As you can see, a module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module graph/index, which avoid duplicated loading and improves the performance.
+A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module graph/index, which avoid duplicated loading and improves the performance.

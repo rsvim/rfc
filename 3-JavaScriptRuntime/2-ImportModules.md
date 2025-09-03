@@ -377,17 +377,17 @@ Finally, the process of event loop written written in pseudo-code is:
 12             If "current" module is `Duplicate`:
 13               Mark it as `Ready`.
 14             For all its dependencies of "current" module:
-15               Run fast import:
-16                 If it is already `Ready`:
-17                   Do nothing
-18                 If it is `Duplicate`:
-19                   Mark it as `Ready`
-20                 If it has no dependencies, and it's `Resolving`:
-21                   Mark it as `Ready`
-22                 If it has no dependencies, and it's not `Resolving`:
-23                   Do nothing
-24                 If all the dependencies of "current" module are `Ready`:
-25                   Mark it as `Ready`
+15               Run fast import one of the dependency module:
+16               | If it is already `Ready`:
+17               |   Do nothing
+18               | If it is `Duplicate`:
+19               |   Mark it as `Ready`
+20               | If it has no dependencies, and it's `Resolving`:
+21               |   Mark it as `Ready`
+22               | If it has no dependencies, and it's not `Resolving`:
+23               |   Do nothing
+24               | If all the dependencies of it are `Ready`:
+25               |   Mark it as `Ready`
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

@@ -252,4 +252,7 @@ In real-world project, the dependencies can be a big ocean, simply loading them 
 5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue.
 6   Loop:
 7     Get a pending task in the `pending_futures` queue. (i.e. the first `EsModuleFuture`)
+8     Compile the source code into V8 module (Let's name it the "current" module).
+9     Get all dependency modules from the "current" module.
+10    Get all dependency modules from the "current" module.
 ```

@@ -23,8 +23,8 @@ Tokio helps split the editor logic into more fine-grained tasks: blocking tasks 
 
 For example, when a user execute below operations:
 
-1. Press key `i` - the editor goes to **Insert Mode**
-2. Types letters `a-z` and `A-Z` and numbers `0-9`, the editor inserts these letters and numbers in the buffer
+1. Press key `i` - the editor goes to **Insert Mode**.
+2. Types letters `a-z` and `A-Z` and numbers `0-9`, the editor inserts these letters and numbers in the buffer.
 3. Press key `ESC`, the editor goes back to **Normal Mode**.
 
 In these operations, the **Interaction** should always be synchronous, i.e. it should follows "input" => "calculation" => "output" for each user's operation, thus achieve a consistent application behavior.

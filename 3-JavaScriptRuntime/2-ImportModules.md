@@ -228,7 +228,7 @@ Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from Com
   const syntax = await import("syntax");
   ```
 
-## V8 Js Engine
+## Pseudo-Code of Initialization
 
 From a javascript source code is read, until it is executed by V8 engine, the basic process is:
 
@@ -271,6 +271,7 @@ The event loop (v1) of dune runs in below pseudo-code process:
 11        Get all dependency modules from the "current" module.
 12        For each dependency module:
 13          Create new task `EsModuleFuture` and push to `pending_futures` queue.
+14      Else:
 ```
 
 ## Module Caches
@@ -359,5 +360,7 @@ struct ModuleMap {
 - `index`: Holds all modules' file path and its compiled V8 module.
 - `seen`: Holds all modules' file path and its status.
 - `pending`: Holds all unresolved modules, i.e. the module status is still not `Ready`.
+
+### Pseudo-Code of Initialization With Module Caches
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

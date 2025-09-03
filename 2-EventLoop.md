@@ -19,7 +19,7 @@ When such a (classic) running loop comes to terminal+rust, we specifically intro
 - [Tokio](https://tokio.rs/) as async runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio helps split the editor logic into more fine-grained tasks: blocking tasks and non-blocking tasks. Notice we should not rashly say tokio helps us turning the editor into async. Because in this scenario, i.e. text editing is always interacting with users.
+Tokio helps split the editor logic into more fine-grained tasks: blocking tasks and non-blocking tasks. Notice we should not rashly say tokio helps us turning the editor into async. Because in this scenario, i.e. text editing, the editor is always interacting with users.
 
 For example, when a user execute below operations:
 

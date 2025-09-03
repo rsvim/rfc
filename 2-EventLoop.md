@@ -12,6 +12,8 @@ As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/main/1-TUI.md), the ve
 2. Handle user logic.
 3. Render terminal or exit.
 
+![1](images/1-TUI.1.drawio.svg)
+
 When such a (classic) running loop comes to terminal+rust, we specifically introduce:
 
 - [Tokio](https://tokio.rs/) as async runtime.
@@ -19,7 +21,15 @@ When such a (classic) running loop comes to terminal+rust, we specifically intro
 
 Tokio helps split the editor logic into more fine-grained tasks: blocking tasks and non-blocking tasks.
 
-Notice we should not rashly say tokio helps us turning the editor into async. Because in this scenario, i.e. text editing is always interacting with users. For example, when a user presses the key `i`, the editor goes to **Insert Mode**, then the user types some letters `a-z, A-Z` and numbers `0-9`, the editor appends these letters and numbers in the buffer, then the user presses the key `ESC`, the editor goes back to **Normal Mode**.
+Notice we should not rashly say tokio helps us turning the editor into async. Because in this scenario, i.e. text editing is always interacting with users.
+
+For example, when a user execute below operations:
+
+1. Press key `i` - the editor goes to **Insert Mode**
+2. Types letters `a-z` and `A-Z` and numbers `0-9`, the editor inserts these letters and numbers in the buffer
+3. Press key `ESC`, the editor goes back to **Normal Mode**.
+
+In these operations, the **Interaction** should always be synchronous, i.e. it should follows "input" => "calculation" => "output" for each user's operation, thus achieve a consistent application behavior.
 
 ## Starting
 

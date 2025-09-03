@@ -259,7 +259,7 @@ the event loop runs in below pseudo-code process:
 1 Main:
 2   Read arguments from CLI, i.e. the entry file name `index.js`.
 3   Initialize js runtime and V8 engine.
-5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue. NOTE: The "task" here has two steps: working and completed.
+5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue. NOTE: The `EsModuleFuture` task's work is reading source code from the file.
 6   Loop:
 7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue.
 8     For each task in `pending_tasks`:

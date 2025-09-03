@@ -232,7 +232,7 @@ Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from Com
 
 From a javascript source code is read, until it is executed by V8 engine, the basic process is:
 
-1. Read source code file. NOTE: the `import` supports a remote resource such as `import syntax from "https://jsdlr.com/syntax.js";`, in such case, this step becomes download + read.
+1. Read source code file. NOTE: the `import` supports a remote resource such as `import syntax from "https://jsdlr.com/syntax.js";`, in such case, this step becomes download + read. But in this section, let's simply think of all javascript scripts are on local file system.
 2. Compile into V8 module.
 3. Fetch all static import dependencies, each dependency is also a V8 module. NOTE: Here we can only fetch all static import dependencies (`import ... from ...`), dynamic import need to be fetched during module evaluating (`await import(...)`).
 4. Instantiate V8 module with module resolver callback. NOTE: In this step, all the dependencies should be already cached and ready to use.
@@ -273,11 +273,11 @@ The event loop (v1) of dune runs in below pseudo-code process:
 13          Create new task `EsModuleFuture` and push to `pending_futures` queue.
 ```
 
-## Module Map
+## Module Caches
 
 A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it is a hash map that caches a compiled module and avoid duplicated loading.
 
-There are two structs relate to module map:
+Before introducing it, let's first define some very common utilities:
 
 ```rust
 pub type ModulePath = String;
@@ -298,12 +298,54 @@ pub enum ModuleStatus {
     // Indicates the modules is resolved.
     Ready,
 }
+```
+
+- `ModulePath` indicates the file path of a javascript script file.
+- `ModuleSource` indicates the source code content.
+- `ImportKind` indicates whether the module is static import or dynamic import.
+- `ModuleStatus` indicates current module status:
+  - `Fetching`: Initialize status. When a module is first been created, it's status is `Fetching`. It corresponds to line-5 in above pseudo-code process, i.e. create a `EsModuleFuture` and let backend thread-pool to read the source code from the javascript file.
+  - `Resolving`: After the source code is read, and compiled into V8 module, but it still has many dependency modules, it's status is `Resolving`. It corresponds to line-13 in above pseudo-code process, i.e. it creates more `EsModuleFuture` tasks for each dependencies.
+  - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip fetching again.
+  - `Ready`: When a module and all its dependency modules are fetched and compiled into V8 modules, it's status is `Ready`.
+
+### Module Graph
+
+A module can have no dependency, or it can have multiple dependencies.
+
+```rust
+struct EsModule {
+    pub path: ModulePath,
+    pub status: ModuleStatus,
+    pub dependencies: Vec<Rc<RefCell<EsModule>>>,
+    pub exception: Rc<RefCell<Option<String>>>,
+    pub is_dynamic_import: bool,
+}
 struct ModuleGraph {
     pub kind: ImportKind,
     pub root_rc: Rc<RefCell<EsModule>>,
     pub same_origin: LinkedList<v8::Global<v8::PromiseResolver>>,
 }
-pub struct ModuleMap {
+```
+
+The `EsModule` holds a module's information:
+
+- `path`: File path of source code.
+- `status`: Module status.
+- `dependencies`: All its dependencies.
+- `exception`: Any exception happened during resolving.
+- `is_dynamic_import`: Whether the "current" module is dynamic import.
+
+The `ModuleGraph` holds a module's information:
+
+- `kind`: This is similar to EsModule's `is_dynamic_import`. But it can hold a `v8::PromiseResolver` if current module is dynamic import.
+- `root_rc`: The `EsModule` itself of current module.
+- `same_origin`: All dependencies belongs to "current" module that are dynamic imported.
+
+### Module Map
+
+```rust
+struct ModuleMap {
     pub main: Option<ModulePath>,
     pub index: HashMap<ModulePath, v8::Global<v8::Module>>,
     pub seen: HashMap<ModulePath, ModuleStatus>,

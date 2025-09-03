@@ -232,7 +232,7 @@ Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from Com
 
 From a javascript source code is read, until it is executed by V8 engine, the basic process is:
 
-1. Read source code file.
+1. Read source code file. NOTE: the `import` supports a remote resource such as `import syntax from "https://jsdlr.com/syntax.js";`, in such case, this step becomes download + read.
 2. Compile into V8 module.
 3. Fetch all static import dependencies, each dependency is also a V8 module. NOTE: Here we can only fetch all static import dependencies (`import ... from ...`), dynamic import need to be fetched during module evaluating (`await import(...)`).
 4. Instantiate V8 module with module resolver callback. NOTE: In this step, all the dependencies should be already cached and ready to use.

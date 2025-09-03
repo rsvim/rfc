@@ -251,7 +251,7 @@ An async task has two steps:
    - Network/http. The socket/network/http is similar to file IO, it can also use async IO.
    - Sleep/timeout. This task can use a timer to calculate how many milliseconds/seconds/hours has elapsed, thus it doesn't block the "main" thread.
    - Some real CPU-bound tasks. The event loop will dispatch it to a thread-pool to execute it, thus it will not block the "main" thread.
-2. Complete
+2. Complete: Once the task has done the job, it can trigger the next step with a callback.
 
 the event loop runs in below pseudo-code process:
 

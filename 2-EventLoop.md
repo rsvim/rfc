@@ -31,9 +31,10 @@ In these operations, the **Interaction** should always be synchronous, i.e. it s
 
 You may ask: then what does tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience. Only a few core operations (i.e. text editing) should always stay synchronous, other tasks can run asynchronously or in parallel, for example:
 
-- Source code syntax analysis and highlighting.
+- Syntax analysis and highlighting.
 - LSP services management.
-- LSP services management.
+
+You will find most UI rendering effects and analysis tasks has a low priority, even they provide a much better user experience, but the service quality can be downgraded or cancelled. We spawn these tasks with tokio's async runtime, thus to not block core text editing, their calculation results will be sync back once they are done, or just be abandoned.
 
 ## Starting
 

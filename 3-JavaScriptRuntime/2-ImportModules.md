@@ -353,4 +353,9 @@ struct ModuleMap {
 }
 ```
 
-The `ModuleMap`
+`ModuleMap` holds all the modules for the whole js runtime:
+
+- `main`: The entry file path, in this section, it is the `index.js` file.
+- `index`: Holds all modules' file path and its compiled V8 module.
+- `seen`: Holds all modules' file path and its status.
+- `pending`: Holds all unresolved modules, i.e. the module status is still not `Ready`.

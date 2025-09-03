@@ -86,7 +86,7 @@ Let's go through this line by line:
 6. For line 16, once the event is been processed, and the editor renders the internal data changes to TUI.
 7. For line 17, the editor recovers the terminal and exit the program.
 
-As you can see, actually it is still "input" => "calculation" => "output" process, nothing new.
+As you can see, actually it is still "input" => "calculation" => "output" process.
 
 ## Starting
 

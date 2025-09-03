@@ -266,9 +266,9 @@ The event loop of dune runs in below pseudo-code process:
 6   Loop:
 7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue. NOTE: At this time, the task's work is already done.
 8     For each task in `pending_tasks`:
-9       If the task is `EsModuleFuture`:
+9       If the task is `EsModuleFuture`, do the complete step (i.e. the callback):
 10        Compile the source code into V8 module (Let's name it the "current" module).
 11        Get all dependency modules from the "current" module.
 12        For each dependency module:
-13          Create new task `EsModuleFuture`
+13          Create new task `EsModuleFuture` and push to `pending_futures` queue.
 ```

@@ -276,3 +276,37 @@ The event loop (v1) of dune runs in below pseudo-code process:
 ## Module Map
 
 A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it is a hash map that caches a compiled module and avoid duplicated loading.
+
+There are two structs relate to module map:
+
+```rust
+pub type ModulePath = String;
+pub type ModuleSource = String;
+pub enum ImportKind {
+    // Loading static imports.
+    Static,
+    // Loading a dynamic import.
+    Dynamic(v8::Global<v8::PromiseResolver>),
+}
+pub enum ModuleStatus {
+    // Indicates the module is being fetched.
+    Fetching,
+    // Indicates the dependencies are being fetched.
+    Resolving,
+    // Indicates the module has ben seen before.
+    Duplicate,
+    // Indicates the modules is resolved.
+    Ready,
+}
+struct ModuleGraph {
+    pub kind: ImportKind,
+    pub root_rc: Rc<RefCell<EsModule>>,
+    pub same_origin: LinkedList<v8::Global<v8::PromiseResolver>>,
+}
+pub struct ModuleMap {
+    pub main: Option<ModulePath>,
+    pub index: HashMap<ModulePath, v8::Global<v8::Module>>,
+    pub seen: HashMap<ModulePath, ModuleStatus>,
+    pub pending: Vec<Rc<RefCell<ModuleGraph>>>,
+}
+```

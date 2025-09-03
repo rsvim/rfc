@@ -328,7 +328,7 @@ struct ModuleGraph {
 }
 ```
 
-The `EsModule` holds a module's information:
+`EsModule` holds information for a single module:
 
 - `path`: File path of source code.
 - `status`: Module status.
@@ -336,7 +336,7 @@ The `EsModule` holds a module's information:
 - `exception`: Any exception happened during resolving.
 - `is_dynamic_import`: Whether the "current" module is dynamic import.
 
-The `ModuleGraph` holds a module's information:
+`ModuleGraph` holds all promises (`v8::PromiseResolver`) for a single module:
 
 - `kind`: This is similar to EsModule's `is_dynamic_import`. But it can hold a `v8::PromiseResolver` if current module is dynamic import.
 - `root_rc`: The `EsModule` itself of current module.
@@ -352,3 +352,5 @@ struct ModuleMap {
     pub pending: Vec<Rc<RefCell<ModuleGraph>>>,
 }
 ```
+
+The `ModuleMap`

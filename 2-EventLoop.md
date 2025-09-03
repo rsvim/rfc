@@ -50,7 +50,7 @@ An editor waits for a user's action, finishes internal logic, renders the termin
 
 ### Non-Blocking/Async Tasks
 
-There are also a lot of tasks that user don't want them blocking the core editing functions, such as:
+There are also a lot of tasks that user don't want them blocking the core text editing, such as:
 
 - Colorschemes.
 - Background jobs.

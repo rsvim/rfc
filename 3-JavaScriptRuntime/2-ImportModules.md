@@ -275,4 +275,4 @@ The event loop (v1) of dune runs in below pseudo-code process:
 
 ## Module Map
 
-A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it caches a compiled module and avoid duplicated loading.
+A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it is a hash map that caches a compiled module and avoid duplicated loading.

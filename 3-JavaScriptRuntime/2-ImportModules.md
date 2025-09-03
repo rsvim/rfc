@@ -249,5 +249,7 @@ In real-world project, the dependencies can be a big ocean, simply loading them 
 2   Read arguments from CLI, i.e. the entry file name `index.js`.
 3   Initialize js runtime and V8 engine.
 4   Read source code from entry file name.
-5   Create the first task `EsModuleFuture`, and push to the `pending_futures`.
+5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue.
+6   Loop:
+7     Get a pending task in the `pending_futures` queue.
 ```

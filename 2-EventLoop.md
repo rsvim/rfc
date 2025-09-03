@@ -104,8 +104,6 @@ Let's go through this line by line:
 
 As you can see, actually it still follows the "input" => "calculation" => "output" process.
 
-## Running
-
 ## Exiting
 
 ### Interruptible Tasks

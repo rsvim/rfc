@@ -27,9 +27,13 @@ For example, when a user execute below operations:
 2. Types letters `a-z` and `A-Z` and numbers `0-9`, the editor inserts these letters and numbers in the buffer.
 3. Press key `ESC`, the editor goes back to **Normal Mode**.
 
-In these operations, the **Interaction** should always be synchronous, i.e. it should follows "input" => "calculation" => "output" for each user's operation, thus achieve a consistent application behavior.
+In these operations, the **Interaction** should always be synchronous, i.e. it should follows "input" => "calculation" => "output" for each user's operation, thus achieve a consistent application behavior. Even some operations will block the TUI, this should still stay synchronous, because consistent behavior has highest priority.
 
-You may ask: then what does tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience.
+You may ask: then what does tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience. Only a few core operations (i.e. text editing) should always stay synchronous, other tasks can be asynchronous, for example:
+
+- Source code syntax analysis and highlighting.
+- LSP services management.
+- LSP services management.
 
 ## Starting
 

@@ -228,4 +228,14 @@ Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from Com
 
 ## V8 Js Engine
 
-From a javascript source code is read, until it is executed by V8 engine, a basic process is:
+From a javascript source code is read, until it is executed by V8 engine, the basic process is:
+
+1. Read source code file.
+2. Compile into V8 module.
+3. Fetch all static import dependencies, each dependency is also a V8 module. NOTE: Here we can only fetch all static import dependencies (`import ... from ...`), dynamic import need to be fetched during module evaluating (`await import(...)`).
+4. Instantiate V8 module with module resolver callback. NOTE: In this step, all the dependencies should be already cached and ready to use.
+5. Evaluate (execute) V8 module.
+
+When we run `dune run ./file.js` in the terminal. All the modules it depends is a dependency tree:
+
+![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)

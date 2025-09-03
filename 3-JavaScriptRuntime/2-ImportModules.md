@@ -241,3 +241,5 @@ From a javascript source code is read, until it is executed by V8 engine, the ba
 When we run `dune run ./index.js` in the terminal. All modules is a dependency tree:
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
+
+In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (I believe node/deno also use this architecture, but they are way more completed):

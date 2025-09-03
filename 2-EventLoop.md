@@ -29,9 +29,7 @@ For example, when a user execute below operations:
 
 In these operations, the **Interaction** should always be synchronous, i.e. it should follows "input" => "calculation" => "output" for each user's operation, thus achieve a consistent application behavior.
 
-You may ask: then what does tokio do? and how do we benefit from tokio's async tasks?
-
-Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience.
+You may ask: then what does tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience.
 
 ## Starting
 

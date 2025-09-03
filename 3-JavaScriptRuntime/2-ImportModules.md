@@ -264,7 +264,7 @@ The event loop of dune runs in below pseudo-code process:
 3   Initialize js runtime and V8 engine.
 5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue.
 6   Loop:
-7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue.
+7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue. NOTE: At this time, the task's work is already done.
 8     For each task in `pending_tasks`:
 9       If the task is `EsModuleFuture`:
 10        Compile the source code into V8 module (Let's name it the "current" module).

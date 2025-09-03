@@ -77,7 +77,7 @@ Let's go through this line by line:
    - Turn terminal into raw mode, and render for the first time. If the default buffer has file content, it will first show in the terminal.
 5. For line 14-15, the editor finally starts to read from terminal input, i.e. user can interact with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
    - `crossterm::event::EventStream`: All user keyboard/mouse events are receiving through this stream.
-   - Master channel receiver and Js channel receiver: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe.
+   - Master channel receiver and Js channel receiver: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe. Thus rsvim introduces these 2 channels to send data to each other.
 
 NOTE: Since tokio's runtime is async and multi-threaded, while V8 js engine is non-thread safe, i.e. all its APIs and data structures are `Rc`
 

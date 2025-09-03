@@ -251,6 +251,7 @@ An async task has two steps:
    - Network/http. The socket/network/http is similar to file IO, it can also use async IO.
    - Sleep/timeout. This task can use a timer to calculate how many milliseconds/seconds/hours has elapsed, thus it doesn't block the "main" thread.
    - Some real CPU-bound calculation tasks.
+   - `EsModuleFuture`. This task is simply reading source code by a file name (we are going to use it later).
 2. Complete: Once the task has done the job, it can trigger the next step with a callback.
 
 All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread.

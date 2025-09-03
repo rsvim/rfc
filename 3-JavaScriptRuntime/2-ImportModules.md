@@ -251,5 +251,5 @@ In real-world project, the dependencies can be a big ocean, simply loading them 
 4   Read source code from entry file name.
 5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue.
 6   Loop:
-7     Get a pending task in the `pending_futures` queue.
+7     Get a pending task in the `pending_futures` queue. (i.e. the first `EsModuleFuture`)
 ```

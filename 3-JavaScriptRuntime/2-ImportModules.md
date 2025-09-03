@@ -364,6 +364,24 @@ Finally, the process of event loop written written in pseudo-code is:
 1  Main:
 2    Initialize V8 engine.
 3    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
+4    Loop:
+5      (Step-1) Fast forward imports:
+6        For each pending module in `module_map.pending` queue:
+7          If "current" module has any exception while resolving:
+8            Assert it must be dynamic import, reject the promise.
+9            Remove it from `module_map.pending` queue.
+10         Else:
+11           If "current" module is not `Ready` yet:
+12             If "current" module is `Duplicate`:
+13               Mark it as `Ready`.
+14             For all its dependencies of "current" module:
+15               Repeat logic between line 10-19 on each dependency
+16             If "current" module has no dependencies, and it's `Resolving`:
+17               Mark it as `Ready`.
+18             If "current" module has no dependencies (and it's not `Resolving`):
+19               Do nothing
+20             If all the dependencies of "current" module are `Ready`:
+19               Mark it as `Ready`
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

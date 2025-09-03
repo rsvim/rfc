@@ -242,4 +242,12 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
 
-In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed):
+In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed), the event loop runs in below pseudo-code process:
+
+```text
+1 Main:
+2   Read arguments from CLI, i.e. the entry file name `index.js`.
+3   Initialize js runtime and V8 engine.
+4   Read source code from entry file name.
+5   Create the first task `EsModuleFuture`, and push to the `pending_futures`.
+```

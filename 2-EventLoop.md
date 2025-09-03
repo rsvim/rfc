@@ -35,7 +35,7 @@ You may ask: then what does tokio do? and how do we benefit from tokio's async t
 - LSP services management.
 - And a lot more...
 
-> If all these tasks are running synchronously, you will stuck on opening every file/buffer, or even simply typing every character.
+> If all these calculation logic run synchronously, you will stuck on opening every file/buffer, or even simply typing every character.
 
 You will find most UI rendering effects and analysis tasks has a low priority, even they provide a much better user experience, but the service quality can be downgraded or cancelled. We spawn these tasks with tokio's async runtime, thus to not block core text editing, their calculation results will be sync back once they are done, or just be abandoned.
 

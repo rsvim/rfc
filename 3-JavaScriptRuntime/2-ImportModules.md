@@ -228,7 +228,7 @@ Recall the "CommonJS modules" and "ECMA modules", the `require` keyword from Com
   const syntax = await import("syntax");
   ```
 
-## Pseudo-Code of Initialization
+## Resolve Module
 
 From a javascript source code is read, until it is executed by V8 engine, the basic process is:
 
@@ -356,12 +356,14 @@ struct ModuleMap {
 - `seen`: Holds all modules' file path and its status.
 - `pending`: Holds all unresolved modules, i.e. the module status is still not `Ready`.
 
-### Pseudo-Code of Initialization With Module Caches
+## Pseudo-Code Process of Event Loop
 
-With module caches, the initialization process can be upgrade to:
+Finally, the process of event loop written written in pseudo-code is:
 
 ```text
-
+1  Main:
+2    Initialize V8 engine.
+3    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

@@ -252,9 +252,9 @@ An async task has two steps:
    - Sleep/timeout. This task can use a timer to calculate how many milliseconds/seconds/hours has elapsed, thus it doesn't block the "main" thread.
    - Some real CPU-bound calculation tasks.
    - `EsModuleFuture`. This task is simply reading source code by a file name (we are going to use it later).
-2. Complete: Once the task has done the job, it can trigger the next step with a callback.
+2. Complete: Once the task has done the work, it can trigger the next step with a callback.
 
-All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread.
+All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread. Once their works done, they will be adding to a `pending_futures` queue, waiting for the "main" thread to call the "complete" steps.
 
 The event loop (v1) of dune runs in below pseudo-code process:
 
@@ -273,6 +273,6 @@ The event loop (v1) of dune runs in below pseudo-code process:
 13          Create new task `EsModuleFuture` and push to `pending_futures` queue.
 ```
 
-## Module Graph
+## Module Map
 
-A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module graph/index, which avoid duplicated loading and improves the performance.
+A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it caches a compiled module and avoid duplicated loading.

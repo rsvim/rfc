@@ -267,20 +267,7 @@ For module resolving, the task is called `EsModuleFuture`, its "work" step is si
 7     Create new `EsModuleFuture` task and push to `pending_futures` queue
 ```
 
-The event loop (v1) of dune runs in below pseudo-code process:
-
-```text
-1 Main:
-2   Read arguments from CLI, i.e. the entry file name `index.js`.
-3   Initialize js runtime and V8 engine.
-5   Create the first `EsModuleFuture` task and push to the `pending_futures` queue.
-6   Loop:
-7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue.
-8     For each task in `pending_tasks`:
-9       If the task is `EsModuleFuture`, do the "complete" step.
-```
-
-NOTE: In line 7, for all the pending tasks, their "work" steps are already completed.
+In the "complete" step, if there's any error, `EsModuleFuture` will set an exception for this module.
 
 ## Module Caches
 

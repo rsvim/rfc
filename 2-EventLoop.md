@@ -34,6 +34,7 @@ You may ask: then what does tokio do? and how do we benefit from tokio's async t
 - Syntax analysis and highlighting.
 - LSP services management.
 - Child processes management.
+- IPC/RPC connections.
 - And a lot more...
 
 > If all these calculation logic run synchronously, you will stuck on opening every file/buffer, or even simply typing every character.
@@ -50,15 +51,7 @@ An editor waits for a user's action, finishes internal logic, renders the termin
 
 ### Non-Blocking/Async Tasks
 
-There are also a lot of tasks that user don't want them blocking the core text editing, such as:
-
-- Colorschemes.
-- Background jobs.
-- Multiple IPC/RPC connections.
-- Child processes management.
-- Source code analysis (token parsing).
-
-We could leverage rust and tokio's async to dispatch these tasks, thus fully utilize all the CPU cores and never freeze the editor.
+There are also a lot of tasks that user don't want them blocking the core text editing. We use tokio's async tasks, thus fully utilize all the CPU cores and never freeze the editor.
 
 Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine will stops running and gives the CPU back to the editor, hold scripts logic until next event loop.
 

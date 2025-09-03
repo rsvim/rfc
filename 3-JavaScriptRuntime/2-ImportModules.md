@@ -242,17 +242,30 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
 
-In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed), the event loop runs in below pseudo-code process:
+In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed): event loop + async task.
+
+An async task has two steps:
+
+1. Work: The task has a job to do. For example:
+   - Read file content. This task can use async file IO, thus it can be run within a single thread.
+   - Network/http. The socket/network/http is similar to file IO, it can also use async IO.
+   - Sleep/timeout. This task can use a timer to calculate how many milliseconds/seconds/hours has elapsed, thus it doesn't block the "main" thread.
+   - Some real CPU-bound tasks. The event loop will dispatch it to a thread-pool to execute it, thus it will not block the "main" thread.
+2. Complete
+
+the event loop runs in below pseudo-code process:
 
 ```text
 1 Main:
 2   Read arguments from CLI, i.e. the entry file name `index.js`.
 3   Initialize js runtime and V8 engine.
-4   Read source code from entry file name.
-5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue.
+5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue. NOTE: The "task" here has two steps: working and completed.
 6   Loop:
-7     Get a pending task in the `pending_futures` queue. (i.e. the first `EsModuleFuture`)
-8     Compile the source code into V8 module (Let's name it the "current" module).
-9     Get all dependency modules from the "current" module.
-10    Get all dependency modules from the "current" module.
+7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue.
+8     For each task in `pending_tasks`:
+9       If the task is `EsModuleFuture`:
+10        Compile the source code into V8 module (Let's name it the "current" module).
+11        Get all dependency modules from the "current" module.
+12        For each dependency module:
+13          Create new task `EsModuleFuture`
 ```

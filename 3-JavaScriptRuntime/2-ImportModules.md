@@ -363,9 +363,11 @@ Finally, the process of event loop written written in pseudo-code is:
 ```text
 1  Main:
 2    Initialize V8 engine.
+3    Initialize `module_map` (ModuleMap)
+3    Initialize `pending_futures` for all async tasks
 3    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
 4    Loop:
-5      (Step-1) Fast forward imports:
+5      (Step-1) Run fast forward imports:
 6        For each pending module in `module_map.pending` queue:
 7          If "current" module has any exception while resolving:
 8            Assert it must be dynamic import, reject the promise.
@@ -375,13 +377,17 @@ Finally, the process of event loop written written in pseudo-code is:
 12             If "current" module is `Duplicate`:
 13               Mark it as `Ready`.
 14             For all its dependencies of "current" module:
-15               Repeat logic between line 11-21 on each dependency
-16             If "current" module has no dependencies, and it's `Resolving`:
-17               Mark it as `Ready`.
-18             If "current" module has no dependencies (and it's not `Resolving`):
-19               Do nothing
-20             If all the dependencies of "current" module are `Ready`:
-21               Mark it as `Ready`
+15               Run fast import:
+16                 If it is already `Ready`:
+17                   Do nothing
+18                 If it is `Duplicate`:
+19                   Mark it as `Ready`
+20                 If it has no dependencies, and it's `Resolving`:
+21                   Mark it as `Ready`
+22                 If it has no dependencies, and it's not `Resolving`:
+23                   Do nothing
+24                 If all the dependencies of "current" module are `Ready`:
+25                   Mark it as `Ready`
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

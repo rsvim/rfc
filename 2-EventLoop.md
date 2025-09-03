@@ -42,6 +42,28 @@ You will find most UI rendering effects and analysis tasks has a low priority, e
 
 For example, the syntax analysis task will be run every time user insert a new character. A new syntax analyzing task is spawned to tokio. In the meanwhile, there may already have some ongoing syntax analyzing tasks calculating, once a newest task is spawned, all the old tasks can be cancelled, since their results are not useful any more. Or, user is exiting the editor, then all the ongoing analysis are no longer needed.
 
+Thus all tasks inside rsvim can be split into two types: blocking tasks and non-blocking tasks.
+
+### Blocking/Sync Tasks
+
+An editor waits for a user's action, finishes internal logic, renders the terminal, then waits for user's next action. This is core internal logic for an editor, and the timeline should be always sync and blocking. Because user would rather wait for tasks done to get a deterministic and correct editor behavior.
+
+### Non-Blocking/Async Tasks
+
+There are also a lot of tasks that user don't want them blocking the core editing functions, such as:
+
+- Colorschemes.
+- Background jobs.
+- Multiple IPC/RPC connections.
+- Child processes management.
+- Source code analysis (token parsing).
+
+We could leverage rust and tokio's async to dispatch these tasks, thus fully utilize all the CPU cores and never freeze the editor.
+
+Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine will stops running and gives the CPU back to the editor, hold scripts logic until next event loop.
+
+This is exactly what all JavaScript-based runtimes ([node.js](https://nodejs.org/), [deno](https://deno.com/)) do.
+
 ## Pseudo-Code Process
 
 To make it more clear what rsvim is doing inside, here's a main loop process written with pseudo-code:
@@ -90,26 +112,6 @@ Let's go through this line by line:
 As you can see, actually it still follows the "input" => "calculation" => "output" process.
 
 ## Running
-
-### Blocking/Sync Tasks
-
-An editor waits for a user's action, finishes internal logic, renders the terminal, then waits for user's next action. This is core internal logic for an editor, and the timeline should be always sync and blocking. Because user would rather wait for tasks done to get a deterministic and correct editor behavior.
-
-### Non-Blocking/Async Tasks
-
-There are also a lot of tasks that provide better user experiences, while users don't want these tasks blocking the core editing functions, such as:
-
-- Colorschemes.
-- Background jobs.
-- Multiple IPC/RPC connections.
-- Child processes management.
-- Source code analysis (token parsing).
-
-We could leverage rust and tokio's async to dispatch these tasks, thus fully utilize all the CPU cores and never freeze the editor.
-
-Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine will stops running and gives the CPU back to the editor, hold scripts logic until next event loop.
-
-This is exactly what all JavaScript-based runtimes ([node.js](https://nodejs.org/), [deno](https://deno.com/)) do.
 
 ## Exiting
 

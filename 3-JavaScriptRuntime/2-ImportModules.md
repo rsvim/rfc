@@ -256,7 +256,7 @@ An async task has two steps:
 
 All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread.
 
-The event loop of dune runs in below pseudo-code process:
+The event loop (v1) of dune runs in below pseudo-code process:
 
 ```text
 1 Main:
@@ -272,3 +272,7 @@ The event loop of dune runs in below pseudo-code process:
 12        For each dependency module:
 13          Create new task `EsModuleFuture` and push to `pending_futures` queue.
 ```
+
+## Module Cache
+
+As you can see, a module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly.

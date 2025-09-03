@@ -41,6 +41,48 @@ You will find most UI rendering effects and analysis tasks has a low priority, e
 
 For example, the syntax analysis task will be run every time user insert a new character. A new syntax analyzing task is spawned to tokio. In the meanwhile, there may already have some ongoing syntax analyzing tasks calculating, once a newest task is spawned, all the old tasks can be cancelled, since their results are not useful any more. Or, user is exiting the editor, then all the ongoing analysis are no longer needed.
 
+## Pseudo-Code Process
+
+To make it more clear what rsvim is doing inside, here's a main loop process written with pseudo-code:
+
+```text
+1 Main:
+2  Reading arguments from CLI
+3  If arguments == "-V/--version" or "-h/--help":
+4    Print version or help manual
+5    Exit
+6  Create data structures: BuffersManager, UIWidgetTree, JsRuntime, TaskTracker, etc.
+7  Initialize (execute) js configs.
+8  (Initialize buffers) If arguments provide file names:
+9    Create one buffer for each file name, reading file content into buffer. Set the first buffer as default buffer.
+10 Else:
+11   Create a default buffer with no file name, empty content.
+12 Initialize a default window, binded with the default buffer.
+13 Initialize terminal into raw mode, and render TUI.
+14 Loop:
+15   `tokio::select!` on multiple streams asynchronously:
+       - `crossterm::event::EventStream`
+       - Master Channel Receiver
+       - Js Channel Receiver
+```
+
+Let's go through this line by line:
+
+1. For line 1, it is the the entry of our program `rsvim`.
+2. For line 2, it reads the arguments feed into `rsvim`.
+3. For line 3-5, if arguments is `-V`/`--version` or `-h`/`--help`, the program simply prints some information then exit.
+4. For line 6-13, the editor initialize 3 components:
+   - Data structures such as buffers, UI tree, task tracker, etc.
+   - Js runtime, include all V8 components.
+   - Turn terminal into raw mode, and render for the first time. If the default buffer has file content, it will first show in the terminal.
+5. For line 14-15, the editor finally starts to read from terminal input, i.e. user can interact with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
+   - `crossterm::event::EventStream`: All user keyboard/mouse events are receiving through this stream.
+   - Master channel receiver and Js channel receiver: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe.
+
+NOTE: Since tokio's runtime is async and multi-threaded, while V8 js engine is non-thread safe, i.e. all its APIs and data structures are `Rc`
+
+- Master Channel Receiver (NOTE: "Master" is the event loop itself) - Js Channel Receiver (NOTE: "Js" is the js runtime, there's a technical limitation: tokio's runtime is async and multi-threaded, V8 js engine is non-thread safe, many data transfer need to go through channels to keep data safe)
+
 ## Starting
 
 When rsvim starts, it follows below steps to initialize

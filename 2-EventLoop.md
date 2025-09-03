@@ -79,10 +79,6 @@ Let's go through this line by line:
    - `crossterm::event::EventStream`: All user keyboard/mouse events are receiving through this stream.
    - Master channel receiver and Js channel receiver: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe. Thus rsvim introduces these 2 channels to send data to each other.
 
-NOTE: Since tokio's runtime is async and multi-threaded, while V8 js engine is non-thread safe, i.e. all its APIs and data structures are `Rc`
-
-- Master Channel Receiver (NOTE: "Master" is the event loop itself) - Js Channel Receiver (NOTE: "Js" is the js runtime, there's a technical limitation: tokio's runtime is async and multi-threaded, V8 js engine is non-thread safe, many data transfer need to go through channels to keep data safe)
-
 ## Starting
 
 When rsvim starts, it follows below steps to initialize

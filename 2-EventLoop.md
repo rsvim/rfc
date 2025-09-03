@@ -64,6 +64,7 @@ To make it more clear what rsvim is doing inside, here's a main loop process wri
        - `crossterm::event::EventStream`
        - Master Channel Receiver
        - Js Channel Receiver
+16   Render TUI
 ```
 
 Let's go through this line by line:
@@ -78,6 +79,7 @@ Let's go through this line by line:
 5. For line 14-15, the editor finally starts to read from terminal input, i.e. user can interact with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
    - `crossterm::event::EventStream`: All user keyboard/mouse events are receiving through this stream.
    - Master channel receiver and Js channel receiver: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe. Thus rsvim introduces these 2 channels to send data to each other.
+6. For line 16, once the event is been processed, and the editor renders the internal data changes to TUI.
 
 As you can see, actually it is still "input" => "calculation" => "output" process.
 

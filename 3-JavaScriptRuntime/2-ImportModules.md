@@ -359,3 +359,5 @@ struct ModuleMap {
 - `index`: Holds all modules' file path and its compiled V8 module.
 - `seen`: Holds all modules' file path and its status.
 - `pending`: Holds all unresolved modules, i.e. the module status is still not `Ready`.
+
+When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

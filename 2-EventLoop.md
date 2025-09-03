@@ -61,7 +61,7 @@ To make it more clear what rsvim is doing inside, here's a main loop process wri
 13 Initialize terminal into raw mode, and render TUI.
 14 Loop:
 15   `tokio::select!` on multiple streams asynchronously:
-       - `crossterm::event::EventStream`
+16     - `crossterm::event::EventStream`
        - Master Channel Receiver
        - Js Channel Receiver
 ```

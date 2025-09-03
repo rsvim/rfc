@@ -33,6 +33,7 @@ You may ask: then what does tokio do? and how do we benefit from tokio's async t
 
 - Syntax analysis and highlighting.
 - LSP services management.
+- Child processes management.
 - And a lot more...
 
 > If all these calculation logic run synchronously, you will stuck on opening every file/buffer, or even simply typing every character.

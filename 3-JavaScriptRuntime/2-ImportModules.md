@@ -4,7 +4,7 @@
 
 This RFC investigates javascript modules and `import` keyword implementations in [dune](https://github.com/aalykiot/dune).
 
-> Recommend reading: [RFC-2](2-EventLoop.md)
+> Recommend reading: [RFC-2](../2-EventLoop.md)
 
 ## Why Dune?
 

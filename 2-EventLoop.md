@@ -1,12 +1,13 @@
 # Event Loop
 
 > Written by @linrongbin16, first created at 2024-09-03, last updated at 2025-09-03.
+> Also recommend reading: [RFC-3.2](3-JavaScriptRuntime/2-ImportModules.md).
 
 This RFC describes the Rsvim's running loop.
 
 ## Running Loop
 
-As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/main/1-TUI.md), the very basic running loop of Rsvim editor is just 3 steps:
+As mentioned in [RFC-1](1-TUI.md), the very basic running loop of Rsvim editor is just 3 steps:
 
 1. Receive user keyboard/mouse events.
 2. Handle user logic.

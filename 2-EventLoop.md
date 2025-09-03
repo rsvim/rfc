@@ -33,10 +33,13 @@ You may ask: then what does tokio do? and how do we benefit from tokio's async t
 
 - Syntax analysis and highlighting.
 - LSP services management.
+- And a lot more...
+
+> If all these tasks are running synchronously, you will stuck on opening every file/buffer, or even simply typing every character.
 
 You will find most UI rendering effects and analysis tasks has a low priority, even they provide a much better user experience, but the service quality can be downgraded or cancelled. We spawn these tasks with tokio's async runtime, thus to not block core text editing, their calculation results will be sync back once they are done, or just be abandoned.
 
-> For example, the syntax analysis task will be run every time user insert a new character. A new syntax analyzing task is spawned to tokio. In the meanwhile, there may already have some ongoing syntax analyzing tasks calculating, once a newest task is spawned, all the old tasks can be cancelled, since their results are not useful any more.
+For example, the syntax analysis task will be run every time user insert a new character. A new syntax analyzing task is spawned to tokio. In the meanwhile, there may already have some ongoing syntax analyzing tasks calculating, once a newest task is spawned, all the old tasks can be cancelled, since their results are not useful any more.
 
 ## Starting
 

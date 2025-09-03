@@ -367,27 +367,31 @@ Finally, the process of event loop written written in pseudo-code is:
 3    Initialize `pending_futures` for all async tasks
 3    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
 4    Loop:
-5      (Step-1) Run fast forward imports:
-6        For each pending module in `module_map.pending` queue:
-7          If "current" module has any exception while resolving:
-8            Assert it must be dynamic import, reject the promise.
-9            Remove it from `module_map.pending` queue.
-10         Else:
-11           If "current" module is not `Ready` yet:
-12             If "current" module is `Duplicate`:
-13               Mark it as `Ready`.
-14             For all its dependencies of "current" module:
-15               Run fast import one of the dependency module:
-16               | If it is already `Ready`:
-17               |   Do nothing
-18               | If it is `Duplicate`:
-19               |   Mark it as `Ready`
-20               | If it has no dependencies, and it's `Resolving`:
-21               |   Mark it as `Ready`
-22               | If it has no dependencies, and it's not `Resolving`:
-23               |   Do nothing
-24               | If all the dependencies of it are `Ready`:
-25               |   Mark it as `Ready`
+5      Run fast forward imports (Step-1):
+6      | For each pending module in `module_map.pending` queue:
+7      |   If "current" module has any exception while resolving:
+8      |     Assert it must be dynamic import, reject the promise.
+9      |     Remove it from `module_map.pending` queue.
+10     |   Else:
+11     |     If "current" module is not `Ready` yet:
+12     |       If "current" module is `Duplicate`:
+13     |         Mark it as `Ready`.
+14     |       For all its dependencies of "current" module:
+15     |         Run fast import one of the dependency module:
+16     |         | If it is already `Ready`:
+17     |         |   Do nothing
+18     |         | If it is `Duplicate`:
+19     |         |   Mark it as `Ready`
+20     |         | If it has no dependencies, and it's `Resolving`:
+21     |         |   Mark it as `Ready`
+22     |         | If it has no dependencies, and it's not `Resolving`:
+23     |         |   Do nothing
+24     |         | If all the dependencies of it are `Ready`:
+25     |         |   Mark it as `Ready`
+26     |       If "current" module is `Ready`:
+27     |         Push it to a `ready_imports` queue.
+28     |         Remove it from `module_map.pending` queue.
+29     | For each module in `ready_imports` queue:
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

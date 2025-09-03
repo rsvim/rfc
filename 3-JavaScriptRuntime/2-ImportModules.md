@@ -236,6 +236,6 @@ From a javascript source code is read, until it is executed by V8 engine, the ba
 4. Instantiate V8 module with module resolver callback. NOTE: In this step, all the dependencies should be already cached and ready to use.
 5. Evaluate (execute) V8 module.
 
-When we run `dune run ./file.js` in the terminal. All modules is a dependency tree:
+When we run `dune run ./index.js` in the terminal. All modules is a dependency tree:
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)

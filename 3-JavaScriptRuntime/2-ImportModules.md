@@ -250,10 +250,12 @@ An async task has two steps:
    - Read file content. This task can use async file IO, thus it can be run within a single thread.
    - Network/http. The socket/network/http is similar to file IO, it can also use async IO.
    - Sleep/timeout. This task can use a timer to calculate how many milliseconds/seconds/hours has elapsed, thus it doesn't block the "main" thread.
-   - Some real CPU-bound tasks. The event loop will dispatch it to a thread-pool to execute it, thus it will not block the "main" thread.
+   - Some real CPU-bound calculation tasks.
 2. Complete: Once the task has done the job, it can trigger the next step with a callback.
 
-the event loop runs in below pseudo-code process:
+All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread.
+
+The event loop of dune runs in below pseudo-code process:
 
 ```text
 1 Main:

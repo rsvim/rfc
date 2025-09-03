@@ -251,10 +251,21 @@ An async task has two steps:
    - Network/http. The socket/network/http is similar to file IO, it can also use async IO.
    - Sleep/timeout. This task can use a timer to calculate how many milliseconds/seconds/hours has elapsed, thus it doesn't block the "main" thread.
    - Some real CPU-bound calculation tasks.
-   - `EsModuleFuture`. This task is simply reading source code by a file name (we are going to use it later).
 2. Complete: Once the task has done the work, it can trigger the next step with a callback.
 
-All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread. Once their works done, they will be adding to a `pending_futures` queue, waiting for the "main" thread to call the "complete" steps.
+All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread. Once "work" step is done, they will be adding to a `pending_futures` queue, waiting for the "main" thread to call the "complete" steps.
+
+For module resolving, the task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. While its "complete" step is:
+
+```text
+1 If current module has exceptions:
+2   Stops current process
+3 Else:
+4   Compile the source code into V8 module (here we call it the "current" module)
+5   Get all its dependency modules from "current" module
+6   For each dependency module:
+7     Create new `EsModuleFuture` task and push to `pending_futures` queue
+```
 
 The event loop (v1) of dune runs in below pseudo-code process:
 
@@ -262,17 +273,14 @@ The event loop (v1) of dune runs in below pseudo-code process:
 1 Main:
 2   Read arguments from CLI, i.e. the entry file name `index.js`.
 3   Initialize js runtime and V8 engine.
-5   Create the first task `EsModuleFuture`, and push to the `pending_futures` queue.
+5   Create the first `EsModuleFuture` task and push to the `pending_futures` queue.
 6   Loop:
-7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue. NOTE: At this time, the task's work is already done.
+7     let `pending_tasks` = Remove all completed tasks from the `pending_futures` queue.
 8     For each task in `pending_tasks`:
-9       If the task is `EsModuleFuture`, do the complete step (i.e. the callback):
-10        Compile the source code into V8 module (Let's name it the "current" module).
-11        Get all dependency modules from the "current" module.
-12        For each dependency module:
-13          Create new task `EsModuleFuture` and push to `pending_futures` queue.
-14      Else:
+9       If the task is `EsModuleFuture`, do the "complete" step.
 ```
+
+NOTE: In line 7, for all the pending tasks, their "work" steps are already completed.
 
 ## Module Caches
 
@@ -362,5 +370,11 @@ struct ModuleMap {
 - `pending`: Holds all unresolved modules, i.e. the module status is still not `Ready`.
 
 ### Pseudo-Code of Initialization With Module Caches
+
+With module caches, the initialization process can be upgrade to:
+
+```text
+
+```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

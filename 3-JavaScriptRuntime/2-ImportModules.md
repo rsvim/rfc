@@ -282,7 +282,7 @@ As you can see, npm package solves several issues for node/npm:
 
 ## Resolve Module
 
-From a javascript source code is read, until it is executed by V8 engine, the basic process is:
+Inside js runtime, it needs a few steps to evaluate/execute a module:
 
 1. Read source code file. NOTE: the `import` supports a remote resource such as `import syntax from "https://jsdlr.com/syntax.js";`, in such case, this step becomes download + read. But in this section, let's simply think of all javascript scripts are on local file system.
 2. Compile into V8 module.

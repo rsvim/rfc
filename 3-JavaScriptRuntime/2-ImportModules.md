@@ -343,14 +343,7 @@ pub enum ModuleStatus {
 
 ### `EsModule`
 
-In real-world project, the dependencies can be a big ocean, simply loading them is a big challenge.
-
-An async task has two steps:
-
-1. Work: The task has a work to do, and generate a result.
-2. Callback: Once the task has done the work, it triggers a callback to consume the result and finally completes.
-
-In dune, all tasks are called `JsFuture`. The event loop can handle multiple tasks together, they are scheduled with 3 steps:
+In real-world project, the dependencies can be a big ocean, simply loading them is a big challenge. The event loop handles all the module resolving tasks along with all the async tasks together. Scheduled in 3 steps:
 
 1. Spawn with a worker, i.e. the actual work will be done without blocking "main" thread. Then push the task to a `pending_futures` queue.
 2. Wait for the task work done.

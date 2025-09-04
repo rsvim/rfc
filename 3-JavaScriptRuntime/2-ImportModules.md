@@ -29,7 +29,7 @@ A javascript-based project is similar to other programming language project, usu
 
 A compiled javascript script file is a "module".
 
-> For more details, please checkout [Node Modules/Packages](https://nodejs.org/api/packages.html). In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better words/descriptions.
+> For more details, please checkout [Node Modules/Packages](https://nodejs.org/api/packages.html). In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better descriptions.
 
 The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". In node modules, there're two types of module standards:
 

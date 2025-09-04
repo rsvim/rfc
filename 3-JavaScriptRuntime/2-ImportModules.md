@@ -349,16 +349,16 @@ In real-world project, the dependencies can be a big ocean, simply loading them 
 2. Wait for the task work done.
 3. Run the callback with work results, remove from `pending_futures` queue.
 
-Module resolving task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. While its "complete" step is:
+Module resolving task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. Its "callback" step is:
 
 ```text
-1 If current module has exceptions:
-2   Stops current process
-3 Else:
-4   Compile the source code into V8 module (here we call it the "current" module)
-5   Get all its dependency modules from "current" module
-6   For each dependency module:
-7     Create new `EsModuleFuture` task and push to `pending_futures` queue
+1  If current module has exceptions:
+2      Stops current process
+3  Else:
+4      Compile the source code into V8 module
+5      Get all its dependency modules from "current" module
+6      For each dependency module:
+7          Create new `EsModuleFuture` task and push to `pending_futures` queue
 ```
 
 In the "complete" step, if there's any error, `EsModuleFuture` will set an exception for this module.

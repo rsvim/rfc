@@ -27,7 +27,7 @@ For example, when a user execute below operations:
 2. Types `a-z`/`A-Z` and `0-9`: editor inserts these letters and numbers in the buffer.
 3. Press key `ESC`: editor goes back to **Normal Mode**.
 
-In these operations, the **process** should always be synchronous, i.e. it follows "input" => "calculation" => "output" for each operation, thus achieve a consistent behavior. Even some operations will block the TUI, this should still stay synchronous, because consistent behavior has highest priority.
+In these operations, the **process** should always be synchronous, i.e. it follows "input" => "calculation" => "output" for each operation, thus achieve a consistent behavior. Even some operations will block the TUI, this should still stay synchronous, because consistent behavior always has the highest priority.
 
 You may ask: then what does tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience. Only a few core operations (i.e. text editing) should always stay synchronous, other tasks can run asynchronously or in parallel, for example:
 

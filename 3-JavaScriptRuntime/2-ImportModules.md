@@ -31,7 +31,7 @@ A compiled javascript script file is a "module".
 
 > For more details, please checkout [Node Modules/Packages](https://nodejs.org/api/packages.html). In this section, I will use very simple words to describe the technical terms. They are not complete or accurate, but easy to understand. Welcome to suggest better descriptions.
 
-The `file.js` (in the above example) is also a "module". As the first executable module feed into `dune` command line, it is called the "main module". In node modules, there're two types of module standards:
+The `file.js` (in the above example) is also a "module". As the first file name feed into `dune`, it is called the "main module". In node modules, there're two types of module standards:
 
 - [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules) (CJS)
 - [ECMA modules](https://nodejs.org/api/esm.html) (ESM) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules)

@@ -363,11 +363,17 @@ Else:
 
 In the "callback" step, if there's any error, `EsModuleFuture` will set an exception for this module.
 
-### `EsModule`
+Here is the rust version [`EsModule`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L153):
 
-A module can be a common dependency for many other modules. When event loop runs, it may load a common dependency many times, duplicatedly. A module caches (a hash map) can cache all compiled modules and avoid duplicated loading.
-
-Before introducing it, let's first define some very common utilities:
+```rust
+struct EsModule {
+    pub path: ModulePath,
+    pub status: ModuleStatus,
+    pub dependencies: Vec<Rc<RefCell<EsModule>>>,
+    pub exception: Rc<RefCell<Option<String>>>,
+    pub is_dynamic_import: bool,
+}
+```
 
 ### `ModuleGraph`
 
@@ -403,6 +409,8 @@ struct ModuleGraph {
 - `same_origin`: All dependencies belongs to "current" module that are dynamic imported.
 
 ### Module Map
+
+A module can be a common dependency for many other modules. When event loop runs, it may load a common dependency many times, duplicatedly. A module caches (a hash map) can cache all compiled modules and avoid duplicated loading.
 
 ```rust
 struct ModuleMap {

@@ -49,6 +49,28 @@ A ES module is imported by the `import` keyword:
 import syntax from "syntax";
 ```
 
+And ES module support 3 variants:
+
+- Static import:
+
+  ```javascript
+  // Import without side-effects
+  import syntax from "syntax";
+
+  // Import with side-effects
+  import "syntax";
+  ```
+
+- Dynamic import:
+
+  ```javascript
+  // Import asynchronously
+  const syntax = await import("syntax");
+
+  // Or
+  import("syntax").then((syntax) => {}).catch((err) => {});
+  ```
+
 ### A Real-World Node Project with NPM Packages
 
 Now let's extend a single file module into a multi-file project named "syntax", the file structure is:

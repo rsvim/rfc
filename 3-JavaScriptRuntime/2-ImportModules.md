@@ -33,42 +33,32 @@ A compiled javascript script file is a "module".
 
 The `file.js` (in the above example) is also a "module". As the first file name feed into `dune`, it is called the "main module". In node modules, there're two types of module standards:
 
-- [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules)
-- [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules)
-
-A CommonJS module is imported by the `require` keyword:
-
-```javascript
-const syntax = require("syntax");
-```
-
-A ES module is imported by the `import` keyword:
-
-```javascript
-import syntax from "syntax";
-```
-
-And ES module support 3 variants:
-
-- Static import:
+- [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules): It uses the `require` keyword, for example:
 
   ```javascript
-  // Import without side-effects
-  import syntax from "syntax";
-
-  // Import with side-effects
-  import "syntax";
+  const syntax = require("syntax");
   ```
 
-- Dynamic import:
+- [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules): It uses the `import` keyword. It has 3 variants, for example:
+  - Static import:
 
-  ```javascript
-  // Import asynchronously
-  const syntax = await import("syntax");
+    ```javascript
+    // Import without side-effects
+    import syntax from "syntax";
 
-  // Or
-  import("syntax").then((syntax) => {}).catch((err) => {});
-  ```
+    // Import with side-effects
+    import "syntax";
+    ```
+
+  - Dynamic import:
+
+    ```javascript
+    // Import asynchronously
+    const syntax = await import("syntax");
+
+    // Or
+    import("syntax").then((syntax) => {}).catch((err) => {});
+    ```
 
 The word "side-effects" is to describe there are actual impacts and changes been made to the Operating Systems. It can be print messages to console/terminal, read/write files in file system, receive/send data via IPC/RCP to remote systems, etc. When we start a program, we usually expect it does some "side-effects" to help us. But for library/package, we usually expect they don't have any side-effects, just expose some utilities and let the executable files call them.
 

@@ -1,12 +1,12 @@
 # JavaScript APIs
 
-> Written by @linrongbin16, first created at 2025-07-14.
+> Written by @linrongbin16, first created at 2025-07-14, last updated at 2025-09-02.
 
 There will be 3 groups of JavaScript APIs in Rsvim:
 
 - Builtin APIs: The builtin APIs provided by V8 engine, defines by ECMA standard, please see [Standard built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects).
 - Web APIs: Most javascript-based runtimes implements a set of Web APIs, please see [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API). But most web APIs are for web browsers and web applications, which are not suitable for Rsvim editor. Rsvim editor will only implement a small set of them.
-- Specific runtime APIs: Different javascript-based runtimes provide their own APIs, different from web browsers and server-side runtimes, Rsvim provides APIs related to Vim windows/buffers, similar to Neovim's [`vim.api`](https://neovim.io/doc/user/api.html).
+- Runtime APIs: Different javascript-based runtimes provide their own APIs, different from web browsers and server-side runtimes, Rsvim provides APIs related to Vim windows/buffers, similar to Neovim's [`vim.api`](https://neovim.io/doc/user/api.html).
 
 Inside scripts, JavaScript APIs are literally the only way to interact with Rsvim editor. There is no key mappings or user commands, they are actually only editor UI backed with registered js functions.
 
@@ -43,7 +43,7 @@ For editor APIs:
 
 For general APIs:
 
-- `Rsvim.process`: The editor process related APIs.
+- `Rsvim.rt`: The editor process (i.e. runtime) related APIs.
 - And a lot more.
 
 The editor APIs will follow design of [Neovim Lua API](https://neovim.io/doc/user/api.html) and [Vim functions](https://vimhelp.org/), the general APIs will follow [Node API](https://nodejs.org/api/n-api.html) and [Deno API](https://docs.deno.com/api/deno/~/Deno).

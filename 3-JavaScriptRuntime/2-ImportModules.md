@@ -385,6 +385,8 @@ struct EsModule {
 
 ### `ModuleGraph`
 
+The rust version [`ModuleGraph`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L208) is:
+
 ```rust
 struct ModuleGraph {
     pub kind: ImportKind,
@@ -393,7 +395,7 @@ struct ModuleGraph {
 }
 ```
 
-`ModuleGraph` holds all promises (`v8::PromiseResolver`) for a single module:
+`ModuleGraph` holds all promises (`v8::PromiseResolver`) for a `EsModule`:
 
 - `kind`: This is similar to EsModule's `is_dynamic_import`. But it can hold a `v8::PromiseResolver` if current module is dynamic import.
 - `root_rc`: The `EsModule` itself of current module.

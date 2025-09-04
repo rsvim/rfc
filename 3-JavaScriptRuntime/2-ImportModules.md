@@ -148,6 +148,19 @@ import react from "react"; // This line is unused
 util.hello();
 ```
 
+And changes the `package.json` file to:
+
+```json
+{
+  "type": "module",
+  "dependencies": {
+    "@mui/material": "^7.3.2"
+  }
+}
+```
+
+This is because `node` by default uses CommonJS modules, but in this section we will focus on ES modules. Adding `"type": "module"` will let `node` uses ES modules.
+
 The `npm` fetches latest version of packages (including all the dependencies), and download them in `node_modules` directory:
 
 ```text

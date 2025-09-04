@@ -297,7 +297,7 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
 
-### Async Task and `JsFuture`
+### `JsFuture`
 
 Js runtime such as node/deno is famous for their "async event loop", which brings a great performance. The "async" is implemented by several core components:
 
@@ -361,7 +361,7 @@ Else:
         Create new `EsModuleFuture` task and push to `pending_futures` queue
 ```
 
-In the "complete" step, if there's any error, `EsModuleFuture` will set an exception for this module.
+In the "callback" step, if there's any error, `EsModuleFuture` will set an exception for this module.
 
 ## Module Caches
 

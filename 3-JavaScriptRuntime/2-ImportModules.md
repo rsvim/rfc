@@ -324,7 +324,7 @@ pub enum ModuleStatus {
 - `ModuleSource` indicates the source code content.
 - `ImportKind` indicates whether the module is static import or dynamic import.
 - `ModuleStatus` indicates current module status:
-  - `Fetching`: Initialize status. When a module is first been created, it's status is `Fetching`, i.e. When creates a `EsModuleFuture` and let backend thread-pool to read the source code from the javascript file.
+  - `Fetching`: Initialize status. When a module is first been created, it's status is `Fetching`.
   - `Resolving`: After the source code is read, and compiled into V8 module, but it still has many dependency modules, it's status is `Resolving`. It corresponds to line-13 in above pseudo-code process, i.e. it creates more `EsModuleFuture` tasks for each dependencies.
   - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip fetching again.
   - `Ready`: When a module and all its dependency modules are fetched and compiled into V8 modules, it's status is `Ready`.

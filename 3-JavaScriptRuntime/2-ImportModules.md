@@ -316,7 +316,7 @@ An async task has two steps:
 1. Work: The task has a work to do, and generate a result.
 2. Callback: Once the task has done the work, it triggers a callback to consume the result and finally completes.
 
-All tasks are scheduled with 3 steps:
+In dune, all tasks are called `JsFuture`. The event loop can handle multiple tasks together, they are scheduled with 3 steps:
 
 1. Spawn with a worker, i.e. the actual work will be done without blocking "main" thread. Then push the task to a `pending_futures` queue.
 2. Wait for the task work done.

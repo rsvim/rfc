@@ -71,7 +71,7 @@ And ES module support 3 variants:
   import("syntax").then((syntax) => {}).catch((err) => {});
   ```
 
-The word "side-effects" is to describe there are actual impacts and changes been made to the Operating Systems. It can be print messages to console/terminal, read/write files in file system, receive/send data via IPC/RCP to remote systems, etc. When we start a program, we usually expect it does some "side-effects" to help us. But for library/package, we usually expect they don't have any side-effects, but just expose some utilities and let the executable files call them.
+The word "side-effects" is to describe there are actual impacts and changes been made to the Operating Systems. It can be print messages to console/terminal, read/write files in file system, receive/send data via IPC/RCP to remote systems, etc. When we start a program, we usually expect it does some "side-effects" to help us. But for library/package, we usually expect they don't have any side-effects, just expose some utilities and let the executable files call them.
 
 ### A Real-World Node Project with NPM Packages
 

@@ -285,7 +285,7 @@ Node and deno is famous for their "async event loop", which brings a great perfo
 - Thread Pool: For CPU-bound tasks, they are spawn with a worker thread to avoid blocking the main thread.
 - Callback: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
 
-All async tasks share a same trait: `JsFuture`:
+All async tasks share a same trait `JsFuture`:
 
 ```rust
 pub trait JsFuture {

@@ -9,7 +9,7 @@ This RFC investigates javascript modules and `import` keyword implementations in
 The dune project:
 
 - Is an open source javascript runtime.
-- Has a very small code base, but still covers almost covers all the most important components as a javascript runtime.
+- Has a very small code base, but still covers all the most important components and algorithms/soultions of a javascript runtime.
 - Is developed with rust/tokio and V8 js engine, Rsvim copied the architecture and a lot source code from it. Big thanks!
 - Is the best example to show what a javascript runtime is doing inside, and how it fills up all the gaps between js engine and a ready-to-use general purposed language interpreter/virtual-machine, including standard library, `Promise`/`async`/`await` scheduler, etc.
 

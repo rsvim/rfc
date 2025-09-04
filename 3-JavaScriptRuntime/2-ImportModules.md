@@ -469,7 +469,8 @@ Finally, the process of event loop written in pseudo-code is:
            | For each module in `ready_imports` queue:
            |     Compile source code into v8 module. <- NOTE: The "main" module will be the first pushed to `module_map.pending`, but the last to evaluate/execute.
            |     Evaluate (execute) it.
-           |     Evaluate (execute) it.
+           |     If it is dynamic import and there's exception:
+           |         Reject the promise of this dynamic import
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

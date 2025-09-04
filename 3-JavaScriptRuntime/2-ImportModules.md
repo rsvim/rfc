@@ -12,7 +12,7 @@ The dune project:
 - Has a very small code base, but still covers all the most important components/algorithms/soultions of a javascript runtime.
 - Is developed with rust/tokio and V8 js engine.
 - Is the best example to show what a javascript runtime is doing inside, and how it fills up all the gaps between js engine and a ready-to-use general purposed language interpreter/virtual-machine, including standard library, `Promise`/`async`/`await`, runtime APIs, etc.
-- Rsvim copied the architecture and a lot source code from it. Big thanks!
+- Rsvim copied the architecture and a lot source code from it (big thanks!).
 
 As for other projects, they are either too small, just a "Hello World" tutorial, or too big (i.e. node and deno) to go through the whole code base, no one can quickly understand their core components, design principles and technical solutions.
 

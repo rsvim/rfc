@@ -89,7 +89,7 @@ Let's go through this line by line:
    - Data structures such as buffers, UI tree, task tracker, etc.
    - Js runtime, include all V8 components.
    - Turn terminal into raw mode, and render for the first time. If the default buffer has file content, it will first show in the terminal.
-4. For line 14-15, the editor finally starts to read from terminal input, i.e. user can interact with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
+4. For line 14-15, the editor starts to read from terminal input, i.e. user can start interacting with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
    - `crossterm::event::EventStream`: All user keyboard/mouse events are receiving through this stream.
    - Master channel receiver and Js channel receiver: Once master receives the "Exit" message, it breaks the loop.
 

@@ -286,7 +286,7 @@ Inside js runtime, it needs a few steps to evaluate/execute a module:
 
 1. Read source code file.
 
-   > NOTE: The `import` keyword supports a remote resource. For example `import react from "https://cdn.jsdelivr.net/npm/react@19.1.1/cjs/react.production.min.js";`, in such case, this step becomes download + read. But in this section, let's simply think of all javascript scripts are on local file system.
+   > NOTE: The `import` keyword supports a remote resource. For example `import react from "https://cdn.jsdelivr.net/npm/react@19.1.1/cjs/react.production.min.js";`. In such case, this step requires extra downloading resource from http/network. In this section, let's simply ignore them to keep it simple.
 
 2. Compile into V8 module.
 3. Fetch all static import dependencies, each dependency is also a V8 module. NOTE: Here we can only fetch all static import dependencies (`import ... from ...`), dynamic import need to be fetched during module evaluating (`await import(...)`).

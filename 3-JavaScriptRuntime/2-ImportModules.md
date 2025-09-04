@@ -284,7 +284,10 @@ As you can see, npm package solves several issues for node/npm:
 
 Inside js runtime, it needs a few steps to evaluate/execute a module:
 
-1. Read source code file. NOTE: the `import` supports a remote resource such as `import syntax from "https://jsdlr.com/syntax.js";`, in such case, this step becomes download + read. But in this section, let's simply think of all javascript scripts are on local file system.
+1. Read source code file.
+
+   > NOTE: The `import` keyword supports a remote resource. For example `import react from "https://cdn.jsdelivr.net/npm/react@19.1.1/cjs/react.production.min.js";`, in such case, this step becomes download + read. But in this section, let's simply think of all javascript scripts are on local file system.
+
 2. Compile into V8 module.
 3. Fetch all static import dependencies, each dependency is also a V8 module. NOTE: Here we can only fetch all static import dependencies (`import ... from ...`), dynamic import need to be fetched during module evaluating (`await import(...)`).
 4. Instantiate V8 module with module resolver callback. NOTE: In this step, all the dependencies should be already cached and ready to use.

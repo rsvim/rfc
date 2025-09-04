@@ -260,7 +260,7 @@ As you can see, npm package solves several issues for node/npm:
 
 - A npm package can have multiple files, thus the code logic is more fine-grained controlled.
 - A module can be specified with relative file path started with `./` or `../`, or full file path started with `/` or `C:\\` (on Windows).
-- The module can be specified with a package name. Node will look for the entry module by the [`"exports" entry points`](https://nodejs.org/api/packages.html#package-entry-points) specified inside `package.json`, usually it is the `index.js` file.
+- A module can be specified with a package name. Node will look for the entry module by the [`"exports" entry points`](https://nodejs.org/api/packages.html#package-entry-points) specified inside `package.json`, usually it is the `index.js` file.
 - The `package.json` file specifies all the dependencies used by "this" package, thus npm can install all of them for user.
 
 ## Async Import

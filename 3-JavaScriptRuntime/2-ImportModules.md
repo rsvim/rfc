@@ -363,13 +363,13 @@ Else:
 
 In the "callback" step, if there's any error, `EsModuleFuture` will set an exception for this module.
 
-## Module Caches
+### `EsModule`
 
-A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it is a hash map that caches a compiled module and avoid duplicated loading.
+A module can be a common dependency for many other modules. When event loop runs, it may load a common dependency many times, duplicatedly. A module caches (a hash map) can cache a compiled module and avoid duplicated loading.
 
 Before introducing it, let's first define some very common utilities:
 
-### Module Graph
+### `ModuleGraph`
 
 A module can have no dependency, or it can have multiple dependencies.
 

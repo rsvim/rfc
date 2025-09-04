@@ -103,7 +103,7 @@ Here we have 2 modules:
 
 #### Step-2 Add NPM Packages
 
-The example is quit simple and easy, but when comes to real-world project, the complexity grows fast and multi-file structure is urgently needed. And here comes the [NPM packages](https://docs.npmjs.com/about-packages-and-modules), which is the most popular and widely used standard for server side javascript-based runtime.
+The example is quit simple and easy, but when comes to real-world project, the complexity grows fast and third-party libraries are urgently needed. And here comes the [NPM packages](https://docs.npmjs.com/about-packages-and-modules), which is the most popular and widely used standard for server side javascript-based runtime.
 
 Let's run below command in the "syntax" project:
 
@@ -142,19 +142,6 @@ import react from "react"; // This line is unused
 
 util.hello();
 ```
-
-And changes the `package.json` file to:
-
-```json
-{
-  "type": "module",
-  "dependencies": {
-    "@mui/material": "^7.3.2"
-  }
-}
-```
-
-This is because `node` by default uses CommonJS modules, but in this section we will focus on ES modules. Adding `"type": "module"` will let `node` uses ES modules.
 
 The `npm` fetches latest version of packages (including all the dependencies), and download them in `node_modules` directory:
 

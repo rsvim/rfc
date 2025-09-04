@@ -326,7 +326,7 @@ pub enum ModuleStatus {
 - `ModuleStatus` indicates current module status:
   - `Fetching`: Initialize status. When a module is first been created, it's status is `Fetching`. i.e. it creates a `EsModuleFuture`.
   - `Resolving`: After the source code is read, and compiled into V8 module, but it still has many dependency modules, it's status is `Resolving`. i.e. it creates more `EsModuleFuture` tasks for each dependencies.
-  - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip fetching again.
+  - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip resolving again.
   - `Ready`: When a module and all its dependency modules are fetched and compiled into V8 modules, it's status is `Ready`.
 
 ### [`EsModule`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L153)

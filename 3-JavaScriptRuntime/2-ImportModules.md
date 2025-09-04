@@ -375,25 +375,6 @@ struct EsModule {
 }
 ```
 
-### `ModuleGraph`
-
-A module can have no dependency, or it can have multiple dependencies.
-
-```rust
-struct EsModule {
-    pub path: ModulePath,
-    pub status: ModuleStatus,
-    pub dependencies: Vec<Rc<RefCell<EsModule>>>,
-    pub exception: Rc<RefCell<Option<String>>>,
-    pub is_dynamic_import: bool,
-}
-struct ModuleGraph {
-    pub kind: ImportKind,
-    pub root_rc: Rc<RefCell<EsModule>>,
-    pub same_origin: LinkedList<v8::Global<v8::PromiseResolver>>,
-}
-```
-
 `EsModule` holds information for a single module:
 
 - `path`: File path of source code.
@@ -401,6 +382,18 @@ struct ModuleGraph {
 - `dependencies`: All its dependencies.
 - `exception`: Any exception happened during resolving.
 - `is_dynamic_import`: Whether the "current" module is dynamic import.
+
+### `ModuleGraph`
+
+A module can have no dependency, or it can have multiple dependencies.
+
+```rust
+struct ModuleGraph {
+    pub kind: ImportKind,
+    pub root_rc: Rc<RefCell<EsModule>>,
+    pub same_origin: LinkedList<v8::Global<v8::PromiseResolver>>,
+}
+```
 
 `ModuleGraph` holds all promises (`v8::PromiseResolver`) for a single module:
 

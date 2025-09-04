@@ -98,7 +98,7 @@ export function hello() {
 
 Here we have 2 modules:
 
-- `index.js` as a main module, it can be executed by `dune run ./index.js` and print a "Hello" message (or `node ./index.js`, `deno ./index.js`).
+- `index.js` as a main module, it can be executed by `dune run ./index.js` and print a "Hello" message.
 - `util.js` as a library module, it implements many fundamental utilities and doesn't have any side-effects.
 
 #### Step-2 Add NPM Packages

@@ -66,7 +66,7 @@ The `file.js` (in the above example) is also a "module". As the first file name 
 
 The word "side-effects" is to describe there are actual impacts and changes been made to the Operating Systems. It can be print messages to console/terminal, read/write files in file system, receive/send data via IPC/RCP to remote systems, etc. When we start a program, we usually expect it does some "side-effects" to help us. But for library/package, we usually expect they don't have any side-effects, just expose some utilities and let the executable files call them.
 
-In this section, we can simply think of "static import" and "commonjs require" are the same thing.
+In this section, we can simply think "static import" is the same with commonjs "require".
 
 ### A Real-World Node Project with NPM Packages
 

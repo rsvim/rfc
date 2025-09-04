@@ -84,7 +84,7 @@ To make it more clear what rsvim is doing inside, here's a main loop process wri
 Let's go through this line by line:
 
 1. For line 1, it is the the entry of our program `rsvim`.
-2. For line 2-4, it reads the arguments feed into `rsvim`. If arguments are `-V`/`--version` or `-h`/`--help`, the program simply prints information and exit.
+2. For line 2-4, it reads the arguments feed into `rsvim`. If arguments are `-V`/`--version` or `-h`/`--help`, it simply prints information and exit.
 3. For line 6-13, the editor initialize 3 components:
    - Data structures such as buffers, UI tree, task tracker, etc.
    - Js runtime, include all V8 components.

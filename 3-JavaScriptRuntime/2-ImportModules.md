@@ -398,7 +398,7 @@ struct ModuleGraph {
 `ModuleGraph` holds all promises (`v8::PromiseResolver`) for a `EsModule`:
 
 - `kind`: This is similar to EsModule's `is_dynamic_import`. But it can hold a `v8::PromiseResolver` if current module is dynamic import.
-- `root_rc`: The `EsModule` itself of current module.
+- `root_rc`: The `EsModule` of current module.
 - `same_origin`: All dependencies belongs to "current" module that are dynamic imported.
 
 ### Module Map

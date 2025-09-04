@@ -14,7 +14,7 @@ As mentioned in [RFC-1](1-TUI.md), the very basic running loop of Rsvim editor i
 
 ![1](images/1-TUI.1.drawio.svg)
 
-When such a (classic) running loop comes to terminal+rust, we specifically introduce:
+When such a running loop comes to terminal+rust, we specifically introduce:
 
 - [Tokio](https://tokio.rs/) as async runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.

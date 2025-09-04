@@ -33,8 +33,8 @@ A compiled javascript script file is a "module".
 
 The `file.js` (in the above example) is also a "module". As the first file name feed into `dune`, it is called the "main module". In node modules, there're two types of module standards:
 
-- [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules) (CJS)
-- [ECMA modules](https://nodejs.org/api/esm.html) (ESM) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules)
+- [CommonJS modules](https://nodejs.org/api/modules.html#modules-commonjs-modules)
+- [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules)
 
 A CommonJS module is imported by the `require` keyword:
 

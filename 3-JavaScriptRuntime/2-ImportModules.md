@@ -379,13 +379,11 @@ struct EsModule {
 
 - `path`: File path of source code.
 - `status`: Module status.
-- `dependencies`: All its dependencies.
+- `dependencies`: All its dependencies. A module can have no dependency, or it can have multiple dependencies.
 - `exception`: Any exception happened during resolving.
 - `is_dynamic_import`: Whether the "current" module is dynamic import.
 
 ### `ModuleGraph`
-
-A module can have no dependency, or it can have multiple dependencies.
 
 ```rust
 struct ModuleGraph {

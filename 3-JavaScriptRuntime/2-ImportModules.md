@@ -39,7 +39,7 @@ The `file.js` (in the above example) is also a "module". As the first file name 
   const syntax = require("syntax");
   ```
 
-- [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules): It uses the `import` keyword. It has 3 variants, for example:
+- [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules): It uses the `import` keyword, with 3 variants, for example:
   - Static import:
 
     ```javascript

@@ -297,7 +297,7 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
 
-### Async Event Loop
+### Async Task
 
 Js runtime such as node/deno is famous for their "async event loop", which brings a great performance. The "async" is implemented by several core components:
 
@@ -306,6 +306,40 @@ Js runtime such as node/deno is famous for their "async event loop", which bring
 - Callback: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
 
 Resolving a module is also one of the async task.
+
+### Common Types
+
+Before introducing module resolving, here're some common types in dune:
+
+```rust
+pub type ModulePath = String;
+pub type ModuleSource = String;
+pub enum ImportKind {
+    // Loading static imports.
+    Static,
+    // Loading a dynamic import.
+    Dynamic(v8::Global<v8::PromiseResolver>),
+}
+pub enum ModuleStatus {
+    // Indicates the module is being fetched.
+    Fetching,
+    // Indicates the dependencies are being fetched.
+    Resolving,
+    // Indicates the module has ben seen before.
+    Duplicate,
+    // Indicates the modules is resolved.
+    Ready,
+}
+```
+
+- `ModulePath` indicates the file path of a javascript script file.
+- `ModuleSource` indicates the source code content.
+- `ImportKind` indicates whether the module is static import or dynamic import.
+- `ModuleStatus` indicates current module status:
+  - `Fetching`: Initialize status. When a module is first been created, it's status is `Fetching`. It corresponds to line-5 in above pseudo-code process, i.e. create a `EsModuleFuture` and let backend thread-pool to read the source code from the javascript file.
+  - `Resolving`: After the source code is read, and compiled into V8 module, but it still has many dependency modules, it's status is `Resolving`. It corresponds to line-13 in above pseudo-code process, i.e. it creates more `EsModuleFuture` tasks for each dependencies.
+  - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip fetching again.
+  - `Ready`: When a module and all its dependency modules are fetched and compiled into V8 modules, it's status is `Ready`.
 
 ### `EsModule`
 
@@ -341,36 +375,6 @@ In the "complete" step, if there's any error, `EsModuleFuture` will set an excep
 A module can be a common dependency for many other modules. In event loop (v1), it may load a common dependency many times, duplicatedly. Here comes the module map, it is a hash map that caches a compiled module and avoid duplicated loading.
 
 Before introducing it, let's first define some very common utilities:
-
-```rust
-pub type ModulePath = String;
-pub type ModuleSource = String;
-pub enum ImportKind {
-    // Loading static imports.
-    Static,
-    // Loading a dynamic import.
-    Dynamic(v8::Global<v8::PromiseResolver>),
-}
-pub enum ModuleStatus {
-    // Indicates the module is being fetched.
-    Fetching,
-    // Indicates the dependencies are being fetched.
-    Resolving,
-    // Indicates the module has ben seen before.
-    Duplicate,
-    // Indicates the modules is resolved.
-    Ready,
-}
-```
-
-- `ModulePath` indicates the file path of a javascript script file.
-- `ModuleSource` indicates the source code content.
-- `ImportKind` indicates whether the module is static import or dynamic import.
-- `ModuleStatus` indicates current module status:
-  - `Fetching`: Initialize status. When a module is first been created, it's status is `Fetching`. It corresponds to line-5 in above pseudo-code process, i.e. create a `EsModuleFuture` and let backend thread-pool to read the source code from the javascript file.
-  - `Resolving`: After the source code is read, and compiled into V8 module, but it still has many dependency modules, it's status is `Resolving`. It corresponds to line-13 in above pseudo-code process, i.e. it creates more `EsModuleFuture` tasks for each dependencies.
-  - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip fetching again.
-  - `Ready`: When a module and all its dependency modules are fetched and compiled into V8 modules, it's status is `Ready`.
 
 ### Module Graph
 

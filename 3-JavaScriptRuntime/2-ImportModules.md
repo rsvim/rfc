@@ -449,23 +449,23 @@ Finally, the process of event loop written in pseudo-code is:
            |            Remove it from `module_map.pending` queue.
            |        Else:
            |            If current module is not `Ready` yet:
-           |              If current module is `Duplicate`:
-15         |                Mark it as `Ready`.
-           |              For all its dependencies of current module:
-           |                Fast import for one dependency:
-           |                | If it is already `Ready`:
-           |                |   Do nothing
-20         |                | If it is `Duplicate`:
-           |                |   Mark it as `Ready`
-           |                | If it has no dependencies, and it's `Resolving`:
-           |                |   Mark it as `Ready`
-           |                | If it has no dependencies, and it's not `Resolving`:
-25         |                |   Do nothing
-           |                | If all the dependencies of it are `Ready`:
-           |                |   Mark it as `Ready`
-           |              If current module is `Ready`:
-           |                Push it to a `ready_imports` queue.
-30         |                Remove it from `module_map.pending` queue.
+           |                If current module is `Duplicate`:
+15         |                    Mark it as `Ready`.
+           |                For all its dependencies of current module:
+           |                    Fast import for one dependency:
+           |                    |   If it is already `Ready`:
+           |                    |       Do nothing
+20         |                    |   If it is `Duplicate`:
+           |                    |       Mark it as `Ready`
+           |                    |   If it has no dependencies, and it's `Resolving`:
+           |                    |       Mark it as `Ready`
+           |                    |   If it has no dependencies, and it's not `Resolving`:
+25         |                    |       Do nothing
+           |                    |   If all the dependencies of it are `Ready`:
+           |                    |       Mark it as `Ready`
+           |                    If current module is `Ready`:
+           |                        Push it to a `ready_imports` queue.
+30         |                        Remove it from `module_map.pending` queue.
            | For each module in `ready_imports` queue:
            |
 ```

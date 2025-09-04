@@ -10,7 +10,7 @@ The dune project:
 
 - Is an open source javascript runtime.
 - Has a very small code base, but still covers all the most important components/algorithms/soultions of a javascript runtime.
-- Is developed with rust/tokio and V8 js engine
+- Is developed with rust/tokio and V8 js engine.
 - Is the best example to show what a javascript runtime is doing inside, and how it fills up all the gaps between js engine and a ready-to-use general purposed language interpreter/virtual-machine, including standard library, `Promise`/`async`/`await` scheduler, etc.
 - Rsvim copied the architecture and a lot source code from it. Big thanks!
 

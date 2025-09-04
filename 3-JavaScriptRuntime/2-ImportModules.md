@@ -143,7 +143,7 @@ import react from "react"; // This line is unused
 util.hello();
 ```
 
-Let's check the directory structure:
+Let's check the `node_modules` directory:
 
 ```text
 syntax/

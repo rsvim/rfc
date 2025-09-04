@@ -297,7 +297,7 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
 
-### `JsFuture`
+### [`JsFuture`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/runtime.rs?plain=1#L44)
 
 Js runtime such as node/deno is famous for their "async event loop", which brings a great performance. The "async" is implemented by several core components:
 
@@ -305,7 +305,15 @@ Js runtime such as node/deno is famous for their "async event loop", which bring
 - Thread Pool: For CPU-bound tasks, they are spawn with a worker thread to avoid blocking the main thread.
 - Callback: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
 
-All async tasks share a same trait: `JsFuture`. Resolving a module is also one of async tasks.
+All async tasks share a same trait: `JsFuture`:
+
+```rust
+pub trait JsFuture {
+    fn run(&mut self, scope: &mut v8::HandleScope);
+}
+```
+
+Resolving a module is also one of async tasks.
 
 ### Common Types
 
@@ -341,7 +349,7 @@ pub enum ModuleStatus {
   - `Duplicate`: When fetching a module, if it is already been loaded before and cached, we can directly mark it as `Duplicate` and skip fetching again.
   - `Ready`: When a module and all its dependency modules are fetched and compiled into V8 modules, it's status is `Ready`.
 
-### `EsModule`
+### [`EsModule`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L153)
 
 In real-world project, the dependencies can be a big ocean, simply loading them is a big challenge. The event loop handles all the module resolving tasks along with all the async tasks together. Scheduled in 3 steps:
 
@@ -363,7 +371,7 @@ Else:
 
 In the "callback" step, if there's any error, `EsModuleFuture` will set an exception for this module.
 
-Here is the rust version [`EsModule`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L153):
+Here is the rust version `EsModule`:
 
 ```rust
 struct EsModule {
@@ -383,9 +391,9 @@ struct EsModule {
 - `exception`: Any exception happened during resolving.
 - `is_dynamic_import`: Whether the "current" module is dynamic import.
 
-### `ModuleGraph`
+### [`ModuleGraph`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L208)
 
-The rust version [`ModuleGraph`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L208) is:
+The rust version `ModuleGraph` is:
 
 ```rust
 struct ModuleGraph {
@@ -401,9 +409,11 @@ struct ModuleGraph {
 - `root_rc`: The `EsModule` of current module.
 - `same_origin`: All dependencies belongs to "current" module that are dynamic imported.
 
-### Module Map
+### [`ModuleMap`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/modules.rs?plain=1#L81)
 
 A module can be a common dependency for many other modules. When event loop runs, it may load a common dependency many times, duplicatedly. A module caches (a hash map) can cache all compiled modules and avoid duplicated loading.
+
+Here's the rust version [`ModuleMap`]()
 
 ```rust
 struct ModuleMap {

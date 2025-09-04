@@ -303,13 +303,13 @@ Js runtime such as node/deno is famous for their "async event loop", which bring
 
 - Async IO: Most IO operations are running asynchronously to avoid blocking, for example file IO, standard IO (`stdin`, `stdout`, `stderr`), socket, network, http, ssl/tls, etc.
 - Thread Pool: For CPU-bound tasks, they are spawn with a worker thread to avoid blocking the main thread.
-- Callbacks: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
+- Callback: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
 
 Resolving a module is also one of the async task.
 
 ### `EsModule`
 
-In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed): event loop + async task.
+In real-world project, the dependencies can be a big ocean, simply loading them is a big challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed): event loop + async task.
 
 An async task has two steps:
 

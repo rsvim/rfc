@@ -23,7 +23,7 @@ As for other projects, they are either too small, just a "Hello World" tutorial,
 A javascript-based project is similar to other programming language project, usually it has two types:
 
 - As an executable file: for example, running `dune run file.js` (or `node file.js`, `deno file.js`) to execute the `file.js` script.
-- As a library/package: for example, using `import syntax from "syntax";` in the `file.js` to import a javascript module to avoid duplication and manual copy-pasting.
+- As a library/package: for example, using `import syntax from "syntax";` in the `file.js` to import a javascript module.
 
 ### CommonJS/ECMA Modules
 

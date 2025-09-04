@@ -479,5 +479,5 @@ Finally, the process of event loop written in pseudo-code is:
 
 The whole process is quite long, the most important two lines are:
 
-- For line 32, the "main" module will be the first pushed to `module_map.pending`, but the last to evaluate/execute at this line. When js runtime initializes, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.
+- For line 32, the "main" module will be the first pushed to `module_map.pending`, but the last to evaluate/execute at this line. When js runtime initializes, all the static import modules should to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.
 - For line 39, if the callback is a `EsModuleFuture`, it will compile source code into v8 module, and creates tasks for all dependencies (as we mentioned in [`EsModule`](#esmodule)).

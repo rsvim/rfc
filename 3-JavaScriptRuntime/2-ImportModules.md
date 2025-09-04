@@ -474,7 +474,7 @@ Finally, the process of event loop written in pseudo-code is:
            (Step-2) Tick the event loop (We don't explain this part in this section)
            (Step-3) Run all the callbacks waiting in `pending_futures` queue:
            |   For each callback in `pending_futures` queue:
-           |       Run the callback.
+           |       Run the callback. <- NOTE: If this is a `EsModuleFuture`, it will compile source code into v8 module, and creates tasks for all dependencies.
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

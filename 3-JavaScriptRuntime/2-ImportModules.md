@@ -2,9 +2,7 @@
 
 > Written by @linrongbin16, first created at 2025-09-02.
 
-This RFC investigates javascript modules and `import` keyword implementations in [dune](https://github.com/aalykiot/dune).
-
-> Recommend reading: [RFC-2](../2-EventLoop.md)
+This RFC investigates javascript modules and `import` keyword implementations in [dune](https://github.com/aalykiot/dune). Also recommend reading [RFC-2](../2-EventLoop.md).
 
 ## Why Dune?
 

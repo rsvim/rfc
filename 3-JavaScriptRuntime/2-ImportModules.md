@@ -361,7 +361,7 @@ Module resolving task is called `EsModuleFuture`, its "work" step is simply read
 
 ```text
 If current module has exceptions:
-    Stop process
+    If it is static import, then stop the whole process
 Else:
     Compile the source code into V8 module
     Get all its dependencies from current module

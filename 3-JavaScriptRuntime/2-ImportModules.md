@@ -17,14 +17,16 @@ The dune project:
 
 As for other projects, they are either too small, just a "Hello World" tutorial, or too big to quickly go through the whole code base, we can no longer quickly understand their core components, design principles and technical solutions (i.e. node/deno).
 
-## JavaScript-based Project
+## Module
+
+### Introduction
 
 A javascript-based project is similar to other programming language project, mostly it has two types:
 
-- As an executable file: for example, running `dune file.js` (similar to `node file.js`, `deno file.js`) to execute the `file.js` script.
+- As an executable file: for example, running `dune run file.js` (similar to `node file.js`, `deno file.js`) to execute the `file.js` script.
 - As a library/package: for example, using `import syntax from "syntax";` (inside "current" js script) to import a javascript module to avoid duplication and manual copy-pasting.
 
-## Module
+### Node Modules/Packages
 
 A compiled javascript script file is a "module".
 
@@ -44,7 +46,7 @@ A ES module is imported by the `import` keyword:
 import syntax from "syntax";
 ```
 
-## A Real-World Node Project with NPM Packages
+### A Real-World Node Project with NPM Packages
 
 Now let's extend a single file module into a multi-file project named "syntax", the file structure is:
 

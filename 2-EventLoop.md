@@ -25,7 +25,7 @@ For example, when a user execute below operations:
 
 1. Press key `i` - the editor goes to **Insert Mode**.
 2. Types `a-z`/`A-Z` and `0-9` - the editor inserts these letters and numbers in the buffer.
-3. Press key `ESC`, the editor goes back to **Normal Mode**.
+3. Press key `ESC` - the editor goes back to **Normal Mode**.
 
 In these operations, the **Interaction** should always be synchronous, i.e. it should follows "input" => "calculation" => "output" for each user's operation, thus achieve a consistent application behavior. Even some operations will block the TUI, this should still stay synchronous, because consistent behavior has highest priority.
 

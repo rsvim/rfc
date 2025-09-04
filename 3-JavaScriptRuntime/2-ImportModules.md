@@ -282,14 +282,14 @@ As you can see, npm package solves several issues for node/npm:
 
 ## Resolve Module
 
-Inside js runtime, it needs a few steps to evaluate/execute a module:
+Inside js runtime, it needs a few steps to evaluate (execute) a module:
 
 1. Read source code from file path.
 
    > NOTE: The `import` keyword supports a remote resource. For example `import react from "https://cdn.jsdelivr.net/npm/react@19.1.1/cjs/react.production.min.js";`. In such case, this step requires extra downloading resource from http/network. In this section, let's simply ignore them to keep it simple.
 
 2. Compile source code into V8 module.
-3. Recursively resolve all static imported dependencies, each dependency is also a module. NOTE: dynamic imported modules need to be resolved during evaluating/executing current module.
+3. Recursively resolve all static imported dependencies, each dependency is also a module. NOTE: dynamic imported modules need to be resolved during evaluating (executing) current module.
 4. Instantiate V8 module with a module lookup callback function. In this step, all dependencies of current module should be already resolved and ready to use.
 5. Evaluate (execute) V8 module.
 

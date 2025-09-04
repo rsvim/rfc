@@ -356,7 +356,7 @@ Module resolving task is called `EsModuleFuture`, its "work" step is simply read
 2      Stop process
 3  Else:
 4      Compile the source code into V8 module
-5      Get all its dependency modules from "current" module
+5      Get all its dependency modules from current module
 6      For each dependency module:
 7          Create new `EsModuleFuture` task and push to `pending_futures` queue
 ```

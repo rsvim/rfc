@@ -236,7 +236,7 @@ Let's go through these "require" statements:
 - In line 16-21, `require("@mui/utils/...")` imports the [`@mui/utils`](https://www.npmjs.com/package/@mui/utils) package.
 - In line 22-26, `require("../zero-styled")` and others imports the local modules in upper directory.
 
-As you can see, npm package solves several issues for node/npm:
+As you can see, npm package solves several issues for node:
 
 - A npm package can have multiple files, thus the code logic is more fine-grained controlled.
 - A module can be specified with relative file path started with `./` or `../`, or full file path started with `/` or `C:\\` (on Windows).

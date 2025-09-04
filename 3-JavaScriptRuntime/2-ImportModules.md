@@ -290,7 +290,7 @@ Inside js runtime, it needs a few steps to evaluate/execute a module:
 
 2. Compile source code into V8 module.
 3. Recursively resolve all static imported dependencies, each dependency is also a module. NOTE: dynamic imported modules need to be resolved during evaluating/executing current module.
-4. Instantiate V8 module with module resolver callback. NOTE: In this step, all the dependencies should be already cached and ready to use.
+4. Instantiate V8 module with a module lookup callback function. In this step, all dependencies of current module should be already resolved and ready to use.
 5. Evaluate (execute) V8 module.
 
 When we run `dune run ./index.js` in the terminal. All modules is a dependency tree:

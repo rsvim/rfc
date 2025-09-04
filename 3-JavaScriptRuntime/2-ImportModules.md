@@ -14,7 +14,7 @@ The dune project:
 - Is the best example to show what a javascript runtime is doing inside, and how it fills up all the gaps between js engine and a ready-to-use general purposed language interpreter/virtual-machine, including standard library, `Promise`/`async`/`await`, runtime APIs, etc.
 - Rsvim copied the architecture and a lot source code from it. Big thanks!
 
-As for other projects, they are either too small, just a "Hello World" tutorial, or too big to quickly go through the whole code base, we can no longer quickly understand their core components, design principles and technical solutions (i.e. node/deno).
+As for other projects, they are either too small, just a "Hello World" tutorial, or too big (i.e. node/deno) to go through the whole code base, no one can quickly understand their core components, design principles and technical solutions.
 
 ## Module
 

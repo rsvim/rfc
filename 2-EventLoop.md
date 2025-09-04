@@ -110,6 +110,6 @@ Most read-only tasks, such as colorschemes updating, they are interruptible, the
 
 ### Non-Interruptible Tasks
 
-For write file tasks, or other resources related tasks (IPC/RPC, child-processes management), it is dangerous if editor forcibly interrupts them, which can damages users data and services.
+For write file tasks, or other resources related tasks (IPC/RPC, child-processes management), it is dangerous if editor forcibly interrupts them, which can cause damage to user's data and system.
 
 For such case, we have to wait for them complete to keep safe.

@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2024-09-03, last updated at 2025-09-03.
 
-This RFC describes the Rsvim's running loop. Also recommend reading: [RFC-3.2](3-JavaScriptRuntime/2-ImportModules.md)
+This RFC describes the Rsvim's running loop. Also recommend reading [RFC-3.2](3-JavaScriptRuntime/2-ImportModules.md).
 
 ## Running Loop
 

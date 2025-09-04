@@ -95,8 +95,8 @@ Let's go through this line by line:
 
    > NOTE: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe. Thus rsvim introduces these 2 channels to send data to each other.
 
-5. For line 16, once the event is been processed, and the editor renders the internal data changes to TUI.
-6. For line 17, the editor recovers the terminal and exit the program.
+5. For line 18, once a event is been processed, the editor renders the internal data changes to TUI.
+6. For line 19, the editor recovers the terminal and exit the program.
 
 As you can see, actually it still follows the "input" => "calculation" => "output" process.
 

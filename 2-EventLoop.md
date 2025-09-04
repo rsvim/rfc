@@ -84,20 +84,19 @@ To make it more clear what rsvim is doing inside, here's a main loop process wri
 Let's go through this line by line:
 
 1. For line 1, it is the the entry of our program `rsvim`.
-2. For line 2, it reads the arguments feed into `rsvim`.
-3. For line 3-5, if arguments is `-V`/`--version` or `-h`/`--help`, the program simply prints some information then exit.
-4. For line 6-13, the editor initialize 3 components:
+2. For line 2-4, it reads the arguments feed into `rsvim`. If arguments are `-V`/`--version` or `-h`/`--help`, the program simply prints some information then exit.
+3. For line 6-13, the editor initialize 3 components:
    - Data structures such as buffers, UI tree, task tracker, etc.
    - Js runtime, include all V8 components.
    - Turn terminal into raw mode, and render for the first time. If the default buffer has file content, it will first show in the terminal.
-5. For line 14-15, the editor finally starts to read from terminal input, i.e. user can interact with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
+4. For line 14-15, the editor finally starts to read from terminal input, i.e. user can interact with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
    - `crossterm::event::EventStream`: All user keyboard/mouse events are receiving through this stream.
    - Master channel receiver and Js channel receiver: Once master receives the "Exit" message, it breaks the loop.
 
    > NOTE: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe. Thus rsvim introduces these 2 channels to send data to each other.
 
-6. For line 16, once the event is been processed, and the editor renders the internal data changes to TUI.
-7. For line 17, the editor recovers the terminal and exit the program.
+5. For line 16, once the event is been processed, and the editor renders the internal data changes to TUI.
+6. For line 17, the editor recovers the terminal and exit the program.
 
 As you can see, actually it still follows the "input" => "calculation" => "output" process.
 

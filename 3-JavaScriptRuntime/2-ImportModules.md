@@ -353,7 +353,7 @@ Module resolving task is called `EsModuleFuture`, its "work" step is simply read
 
 ```text
 1  If current module has exceptions:
-2      Stops current process
+2      Stops process
 3  Else:
 4      Compile the source code into V8 module
 5      Get all its dependency modules from "current" module

@@ -102,9 +102,9 @@ As you can see, actually it still follows the "input" => "calculation" => "outpu
 
 ## Exiting
 
-### Interruptible Tasks
-
 Consider when an editor is going to exit, async tasks can be split into two types: interruptible (cancellable) and non-interruptible (non-cancellable).
+
+### Interruptible Tasks
 
 Most read-only tasks, such as colorschemes updating, they are interruptible, the editor can just abandon them and exit.
 

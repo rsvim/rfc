@@ -293,7 +293,7 @@ pub trait JsFuture {
 }
 ```
 
-Resolving a module is also one of async tasks.
+Module resolving is also one of async tasks.
 
 ### Common Types
 

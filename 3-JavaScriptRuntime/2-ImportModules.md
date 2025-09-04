@@ -113,7 +113,7 @@ npm install @mui/material
 
 > NOTE: The `@mui/material` packages have nothing to do with Rsvim, here I just want to demo how real-world NPM packages are structured.
 
-We will have two new files `package.json`, `package-lock.json` and a new directory `node_modules/`. The file structure becomes:
+The `npm` fetches latest version of packages (including all the dependencies), and download them in `node_modules` directory. We will have two new files `package.json`, `package-lock.json` and a new directory `node_modules/`. The file structure becomes:
 
 ```text
 syntax/
@@ -142,8 +142,6 @@ import react from "react"; // This line is unused
 
 util.hello();
 ```
-
-The `npm` fetches latest version of packages (including all the dependencies), and download them in `node_modules` directory:
 
 ```text
 syntax/

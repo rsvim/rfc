@@ -279,7 +279,7 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ### [`JsFuture`](https://github.com/aalykiot/dune/blob/8f61719c7765d371e4f77ee3a4cf9d82e59391e7/src/runtime.rs?plain=1#L44)
 
-Node and deno is famous for their "async event loop", which brings a great performance. The "async" is implemented by several core mechanism:
+Node and deno is famous for their "async event loop", which brings a great performance. The "async" is implemented by several mechanism:
 
 - Async IO: Most IO operations are running asynchronously to avoid blocking, for example file IO, standard IO (`stdin`, `stdout`, `stderr`), socket, network, http, ssl/tls, etc.
 - Thread Pool: For CPU-bound tasks, they are spawn with a worker thread to avoid blocking the main thread.

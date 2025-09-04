@@ -40,12 +40,16 @@ The `file.js` (in the above example) is also a "module". As the first file name 
   ```
 
 - [ECMA modules](https://nodejs.org/api/esm.html) defined in [ECMA-262](https://tc39.es/ecma262/#sec-modules): It uses the `import` keyword with 3 variants, for example:
-  - Static import:
+  - Static import without side-effects:
 
     ```javascript
     // Import without side-effects
     import syntax from "syntax";
+    ```
 
+  - Static import with side-effects:
+
+    ```javascript
     // Import with side-effects
     import "syntax";
     ```

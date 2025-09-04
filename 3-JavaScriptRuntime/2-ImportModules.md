@@ -413,7 +413,7 @@ struct ModuleGraph {
 
 A module can be a common dependency for many other modules. When event loop runs, it may load a common dependency many times, duplicatedly. A module caches (a hash map) can cache all compiled modules and avoid duplicated loading.
 
-Here's the rust version [`ModuleMap`]()
+Here's the rust version `ModuleMap`:
 
 ```rust
 struct ModuleMap {

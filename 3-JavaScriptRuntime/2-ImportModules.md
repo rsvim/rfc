@@ -71,7 +71,7 @@ And ES module support 3 variants:
   import("syntax").then((syntax) => {}).catch((err) => {});
   ```
 
-Note: "Side-effects" is to describe there are actual impacts and changes been made to the Operating Systems. It can be messages print to console/terminal, read/write files in file system, IPC/RCP data receive/send to remote systems, etc. When we start a program, we usually expect it does some "side-effects" to help us finish our work. But for library/package, we usually expect they don't have any side-effects, but just expose some utilities and let the executable files call them.
+The word "side-effects" is to describe there are actual impacts and changes been made to the Operating Systems. It can be messages print to console/terminal, read/write files in file system, IPC/RCP data receive/send to remote systems, etc. When we start a program, we usually expect it does some "side-effects" to help us finish our work. But for library/package, we usually expect they don't have any side-effects, but just expose some utilities and let the executable files call them.
 
 ### A Real-World Node Project with NPM Packages
 
@@ -105,6 +105,8 @@ Here we have 2 modules:
 
 - `index.js` as a main module, it can be executed by `dune run ./index.js` and print a "Hello" message (or `node ./index.js`, `deno ./index.js`).
 - `util.js` as a library module, it implements many fundamental utilities and doesn't have any side-effects.
+
+#### Step-2 Add NPM Packages
 
 The example is quit simple and easy, but when comes to real-world project, the complexity grows fast and multi-file structure is urgently needed. And here comes the [NPM packages](https://docs.npmjs.com/about-packages-and-modules), which is the most popular and widely used standard for server side javascript-based runtime.
 

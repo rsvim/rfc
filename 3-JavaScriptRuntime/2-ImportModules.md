@@ -352,13 +352,13 @@ In real-world project, the dependencies can be a big ocean, simply loading them 
 Module resolving task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. Its "callback" step is:
 
 ```text
-1  If current module has exceptions:
-2      Stop process
-3  Else:
-4      Compile the source code into V8 module
-5      Get all its dependencies from current module
-6      For each dependency module:
-7          Create new `EsModuleFuture` task and push to `pending_futures` queue
+If current module has exceptions:
+    Stop process
+Else:
+    Compile the source code into V8 module
+    Get all its dependencies from current module
+    For each dependency module:
+        Create new `EsModuleFuture` task and push to `pending_futures` queue
 ```
 
 In the "complete" step, if there's any error, `EsModuleFuture` will set an exception for this module.

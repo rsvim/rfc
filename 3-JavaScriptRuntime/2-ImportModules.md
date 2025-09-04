@@ -316,7 +316,11 @@ An async task has two steps:
 1. Work: The task has a work to do, and generate a result.
 2. Callback: Once the task has done the work, it triggers a callback to consume the result and finally completes.
 
-All tasks are dispatched to a backend thread-pool to execute, so even the CPU-bound calculation tasks will not block the "main" thread. Once "work" step is done, they will be adding to a `pending_futures` queue, waiting for the "main" thread to call the "complete" steps.
+All tasks are scheduled with 3 steps:
+
+1. Spawn with a worker, i.e. the actual work will be done without blocking "main" thread. Then push the task to a `pending_futures` queue.
+2. Wait for the task work done.
+3. Run the callback with work results, remove from `pending_futures` queue.
 
 For module resolving, the task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. While its "complete" step is:
 

@@ -349,7 +349,7 @@ In real-world project, the dependencies can be a big ocean, simply loading them 
 2. Wait for the task work done.
 3. Run the callback with work results, remove from `pending_futures` queue.
 
-For module resolving, the task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. While its "complete" step is:
+Module resolving task is called `EsModuleFuture`, its "work" step is simply reading source code by a file path. While its "complete" step is:
 
 ```text
 1 If current module has exceptions:

@@ -278,7 +278,7 @@ As you can see, npm package solves several issues for node/npm:
 
   Thus when we write `import react from "react";`, it actually import the `react/index.js` file.
 
-- The `package.json` file specifies all the dependencies used by "this" package, thus npm can install all of them for user.
+- The `package.json` file specifies all the dependencies used by "current" package, thus npm can install all of them for user.
 
 ## Async Import
 

@@ -431,21 +431,21 @@ struct ModuleMap {
 - `seen`: Holds all modules' file path and its status.
 - `pending`: Holds all unresolved modules, i.e. the module status is still not `Ready`.
 
-## Pseudo-Code Process of Event Loop
+### Pseudo-Code Process
 
-Finally, the process of event loop written written in pseudo-code is:
+Finally, the process of event loop written in pseudo-code is:
 
 ```text
 1  Main:
-2    Initialize V8 engine.
-3    Initialize `module_map` (ModuleMap)
-3    Initialize `pending_futures` for all async tasks
-3    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
-4    Loop:
-5      Run fast forward imports (Step-1):
-6      | For each pending module in `module_map.pending` queue:
-7      |   If "current" module has any exception while resolving:
-8      |     Assert it must be dynamic import, reject the promise.
+     Initialize V8 engine.
+     Initialize `module_map` (ModuleMap).
+     Initialize `pending_futures` queue.
+5    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
+     Loop:
+       Run fast forward imports (Step-1):
+       | For each pending module in `module_map.pending` queue:
+       |   If "current" module has any exception while resolving:
+10     |     Assert it must be dynamic import, reject the promise.
 9      |     Remove it from `module_map.pending` queue.
 10     |   Else:
 11     |     If "current" module is not `Ready` yet:

@@ -29,7 +29,7 @@ For example, when a user execute below operations:
 
 In these operations, the **process** should always be synchronous, i.e. it follows "input" => "calculation" => "output" for each operation, thus achieve a consistent behavior. Even some operations will block the TUI, this should still stay synchronous, because consistent behavior always has the highest priority.
 
-You may ask: then what does tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide users with a very comfortable editing experience. Only a few core operations (i.e. text editing) should always stay synchronous, other tasks can run asynchronously or in parallel, for example:
+You may ask: then what will tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide a comfortable editing experience. Only a few core operations (i.e. above operations) should always stay synchronous, other tasks can run asynchronously or in parallel, for example:
 
 - Syntax analysis and highlighting.
 - LSP services management.
@@ -47,41 +47,38 @@ Thus all tasks inside rsvim can be split into two types: blocking tasks and non-
 
 ### Blocking/Sync Tasks
 
-An editor waits for a user's action, finishes internal logic, renders the terminal, then waits for user's next action. This is core internal logic for an editor, and the timeline should be always sync and blocking. Because user would rather wait for tasks done to get a deterministic and correct editor behavior.
+Only a few core text editing logic always stays synchronous and blocking. Because user would rather wait for them done to get a consistent and correct behavior.
 
 ### Non-Blocking/Async Tasks
 
-There are also a lot of tasks that user don't want them blocking the core text editing. We use tokio's async tasks, thus fully utilize all the CPU cores and never freeze the editor.
+Many other logic can run asynchronously or in parallel, because user don't want to wait for them, thus fully utilize all the CPU cores and never freeze the editor.
 
-Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine will stops running and gives the CPU back to the editor, hold scripts logic until next event loop.
-
-This is exactly what all JavaScript-based runtimes ([node.js](https://nodejs.org/), [deno](https://deno.com/)) do.
+Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine stops running and gives the "main" thread to the editor, hold the context until next event loop. This is exactly what all JavaScript-based runtimes ([node.js](https://nodejs.org/), [deno](https://deno.com/)) do.
 
 ## Pseudo-Code Process
 
 To make it more clear what rsvim is doing inside, here's a main loop process written with pseudo-code:
 
 ```text
-1 Main:
-2  Reading arguments from CLI
-3  If arguments == "-V/--version" or "-h/--help":
-4    Print version or help manual
-5    Exit
-6  Create data structures: BuffersManager, UIWidgetTree, JsRuntime, TaskTracker, etc.
-7  Initialize (execute) js configs.
-8  (Initialize buffers) If arguments provide file names:
-9    Create one buffer for each file name, reading file content into buffer. Set the first buffer as default buffer.
-10 Else:
-11   Create a default buffer with no file name, empty content.
-12 Initialize a default window, binded with the default buffer.
-13 Initialize terminal into raw mode, and render TUI.
-14 Loop:
-15   `tokio::select!` on multiple streams asynchronously:
-       - `crossterm::event::EventStream`
-       - Master Channel Receiver, if receives "Exit" message, break the loop
-       - Js Channel Receiver
-16   Render TUI
-17 Recover terminal, exit
+1  Main:
+       Reading arguments from CLI
+       If arguments == "-V/--version" or "-h/--help":
+           Print information and exit
+5      Create data structures: BuffersManager, UIWidgetTree, JsRuntime, TaskTracker, etc.
+       Initialize (execute) js configs.
+       (Initialize buffers) If arguments provide file names:
+            Create one buffer for each file name, reading file content into buffer. Set the first buffer as default buffer.
+       Else:
+10          Create a default buffer with no file name, empty content.
+       Initialize a default window, binded with the default buffer.
+       Initialize terminal into raw mode, and render TUI.
+       Loop:
+           `tokio::select!` on multiple streams asynchronously:
+15             - `crossterm::event::EventStream`
+               - Master Channel Receiver, if receives "Exit" message, break the loop
+               - Js Channel Receiver
+           Render TUI
+19     Recover terminal, exit
 ```
 
 Let's go through this line by line:

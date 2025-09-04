@@ -269,9 +269,9 @@ Inside js runtime, it needs a few steps to evaluate (execute) a module:
    > NOTE: The `import` keyword supports a remote resource. For example `import react from "https://cdn.jsdelivr.net/npm/react@19.1.1/cjs/react.production.min.js";`. In such case, this step requires extra downloading resource from http/network. In this section, let's simply ignore them to keep it simple.
 
 2. Compile source code into V8 module.
-3. Recursively resolve all static imported dependencies, each dependency is also a module. NOTE: dynamic imported modules need to be resolved during evaluating (executing) current module.
+3. Recursively resolve all static imported dependencies, each dependency is also a module. NOTE: dynamic imported modules need to be resolved during evaluating current module.
 4. Instantiate V8 module with a module lookup callback function. In this step, all dependencies of current module should be already resolved and ready to use.
-5. Evaluate (execute) V8 module.
+5. Evaluate V8 module.
 
 When we run `dune run ./index.js` in the terminal. All modules is a dependency tree:
 
@@ -448,7 +448,7 @@ Finally, the process of event loop written in pseudo-code is:
 30         |                       Remove it from `module_map.pending` queue.
            | For each module in `ready_imports` queue:
 32         |   Compile source code into v8 module.
-           |   Evaluate (execute) it.
+           |   Evaluate it.
            |   If it is dynamic import and there's exception:
 35         |       Reject the promise of this dynamic import
            (Step-2) Tick the event loop (We don't explain this part in this section)
@@ -459,5 +459,5 @@ Finally, the process of event loop written in pseudo-code is:
 
 The whole process is quite long, the most important two lines are:
 
-- For line 32, the "main" module will be the first pushed to `module_map.pending`, but the last to evaluate/execute at this line. When js runtime initializes, all static imported modules should to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.
+- For line 32, the "main" module will be the first pushed to `module_map.pending`, but the last to evaluate at this line. When js runtime initializes, all static imported modules should to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate the module. While all dynamic import modules can be delayed until actual evaluation.
 - For line 39, if the callback is a `EsModuleFuture`, it will compile source code into v8 module, and creates tasks for all dependencies (as we mentioned in [`EsModule`](#esmodule)).

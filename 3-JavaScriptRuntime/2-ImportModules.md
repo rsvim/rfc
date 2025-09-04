@@ -444,29 +444,29 @@ Finally, the process of event loop written in pseudo-code is:
      Loop:
        (Step-1) Fast forward imports:
        | For each pending module in `module_map.pending` queue:
-       |   If "current" module has any exception while resolving:
+       |   If current module has any exception while resolving:
 10     |     Assert it must be dynamic import, reject the promise.
        |     Remove it from `module_map.pending` queue.
        |   Else:
-       |     If "current" module is not `Ready` yet:
-       |       If "current" module is `Duplicate`:
+       |     If current module is not `Ready` yet:
+       |       If current module is `Duplicate`:
 15     |         Mark it as `Ready`.
-14     |       For all its dependencies of "current" module:
-15     |         Fast import for one dependency:
-16     |         | If it is already `Ready`:
-17     |         |   Do nothing
-18     |         | If it is `Duplicate`:
-19     |         |   Mark it as `Ready`
-20     |         | If it has no dependencies, and it's `Resolving`:
-21     |         |   Mark it as `Ready`
-22     |         | If it has no dependencies, and it's not `Resolving`:
-23     |         |   Do nothing
-24     |         | If all the dependencies of it are `Ready`:
-25     |         |   Mark it as `Ready`
-26     |       If "current" module is `Ready`:
-27     |         Push it to a `ready_imports` queue.
-28     |         Remove it from `module_map.pending` queue.
-29     | For each module in `ready_imports` queue:
+       |       For all its dependencies of current module:
+       |         Fast import for one dependency:
+       |         | If it is already `Ready`:
+       |         |   Do nothing
+20     |         | If it is `Duplicate`:
+       |         |   Mark it as `Ready`
+       |         | If it has no dependencies, and it's `Resolving`:
+       |         |   Mark it as `Ready`
+       |         | If it has no dependencies, and it's not `Resolving`:
+25     |         |   Do nothing
+       |         | If all the dependencies of it are `Ready`:
+       |         |   Mark it as `Ready`
+       |       If current module is `Ready`:
+       |         Push it to a `ready_imports` queue.
+30     |         Remove it from `module_map.pending` queue.
+       | For each module in `ready_imports` queue:
 ```
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

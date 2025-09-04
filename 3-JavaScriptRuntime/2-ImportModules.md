@@ -139,6 +139,15 @@ The `package.json` is:
 }
 ```
 
+Then let's edit the `index.js` file, change it to:
+
+```javascript
+import * as util from "./util.js";
+import react from "react"; // This line is unused
+
+util.hello();
+```
+
 The `npm` fetches latest version of packages (including all the dependencies), and download them in `node_modules` directory:
 
 ```text

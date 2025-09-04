@@ -442,17 +442,17 @@ Finally, the process of event loop written in pseudo-code is:
      Initialize `pending_futures` queue.
 5    Create first `EsModuleFuture` task and push to the `pending_futures` queue.
      Loop:
-       Run fast forward imports (Step-1):
+       (Step-1) Fast forward imports:
        | For each pending module in `module_map.pending` queue:
        |   If "current" module has any exception while resolving:
 10     |     Assert it must be dynamic import, reject the promise.
-9      |     Remove it from `module_map.pending` queue.
-10     |   Else:
-11     |     If "current" module is not `Ready` yet:
-12     |       If "current" module is `Duplicate`:
-13     |         Mark it as `Ready`.
+       |     Remove it from `module_map.pending` queue.
+       |   Else:
+       |     If "current" module is not `Ready` yet:
+       |       If "current" module is `Duplicate`:
+15     |         Mark it as `Ready`.
 14     |       For all its dependencies of "current" module:
-15     |         Run fast import one of the dependency module:
+15     |         Fast import for one dependency:
 16     |         | If it is already `Ready`:
 17     |         |   Do nothing
 18     |         | If it is `Duplicate`:

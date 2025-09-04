@@ -297,7 +297,7 @@ When we run `dune run ./index.js` in the terminal. All modules is a dependency t
 
 ![1](../images/3-JavaScriptRuntime-2-ImportModules.1.drawio.svg)
 
-### Async Task
+### Async Task and `JsFuture`
 
 Js runtime such as node/deno is famous for their "async event loop", which brings a great performance. The "async" is implemented by several core components:
 
@@ -305,7 +305,7 @@ Js runtime such as node/deno is famous for their "async event loop", which bring
 - Thread Pool: For CPU-bound tasks, they are spawn with a worker thread to avoid blocking the main thread.
 - Callback: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
 
-Resolving a module is also one of the async task.
+All async tasks share a same trait: `JsFuture`. Resolving a module is also one of async tasks.
 
 ### Common Types
 
@@ -343,7 +343,7 @@ pub enum ModuleStatus {
 
 ### `EsModule`
 
-In real-world project, the dependencies can be a big ocean, simply loading them is a big challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed): event loop + async task.
+In real-world project, the dependencies can be a big ocean, simply loading them is a big challenge.
 
 An async task has two steps:
 

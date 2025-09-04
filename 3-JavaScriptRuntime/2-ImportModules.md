@@ -467,14 +467,19 @@ Finally, the process of event loop written in pseudo-code is:
            |                       Push it to a `ready_imports` queue.
 30         |                       Remove it from `module_map.pending` queue.
            | For each module in `ready_imports` queue:
-           |   Compile source code into v8 module. <- NOTE: The "main" module will be the first pushed to `module_map.pending`, but the last to evaluate/execute.
+32         |   Compile source code into v8 module.
            |   Evaluate (execute) it.
            |   If it is dynamic import and there's exception:
 35         |       Reject the promise of this dynamic import
            (Step-2) Tick the event loop (We don't explain this part in this section)
            (Step-3) Run all the callbacks waiting in `pending_futures` queue:
            |   For each callback in `pending_futures` queue:
-           |       Run the callback. <- NOTE: If this is a `EsModuleFuture`, it will compile source code into v8 module, and creates tasks for all dependencies.
+39         |       Run the callback.
 ```
+
+The whole process is quite long, the most important two lines are:
+
+- For line 32, the "main" module will be the first pushed to `module_map.pending`, but the last to evaluate/execute at this line.
+- For line 39, if the callback is a `EsModuleFuture`, it will compile source code into v8 module, and creates tasks for all dependencies (as we mentioned in [`EsModule`](#esmodule)).
 
 When js runtime initialize, all the static import modules need to be resolved, i.e. their status are `Ready`. Then the js runtime can finally start to evaluate/execute the module. While all dynamic import modules can be delayed until actual evaluation/execution.

@@ -305,6 +305,8 @@ Js runtime such as node/deno is famous for their "async event loop", which bring
 - Thread Pool: For CPU-bound tasks, they are spawn with a worker thread to avoid blocking the main thread.
 - Callbacks: For each async task, once its work is completed, its callback consumes the work result and finally completes itself.
 
+Resolving a module is also one of the async task.
+
 ### `EsModule`
 
 In real-world project, the dependencies can be a big ocean, simply loading them can be a challenge. Dune uses a classic architecture to solve this issue (node/deno also use this solution, but more completed): event loop + async task.

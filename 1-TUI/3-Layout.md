@@ -24,7 +24,16 @@ A window can have below components:
 
 ![1](../images/1-TUI-3-Layout.1.drawio.svg)
 
-Don't be scared by it, a complicated window can be split into a simple rectangle divided into several parts either horizontally or vertically.
+Don't be scared by it, a complicated window can be split into a simple rectangle divided into several parts either horizontally or vertically, recursively. In this example, the window can be achieved by:
+
+1. First split a rectangle into 3 rectangles horizontally, and we got:
+   - "Line number" rectangle on the left side.
+   - "Text content" rectangle in the middle.
+   - "Scroll bar" rectangle on the right side.
+2. Then split the "text content" rectangle into 3 rectangles vertically, and we got:
+   - "Window bar" rectangle at the top.
+   - "Text content" rectangle in the middle.
+   - "Status line" rectangle at the bottom.
 
 #### Command-Line
 

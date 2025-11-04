@@ -32,3 +32,7 @@ A command-line can have below components:
 2. For search forward/backward, it contains:
    - A `/` or `?` indicator that indicates current command-line accepts user input pattern for searching on current buffer.
    - The user input text content as search pattern.
+
+![2](../images/1-TUI-3-Layout.2.drawio.svg)
+
+![3](../images/1-TUI-3-Layout.3.drawio.svg)

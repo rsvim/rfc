@@ -24,7 +24,7 @@ A window can have below components:
 
 ![1](../images/1-TUI-3-Layout.1.drawio.svg)
 
-Don't be scared by it, a complicated window can be split into a simple rectangle divided into several parts either horizontally or vertically, recursively. In this example, the window can be achieved by:
+Don't be scared by it, a complicated window can be achieved by recursively dividing a simple rectangle into several parts either horizontally or vertically. In this example, the window can be achieved by:
 
 1. First split a rectangle into 3 rectangles horizontally, and we got:
    - "Line number" rectangle on the left side.

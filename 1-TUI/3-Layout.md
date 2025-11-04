@@ -45,4 +45,4 @@ There are some other global UI widgets, such as statusline, winbar, etc.
 
 ### Window Layout
 
-Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizontally, and even create floating window.
+Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizontally, and also creating floating window.

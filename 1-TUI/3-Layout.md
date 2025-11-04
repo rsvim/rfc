@@ -8,9 +8,11 @@ This RFC describes the layout system of TUI.
 
 Before introducing any technical solutions, let's go through the "requirements" for Rsvim's TUI layout system.
 
+### Widgets and Sub-Components
+
 First let's discuss "Window", "command-line" and some global widgets, they are the most important UI widgets in Rsvim as well as Vim/Neovim. They are not just simple rectangle box that shows some text contents, they contain many small UI components that improve the editing experience and provide information that help users workflow.
 
-### Window
+#### Window
 
 A window can have below components:
 
@@ -22,7 +24,7 @@ A window can have below components:
 
 ![1](../images/1-TUI-3-Layout.1.drawio.svg)
 
-### Command-Line
+#### Command-Line
 
 A command-line can have below components:
 
@@ -37,6 +39,10 @@ A command-line can have below components:
 
 ![3](../images/1-TUI-3-Layout.3.drawio.svg)
 
-### Status-Line
+#### Global Widgets
 
 There are some other global UI widgets, such as statusline, winbar, etc.
+
+### Window Layout
+
+Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizontally, and even create floating window.

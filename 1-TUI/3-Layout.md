@@ -37,4 +37,6 @@ A command-line can have below components:
 
 ![3](../images/1-TUI-3-Layout.3.drawio.svg)
 
-### Global Status-Line
+### Status-Line
+
+There are some other global UI widgets, such as statusline, winbar, etc.

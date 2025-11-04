@@ -12,7 +12,7 @@ First let's discuss "Window", "command-line" and some global widgets, they are t
 
 ### Window
 
-A window can have several sub-components:
+A window can have below components:
 
 1. Text content: The most important component that preview the buffer content, hold a cursor inside and let user editing the buffer.
 2. Line number: A vertical column component in the left side of the window, usually shows line numbers, diff symbols, diagnostic symbols, etc.
@@ -21,3 +21,10 @@ A window can have several sub-components:
 5. Scroll bar: A vertical column component in the right side of the window, usually shows a scrollbar to indicate the current viewport position in the whole buffer.
 
 ![1](../images/1-TUI-3-Layout.1.drawio.svg)
+
+### Command-Line
+
+A command-line can have below components:
+
+1. For user input variant, it contains:
+   - A `:` indicator that indicates current command-line accepts user input commands, and the last editing mode is "Normal". If the last editing mode is "Visual"/"Select", the indicator is `:'<,'>` that indicates cmdline also accepts the visual-selected text range.

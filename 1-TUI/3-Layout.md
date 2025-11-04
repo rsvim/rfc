@@ -28,3 +28,4 @@ A command-line can have below components:
 
 1. For user input variant, it contains:
    - A `:` indicator that indicates current command-line accepts user input commands, and the last editing mode is "Normal". If the last editing mode is "Visual"/"Select", the indicator is `:'<,'>` that indicates cmdline also accepts the visual-selected text range.
+   - The user input text contents.

@@ -14,7 +14,7 @@ First let's discuss "Window", "command-line" and some global widgets, they are t
 
 A window can have several sub-components:
 
-1. Text content container: The most important component that preview the buffer content, hold a cursor inside and let user editing the buffer.
+1. Text content: The most important component that preview the buffer content, hold a cursor inside and let user editing the buffer.
 2. Line number: A vertical column component in the left side of the window, usually shows line numbers, diff symbols, diagnostic symbols, etc.
 3. Window bar: A horizontal row component at the top of the window, community plugins usually use them to show a IDE-like breadcrumbs, for example [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) for Neovim.
 4. Window scoped status line: A horizontal row component at the bottom of the window, i.e. the statusline of a window.

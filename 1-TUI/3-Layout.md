@@ -24,6 +24,8 @@ A window can have below components:
 
 ![1](../images/1-TUI-3-Layout.1.drawio.svg)
 
+Don't be scared by it, a complicated window can be split into a simple rectangle divided into several parts either horizontally or vertically.
+
 #### Command-Line
 
 A command-line can have below components:
@@ -53,3 +55,11 @@ Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizont
 ![5](../images/1-TUI-3-Layout.5.drawio.svg)
 
 ![6](../images/1-TUI-3-Layout.6.drawio.svg)
+
+### Summary
+
+So after took a look at these use cases, we can summarize our requirements about layout system in Rsvim:
+
+1. For a complicated UI widget such as "Window" and "Command-line", we can have some child components lean against top/bottom/left/right side of the main widget. We can set
+
+## Library & Framework

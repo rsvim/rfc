@@ -18,3 +18,4 @@ A window can have several sub-components:
 2. Line number: A vertical column component in the left side of the window, usually shows line numbers, diff symbols, diagnostic symbols, etc.
 3. Window bar: A horizontal row component at the top of the window, community plugins usually use them to show a IDE-like breadcrumbs, for example [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) for Neovim.
 4. Window scoped status line: A horizontal row component at the bottom of the window, i.e. the statusline of a window.
+5. Scroll bar: A vertical column component in the right side of the window, usually shows a scrollbar to indicate the current viewport position in the whole buffer.

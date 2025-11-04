@@ -36,3 +36,5 @@ A command-line can have below components:
 ![2](../images/1-TUI-3-Layout.2.drawio.svg)
 
 ![3](../images/1-TUI-3-Layout.3.drawio.svg)
+
+### Global Status-Line

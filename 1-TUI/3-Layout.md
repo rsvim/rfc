@@ -4,7 +4,7 @@
 
 This RFC describes the layout system of TUI.
 
-## Requirements & Use Cases
+## Use Cases
 
 Before introducing any technical solutions, let's go through the "requirements" for Rsvim's TUI layout system.
 

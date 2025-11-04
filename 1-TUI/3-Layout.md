@@ -31,13 +31,14 @@ A command-line can have below components:
 1. For user input variant, it contains:
    - A `:` indicator that indicates current command-line accepts user input commands, and the last editing mode is "Normal". If the last editing mode is "Visual"/"Select", the indicator is `:'<,'>` that indicates cmdline also accepts the visual-selected text range.
    - The user input text content as commands and arguments.
+
+   ![2](../images/1-TUI-3-Layout.2.drawio.svg)
+
 2. For search forward/backward, it contains:
    - A `/` or `?` indicator that indicates current command-line accepts user input pattern for searching on current buffer.
    - The user input text content as search pattern.
 
-![2](../images/1-TUI-3-Layout.2.drawio.svg)
-
-![3](../images/1-TUI-3-Layout.3.drawio.svg)
+   ![3](../images/1-TUI-3-Layout.3.drawio.svg)
 
 #### Global Widgets
 
@@ -45,4 +46,4 @@ There are some other global UI widgets, such as statusline, winbar, etc.
 
 ### Window Layout
 
-Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizontally, and also creating floating window.
+Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizontally, and also creating floating window. Here are some examples:

@@ -81,6 +81,10 @@ There are more fancy visual effects that are already implemented by many popular
 
 ![8](../images/1-TUI-3-Layout.8.drawio.svg)
 
+![9](../images/1-TUI-3-Layout.9.drawio.svg)
+
+And there are a lot more CSS-style layouts!
+
 ### Summary
 
 We can choose and leverage a widely used layout engine to help us archive all above requirements.

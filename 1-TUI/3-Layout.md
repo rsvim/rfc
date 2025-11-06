@@ -81,9 +81,6 @@ There are more fancy visual effects that are already implemented by many popular
 
 ### Summary
 
-So after took a look at these use cases, we can summarize our requirements about layout system in Rsvim:
-
-1. We can split a parent widget (rectangle) into `N` continuous small child rectangles either horizontally or vertically.
-2. We can apply some strategy on these child rectangles to tell them what position they should be. For the strategy, we can leverage some widely used layout algorithms and libraries.
+We can choose and leverage a widely used layout engine to help us archive the above requirements.
 
 ## Algorithms & Libraries

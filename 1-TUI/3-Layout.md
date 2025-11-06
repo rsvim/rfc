@@ -75,7 +75,7 @@ These characters display width is 1, and looks just like a border line for the U
 
 ### More Fancy Visual Effects
 
-There are more fancy visual effects that are already implemented by many popular GUI/TUI frameworks, but are not existed in (or say, supported by) Vim/Neovim. Here list a few:
+There are more fancy visual effects that are already implemented by many popular GUI/TUI frameworks, but are not existed in (or say, not supported by) Vim/Neovim. Here list a few:
 
 ![7](../images/1-TUI-3-Layout.7.drawio.svg)
 

@@ -75,13 +75,15 @@ These characters display width is 1, and looks just like a border line for the U
 
 ### More Fancy Visual Effects
 
-There are some fancy visual effects that are already implemented by many popular GUI/TUI frameworks, but are not existed in (or say, supported by) Vim/Neovim.
+There are more fancy visual effects that are already implemented by many popular GUI/TUI frameworks, but are not existed in (or say, supported by) Vim/Neovim. Here list a few:
+
+![7](../images/1-TUI-3-Layout.7.drawio.svg)
 
 ### Summary
 
 So after took a look at these use cases, we can summarize our requirements about layout system in Rsvim:
 
 1. We can split a parent widget (rectangle) into `N` continuous small child rectangles either horizontally or vertically.
-2. We can apply some strategy on these child rectangles to tell them what position they should be. For the strategy, we can leverage the [CSS Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox) layout, since it is quite close to our use cases.
+2. We can apply some strategy on these child rectangles to tell them what position they should be. For the strategy, we can leverage some widely used layout algorithms and libraries.
 
-## CSS Flexbox
+## Algorithms & Libraries

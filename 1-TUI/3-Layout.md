@@ -83,7 +83,7 @@ There are more fancy visual effects that are already implemented by many popular
 
 ![9](../images/1-TUI-3-Layout.9.drawio.svg)
 
-And there are a lot more CSS-style layouts!
+And there are a lot more CSS (include Flexbox) layouts!
 
 ### Summary
 

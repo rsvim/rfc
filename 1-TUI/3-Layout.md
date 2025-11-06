@@ -61,6 +61,10 @@ Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizont
 
 ![6](../images/1-TUI-3-Layout.6.drawio.svg)
 
+### More Fancy Visual Effects
+
+There are some fancy visual effects that are already implemented by many popular GUI/TUI frameworks, but are not existed in (or say, supported by) Vim/Neovim.
+
 ### Summary
 
 So after took a look at these use cases, we can summarize our requirements about layout system in Rsvim:

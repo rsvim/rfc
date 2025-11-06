@@ -71,6 +71,8 @@ A window can also have border, which is conposed of a few Unicode characters wit
 - None: " ", " ", " ", " ", " ", " ", " ", " "
 - Bold: "┏", "━", "┓", "┃", "┛", "━", "┗", "┃"
 
+These characters display width is 1, and looks just like a border line for the UI widgets.
+
 ### More Fancy Visual Effects
 
 There are some fancy visual effects that are already implemented by many popular GUI/TUI frameworks, but are not existed in (or say, supported by) Vim/Neovim.

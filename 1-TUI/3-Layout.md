@@ -85,7 +85,9 @@ There are more fancy visual effects that are already implemented by many popular
 
 And there are a lot more CSS (include Flexbox) layouts!
 
-## Solutions
+## Solution
+
+### Choices
 
 We can choose and leverage a widely used layout engine to help us archive all above requirements. There are several rust libraries:
 
@@ -99,3 +101,7 @@ We can choose and leverage a widely used layout engine to help us archive all ab
   - [backer](https://docs.rs/backer/latest/backer/)
 
 As CSS Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on the taffy to implement our layout system for Rsvim.
+
+### Trade-Off
+
+Of course there is a big gap between TUI layout and a browser that running CSS layout.

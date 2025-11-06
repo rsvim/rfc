@@ -106,4 +106,12 @@ As CSS Flexbox is quite popular and full-featured web standard, its rust impleme
 
 Of course there is a big gap between TUI layout and a browser that running CSS layout. Here we have some very fundamental principles when using CSS Flexbox with Rsvim TUI:
 
-- Grapheme based TUI has very limited spaces compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
+#### Limited Resource
+
+Grapheme based TUI has very limited spaces compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
+
+For example, a website HTML usually use below components to present and highlight its content:
+
+- Margin and padding
+- Gaps and spacing
+- Text content centered with whitespaces on both sides

@@ -92,4 +92,10 @@ We can choose and leverage a widely used layout engine to help us archive all ab
 - CSS Flexbox:
   - [taffy](https://docs.rs/taffy/latest/taffy/)
   - [yoga-rs](https://docs.rs/yoga/latest/yoga/)
-- [kasuari](https://docs.rs/kasuari/latest/kasuari/): Cassowary constraint solving algorithm.
+- Cassowary constraint solving algorithm:
+  - [kasuari](https://docs.rs/kasuari/latest/kasuari/)
+- Others:
+  - [morphorm](https://docs.rs/morphorm/latest/morphorm/)
+  - [backer](https://docs.rs/backer/latest/backer/)
+
+As CSS Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on the taffy to implement our layout system for Rsvim.

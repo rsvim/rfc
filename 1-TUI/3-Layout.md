@@ -39,7 +39,7 @@ Don't be scared by it, a complicated window can be achieved by recursively divid
 
 A command-line can have below components:
 
-1. For user input variant, it contains:
+1. For user input command, it contains:
    - A `:` indicator that indicates current command-line accepts user input commands, and the last editing mode is "Normal". If the last editing mode is "Visual"/"Select", the indicator is `:'<,'>` that indicates cmdline also accepts the visual-selected text range.
    - The user input text content as commands and arguments.
 

@@ -8,7 +8,7 @@ This RFC describes the layout system of TUI.
 
 Before introducing any technical solutions, let's go through the requirements, e.g. use cases, for Rsvim's TUI layout system.
 
-### Inside Widgets
+### Widgets
 
 First let's discuss "Window" and "command-line", they are the most important UI widgets in Rsvim as well as Vim/Neovim. They are not just simple rectangle box that shows some text contents, they contain many small UI components that improve the editing experience and provide information that help users workflow.
 
@@ -85,8 +85,11 @@ There are more fancy visual effects that are already implemented by many popular
 
 And there are a lot more CSS (include Flexbox) layouts!
 
-### Summary
+## Solutions
 
-We can choose and leverage a widely used layout engine to help us archive all above requirements.
+We can choose and leverage a widely used layout engine to help us archive all above requirements. There are several rust libraries:
 
-## Algorithms & Libraries
+- CSS Flexbox:
+  - [taffy](https://docs.rs/taffy/latest/taffy/)
+  - [yoga-rs](https://docs.rs/yoga/latest/yoga/)
+- [kasuari](https://docs.rs/kasuari/latest/kasuari/): Cassowary constraint solving algorithm.

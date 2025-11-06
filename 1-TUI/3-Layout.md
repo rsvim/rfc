@@ -81,6 +81,6 @@ There are more fancy visual effects that are already implemented by many popular
 
 ### Summary
 
-We can choose and leverage a widely used layout engine to help us archive the above requirements.
+We can choose and leverage a widely used layout engine to help us archive all above requirements.
 
 ## Algorithms & Libraries

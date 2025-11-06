@@ -115,3 +115,5 @@ For example, a website HTML usually use below components to present and highligh
 - Margin and padding
 - Gaps and spacing
 - Text content centered with whitespaces on both sides
+
+But in TUI, all of these can be removed just because we want to display more buffer contents for user.

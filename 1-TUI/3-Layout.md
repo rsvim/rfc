@@ -79,6 +79,8 @@ There are more fancy visual effects that are already implemented by many popular
 
 ![7](../images/1-TUI-3-Layout.7.drawio.svg)
 
+![8](../images/1-TUI-3-Layout.8.drawio.svg)
+
 ### Summary
 
 We can choose and leverage a widely used layout engine to help us archive all above requirements.

@@ -116,4 +116,4 @@ For example, a website HTML usually use below components to present and highligh
 - Gaps and spacing
 - Text content centered with whitespaces on both sides
 
-But in TUI, all of these can be removed just because we want to display more buffer contents for user.
+But in TUI, all of these can be removed because we want to display more buffer contents for user. Even if there are window borders, Vim/Neovim are simply using 1-column width Unicode characters instead of too complicated or wider components to save the space on TUI.

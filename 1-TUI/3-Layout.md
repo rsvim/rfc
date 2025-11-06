@@ -53,13 +53,23 @@ A command-line can have below components:
 
 ### Multiple Windows
 
-Rsvim (and Vim/Neovim) allow user splitting their window vertically and horizontally, and also creating floating window. Here are some examples:
+User can split their window vertically and horizontally, and also create floating window. Here are some examples:
 
 ![4](../images/1-TUI-3-Layout.4.drawio.svg)
 
 ![5](../images/1-TUI-3-Layout.5.drawio.svg)
 
 ![6](../images/1-TUI-3-Layout.6.drawio.svg)
+
+### Window Border
+
+A window can also have border, which is conposed of a few Unicode characters with special colors:
+
+- Double: "╔", "═", "╗", "║", "╝", "═", "╚", "║"
+- Single: "┌", "─", "┐", "│", "┘", "─", "└", "│"
+- Rounded: "╭", "─", "╮", "│", "╯", "─", "╰", "│"
+- None: " ", " ", " ", " ", " ", " ", " ", " "
+- Bold: "┏", "━", "┓", "┃", "┛", "━", "┗", "┃"
 
 ### More Fancy Visual Effects
 

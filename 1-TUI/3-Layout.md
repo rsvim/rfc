@@ -109,4 +109,4 @@ Of course there is a big gap between TUI layout and a browser that running CSS l
 - Limited spaces: Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
 - No tech debt: Only choose the latest modern standard, i.e. the Flexbox, for other historical technical solution we don't have to use it.
 - Remove useless: For some strong corresponding webpage features, they could be completely useless and even harmful to TUI layout, we should disable/remove them.
-- 1:1 concept mapping: For other useful features, we can keep them and also expose them to JavaScript API with the same names, to keep 1:1 concept mappings.
+- 1:1 concept mapping: For the useful features, we expose them to JavaScript API with the same names, thus keep 1:1 concept mappings.

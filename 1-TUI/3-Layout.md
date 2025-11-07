@@ -87,7 +87,7 @@ And there are a lot more CSS (include Flexbox) layouts!
 
 ## Solution
 
-### Choices
+### Choice
 
 We can choose and leverage a widely used layout engine to help us archive all above requirements. There are several rust libraries:
 
@@ -102,13 +102,9 @@ We can choose and leverage a widely used layout engine to help us archive all ab
 
 As CSS Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on taffy to implement our layout system for Rsvim.
 
-### Trade-Off
+### Principle
 
-Of course there is a big gap between TUI layout and a browser that running CSS layout. Here we have some very fundamental principles when using CSS Flexbox with Rsvim TUI:
-
-#### Keep It Simple
-
-Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
+Of course there is a big gap between TUI layout and a browser that running CSS layout. Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
 
 For example, a website HTML usually use below components to present and highlight its content:
 

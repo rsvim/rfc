@@ -108,7 +108,7 @@ Of course there is a big gap between TUI layout and a browser that running CSS l
 
 #### Keep It Simple
 
-Grapheme based TUI has very limited spaces compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
+Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
 
 For example, a website HTML usually use below components to present and highlight its content:
 

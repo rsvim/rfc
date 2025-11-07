@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2024-09-04.
 
-This RFC describes below functinalities:
+This RFC describes below functionalities:
 
 - [windows](https://vimhelp.org/windows.txt.html)
 - [buffers](https://vimhelp.org/windows.txt.html#buffers)

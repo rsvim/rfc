@@ -83,7 +83,7 @@ There are more fancy visual effects that are already implemented by many popular
 
 ![9](../images/1-TUI-3-Layout.9.drawio.svg)
 
-And there are a lot more CSS (include Flexbox) layouts!
+And there are a lot more CSS (and Flexbox) layouts!
 
 ## Solution
 
@@ -91,7 +91,7 @@ And there are a lot more CSS (include Flexbox) layouts!
 
 We can choose and leverage a widely used layout engine to help us archive all above requirements. There are several rust libraries:
 
-- CSS Flexbox:
+- CSS:
   - [taffy](https://docs.rs/taffy/latest/taffy/)
   - [yoga-rs](https://docs.rs/yoga/latest/yoga/)
 - Cassowary constraint solving algorithm:
@@ -100,7 +100,7 @@ We can choose and leverage a widely used layout engine to help us archive all ab
   - [morphorm](https://docs.rs/morphorm/latest/morphorm/)
   - [backer](https://docs.rs/backer/latest/backer/)
 
-As CSS Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on taffy to implement our layout system for Rsvim.
+As CSS and its Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on taffy to implement our layout system for Rsvim.
 
 ### Principle
 

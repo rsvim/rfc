@@ -100,13 +100,13 @@ We can choose and leverage a widely used layout engine to help us archive all ab
   - [morphorm](https://docs.rs/morphorm/latest/morphorm/)
   - [backer](https://docs.rs/backer/latest/backer/)
 
-As CSS Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on the taffy to implement our layout system for Rsvim.
+As CSS Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on taffy to implement our layout system for Rsvim.
 
 ### Trade-Off
 
 Of course there is a big gap between TUI layout and a browser that running CSS layout. Here we have some very fundamental principles when using CSS Flexbox with Rsvim TUI:
 
-#### Limited Resource
+#### Keep It Simple
 
 Grapheme based TUI has very limited spaces compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
 

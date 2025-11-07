@@ -104,7 +104,11 @@ As CSS Flexbox is quite popular and full-featured web standard, its rust impleme
 
 ### Principle
 
-Of course there is a big gap between TUI layout and a browser that running CSS layout. Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
+Of course there is a big gap between TUI layout and a browser that running CSS layout, we need to adjust to apply on Rsvim.
+
+#### Limited Spaces
+
+Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
 
 For example, a website HTML usually use below components to present and highlight its content:
 
@@ -113,3 +117,11 @@ For example, a website HTML usually use below components to present and highligh
 - Text content centered with whitespaces on both sides
 
 But in TUI, all of these can be removed because we want to display more buffer contents for user. Even if there are window borders, Vim/Neovim are simply using 1-column width Unicode characters instead of too complicated or wider components to save the space on TUI.
+
+#### Remove Useless
+
+For some strong corresponding webpage features, they could be completely useless and even harmful to TUI layout, we should disable/remove them.
+
+#### 1:1 Concept Mapping
+
+For other useful features, we can keep them and also expose them to JavaScript API with the same names, to keep 1:1 concept mappings.

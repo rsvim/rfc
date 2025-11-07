@@ -1,6 +1,6 @@
 # Layout
 
-> Written by @linrongbin16, first created at 2025-11-04.
+> Written by @linrongbin16, first created at 2025-11-07.
 
 This RFC describes the layout system of TUI.
 

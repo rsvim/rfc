@@ -1,6 +1,6 @@
 # Layout
 
-> Written by @linrongbin16, first created at 2025-11-07.
+> Written by @linrongbin16, first created at 2025-11-07, last updated at 2025-12-05.
 
 This RFC describes the layout system of TUI.
 
@@ -87,8 +87,6 @@ And there are a lot more CSS (and Flexbox) layouts!
 
 ## Solution
 
-### Choice
-
 We can choose and leverage a widely used layout engine to help us archive all above requirements. There are several rust libraries:
 
 - CSS:
@@ -100,13 +98,4 @@ We can choose and leverage a widely used layout engine to help us archive all ab
   - [morphorm](https://docs.rs/morphorm/latest/morphorm/)
   - [backer](https://docs.rs/backer/latest/backer/)
 
-As CSS and its Flexbox is quite popular and full-featured web standard, its rust implementations are also high quality. We can rely on taffy to implement our layout system for Rsvim.
-
-### Principle
-
-Of course there is a big gap between TUI layout and a browser that running CSS layout, we need to adjust to apply on Rsvim.
-
-- Limited spaces: Grapheme based TUI has very limited space resource compared with pixel based web browser, thus unnecessary details are removed for more effective visual information.
-- No tech debt: Only choose the latest modern standard, i.e. the Flexbox, for other historical technical solution we don't have to use it.
-- Remove useless: For some strong corresponding webpage features, they could be completely useless and even harmful to TUI layout, we should disable/remove them.
-- 1:1 concept mapping: For the useful features, we expose them to JavaScript API with the same names, thus keep 1:1 concept mappings.
+This requires some effort to familiarize ourself and skillfully apply one of them to our codebase.

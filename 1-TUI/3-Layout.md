@@ -92,6 +92,7 @@ We can choose and leverage a widely used layout engine to help us archive all ab
 - CSS:
   - [taffy](https://docs.rs/taffy/latest/taffy/)
   - [yoga-rs](https://docs.rs/yoga/latest/yoga/)
+  - [clay-rs](https://docs.rs/clay-layout/latest/clay_layout/)
 - Cassowary constraint solving algorithm:
   - [kasuari](https://docs.rs/kasuari/latest/kasuari/)
 - Others:

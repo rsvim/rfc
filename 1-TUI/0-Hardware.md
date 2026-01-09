@@ -6,7 +6,7 @@ This RFC describes the basic concepts and rules for TUI system.
 
 ## Spec List
 
-Here's a list of hardwares and specifications for some very popular PC/laptop computers:
+Here's a list of hardware and specifications for some very popular PC/laptop computers:
 
 ### Year 2022
 

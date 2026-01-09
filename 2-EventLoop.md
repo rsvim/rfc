@@ -1,78 +1,115 @@
 # Event Loop
 
-> Written by @linrongbin16, first created at 2024-09-03, last updated at 2024-11-20.
+> Written by @linrongbin16, first created at 2024-09-03, last updated at 2025-09-04.
 
-This RFC describes the RSVIM's running loop.
+This RFC describes the Rsvim's running loop. Also recommend reading [RFC-3.2](3-JavaScriptRuntime/2-ImportModules.md).
 
 ## Running Loop
 
-As mentioned in [RFC-1](https://github.com/rsvim/rfc/blob/e47afd180cc7038675addecf82efed040336ad72/1-TUI.md?#L9), the very basic running loop of RSVIM editor is just 3 steps:
+As mentioned in [RFC-1](1-TUI.md), the very basic running loop of Rsvim editor is just 3 steps:
 
-1. Receive user keyboard/mouse events.
+1. Receive terminal keyboard/mouse events.
 2. Handle user logic.
 3. Render terminal or exit.
 
-When such a (classic) running loop comes to terminal+rust, we specifically introduce:
+![1](images/1-TUI.1.drawio.svg)
 
-- [Tokio](https://tokio.rs/) as asynchronize runtime.
+When such a running loop comes to rust, we specifically introduce:
+
+- [Tokio](https://tokio.rs/) as async runtime.
 - [Crossterm](https://github.com/crossterm-rs/crossterm) as hardware driver for terminal.
 
-Tokio runtime turns the running loop from sync to async, i.e. the main thread only handles keyboard/mouse events and renders to terminal, all the other laggy jobs are spawned with async tasks running in multi-threaded environment and sync data back to editor and update UI after finished. Here are some examples:
+Tokio helps split the editor logic into more fine-grained tasks: blocking tasks and non-blocking tasks. Notice we should not rashly say tokio helps us turning the editor into async. Because in this scenario, i.e. text editing, the editor is always interacting with users.
 
-- IO:
-  - File IO.
-  - IPC/RPC: Pipe, named pipe, unix domain socket, tcp/udp, http(s), ssh, etc.
-  - Terminal: Keyboard/mouse events. Note: the sync _**stdout/stderr**_ operation is still used for rendering terminal.
-- Callbacks:
-  - Delayed/timeout jobs.
-  - Auto commands on Vim events.
-  - File watcher.
-- (User) js/ts scripts:
-  - The `async` annotated functions and `Promise` functions.
-  - The `require` and `import` keywords (js modules).
-- Heavy CPU or big memory block workload:
-  - Syntax and colorscheme rendering.
-  - Text object.
-  - Token parsing.
+For example, when a user execute below operations:
 
-In this way, RSVIM's running loop is actually similar to [deno](https://deno.com/), but focusing on text editing and TUI rendering.
+1. Press key `i`: editor goes to **Insert Mode**.
+2. Types `a-z`/`A-Z` and `0-9`: editor inserts these letters and numbers in the buffer.
+3. Press key `ESC`: editor goes back to **Normal Mode**.
 
-## Context
+In these operations, the **process** should always be synchronous, i.e. it follows "input" => "calculation" => "output" for each operation, thus achieve a consistent behavior. Even some operations will block the TUI, this should still stay synchronous, because consistent behavior always has the highest priority.
 
-The context is a global data structure instance that contains all the data for the editor:
+You may ask: then what will tokio do? and how do we benefit from tokio's async tasks? - Because in a modern text editor, there are too many low-level tasks/services running together to provide a comfortable editing experience. Only a few core operations (i.e. above operations) should always stay synchronous, other tasks can run asynchronously or in parallel, for example:
 
-- UI widget tree (contains windows, cursor, statusline, etc) and canvas.
-- Buffers.
-- Editing mode.
-- And more: javascript runtime, loaded scripts/plugins, etc.
+- Syntax analysis and highlighting.
+- LSP services management.
+- Child processes management.
+- IPC/RPC connections.
+- And a lot more...
 
-It uses read/write locks for data synchronization across different threads.
+> If all these calculation logic run synchronously, you will stuck on opening every file/buffer, or even simply typing every character.
 
-## Editing Mode
+You will find most UI rendering effects and analysis tasks has a low priority, even they provide a much better user experience, but the service quality can be downgraded or cancelled. We spawn these tasks with tokio's async runtime, thus to not block core text editing, their calculation results will be sync back once they are done, or just be abandoned.
 
-[Editing mode](https://vimhelp.org/intro.txt.html#vim-modes) is managed by a finite-state machine, i.e. each mode is a state inside the editor:
+For example, the syntax analysis task will be run every time user insert a new character. A new syntax analyzing task is spawned to tokio. In the meanwhile, there may already have some ongoing syntax analyzing tasks calculating, once a newest task is spawned, all the old tasks can be cancelled, since their results are not useful any more. Or, user is exiting the editor, then all the ongoing analysis are no longer needed.
 
-![1](images/2-EventLoop.1.drawio.svg)
+Thus all tasks inside rsvim can be split into two types: blocking tasks and non-blocking tasks.
 
-Each state can consumes the keyboard/mouse events and implements the corresponding behavior in editor.
+### Blocking/Sync Tasks
 
-## Async Task
+Only a few core text editing logic always stays synchronous and blocking. Because user would rather wait for them done to get a consistent and correct behavior.
 
-Main use cases of a VIM editor for async runtime are:
+### Non-Blocking/Async Tasks
 
-- Resolve filesystem (directories and file reading) for external scripts and plugins, and run them.
-- Topic subscription and event consuming (in Vim editor it's called [auto commands](https://vimhelp.org/autocmd.txt.html#autocmd.txt), but can be treat as a more generally [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)).
-- Timeout tasks.
-- The `async` annotated javascript functions and standard APIs provided by RSVIM editor.
+Many other logic can run asynchronously or in parallel, because user don't want to wait for them, thus fully utilize all the CPU cores and never freeze the editor.
 
-Let's consider some very extreme and unlikely situations:
+Tokio's async task has an extra benefit because it can be used to implement JavaScript's `Promise` and `async`/`await` keyword. Each time user's scripts use the `Promise` and `async`/`await`, the V8 js engine stops running and gives the "main" thread to the editor, hold the context until next event loop. This is exactly what all JavaScript-based runtimes ([node.js](https://nodejs.org/), [deno](https://deno.com/)) do.
 
-### Cancel a Submitted Task
+## Pseudo-Code Process
 
-To clear all the submitted tasks, simply place a [CancellationToken](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) at the beginning of each task, check if it's cancelled before running. This should not be a big deal.
+To make it more clear what rsvim is doing inside, here's a main loop process written with pseudo-code:
 
-### Interrupt/Abort a Running Task
+```text
+1  Main:
+       Reading arguments from CLI
+       If arguments == "-V/--version" or "-h/--help":
+           Print information and exit
+5      Create data structures: BuffersManager, UIWidgetTree, JsRuntime, TaskTracker, etc.
+       Initialize (execute) js configs.
+       (Initialize buffers) If arguments provide file names:
+            Create one buffer for each file name, reading file content into buffer. Set the first buffer as default buffer.
+       Else:
+10          Create a default buffer with no file name, empty content.
+       Initialize a default window, binded with the default buffer.
+       Initialize terminal into raw mode, and render TUI.
+       Loop:
+           `tokio::select!` on multiple streams asynchronously:
+15             - `crossterm::event::EventStream`
+               - Master Channel Receiver, if receives "Exit" message, break the loop
+               - Js Channel Receiver
+           Render TUI
+19     Recover terminal, exit
+```
 
-For example, when writing a super big file that takes minutes or even hours, it's dangerous if the write operation is interrupted without correctly close the file descriptor, which damages filesystem on storage device.
+Let's go through this line by line:
+
+1. For line 1, it is the the entry of our program `rsvim`.
+2. For line 2-4, it reads the arguments feed into `rsvim`. If arguments are `-V`/`--version` or `-h`/`--help`, it simply prints information and exit.
+3. For line 5-12, the editor initialize 3 components:
+   - Data structures such as buffers, UI tree, task tracker, etc.
+   - Js runtime, include all V8 components.
+   - Turn terminal into raw mode, and render for the first time. If the default buffer has file content, it will first show in the terminal.
+4. For line 13-17, the editor starts to read from terminal input, i.e. user can start interacting with the editor. The loop uses `tokio::select!` to read from multiple streams asynchronously:
+   - `crossterm::event::EventStream`: All terminal keyboard/mouse events are receiving through this stream.
+   - Master channel receiver and Js channel receiver: Once master receives the "Exit" message, it breaks the loop.
+
+   > NOTE: Tokio's runtime is multi-threaded and requires data structures to be `Arc` to keep thread safe. While V8 js engine is single-threaded and all data structures are `Rc`, which are non-thread safe. Thus rsvim introduces these 2 channels to send data to each other.
+
+5. For line 18, once a event is been processed, the editor renders the internal data changes to TUI.
+6. For line 19, the editor recovers the terminal and exit the program.
+
+As you can see, actually it still follows the "input" => "calculation" => "output" process.
+
+## Exiting
+
+Consider when an editor is going to exit, async tasks can be split into two types: interruptible (cancellable) and non-interruptible (non-cancellable).
+
+### Interruptible Tasks
+
+Most read-only tasks, such as colorschemes updating, they are interruptible, the editor can just abandon them and exit.
+
+### Non-Interruptible Tasks
+
+For write file tasks, or other resources related tasks (IPC/RPC, child-processes management), it is dangerous if editor forcibly interrupts them, which can cause damage to user's data or system.
 
 For such case, we have to wait for them complete to keep safe.

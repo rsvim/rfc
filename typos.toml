@@ -1,0 +1,12 @@
+[default]
+extend-ignore-re = [
+  # Ignore blocks between `<!-- spellchecker:off -->` and `<!-- spellchecker:on -->`
+  "(?s)(<!--)\\s*spellchecker:off.*?\\n\\s*(<!--)\\s*spellchecker:on",
+]
+
+extend-ignore-words-re = [
+  # Ignore specific words
+]
+
+[files]
+extend-exclude = ["images"]

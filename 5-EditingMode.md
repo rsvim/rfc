@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2025-06-13.
 
-This RFC describes below functinalities:
+This RFC describes below functionalities:
 
 1. An overview on the features of Vim/Neovim/Rsvim editor, taking scripts/commands/plugins into consideration.
 2. Some high-level potential solutions and comparison among them, and finally Rsvim's choice.

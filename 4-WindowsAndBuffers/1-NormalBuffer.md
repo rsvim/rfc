@@ -12,11 +12,15 @@ Here we propose two ways of data syncing between the in-memory buffers and files
 
 There are several read/write operations about normal buffer\[[1](#references)\]:
 
+<!-- spellchecker:off -->
+
 - `:e[dit] {name}`\[[2](#references)\]: Open file and read the contents into a new buffer, set the `{name}` for the buffer.
 - `:e[new]`\[[3](#references)\]: Create a new detached buffer, associated with no file.
 - `:file {name}`\[[4](#references)\]: Set another `{name}` for the buffer, i.e. rename a buffer's file name.
 - `:sav[eas] {name}`\[[5](#references)\]: Save current buffer contents into another `{name}`, instead of saving to current file.
 - `:{,range} {name}`\[[6](#references)\], `:w[rite] {name}`\[[7](#references)\] : Save part (selected by line range) of current buffer contents, or all of it, into another `{name}`, instead of saving to current file.
+
+<!-- spellchecker:on -->
 
 And there are some limitations for buffers:
 

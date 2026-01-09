@@ -18,8 +18,9 @@ Syntax parser also serves as a very fundamental component that generates structu
 - Text objects: detect structure boundaries such as inside a function, string literals, etc.
 - Code outlining and folding: identify code blocks such as function, class, for/while loop, etc.
 - Symbols: identify function, parameters, class, variables, constants, etc.
+- Brace/Tag Matching: identify corresponding opening/closing braces or HTML/XML tags.
 
-Currently editor highlighting basically use either regex-based engine or tree-sitter as their parser, it also serves as a very fundamental component that provides a lot functions for the editor:
+Nowadays, editors basically use either a regex-based engine or tree-sitter as syntax parsers.
 
 ### Syntax
 

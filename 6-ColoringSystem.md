@@ -9,9 +9,10 @@ This RFC describes an high-level overview for coloring system, include feature r
 Coloring system makes a text editor colorful. It contains multiple components to work together and provide a user experience:
 
 1. A parser that recognizes semantics, that can cover
-   - Programming languages such as c, java, python, etc.
-   - Structural text-based formatting such as json, yaml, toml, html, markdown, etc.
-   - Free-format and rich-format text documents such as txt, excel, word, etc.
+   - Programming language: c, java, python, etc.
+   - Structural text-based formatting: json, yaml, toml, html, markdown, etc.
+   - Free-format and rich-format text document: txt, excel, word, etc.
+   - Binary data blob: any non-text executable files.
 1. The syntax color for source code text file of programming languages.
 1. The UI widget color for rsvim editor.
 

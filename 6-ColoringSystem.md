@@ -8,7 +8,7 @@ This RFC describes an high-level overview for coloring system, include feature r
 
 Coloring system makes a text editor colorful. It contains multiple components to work together and provide a user experience:
 
-1. A parser that recognizes text semantics that can support programming languages, structured formats and even more potential text document formats.
+1. A parser that recognizes text semantics that can support programming languages, structured formats and even more potential formats.
 1. The syntax color for source code text file of programming languages.
 1. The UI widget color for rsvim editor.
 

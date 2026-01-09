@@ -36,7 +36,7 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
 
 Two more components are important as well for a coloring system:
 
-- Syntax rule/parser for each different programming language. A language has its own rule/parser to define its own syntax, the definition is loaded by the syntax parser to tokenize the source files of that language, generates the structured/tokenized information for the source files that opened by the editor.
+- Syntax rule/parser for each different programming language. A language has its own rule/parser to define its own syntax, the definition is loaded by the syntax parser to tokenize the source files of that language, generates the structured/tokenized information for the source files that opened by an editor.
 - Theme configure for each different themes (in Vim/Neovim we call it [colorscheme](https://vimhelp.org/syntax.txt.html#%3Acolorscheme)).
 
 These two components are usually

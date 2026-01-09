@@ -1,4 +1,4 @@
-# Coloring System
+# Syntax Parser
 
 > Written by @linrongbin16, first created at 2025-06-15.
 

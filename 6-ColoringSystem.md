@@ -12,7 +12,7 @@ Coloring system makes a text editor colorful. It contains multiple components to
    - Programming language: c, java, python, etc.
    - Structural text-based formatting: json, yaml, toml, html, markdown, etc.
    - Free-format and rich-format text document: txt, excel, word, etc.
-   - Binary data blob: tar.gz, bitwise data files, executables, etc.
+   - Binary data blob: tar.gz, bitwise data file, executable file, etc.
 1. The syntax color for source code text file of programming languages.
 1. The UI widget color for rsvim editor.
 

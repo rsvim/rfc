@@ -77,21 +77,3 @@ I believe tree-sitter is the best choice because both itself and its community a
 1. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
 2. How to avoid the slow parsing speed on super big source files on first opening.
 3. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
-
-### Avoid Local Compilation
-
-Since a parser for a language in TreeSitter is a `parser.c` file, and it needs to be compiled into a dynamical library with C/C++ compiler on user's local machine. We can provide a plugin for rsvim to collect/prebuild/download all the syntax parsers for user.
-
-TreeSitter team also plans to support `wasm` library, to let parsers work with javascript engines such as `v8`, to avoid C dynamical library.
-
-### Avoid Blocking On First Open
-
-When user first opens a file and TreeSitter parses the whole file, it can be slow and block user.
-
-We can use the `async` operation provided by **Tokio** runtime, the async operation is scheduled in a separate thread, and avoid blocking. But in the meanwhile, there will be no syntaxes available.
-
-### Pluggable Syntaxes
-
-Image we create a `syntaxes.rsvim` project (written in javascript/typescript) as an official plugin for rsvim, it is highly similar to the [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) plugin (for Neovim). Once user install it, it will try to automatically download the prebuilt dynamical library (or download the parser and build/compile it with C/C++ compiler) for user when user first opens a source code text file. And it also provide several commands to let user install/upgrade/remove parsers by themself.
-
-We can use GitHub Actions to automatically upgrade/build all the language parsers by running a daily job to upgrade them, and release the prebuilt dynamical libraries in GitHub Releases for some most popular OS: Windows/Linux x86_64, MacOS arm64. For other OS, user will have to install a C/C++ compiler to build the parsers by themself.

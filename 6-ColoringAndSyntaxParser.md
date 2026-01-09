@@ -20,34 +20,21 @@ Syntax parser also serves as a very fundamental component that generates structu
 - Symbols: identify function, parameters, class, variables, constants, etc.
 - Brace/Tag Matching: identify corresponding opening/closing braces or HTML/XML tags.
 
-Nowadays, editors basically use either a regex-based engine or tree-sitter as syntax parsers.
-
-### Syntax Parser
-
-There are actually only 2 kinds of syntax parsers:
+Nowadays, there are actually only 2 kinds of syntax parsers:
 
 1. Regex-based engines:
    - [Vim's syntax engine](https://github.com/vim/vim/blob/master/src/syntax.c): Vim implements a regex-based syntax engine by itself. It is only used by Vim/Neovim.
    - [TextMate](https://macromates.com/manual/en/language_grammars): The TextMate engine is first created by the [textmate](https://github.com/textmate/textmate) editor, now it is widely used by many editors: [sublime-text](https://www.sublimetext.com/docs/syntax.html#include-syntax), [vscode](https://github.com/microsoft/vscode-textmate), [atom](https://github.com/atom/first-mate), etc.
    - And some more...
-2. [Tree-sitter](https://github.com/tree-sitter/tree-sitter): A tokenizer-based engine that parses source code more precisely, works more like a compiler. It is also widely used by many editors: [zed](https://zed.dev/blog/syntax-aware-editing), [helix](https://helix-editor.com/) and [GitHub](https://www.youtube.com/watch?v=a1rC79DHpmY).
+2. [Tree-sitter](https://github.com/tree-sitter/tree-sitter): A tokenizer-based engine that parses source code more accurately, works more like a compiler. It is also widely used by many editors: [zed](https://zed.dev/blog/syntax-aware-editing), [helix](https://helix-editor.com/) and [GitHub](https://www.youtube.com/watch?v=a1rC79DHpmY).
 
-- [TreeSitter](https://github.com/tree-sitter/tree-sitter): The TreeSitter engine is a parser-framework engine. Different from the regex-based engine, it actually implements each parser for each programming language. It is actively maintained and also popular in many editors: helix (see [helix runtime files](https://github.com/helix-editor/helix/tree/master/runtime)), zed (see [zed extensions](https://github.com/zed-industries/zed/tree/main/extensions) and [zed languages crate](https://github.com/zed-industries/zed/tree/main/crates/languages/src)).
+### Pros & Cons
 
-The syntax engine is directly built inside the editor, while it has a separate syntax config file that defines how to parse the language source code.
-
-- For vim, it embeds all the syntax configs in its [runtime/syntax](https://github.com/vim/vim/tree/master/runtime/syntax) folder. Every language has its `.vim` syntax file, for example [c.vim](https://github.com/vim/vim/blob/master/runtime/syntax/c.vim), [cpp.vim](https://github.com/vim/vim/blob/master/runtime/syntax/cpp.vim), [python.vim](https://github.com/vim/vim/blob/master/runtime/syntax/python.vim).
-- For sublime-text, it has the [sublimehq/Packages](https://github.com/sublimehq/Packages). Each language has its `.sublime-syntax` config file, for example [C.sublime-syntax](https://github.com/sublimehq/Packages/blob/master/C%2B%2B/C.sublime-syntax), [C++.sublime-syntax](https://github.com/sublimehq/Packages/blob/master/C%2B%2B/C%2B%2B.sublime-syntax), [Python.sublime-syntax](https://github.com/sublimehq/Packages/blob/master/Python/Python.sublime-syntax).
-- For vscode, it embeds the [extensions](https://github.com/microsoft/vscode/tree/main/extensions) folder. Each language has its `.tmLanguage.json` config file, for example [c.tmLanguage.json](https://github.com/microsoft/vscode/blob/main/extensions/cpp/syntaxes/c.tmLanguage.json), [cpp.tmLanguage.json](https://github.com/microsoft/vscode/blob/main/extensions/cpp/syntaxes/cpp.tmLanguage.json), [python.tmLanguage.json](https://github.com/microsoft/vscode/blob/main/extensions/python/syntaxes/MagicPython.tmLanguage.json).
-- For TreeSitter (zed/helix), it has a community to maintain [a list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers) for each programming languages. Each language has its parser.
-
-A syntax config helps the editor detect the source code text file by the file type/extension, i.e. it maps the file type to its syntax definition.
-
-Regex-based engines (vim, textmate) syntax files are mostly config files like json/yaml/xml. While TreeSitter parser is a `parser.c` that implements the tokenizer parser for the language, and it needs to compile (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) and load into the editor to work with TreeSitter.
-
-Once source code text file are parsed into tokens, these syntax information are also been used by other functions/features of the editor. For example textobjects (vim's [textobjects](https://vimhelp.org/motion.txt.html#text-objects), helix's [textobjects](https://docs.helix-editor.com/textobjects.html)), indents, and other syntax related features.
-
-### Theme
+| Category                                       | Tree-sitter   | TextMate | Vim Syntax Engine |
+| ---------------------------------------------- | ------------- | -------- | ----------------- |
+| Quality                                        | Most Accurate | Fine     | Worst             |
+| Performance (especially on opening a new file) | Lowest        | Fine     | Highest           |
+| Performance (especially on opening a new file) | Lowest        | Fine     | Highest           |
 
 Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.
 
@@ -60,25 +47,6 @@ A theme config file actually maps each token to its color (RGB, css name, termin
 Vim/Neovim editors also have other colors, not only syntax colors for source code text files. For example Neovim has multiple highlighting groups for **floating-window**: [NormalFloat](https://neovim.io/doc/user/syntax.html#hl-NormalFloat), [FloatBorder](https://neovim.io/doc/user/syntax.html#hl-FloatBorder), [FloatTitle](https://neovim.io/doc/user/syntax.html#hl-FloatTitle), etc.
 
 Such kind of colors are not related to programming language syntaxes, but more related for UI widgets.
-
-### Ecosystem
-
-All the popular editors have their community to continuously contribute to the syntaxes and themes. This requrie a lot of time and efforts.
-
-- Vim: Programming languages will maintain a `.vim` syntax file, to help developers to use their language with Vim/Neovim editors.
-- Sublime-text: Programming languages will maintain a `.sublime-syntax` syntax file, to help developers to use their language with sublime-text editor (and all the editors/viewers compatible with it).
-- VsCode: Programming languages will maintain a `.tmLanguage.json` syntax file, to help developers to use their language with vscode editor (and all the editors/viewers compatible with it).
-- TreeSitter: Many programming languages will maintain its `parser.c` parser, to help developers to use their language with TreeSitter embedded editors.
-
-Only creating a syntax engine and specifications is easy, but building/maintaining the whole community for all programming languages is hard, which may takes many years.
-
-## Engine
-
-I believe rsvim should choose a ready-to-work syntax engine, leverage the existing community, thus to achieve a quick win. Apparently we only have below choices:
-
-1. Vim regex-based syntax engine.
-2. TextMate syntax engine.
-3. TreeSitter syntax engine.
 
 ### Vim Regex-Based Engine
 

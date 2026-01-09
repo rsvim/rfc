@@ -75,7 +75,7 @@ And here is the pros & cons for each solution:
 I believe tree-sitter is the best choice because both itself and its community are actively maintained, it also has a clear documentation. The challenges for rsvim are:
 
 1. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
-2. How to avoid the slow speed of parsing the whole file when user first opens a source code text file.
+2. How to avoid the slow parsing speed on super big source files on first opening.
 3. How to make the syntaxes pluggable with rsvim editor. As rsvim is designed with a strong concept of being as a javascript-runtime, all plugins are actually packages that can be installed/removed/upgraded by a package management tool (just like `node` and `npm`), thus the `rsvim` binary will not embed any plugins inside itself. While we will provide some **official** plugins for rsvim and users can choose not to install them, if community has create better plugins, which is a common case for Vim editors.
 
 ### Avoid Local Compilation

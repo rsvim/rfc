@@ -24,10 +24,14 @@ Nowadays, editors basically use either a regex-based engine or tree-sitter as sy
 
 ### Syntax Parser
 
-There are actually only a few _popular_ syntax engines:
+There are actually only 2 kinds of syntax parsers:
 
-- [Vim's syntax engine](https://github.com/vim/vim/blob/master/src/syntax.c): Vim implements a regex-based syntax engine by itself. It is only used by Vim/Neovim.
-- [TextMate](https://macromates.com/manual/en/language_grammars): The TextMate engine is also a regex-based engine, created by the [textmate](https://github.com/textmate/textmate) editor. It is widely used by many editors: sublime-text (see [sublime-text syntax definition](https://www.sublimetext.com/docs/syntax.html#include-syntax)), vscode (see [vscode-textmate](https://github.com/microsoft/vscode-textmate)), atom (see [first-mate](https://github.com/atom/first-mate)), etc.
+1. Regex-based engines:
+   - [Vim's syntax engine](https://github.com/vim/vim/blob/master/src/syntax.c): Vim implements a regex-based syntax engine by itself. It is only used by Vim/Neovim.
+   - [TextMate](https://macromates.com/manual/en/language_grammars): The TextMate engine is first created by the [textmate](https://github.com/textmate/textmate) editor, now it is widely used by many editors: [sublime-text](https://www.sublimetext.com/docs/syntax.html#include-syntax), [vscode](https://github.com/microsoft/vscode-textmate), [atom](https://github.com/atom/first-mate), etc.
+   - And some more...
+2. [Tree-sitter](https://github.com/tree-sitter/tree-sitter): A tokenizer-based engine that parses source code more precisely, works more like a compiler.
+
 - [TreeSitter](https://github.com/tree-sitter/tree-sitter): The TreeSitter engine is a parser-framework engine. Different from the regex-based engine, it actually implements each parser for each programming language. It is actively maintained and also popular in many editors: helix (see [helix runtime files](https://github.com/helix-editor/helix/tree/master/runtime)), zed (see [zed extensions](https://github.com/zed-industries/zed/tree/main/extensions) and [zed languages crate](https://github.com/zed-industries/zed/tree/main/crates/languages/src)).
 
 The syntax engine is directly built inside the editor, while it has a separate syntax config file that defines how to parse the language source code.

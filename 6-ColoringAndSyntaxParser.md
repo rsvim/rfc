@@ -28,7 +28,7 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
    - And some more...
 2. [Tree-sitter](https://github.com/tree-sitter/tree-sitter): A tokenizer-based engine that parses source code more accurately, works more like a compiler. It is also widely used by many editors: [zed](https://zed.dev/blog/syntax-aware-editing), [helix](https://helix-editor.com/) and [GitHub](https://www.youtube.com/watch?v=a1rC79DHpmY).
 
-> NOTE: We don't count [language-server-protocol](https://microsoft.github.io/language-server-protocol/) as syntax parser.
+> NOTE: We don't count [language-server-protocol](https://microsoft.github.io/language-server-protocol/) as syntax parser, while it can be a big improvement but unnecessary.
 
 ### Pros & Cons
 

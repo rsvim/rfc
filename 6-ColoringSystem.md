@@ -10,7 +10,7 @@ Coloring system makes a text editor colorful. It contains multiple components to
 
 1. A parser that recognizes semantics, that can cover
    - All kinds of programming languages for software developers (which should be the main stream users of Rsvim).
-   - All kinds of programming languages for software developers.
+   - Free writing text contents.
 1. The syntax color for source code text file of programming languages.
 1. The UI widget color for rsvim editor.
 

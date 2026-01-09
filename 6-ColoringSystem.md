@@ -12,6 +12,10 @@ Coloring system makes a text editor colorful. It contains multiple components to
 2. A theme that defines a set of colors for all the parsed tokens.
 3. A coloring painter that renders colors onto the text and finally print to canvas/terminal.
 
+Currently editor highlighting basically use either regex-based engine or tree-sitter as their parser, it also serves as a very fundamental component that provides a lot functions for the editor:
+
+1. Structured and tokenized information about the text content, it provides data source for some features such as indent width, text objects.
+
 ### Syntax
 
 Every programming language has its own syntax. For example:

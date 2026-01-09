@@ -2,7 +2,7 @@
 
 > Written by @linrongbin16, first created at 2025-06-15, last modified at 2026-01-09.
 
-This RFC describes an high-level overview for syntax parser and coloring system, include feature requirements, scope and technical solutions.
+This RFC describes an high-level overview for coloring system and syntax parser, include feature requirements, scope and technical solutions.
 
 ## Introduction
 

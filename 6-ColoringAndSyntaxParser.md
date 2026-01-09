@@ -72,58 +72,6 @@ And here is the pros & cons for each solution:
 | TextMate          | - Good performance                               | - Syntax configurations are not actively maintained<br>- Need to integrate with `.sublime-syntax` structure for UI components<br>- `.sublime-syntax` files can have a **branding** issue (feel bad to use another editor's resource)<br>- Low-quality results should work fine for coloring system, however as more features depend on the parser results, it can lead to worse and buggy experiences |
 | Vim Syntax Engine | - Good performance                               | - Need to implement from scratch<br>- Cannot leverage neither existing Vim `.vim` colorschemes, nor Neovim `.lua` colorschemes<br>- Same impact with TextMate on low-quality results                                                                                                                                                                                                                  |
 
-Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.
-
-- For vim, it embeds some default colorschemes in its [runtime/colors](https://github.com/vim/vim/tree/master/runtime/colors) folder.
-- For vscode, it embeds some default themes in its [extensions](https://github.com/microsoft/vscode/tree/main/extensions) folder, sub-folders with `theme-` prefix.
-- For helix, it embeds TreeSitter queries in its [runtime/queries](https://github.com/helix-editor/helix/tree/master/runtime/queries) folder (each language also needs a `query` file to define how editors can query the tokens from TreeSitter), themes in its [runtime/themes](https://github.com/helix-editor/helix/tree/master/runtime/themes).
-
-A theme config file actually maps each token to its color (RGB, css name, terminal ansi code) and visual effects (underline, bold, italic).
-
-Vim/Neovim editors also have other colors, not only syntax colors for source code text files. For example Neovim has multiple highlighting groups for **floating-window**: [NormalFloat](https://neovim.io/doc/user/syntax.html#hl-NormalFloat), [FloatBorder](https://neovim.io/doc/user/syntax.html#hl-FloatBorder), [FloatTitle](https://neovim.io/doc/user/syntax.html#hl-FloatTitle), etc.
-
-Such kind of colors are not related to programming language syntaxes, but more related for UI widgets.
-
-### Vim Regex-Based Engine
-
-Pros:
-
-1. Has great performance. Based on some benchmark, it is the fastest, but also support least features, anyway it works.
-2. Can directly use all existing vim's syntax files. It can help rsvim inherits the syntaxes/colorshemes from Vim community.
-
-Cons:
-
-1. Vim's syntax/colorscheme is written in `vim` script, which is completely not compatible with rsvim. Unless we create a vimscript interpreter, or a tool to convert vim scripts into js scripts. Both solutions seems not easy/possible, because it will lead to create a vimscript interpreter with rust. Such ideas are been tried several times by the community, and finally failed, please see [libvim](https://github.com/onivim/libvim).
-
-### TextMate
-
-Pros:
-
-1. Has great performance, slower than Vim's regex-based engine, but provide more accurate tokens (it support syntax scope).
-2. Popular and widely used by many editors.
-3. TextMate has the rust implementation [syntect](https://github.com/trishume/syntect).
-4. Both vim's syntax engine and TextMate are regex-based, and they have a error-tolerant result when parsing partial of the source code text file, which helps a lot for real world typing. When users are typing, in most of the time, the text content is actually error-compiled, because users still not finish their typing yet. So in real world editing, most of the time, the text content is wrong from the language parser's perspective. In such cases, regex-based engines can still recognize some keywords/constants, and provide a downgraded visual effect.
-
-Cons:
-
-1. The TextMate community seems slowly dying. Because TextMate itself is first created by the [textmate](https://github.com/textmate/textmate) editor (a open source project from Apple). Today textmate is used by sublime-text and vscode. Sublime-text is close source software so we don't know how it implements the textmate engine. Vscode implements the textmate engine in [vscode-textmate](https://github.com/microsoft/vscode-textmate), which is written in javascript. It seems when an editor wants to use textmate engine, it will have to maintain its own textmate implementations and syntax specifications.
-2. If rsvim directly uses `syntect` library, it means rsvim will have to use the `.sublime-syntax` config files, or the `.tmLanguage` config files. The biggest `.sublime-syntax` configs are maintained by sublime-text's open source packages: [sublimehq/Packages](https://github.com/sublimehq/Packages), and the biggest `.tmLanguage` configs are maintained by github linguist grammars [github-linguist/linguist/vendor/grammars](https://github.com/github-linguist/linguist/tree/main/vendor/grammars) (most these grammars are not updated for many years).
-3. If rsvim directly uses `vscode-textmate` library, it means rsvim will have to implement a javascript-runtime to run the library. And also rsvim will have to use the `.tmLanguage.json` configs. The javascript engine performance can be a big issue (syntax engine should be directly embedded inside editor and be very performant). And for the `.tmLanguage.json` configs, they are maintained in [vscode/extensions](https://github.com/microsoft/vscode/tree/main/extensions).
-4. Both `.sublime-syntax` and `.tmLanguage.json` grammars are not easy to extend for more rsvim colors. Because for rsvim editor, we will introduce more colors for other cases, such as floating window titles/borders, etc.
-
-### TreeSitter
-
-Pros:
-
-1. Most accurate parsing results/tokens. Note: We don't consider LSP servers as a syntax engine here, even it also provide semantic tokens.
-2. TreeSitter has an official library and rust binding. The library is actively maintained, and it has an actively maintained community for most programming languages, see the [list of parsers](https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers).
-3. TreeSitter supports incremental parsing, it should be performant on every user editing.
-
-Cons:
-
-1. TreeSitter is slower than regex-based engine, especially on super big files.
-2. TreeSitter parsers need to be compiled (with C/C++ compiler) into dynamical library (`.so`, `.dylib`, `.dll`) on user's local machine, then load into the editor to work with TreeSitter. Note: a collection of pre-built parsers can alleviate the need for C/C++ compilers in some popular OS (Windows/Linux/MacOs) and CPU architectures (x86_64/amd64/arm64).
-
 ## Solution
 
 The final solution choice is: TextMate vs TreeSitter.

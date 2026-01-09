@@ -72,11 +72,11 @@ And here is the pros & cons for each solution:
 | TextMate          | - Good performance                               | - Syntax configurations are not actively maintained<br>- Need to integrate with `.sublime-syntax` structure for UI components<br>- `.sublime-syntax` files can have a **branding** issue (feel bad to use another editor's resource)<br>- Low-quality results should work fine for coloring system, however as more features depend on the parser results, it can lead to worse and buggy experiences |
 | Vim Syntax Engine | - Good performance                               | - Need to implement from scratch<br>- Cannot leverage neither existing Vim `.vim` colorschemes, nor Neovim `.lua` colorschemes<br>- Same impact with TextMate on low-quality results                                                                                                                                                                                                                  |
 
-I believe tree-sitter is the best choice because both itself and its community are actively maintained, it also has a clear documentation. The challenges for rsvim are:
+I believe tree-sitter is the best choice because both itself and its community are actively maintained, it also has a clear documentation. The challenges for Rsvim are:
 
 1. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
 2. How to avoid the slow parsing speed on super big source files on first opening.
-3. How to make the syntaxes pluggable with rsvim editor. As rsvim is designed with a strong concept of being as a javascript-runtime, all plugins are actually packages that can be installed/removed/upgraded by a package management tool (just like `node` and `npm`), thus the `rsvim` binary will not embed any plugins inside itself. While we will provide some **official** plugins for rsvim and users can choose not to install them, if community has create better plugins, which is a common case for Vim editors.
+3. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
 
 ### Avoid Local Compilation
 

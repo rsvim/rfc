@@ -4,7 +4,7 @@
 
 This RFC describes an high-level overview for coloring system, include feature requirements, scope and technical solutions.
 
-## Background
+## Introduction
 
 Coloring system makes a text editor colorful. It contains two kinds:
 

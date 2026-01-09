@@ -22,18 +22,9 @@ Syntax parser also serves as a very fundamental component that generates structu
 
 Nowadays, editors basically use either a regex-based engine or tree-sitter as syntax parsers.
 
-### Syntax
+### Syntax Parser
 
-Every programming language has its own syntax. For example:
-
-- `c` language has keywords: `for`, `if`, `continue`, `goto`, etc. It has constants, string literals, variables, functions, etc.
-- `c++` language has keywords: `new`/`delete`, `private`/`public` etc. It has classes/interfaces, members/methods, etc.
-- `python` language has keywords: `def`, `len`, `and`/`or`, `filter`, etc.
-- And more languages...
-
-To let editors understand the source code, there is an syntax engine helps parse source code to tokens, i.e. tokenizer. This is similar to the compiler frontend, but syntax engines are optimized for speed, while compiler frontend are optimized for correctness.
-
-In today's indrustry, there are actually only a few _popular_ syntax engines:
+There are actually only a few _popular_ syntax engines:
 
 - [Vim's syntax engine](https://github.com/vim/vim/blob/master/src/syntax.c): Vim implements a regex-based syntax engine by itself. It is only used by Vim/Neovim.
 - [TextMate](https://macromates.com/manual/en/language_grammars): The TextMate engine is also a regex-based engine, created by the [textmate](https://github.com/textmate/textmate) editor. It is widely used by many editors: sublime-text (see [sublime-text syntax definition](https://www.sublimetext.com/docs/syntax.html#include-syntax)), vscode (see [vscode-textmate](https://github.com/microsoft/vscode-textmate)), atom (see [first-mate](https://github.com/atom/first-mate)), etc.

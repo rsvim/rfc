@@ -47,6 +47,7 @@ Do remember syntax highlighting doesn't provide all colors in the editor, we may
 
 - Floating window borders, titles, etc.
 - Status line, win bar, title bar, etc.
+- Cursor, background, etc.
 
 The colors of these UI components are not syntax highlighting, but we want to include all these parts into the theme configuration, i.e. Rsvim's theme configuration will contain configurations for both syntax highlighting and UI components.
 

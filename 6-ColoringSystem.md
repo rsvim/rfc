@@ -10,7 +10,7 @@ Coloring system makes a text editor colorful. It contains multiple components to
 
 1. A parser that recognizes text semantics that can support programming languages, structured formats and even more potential formats.
 2. A theme that defines a set of colors for all the parsed tokens.
-3. The UI widget color for rsvim editor.
+3. A coloring painter that renders colors onto the text and finally print to canvas/terminal.
 
 ### Syntax
 

@@ -45,9 +45,10 @@ These two components can have hundreds/thousands or more configurations, because
 
 Do remember syntax highlighting doesn't provide all colors in the editor, we may want to provide extra colors and visual effects for UI components, such as:
 
-- Floating window borders, titles, etc.
-- Status line, win bar, title bar, etc.
-- Cursor, background, etc.
+- UI components: cursor, floating-window, status-line, win-bar, title-bar, etc.
+- Background
+- Diagnostics
+- Message level: error, warning, info, hint, etc.
 
 The colors of these UI components are not syntax highlighting, but we want to include all these parts into the theme configuration, i.e. Rsvim's theme configuration will contain configurations for both syntax highlighting and UI components.
 

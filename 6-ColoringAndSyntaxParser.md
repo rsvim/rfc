@@ -37,7 +37,7 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
 | Quality                                        | Most Accurate | Fine     | Worst             |
 | Performance (especially on opening a new file) | Lowest        | Fine     | Highest           |
 | Incremental Parsing                            | Yes           | No       | No                |
-| Incremental Parsing                            | Yes           | No       | No                |
+| Development Effort                             | Ready to use  | No       | No                |
 
 Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.
 

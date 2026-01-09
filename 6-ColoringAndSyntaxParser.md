@@ -56,11 +56,11 @@ Here is a comparison list for several solutions:
 
 And here is the pros & cons for each solution:
 
-|                   | Pros                                                                   | Cons                                                                                                                                                                          |
-| ----------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tree-sitter       | - Best tokenization quality, which is most important for an editor<br> | - C/C++ compiler and `tree-sitter` cli are needed, we will have to provide other solutions to avoid this (e.g. pre-compiled dynamic libraries and automatically downloading). |
-| TextMate          |                                                                        |                                                                                                                                                                               |
-| Vim Syntax Engine |                                                                        |                                                                                                                                                                               |
+|                   | Pros                                             | Cons                                                                                      |
+| ----------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Tree-sitter       | - Best tokenization quality (most important)<br> | - C compiler and `tree-sitter` are needed (have to provide extra solutions to avoid this) |
+| TextMate          |                                                  |                                                                                           |
+| Vim Syntax Engine |                                                  |                                                                                           |
 
 Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.
 

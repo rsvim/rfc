@@ -20,6 +20,8 @@ Syntax parser also serves as a very fundamental component that generates structu
 - Symbols: identify function, parameters, class, variables, constants, etc.
 - Brace/Tag Matching: identify corresponding opening/closing braces or HTML/XML tags.
 
+### Syntax Parser
+
 Nowadays, there are actually only 2 kinds of syntax parsers:
 
 1. Regex-based engines:
@@ -30,6 +32,15 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
 
 > NOTE: We don't count [language-server-protocol](https://microsoft.github.io/language-server-protocol/) as syntax parser, while it can be a big improvement but not mandatory.
 
+### Ecosystem
+
+Two more components are important as well for a coloring system:
+
+- Syntax rule/parser for each different programming language. A language has its own rule/parser to define its own syntax, the definition is loaded by the syntax parser to tokenize the source files of that language.
+- Theme configure for each different themes (in Vim/Neovim we call it [colorscheme](https://vimhelp.org/syntax.txt.html#%3Acolorscheme)).
+
+These two components are usually
+
 ### Pros & Cons
 
 | Category                                       | Tree-sitter   | TextMate | Vim Syntax Engine |
@@ -37,6 +48,7 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
 | Quality                                        | Most Accurate | Fine     | Worst             |
 | Performance (especially on opening a new file) | Lowest        | Fine     | Highest           |
 | Incremental Parsing                            | Yes           | No       | No                |
+|                                                | Ready to use  | No       | No                |
 | Development Effort                             | Ready to use  | No       | No                |
 
 Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.

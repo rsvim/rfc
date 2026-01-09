@@ -41,7 +41,9 @@ Two more components are important as well for a coloring system:
 
 These two components can have hundreds/thousands or more configurations, because a programming language can have a rule configuration, a theme/colorscheme can have a theme configuration. They are mostly maintained by the open source community due to the development effort, i.e. users participate in the development and testing of all these syntax rules and color themes.
 
-### Pros & Cons
+### Solution Comparison
+
+Here is a comparison list for several solutions:
 
 | No. | Category                                       | Tree-sitter                                                                                                                                                | TextMate                                                                                                                                                                                                   | Vim Syntax Engine                                                                                 |
 | --- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -51,6 +53,14 @@ These two components can have hundreds/thousands or more configurations, because
 | 4   | Development Effort                             | [tree-sitter](https://crates.io/crates/tree-sitter)                                                                                                        | [syntect](https://crates.io/crates/syntect) works with `.sublime-syntax` and `.tmLanguage` configuration files                                                                                             | No                                                                                                |
 | 5   | Syntax Configurations                          | Active Community                                                                                                                                           | `.sublime-syntax` collections in [sublime-text packages](https://github.com/sublimehq/Packages), `.tmLanguage.json` files in [vscode extensions](https://github.com/microsoft/vscode/tree/main/extensions) | `.vim` collections in [vim runtime/syntax](https://github.com/vim/vim/tree/master/runtime/syntax) |
 | 6   | Out of Box                                     | C/C++ compiler and `tree-sitter` cli are needed load C parser dynamic library (`so`, `dll`), no extra tools needed for WASM parsers (but rarely supported) | No                                                                                                                                                                                                         | No                                                                                                |
+
+And here is the pros & cons for each solution:
+
+|                   | Pros                                                                   | Cons                                                                                                                                                                          |
+| ----------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tree-sitter       | - Best tokenization quality, which is most important for an editor<br> | - C/C++ compiler and `tree-sitter` cli are needed, we will have to provide other solutions to avoid this (e.g. pre-compiled dynamic libraries and automatically downloading). |
+| TextMate          |                                                                        |                                                                                                                                                                               |
+| Vim Syntax Engine |                                                                        |                                                                                                                                                                               |
 
 Once editors parsed the tokens from a source code text file, it needs another config to give these tokens different colors to make it colorful. Here comes the theme config (vim calls it colorscheme), and editors usually allow users to customize their themes.
 

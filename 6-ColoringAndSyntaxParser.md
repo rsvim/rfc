@@ -85,7 +85,11 @@ I believe tree-sitter is the best choice because both itself and its community a
 
 Here we need to discuss async parsing because it will become a performance bottle neck if we put all the logic into a single-thread function when first open a super big source code file:
 
-1. (Current) Read the whole source file into memory, and create new buffer with it.
-2. (Add) Find the corresponding tree-sitter language based on file extension.
-3. (Add) Create a new tree-sitter parser with corresponding language.
-4. (Add) Parse the buffer into tokens with the parser.
+1. Stage-1:
+   1. (Current) Read the whole source file into memory, and create new buffer with it.
+   2. (Add) Find the corresponding tree-sitter language based on file extension.
+   3. (Add) Create a new tree-sitter parser with corresponding language.
+   4. (Add) Parse the buffer into tokens with the parser.
+2. Stage-2:
+   1. (Add) Query the tree-sitter highlight associated with the tree-sitter parser.
+   2. (Add) Rendering every cells inside the Window with the highlight.

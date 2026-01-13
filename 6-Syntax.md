@@ -15,7 +15,7 @@ Syntax parser serves as a very fundamental component that generates structured a
 - Symbols: identify function, parameters, class, variables, constants, etc.
 - Brace/Tag Matching: identify corresponding opening/closing braces or HTML/XML tags.
 
-Coloring and visual effect system is the most important and so easy to obvious at a glance for users. In this section we will use coloring system as a use case to describe what syntax parser we need in Rsvim.
+Coloring and visual effect system is the most important and easyly obvious at a glance for users. In this section we will use coloring system as a use case to describe what syntax parser we need in Rsvim.
 
 ### Tech Solution
 

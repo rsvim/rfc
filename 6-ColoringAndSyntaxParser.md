@@ -89,5 +89,3 @@ Coloring system can be split into 2 phase:
 
 1. Create tree-sitter parser and tree for each Rsvim buffer, and maintain/update it along with user editing or other text content changes.
 2. Execute the highlight query for each window on a specific viewport, and render the colors (specified by theme/colorscheme configurations) to the canvas.
-
-most tree-sitter grammars provide `highlight.scm` query for a specific programming language (for example [tree-sitter-c](https://github.com/tree-sitter/tree-sitter-c/blob/master/queries/highlights.scm)).

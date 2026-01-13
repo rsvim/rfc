@@ -51,7 +51,9 @@ Do remember syntax highlighting doesn't provide all colors in the editor, we may
 
 The colors of these UI components are not syntax highlighting, but we want to include all these parts into the theme configuration, i.e. Rsvim's theme configuration will contain configurations for both syntax highlighting and UI components.
 
-## Solution Comparison
+## Solution
+
+### Comparison
 
 Here is a comparison list for several solutions:
 
@@ -75,6 +77,17 @@ And here is the pros & cons for each solution:
 
 I believe tree-sitter is the best choice because both itself and its community are actively maintained, it also has a clear documentation. The challenges for Rsvim are:
 
-1. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
-2. How to avoid the slow parsing speed on super big source files on first opening.
-3. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
+1. How to avoid the slow parsing speed on super big source files on first opening.
+2. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
+3. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
+
+### Architecture
+
+> This covers the 1st question above.
+
+Coloring system can be split into 2 phase:
+
+1. Create tree-sitter parser and tree for each Rsvim buffer, and maintain/update it along with user editing or other text content changes.
+2. Execute the highlight query for each window on a specific viewport, and render the colors (specified by theme/colorscheme configurations) to the canvas.
+
+most tree-sitter grammars provide `highlight.scm` query for a specific programming language (for example [tree-sitter-c](https://github.com/tree-sitter/tree-sitter-c/blob/master/queries/highlights.scm)).

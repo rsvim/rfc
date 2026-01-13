@@ -80,3 +80,29 @@ I believe tree-sitter is the best choice because both itself and its community a
 1. How to avoid the slow parsing speed on super big source files on first opening.
 2. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
 3. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
+
+### Parsing
+
+There are mostly two cases, i.e. total parsing and incremental parsing:
+
+- Total parsing on opening a buffer
+  1. Buffer stage:
+     1. (Current) Read the whole source file into memory, and create new buffer with it.
+     2. (Add) Find the corresponding tree-sitter language based on file extension.
+     3. (Add) Create a new tree-sitter parser with corresponding language.
+     4. (Add) Parse the buffer into tokens with the parser.
+  2. Render stage:
+     1. (Add) Query the tree-sitter highlight associated with the tree-sitter parser.
+     2. (Add) Rendering every cells inside the Window with the highlight.
+- Incremental parsing on editing a buffer
+  1. Buffer stage:
+     1. (Current) Handle editing logic and change buffer content.
+     2. (Add) Parse the changed buffer.
+  2. Render stage: same with the "Total parsing" case.
+
+The most time-costing step should be the 4th step in total parsing, and the 2nd step in incremental parsing. The problem scale grows with the buffer size. A decision need to make, that whether we should parsing the whole buffer in async, to avoid blocking main thread of the editor.
+
+There already have some existing work:
+
+- [Neovim's treesitter async parsing improvement](https://github.com/neovim/neovim/pull/31631).
+- Different languages and grammar implementations can have [huge performance differences](https://owen.cafe/posts/tree-sitter-haskell-perf/). Since they are maintained by different communities, which we should not rely on.

@@ -9,8 +9,8 @@ This RFC describes an high-level overview for syntax and coloring system, includ
 Coloring system makes a text editor colorful, it contains several components:
 
 1. A syntax parser that recognizes text semantics and parses tokens for programming languages and structured text contents.
-1. A theme that defines a set of colors for all the parsed tokens.
-1. A coloring painter that renders both colors and visual effects onto the text and finally print to canvas/terminal.
+2. A theme that defines a set of colors for all the parsed tokens.
+3. A coloring painter that renders both colors and visual effects onto the text and finally print to canvas/terminal.
 
 Syntax parser serves as a very fundamental component that generates structured and tokenized information from a text file (mostly source code), which can help implementing many advanced features for an editor:
 

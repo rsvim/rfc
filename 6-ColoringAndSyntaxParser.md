@@ -100,7 +100,7 @@ There are mostly two cases, i.e. total parsing and incremental parsing:
      2. (Add) Parse the changed buffer.
   2. Render stage: same with the "Total parsing" case.
 
-The most time-costing step should be the 4th step in total parsing when opening a buffer. The problem scale grows with the buffer size. A decision need to make, that whether we should parsing the whole buffer in async, to avoid blocking main thread of the editor.
+The most time-costing step should be the 4th step in total parsing, and the 2nd step in incremental parsing. The problem scale grows with the buffer size. A decision need to make, that whether we should parsing the whole buffer in async, to avoid blocking main thread of the editor.
 
 There already have some existing work:
 

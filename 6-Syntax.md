@@ -15,6 +15,8 @@ Syntax parser serves as a very fundamental component that generates structured a
 - Symbols: identify function, parameters, class, variables, constants, etc.
 - Brace/Tag Matching: identify corresponding opening/closing braces or HTML/XML tags.
 
+Coloring and visual effect system is the most important and so easy to obvious at a glance for users. In this section we will use coloring system as a use case to describe what syntax parser we need in Rsvim.
+
 ### Tech Solution
 
 Nowadays, there are actually only 2 kinds of syntax parsers:
@@ -29,7 +31,7 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
 
 ### Ecosystem
 
-Two more components are important as well for a coloring system:
+Two more components are important as well for a syntax parser:
 
 - Syntax rule for each different programming language. A language has its own rule/parser to define its own syntax, the definition is loaded by the syntax parser to tokenize the text files of that language, generates the structured/tokenized information for the text files that opened by an editor.
 - Theme configure for each different themes (Vim/Neovim call it [colorscheme](https://vimhelp.org/syntax.txt.html#%3Acolorscheme)). A theme defines how it actually looks for each token of a text file, e.g. color (frontground, background) and visual effects (bold, italic, underline, etc) of the text.

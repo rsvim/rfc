@@ -83,9 +83,7 @@ I believe tree-sitter is the best choice because both itself and its community a
 
 ### Async Parsing
 
-Here we need to discuss async parsing because it will become a performance bottle neck if we put all the logic into a single-thread function when first open a super big source code file ([Neovim's treesitter performance improvements](https://github.com/neovim/neovim/pull/31631) can also serve as supporting evidense).
-
-There are mostly two use cases, total parsing and incremental parse:
+Here we need to discuss async parsing, there are mostly two use cases, total parsing and incremental parse:
 
 - Total parsing on opening a buffer
   1. Buffer stage:
@@ -102,4 +100,4 @@ There are mostly two use cases, total parsing and incremental parse:
      2. (Add) Parse the changed buffer.
   2. Render stage: same with the "Total parsing" case.
 
-Based on [Neovim's treesitter performance improvements](https://github.com/neovim/neovim/pull/31631), it seems running all these logic when opening a new buffer can cost performance issue
+Based on [Neovim's treesitter performance improvements](https://github.com/neovim/neovim/pull/31631), it seems running all these logic when opening a buffer can become a performance bottle neck if we put all the logic into a single-thread function, especially for super big file.

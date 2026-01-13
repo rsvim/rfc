@@ -106,4 +106,3 @@ There already have some existing work:
 
 - [Neovim's treesitter async parsing improvement](https://github.com/neovim/neovim/pull/31631).
 - Different languages and grammar implementations can have [huge performance differences](https://owen.cafe/posts/tree-sitter-haskell-perf/). Since they are maintained by different communities, which we should not rely on.
-- Different languages and grammar implementations can have huge performance differences. Since they are maintained by different communities, which we cannot rely on.

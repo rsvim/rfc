@@ -100,6 +100,9 @@ There are mostly two cases, i.e. total parsing and incremental parsing:
      2. (Add) Parse the changed buffer.
   2. Render stage: same with the "Total parsing" case.
 
-The most time-costing step should be the 4th step in total parsing when opening a buffer. The problem scale grows with the buffer size.
+The most time-costing step should be the 4th step in total parsing when opening a buffer. The problem scale grows with the buffer size. A decision need to make, that whether we should parsing the whole buffer in async, to avoid blocking main thread of the editor.
 
-Based on [Neovim's treesitter performance improvements](https://github.com/neovim/neovim/pull/31631), it seems running all these logic when opening a buffer can become a performance bottle neck if we put all the logic into a single-thread function, especially for super big file. Another factor is the performance and quality of each different programming language grammar, since most language grammars are maintained by different community, the quality and performance can have difference, which we cannot rely on.
+There already have some existing work:
+
+- [Neovim's treesitter async parsing improvement](https://github.com/neovim/neovim/pull/31631).
+- Different languages and grammar implementations can have huge performance differences. Since they are maintained by different communities, which we cannot rely on.

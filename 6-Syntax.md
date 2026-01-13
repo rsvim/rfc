@@ -1,8 +1,8 @@
-# Syntax
+# Syntax And Coloring System
 
 > Written by @linrongbin16, first created at 2025-06-15, last modified at 2026-01-13.
 
-This RFC describes an high-level overview for syntax, include feature requirements, scope and technical solutions.
+This RFC describes an high-level overview for syntax and coloring system, include feature requirements, scope and technical solutions.
 
 ## Introduction
 
@@ -31,7 +31,7 @@ Nowadays, there are actually only 2 kinds of syntax parsers:
 
 ### Ecosystem
 
-Two more components are important as well for a syntax parser:
+Two more components are important as well for a coloring system:
 
 - Syntax rule for each different programming language. A language has its own rule/parser to define its own syntax, the definition is loaded by the syntax parser to tokenize the text files of that language, generates the structured/tokenized information for the text files that opened by an editor.
 - Theme configure for each different themes (Vim/Neovim call it [colorscheme](https://vimhelp.org/syntax.txt.html#%3Acolorscheme)). A theme defines how it actually looks for each token of a text file, e.g. color (frontground, background) and visual effects (bold, italic, underline, etc) of the text.

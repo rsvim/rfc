@@ -100,4 +100,4 @@ Here we need to discuss async parsing, there are mostly two use cases, total par
      2. (Add) Parse the changed buffer.
   2. Render stage: same with the "Total parsing" case.
 
-Based on [Neovim's treesitter performance improvements](https://github.com/neovim/neovim/pull/31631), it seems running all these logic when opening a buffer can become a performance bottle neck if we put all the logic into a single-thread function, especially for super big file.
+Based on [Neovim's treesitter performance improvements](https://github.com/neovim/neovim/pull/31631), it seems running all these logic when opening a buffer can become a performance bottle neck if we put all the logic into a single-thread function, especially for super big file. The most time-case step should be the 4th step, i.e. parsing the whole buffer, when total parsing a new buffer.

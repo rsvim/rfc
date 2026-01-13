@@ -80,12 +80,3 @@ I believe tree-sitter is the best choice because both itself and its community a
 1. How to avoid the slow parsing speed on super big source files on first opening.
 2. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
 3. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
-
-### Architecture
-
-> This covers the 1st question above.
-
-Coloring system can be split into 2 phase:
-
-1. Create tree-sitter parser and tree for each Rsvim buffer, and maintain/update it along with user editing or other text content changes.
-2. Execute the highlight query for each window on a specific viewport, and render the colors (specified by theme/colorscheme configurations) to the canvas.

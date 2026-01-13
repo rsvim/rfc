@@ -81,9 +81,9 @@ I believe tree-sitter is the best choice because both itself and its community a
 2. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
 3. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
 
-### Async Parsing
+### Parsing
 
-Here we need to discuss async parsing, there are mostly two use cases, total parsing and incremental parse:
+There are mostly two cases, i.e. total parsing and incremental parsing:
 
 - Total parsing on opening a buffer
   1. Buffer stage:

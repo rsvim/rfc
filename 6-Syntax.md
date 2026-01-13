@@ -15,7 +15,7 @@ Syntax parser serves as a very fundamental component that generates structured a
 - Symbols: identify function, parameters, class, variables, constants, etc.
 - Brace/Tag Matching: identify corresponding opening/closing braces or HTML/XML tags.
 
-### Syntax Parser
+### Tech Solution
 
 Nowadays, there are actually only 2 kinds of syntax parsers:
 

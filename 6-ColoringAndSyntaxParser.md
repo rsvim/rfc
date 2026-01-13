@@ -80,3 +80,12 @@ I believe tree-sitter is the best choice because both itself and its community a
 1. How to avoid the slow parsing speed on super big source files on first opening.
 2. How to make the syntaxes pluggable. As we want to allow user install/upgrade/remove a language parser independently, we may not want to directly embed tree-sitter grammars into the editor, but distribute them as a independent plugin.
 3. How to automatically download pre-built C parser dynamic libraries, to avoid local compiling parsers for users.
+
+### Async Parsing
+
+Here we need to discuss async parsing because it will become a performance bottle neck if we put all the logic into a single-thread function when first open a super big source code file:
+
+1. (Current) Read the whole source file into memory, and create new buffer with it.
+2. (Add) Find the corresponding tree-sitter language based on file extension.
+3. (Add) Create a new tree-sitter parser with corresponding language.
+4. (Add) Parse the buffer into tokens with the parser.

@@ -12,9 +12,8 @@ Coloring system makes a text editor colorful, it contains several components:
 2. A theme that defines a set of colors for all the parsed tokens.
 3. A coloring painter that renders both colors and visual effects onto the text and finally print to canvas/terminal.
 
-Syntax parser serves as a very fundamental component that generates structured and tokenized information from a text file (mostly source code), which can help implementing many advanced features for an editor:
+Syntax parser serves as a very fundamental component that generates structured and tokenized information from a text file (mostly source code), except coloring system, it also helps implementing many advanced features for an editor:
 
-- Coloring: render different text with different colors for better visual effect (please refer to [7. Coloring and Visual Effect](7-ColoringAndVisualEffect.md) for more details).
 - Indent: detect how many spaces should use when starting the next new line when writing code.
 - Text objects: detect structure boundaries such as inside a function, string literals, etc.
 - Code outlining and folding: identify code blocks such as function, class, for/while loop, etc.
